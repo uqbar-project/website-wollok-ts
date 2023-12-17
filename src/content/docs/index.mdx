@@ -1,36 +1,65 @@
 ---
-title: Bienvenido
-description: Get started building your docs site with Starlight.
+title: Bienvenidx
+description: Sitio de Wollok.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Explorá el extraordinario mundo de la programación orientada a objetos con Wollok
   image:
-    file: ../../assets/isotipo-wollok.png
+    file: ../../assets/wollok-lsp-diagram.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
+    - text: Comenzar
+      link: /website-wollok-ts/guides/example/
+      icon: rocket
       variant: primary
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Documentación
+      link: /website-wollok-ts/reference/example/
+      icon: document
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
-
-## Next steps
+import { YouTube } from 'astro-embed';
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="¿Qué es Wollok?" icon="pencil">
+		Wollok es un lenguaje de programación y entorno de desarrollo integrado (IDE) para ser utilizado en el dictado de materias iniciales de programación orientada a objetos. 
+		
+		Es ideal ya que permite ir agregando los detalles y conceptos de forma incremental y programando desde el primer día.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Una herramienta con sentido pedagógico..." icon="add-document">
+		- Cómo enseñar
+			- Incorpora gradualmente la complejidad
+			- Permite programar desde el primer día
+		- Qué enseñar
+			- Haciendo foco en los conceptos
+			- Facilita la transición hacia los lenguajes industriales
+		- Aprender de los errores
+			- Tiene detección temprana de los errores
+			- Sistema de inferencia de tipos
+			- Tiene validaciones adicionales configurables
+		- Simple
+			- Con una sintaxis liviana e intuitiva
+			- Una palabra reservada por concepto
+			- Con una interfaz gráfica "Wollok Game"
+			- Con generación automática de diagramas
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="...en sintonía con las tendencias actuales del desarrollo de software" icon="setting">
+		- Programación Orientada a Objetos
+			- Objetos "bien conocidos" como primera abstracción
+			- Con clases y mixins
+			- Permite modelar bloques de código (closures)
+			- Polimorfismo sin burocracia de tipos
+		- Más que programar, desarrollar software
+			- Entorno Integrado de Desarrollo (IDE)
+			- con testeo unitario y refactors
+			- Integración con git y SVN
+		- Un desarrollo autónomo
+			- Creado por docentes como proyecto abierto
+			- Utilizado en universidades nacionales
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+
+	<Card title="Acá una demo de Dodain" icon="youtube">
+		Acá Fer nos trae una demo del IDE en VSCode para Wollok
+		<YouTube id="https://youtu.be/AwkKZ41U6WE" />
 	</Card>
+
 </CardGrid>
