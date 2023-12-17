@@ -10,6 +10,7 @@ Para poder usar Wollok es necesario:
 1. Tener instalado [VSCode](https://code.visualstudio.com/).
 
 1. Descargar la _Wollok Command Line Interface_ (CLI) disponible para [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64), [MacOS](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64) (versión [arm64](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-arm64)) y [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe).
+También recomendamos agregarlo a la variable de entorno PATH (acá hay instrucciones para [Linux](https://unix.stackexchange.com/questions/183295/adding-programs-to-path), [Mac](https://apple.stackexchange.com/questions/41542/adding-a-new-executable-to-the-path-environment-variable) y [Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)).
 
 
 ## Instalación
@@ -50,6 +51,6 @@ Ya deberías poder usar VSCode con Wollok.
 
 ¿Cómo seguimos?
 
-- Podés ver cómo [crear un proyecto Wollok de cero](https://diataxis.fr/how-to-guides/).
+- Podés ver cómo [crear un proyecto Wollok de cero](new_project).
 - Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos]() para sacarle todo el potencial al IDE.
 - Si tenés dudas sobre algo del lenguaje podés [ir a la documentación]().
