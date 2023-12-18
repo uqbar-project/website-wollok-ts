@@ -51,6 +51,7 @@ export default defineConfig({
           label: "Material",
           autogenerate: { directory: "material" },
         },
+        { label: "Quiero saber más", link: "/more_info" },
       ],
     }),
   ],
