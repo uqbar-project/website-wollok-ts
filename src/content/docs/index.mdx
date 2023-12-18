@@ -1,5 +1,5 @@
 ---
-title: Bienvenidx
+title: Bienvenid@
 description: Sitio de Wollok.
 template: splash
 hero:
@@ -12,7 +12,7 @@ hero:
       icon: rocket
       variant: primary
     - text: Documentación
-      link: /website-wollok-ts/documentation/example/
+      link: /website-wollok-ts/documentation/introduction/
       icon: document
 ---
 
@@ -20,42 +20,39 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 import { YouTube } from 'astro-embed';
 
 <CardGrid stagger>
-	<Card title="¿Qué es Wollok?" icon="pencil">
-		Wollok es un lenguaje de programación y entorno de desarrollo integrado (IDE) para ser utilizado en el dictado de materias iniciales de programación orientada a objetos. 
+	<Card title="¿Qué es Wollok?" icon="rocket">
+		Wollok es un **lenguaje de programación y entorno de desarrollo integrado (IDE)** para ser utilizado en el dictado de materias iniciales de programación **orientada a objetos**. 
+
+		Es un proyecto _open source_ desarrollado por [Fundación Uqbar](https://uqbar.org), un **grupo de docentes de distintas universidades nacionales de Argentina**, para ser usados en sus clases.
+
+		Wollok ya lleva **7 años en las aulas**. 
+		Se estima que lo usaron **más de 100 docentes** y **más de 4.200 estudiantes**.
+	</Card>
+
+	<Card title="Una herramienta con sentido pedagógico" icon="open-book">
+		Su lenguaje permite incorporar los conceptos principales del paradigma en forma incremetal.
+		Creando objetos "bien conocidos" como primera abstracción ya se pueden lograr programas con **polimorfismo desde el primer día**.
+
+		Incrementa gradualmente la complejidad con **clases y mixins**.
+		Llega a dominar las **colecciones** usando **bloques de código** (closures).
+
+		Wollok está diseñado con una sintaxis liviana e intuitiva que hace **foco en los conceptos** y facilita la transición hacia los **lenguajes industriales**.
+	</Card>
+
+	<Card title="Pensado desde la industria" icon="setting">
+		Como proponemos que los estudiantes programen desde el primer día con **testeo unitario**, es importante que lo hagan en un **Entorno Integrado de Desarrollo (IDE) dedicado**.
 		
-		Es ideal ya que permite ir agregando los detalles y conceptos de forma incremental y programando desde el primer día.
+		El **reporte de errores**, la **generación automática de diagramas** y su **sistema de inferencia de tipos** permiten una experiencia que enseña que **desarrollar software** es más que solo programar.
 	</Card>
-	<Card title="Una herramienta con sentido pedagógico..." icon="add-document">
-		- Cómo enseñar
-			- Incorpora gradualmente la complejidad
-			- Permite programar desde el primer día
-		- Qué enseñar
-			- Haciendo foco en los conceptos
-			- Facilita la transición hacia los lenguajes industriales
-		- Aprender de los errores
-			- Tiene detección temprana de los errores
-			- Sistema de inferencia de tipos
-			- Tiene validaciones adicionales configurables
-		- Simple
-			- Con una sintaxis liviana e intuitiva
-			- Una palabra reservada por concepto
-			- Con una interfaz gráfica "Wollok Game"
-			- Con generación automática de diagramas
+
+	<Card title="En contacto con la comunidad" icon="star">
+		Estamos en contacto principalmente a través de [Discord](https://discord.gg/9vMbuabnuc).
+		Ya sea para organizar una _hackathon_, un asado o el Concurso de **Wollok Game**, una interfaz gráfica para hacer videojuegos en Wollok.
+
+		También Wollok forma parte de **trabajos de investigación**, proyectos finales, tesis y papers.
+		¡No dudes en acercarte si estás usando Wollok!
 	</Card>
-	<Card title="...en sintonía con las tendencias actuales del desarrollo de software" icon="setting">
-		- Programación Orientada a Objetos
-			- Objetos "bien conocidos" como primera abstracción
-			- Con clases y mixins
-			- Permite modelar bloques de código (closures)
-			- Polimorfismo sin burocracia de tipos
-		- Más que programar, desarrollar software
-			- Entorno Integrado de Desarrollo (IDE)
-			- con testeo unitario y refactors
-			- Integración con git y SVN
-		- Un desarrollo autónomo
-			- Creado por docentes como proyecto abierto
-			- Utilizado en universidades nacionales
-	</Card>
+
 	<Card title="Acá una demo de Dodain" icon="youtube">
 		Acá Fer nos trae una demo del IDE en VSCode para Wollok
 		<YouTube id="https://youtu.be/AwkKZ41U6WE" />
