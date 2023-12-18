@@ -40,6 +40,10 @@ export default defineConfig({
           // ],
         },
         {
+          label: "Tour",
+          autogenerate: { directory: "tour" },
+        },
+        {
           label: "Documentación",
           autogenerate: { directory: "documentation" },
         },

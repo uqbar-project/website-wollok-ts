@@ -42,15 +42,16 @@ Ahora es necesario **configurar la extensión** para que pueda usar _Wollok-CLI_
 <img width="1167" alt="image" src="https://user-images.githubusercontent.com/4098184/204098474-97eafc07-71d6-4520-ac8f-4bb198270caa.png">
 
 
-## Próximos pasos
-
-
 **¡Listo!** 
 
 Ya deberías poder usar VSCode con Wollok.
 
+
+## Próximos pasos
+
+
 ¿Cómo seguimos?
 
-- Podés ver cómo [crear un proyecto Wollok de cero](new_project).
-- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos]() para sacarle todo el potencial al IDE.
-- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación]().
+- Podés ver cómo [crear un proyecto Wollok de cero](/website-wollok-ts/getting_started/new_project).
+- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos](/website-wollok-ts/tour) para sacarle todo el potencial al IDE.
+- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación](/website-wollok-ts/documentation).
