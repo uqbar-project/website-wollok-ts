@@ -1,7 +1,8 @@
 ---
 import Badge from "@astrojs/starlight/components/Badge.astro";
-import { Class, Singleton, Mixin } from "wollok-ts";
-import { methodLabel, wollokDoc } from "./utils";
+import { Class, Mixin, Singleton } from "wollok-ts";
+import { methodLabel } from "./utils";
+import WollokDoc from "./wollok-doc.astro";
 
 interface Props {
     entity: Class | Singleton | Mixin;
@@ -11,6 +12,8 @@ const { entity } = Astro.props;
 ---
 
 <h4><Badge variant="success" text={entity.kind} />{entity.name}</h4>
+
+<WollokDoc node={entity} />
 
 {
     entity.fields.length > 0 && (
@@ -33,7 +36,9 @@ const { entity } = Astro.props;
                             )}
                             <strong>{field.name}</strong>
                         </td>
-                        <td>{wollokDoc(field)}</td>
+                        <td>
+                            <WollokDoc node={field} />
+                        </td>
                     </tr>
                 ))}
             </table>
@@ -50,23 +55,25 @@ const { entity } = Astro.props;
     </tr>
     {
         entity.methods
-        .filter(method => !method.isSynthetic)
-        .map(method => (
-            <tr>
-                <td>
-                    {method.isOverride && (
-                        <Badge variant="note" text="override" />
-                    )}
-                    {method.isAbstract() && (
-                        <Badge variant="caution" text="abstract" />
-                    )}
-                    {method.isNative() && (
-                        <Badge variant="danger" text="native" />
-                    )}
-                    <strong>{methodLabel(method)}</strong>
-                </td>
-                <td>{wollokDoc(method)}</td>
-            </tr>
-        ))
+            .filter((method) => !method.isSynthetic)
+            .map((method) => (
+                <tr>
+                    <td>
+                        {method.isOverride && (
+                            <Badge variant="note" text="override" />
+                        )}
+                        {method.isAbstract() && (
+                            <Badge variant="caution" text="abstract" />
+                        )}
+                        {method.isNative() && (
+                            <Badge variant="danger" text="native" />
+                        )}
+                        <strong>{methodLabel(method)}</strong>
+                    </td>
+                    <td>
+                        <WollokDoc node={method} />
+                    </td>
+                </tr>
+            ))
     }
 </table>
