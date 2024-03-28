@@ -10,11 +10,10 @@ export default defineConfig({
       title: "Wollok",
       favicon: "/favicon.ico",
       logo: {
-        light: "./src/assets/imagotipo-wollok.png",
-        dark: "./src/assets/imagotipo-wollok-neg.png",
+        light: "./src/assets/branding/imagotipo-pos.svg",
+        dark: "./src/assets/branding/imagotipo-neg.svg",
         replacesTitle: true,
       },
-      // Set English as the default language for this site.
       defaultLocale: "root",
       locales: {
         root: {
