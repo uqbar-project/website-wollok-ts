@@ -17,45 +17,49 @@ hero:
 ---
 
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-import { YouTube } from 'astro-embed';
+import { Card, CardGrid, Code } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed'
 
-<CardGrid stagger>
-	<Card title="¿Qué es Wollok?" icon="rocket">
-		Wollok es un **lenguaje de programación y entorno de desarrollo integrado (IDE)** para ser utilizado en el dictado de materias iniciales de programación **orientada a objetos**. 
+<CardGrid>
 
-		Es un proyecto _open source_ desarrollado por [Fundación Uqbar](https://uqbar.org), un **grupo de docentes de distintas universidades nacionales de Argentina**, para ser usados en sus clases.
+  <Card title="¿Qué es Wollok?" icon="rocket">
+    Wollok es un **lenguaje de programación y entorno de desarrollo integrado (IDE)** para ser utilizado en el dictado de materias iniciales de programación **orientada a objetos**. 
 
-		Wollok ya lleva **7 años en las aulas**. 
-		Se estima que lo usaron **más de 100 docentes** y **más de 4.200 estudiantes**.
-	</Card>
+    Es un proyecto _open source_ desarrollado por [Fundación Uqbar](https://uqbar.org), un **grupo de docentes de distintas universidades nacionales de Argentina**, para ser usados en sus clases.
 
-	<Card title="Una herramienta con sentido pedagógico" icon="open-book">
-		Su lenguaje permite incorporar los conceptos principales del paradigma en forma incremetal.
-		Creando objetos "bien conocidos" como primera abstracción ya se pueden lograr programas con **polimorfismo desde el primer día**.
+    Wollok ya lleva **7 años en las aulas**. 
+    Se estima que lo usaron **más de 100 docentes** y **más de 4.200 estudiantes**.
+  </Card>
 
-		Incrementa gradualmente la complejidad con **clases y mixins**.
-		Llega a dominar las **colecciones** usando **bloques de código** (closures).
+  <Card title="Una herramienta con sentido pedagógico" icon="open-book">
+    Su lenguaje permite incorporar los conceptos principales del paradigma en forma incremetal.
+    Creando objetos "bien conocidos" como primera abstracción ya se pueden lograr programas con **polimorfismo desde el primer día**.
 
-		Wollok está diseñado con una sintaxis liviana e intuitiva que hace **foco en los conceptos** y facilita la transición hacia los **lenguajes industriales**.
-	</Card>
+    Incrementa gradualmente la complejidad con **clases y mixins**.
+    Llega a dominar las **colecciones** usando **bloques de código** (closures).
 
-	<Card title="Pensado desde la industria" icon="setting">
-		Como proponemos que los estudiantes programen desde el primer día con **testeo unitario**, es importante que lo hagan en un **Entorno Integrado de Desarrollo (IDE) dedicado**.
-		
-		El **reporte de errores**, la **generación automática de diagramas** y su **sistema de inferencia de tipos** permiten una experiencia que enseña que **desarrollar software** es más que solo programar.
-	</Card>
+    Wollok está diseñado con una sintaxis liviana e intuitiva que hace **foco en los conceptos** y facilita la transición hacia los **lenguajes industriales**.
+  </Card>
 
-	<Card title="En contacto con la comunidad" icon="star">
-		Estamos en contacto principalmente a través de [Discord](https://discord.gg/9vMbuabnuc).
-		Ya sea para organizar una _hackathon_, un asado o el Concurso de **Wollok Game**, una interfaz gráfica para hacer videojuegos en Wollok.
+  <Card title="Pensado desde la industria" icon="setting">
+    Como proponemos que los estudiantes programen desde el primer día con **testeo unitario**, es importante que lo hagan en un **Entorno Integrado de Desarrollo (IDE) dedicado**.
+    
+    El **reporte de errores**, la **generación automática de diagramas** y su **sistema de inferencia de tipos** permiten una experiencia que enseña que **desarrollar software** es más que solo programar.
+  </Card>
 
-		También Wollok forma parte de **trabajos de investigación**, proyectos finales, tesis y papers.
-		¡No dudes en acercarte si estás usando Wollok!
-	</Card>
+  <Card title="En contacto con la comunidad" icon="star">
+    Estamos en contacto principalmente a través de [Discord](https://discord.gg/9vMbuabnuc).
+    Ya sea para organizar una _hackathon_, un asado o el Concurso de **Wollok Game**, una interfaz gráfica para hacer videojuegos en Wollok.
+
+    También Wollok forma parte de **trabajos de investigación**, proyectos finales, tesis y papers.
+    ¡No dudes en acercarte si estás usando Wollok!
+  </Card>
 
 	<Card title="Acá una demo de Dodain" icon="youtube">
 		Acá Fer nos trae una demo del IDE en VSCode para Wollok
 		<YouTube id="https://youtu.be/AwkKZ41U6WE" />
 	</Card>
 </CardGrid>
+
+<Code code='holaaa rastaaa' title='rasta.wlk'>
+</Code>
