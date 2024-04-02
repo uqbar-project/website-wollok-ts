@@ -34,6 +34,9 @@ export default defineConfig({
         discord: "https://discord.gg/9vMbuabnuc",
         twitter: "https://twitter.com/wollokLang",
       },
+      components: {
+        Footer: "./src/content/components/Footer.astro",
+      },
       sidebar: [
         {
           label: "Comenzando con Wollok",
