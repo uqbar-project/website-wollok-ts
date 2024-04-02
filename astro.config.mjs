@@ -48,7 +48,23 @@ export default defineConfig({
         },
         {
           label: "Documentación",
-          autogenerate: { directory: "documentation" },
+          items: [
+            {
+              label: "Introducción a Wollok",
+              link: "documentation/introduction",
+            },
+            { label: "Objetos", link: "documentation/objects" },
+            { label: "Tests", link: "documentation/tests" },
+            { label: "Collecciones", link: "documentation/collections" },
+            { label: "Clases", link: "documentation/classes" },
+            { label: "Wollok Game", link: "documentation/wollok_game" },
+            { label: "Avanzado", link: "documentation/advanced" },
+            {
+              label: "Guía del lenguaje",
+              link: "/documentation/language",
+              badge: { text: "WollokDoc", variant: "danger" },
+            },
+          ],
         },
         {
           label: "Material",

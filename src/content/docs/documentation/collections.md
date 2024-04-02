@@ -1,6 +1,6 @@
 ---
-title: Colleciones
-description: Colleciones en Wollok.
+title: Collecciones
+description: Collecciones en Wollok.
 sidebar:
     order: 4
 ---
