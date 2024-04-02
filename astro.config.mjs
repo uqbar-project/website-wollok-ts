@@ -8,12 +8,14 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Wollok",
+      description: "The official Wollok language website.",
       favicon: "/favicon.ico",
       logo: {
         light: "./src/assets/branding/imagotipo-pos.svg",
         dark: "./src/assets/branding/imagotipo-neg.svg",
         replacesTitle: true,
       },
+      customCss: ["./src/styles/custom-theme.css"],
       defaultLocale: "root",
       locales: {
         root: {
@@ -33,10 +35,6 @@ export default defineConfig({
         {
           label: "Comenzando con Wollok",
           autogenerate: { directory: "getting_started" },
-          // items: [
-          //   // Each item here is one entry in the navigation menu.
-          //   { label: "Example Guide", link: "/guides/example/" },
-          // ],
         },
         {
           label: "Tour",
