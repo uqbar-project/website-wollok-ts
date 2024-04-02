@@ -1,4 +1,4 @@
-import { Field, Method, Node, Package, buildEnvironment } from 'wollok-ts'
+import { Entity, Field, Method, Node, Package, buildEnvironment } from 'wollok-ts'
 import { last, match, when } from 'wollok-ts/dist/extensions'
 
 const expectedSort = ['lang', 'lib', 'game' /* ... and the rest */]
@@ -15,13 +15,26 @@ function sortPackages() {
 
 export const wollokPackages = sortPackages()
 
+export const wollokHeadings = wollokPackages.flatMap(pkg => ([
+  buildHeading(2)(pkg),
+  ...pkg.members.map(buildHeading(3))
+]))
+
+function buildHeading(depth: number): (node: Package | Entity) => { depth: number, slug: string, text: string } {
+    return (node) => ({
+        depth,
+        slug: node.fullyQualifiedName,
+        text: node.name ?? node.fullyQualifiedName,
+    })
+}
+
 export function methodLabel(method: Method) {
     return `${method.name}(${method.parameters.map(param => param.name).join(', ')})`
 }
 
 export function wollokDoc(node: Node): string {
     const comment = commentMetadataFor(node)
-    return comment?.args['text'] as string ?? '<i>Documentation does not found</i>'
+    return comment?.args['text'] as string ?? '<i>Documentation not found</i>'
 }
 
 function commentMetadataFor(node: Node) {

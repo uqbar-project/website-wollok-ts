@@ -1,0 +1,48 @@
+---
+import { Code } from "astro:components";
+import { Node } from "wollok-ts";
+import { wollokDoc } from "./utils";
+
+interface Props {
+  node: Node;
+}
+
+const { node } = Astro.props;
+
+const [comment, examples] = wollokDoc(node).split("Example");
+
+const sanitize = (documentation: string) =>
+  documentation
+    .replaceAll("/*", "")
+    .replaceAll("*/", "")
+    .replaceAll("*", "")
+    .replaceAll(/@author ([A-z ])*/g, "")
+    .replaceAll(
+      /@([A-z])*/g,
+      (substring) => `<strong>${substring.slice(1)}</strong>`
+    )
+    .trim();
+---
+
+{
+  comment ? (
+    comment
+      .split("\n") // Same format than the code
+      .map((text) => <p style="margin-top:0;" set:html={sanitize(text)} />)
+  ) : (
+    <p style="margin-top:0;">No documentation available</p>
+  )
+}
+{
+  examples && (
+    <Code
+      code={examples
+        .split("\n")
+        .slice(1) // Remove first line
+        .map(sanitize)
+        .filter((_) => _) // Remove empty lines after sanitization
+        .join("\n")}
+      lang="js"
+    />
+  )
+}
