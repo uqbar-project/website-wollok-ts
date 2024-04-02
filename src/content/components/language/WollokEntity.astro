@@ -11,9 +11,9 @@ interface Props {
 const { entity } = Astro.props;
 ---
 
-<h4 id={entity.fullyQualifiedName}>
+<h3 id={entity.fullyQualifiedName}>
   <Badge variant="success" text={entity.kind} />{entity.name}
-</h4>
+</h3>
 
 <WollokDoc node={entity} />
 
