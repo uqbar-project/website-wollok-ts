@@ -15,7 +15,10 @@ export default defineConfig({
         dark: "./src/assets/branding/imagotipo-neg.svg",
         replacesTitle: true,
       },
-      customCss: ["./src/styles/custom-theme.css"],
+      customCss: [
+        "./src/styles/custom-theme.css",
+        "./src/styles/global-styles.css",
+      ],
       defaultLocale: "root",
       locales: {
         root: {
