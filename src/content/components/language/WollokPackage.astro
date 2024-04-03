@@ -1,17 +1,19 @@
 ---
 import { Package } from "wollok-ts";
-import WollokEntity from "./wollok-entity.astro";
+import WollokEntity from "./WollokEntity.astro";
 
 interface Props {
-    wPackage: Package;
+  wPackage: Package;
 }
 
 const { wPackage } = Astro.props;
 ---
 
-<h2>{wPackage.fileName!.substring("wollok/".length)}</h2>
+<h2 id={wPackage.fullyQualifiedName}>
+  {wPackage.fileName!.substring("wollok/".length)}
+</h2>
 
 {wPackage.members.map((entity) => <WollokEntity entity={entity as any} />)}
 
-<br>
-<hr>
+<br />
+<hr />

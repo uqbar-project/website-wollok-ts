@@ -1,0 +1,71 @@
+---
+import Badge from "@astrojs/starlight/components/Badge.astro";
+import { Class, Mixin, Singleton } from "wollok-ts";
+import { methodLabel } from "./utils";
+import WollokDoc from "./WollokDoc.astro";
+
+interface Props {
+  entity: Class | Singleton | Mixin;
+}
+
+const { entity } = Astro.props;
+---
+
+<h3 id={entity.fullyQualifiedName}>
+  <Badge variant="success" text={entity.kind} />{entity.name}
+</h3>
+
+<WollokDoc node={entity} />
+
+{
+  entity.fields.length > 0 && (
+    <div>
+      <h5>Estado</h5>
+
+      <table style="width:100%">
+        <tr>
+          <th>Atributo</th>
+          <th style="width:60%">WollokDoc</th>
+        </tr>
+        {entity.fields.map((field) => (
+          <tr>
+            <td>
+              {field.isConstant && <Badge variant="note" text="const" />}
+              {field.isProperty && <Badge variant="caution" text="property" />}
+              <strong>{field.name}</strong>
+            </td>
+            <td>
+              <WollokDoc node={field} />
+            </td>
+          </tr>
+        ))}
+      </table>
+
+      <h5>Comportamiento</h5>
+    </div>
+  )
+}
+
+<table style="width:100%">
+  <tr>
+    <th>Método</th>
+    <th style="width:60%">WollokDoc</th>
+  </tr>
+  {
+    entity.methods
+      .filter((method) => !method.isSynthetic)
+      .map((method) => (
+        <tr>
+          <td>
+            {method.isOverride && <Badge variant="note" text="override" />}
+            {method.isAbstract() && <Badge variant="caution" text="abstract" />}
+            {method.isNative() && <Badge variant="danger" text="native" />}
+            <strong>{methodLabel(method)}</strong>
+          </td>
+          <td>
+            <WollokDoc node={method} />
+          </td>
+        </tr>
+      ))
+  }
+</table>
