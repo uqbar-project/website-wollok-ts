@@ -1,0 +1,63 @@
+---
+import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
+import Image from "astro/components/Image.astro";
+import home1 from "../../../assets/home1.jpeg";
+---
+
+<div>
+  <div class="intro-container">
+    <div class="welcome">
+      <h1>Bienvenid@</h1>
+      <div class="actions">
+        <CallToAction link="./getting_started/installation" variant="primary">
+          Comenzar!
+        </CallToAction>
+        <CallToAction link="./documentation/language" variant="secondary">
+          Documentación
+        </CallToAction>
+      </div>
+    </div>
+    <div class="hide-mobile" style="width: 45%;">
+      <Image src={home1} alt="Wollok en la clase" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .intro-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .hide-mobile {
+      display: none;
+    }
+    .intro-container {
+      justify-content: center;
+    }
+
+    .actions {
+      flex-direction: column;
+    }
+
+    .intro-container .welcome h1 {
+      text-align: center;
+    }
+
+    .welcome {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+</style>
