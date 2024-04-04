@@ -7,14 +7,15 @@ import home1 from "../../../assets/home1.jpeg";
 <div>
   <div class="intro-container">
     <div class="welcome">
-      <h1>Bienvenid@</h1>
+      <h1>Wollok</h1>
+      <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
       <div class="actions">
         <CallToAction
           link="./getting_started/installation"
           variant="primary"
           icon={{ type: "icon", name: "rocket" }}
         >
-          Comenzar!
+          Instalar
         </CallToAction>
         <CallToAction link="./documentation/language" variant="secondary">
           Documentación
@@ -34,6 +35,10 @@ import home1 from "../../../assets/home1.jpeg";
     align-items: center;
     flex-direction: row;
     padding: 2rem;
+  }
+
+  #wollok-intro-subtitle {
+    font-size: 1.3rem;
   }
 
   .actions {

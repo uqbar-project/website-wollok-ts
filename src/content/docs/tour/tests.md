@@ -1,6 +1,9 @@
 ---
 title: Tests
 description: Tests de Wollok en VSCode.
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 4
 sidebar:
   order: 3
 ---
