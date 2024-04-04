@@ -1,0 +1,124 @@
+{
+  "fileTypes": ["wollok"],
+  "name": "wollok",
+  "patterns": [
+    {
+      "include": "#main"
+    }
+  ],
+  "scopeName": "source.wollok",
+  "uuid": "",
+  "repository": {
+    "main": {
+      "patterns": [
+        {
+          "match": "@[A-Za-z]+",
+          "name": "variable.wollok"
+        },
+        {
+          "include": "#numeric"
+        },
+        {
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.wollok"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#main__1"
+            }
+          ],
+          "end": "(\\})",
+          "endCaptures": {
+            "1": {
+              "name": "keyword.operator.wollok"
+            }
+          }
+        },
+        {
+          "match": "(;)",
+          "name": "keyword.operator.wollok"
+        },
+        {
+          "begin": "(\\\"|')",
+          "beginCaptures": {
+            "1": {
+              "name": "string.wollok"
+            }
+          },
+          "contentName": "string.wollok",
+          "end": "(\\\"|')",
+          "endCaptures": {
+            "1": {
+              "name": "string.wollok"
+            }
+          }
+        },
+        {
+          "include": "#multi_line_comment"
+        },
+        {
+          "match": "(//.*)",
+          "name": "comment.wollok"
+        },
+        {
+          "match": "\\b(object|class|package|program|test|describe|method|override|constructor|native|var|const|property|inherits|new|if|else|self|super|import|null|true|false|return|throw|then always|try|catch|mixed with|with|mixin|fixture)\\b",
+          "name": "keyword.wollok"
+        }
+      ]
+    },
+    "main__1": {
+      "patterns": [
+        {
+          "include": "#main"
+        }
+      ]
+    },
+    "main__2": {
+      "patterns": []
+    },
+    "main__3": {
+      "patterns": [
+        {
+          "include": "#numeric"
+        },
+        {
+          "match": "(,)",
+          "name": "keyword.operator.wollok"
+        }
+      ]
+    },
+    "multi_line_comment": {
+      "patterns": [
+        {
+          "begin": "(/\\*)",
+          "beginCaptures": {
+            "1": {
+              "name": "comment.wollok"
+            }
+          },
+          "contentName": "comment.wollok",
+          "end": "(\\*/)",
+          "endCaptures": {
+            "1": {
+              "name": "comment.wollok"
+            }
+          }
+        }
+      ]
+    },
+    "multi_line_comment__1": {
+      "patterns": []
+    },
+    "numeric": {
+      "patterns": [
+        {
+          "match": "(\\b\\d+)",
+          "name": "constant.numeric.wollok"
+        }
+      ]
+    }
+  }
+}
