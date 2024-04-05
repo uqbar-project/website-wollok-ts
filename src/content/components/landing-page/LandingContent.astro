@@ -1,0 +1,17 @@
+---
+import StripedSections from "../StripedSections.astro";
+import InfoGallery from "../info-gallery/InfoGallery.astro";
+const cards = await Astro.glob("./what-is-wollok/card-*.md");
+---
+
+<StripedSections>
+  <div class="what-is-wollok">
+    <InfoGallery title="¿Qué es Wollok?" cards={cards} />
+  </div>
+</StripedSections>
+
+<style>
+  .what-is-wollok {
+    padding: 4rem 2rem;
+  }
+</style>

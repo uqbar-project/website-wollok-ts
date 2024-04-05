@@ -1,0 +1,28 @@
+---
+import type { MarkdownInstance } from "astro";
+import InfoCard from "./InfoCard.astro";
+type Props = {
+  title?: string;
+  cards: Array<MarkdownInstance<any>>;
+};
+const { title, cards } = Astro.props;
+---
+
+<div>
+  {title && <h2 class="title">{title}</h2>}
+  <div class="cards">
+    {cards.map((card) => <InfoCard text={card} />)}
+  </div>
+</div>
+
+<style>
+  .title {
+    text-align: center;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+    row-gap: 2rem;
+  }
+</style>

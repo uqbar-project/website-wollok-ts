@@ -7,6 +7,11 @@
 }
 
 /* call to action buttons should center their elements (see landing page) */
-.action {
+.action.secondary {
   justify-content: center;
+  color: var(--sl-color-accent);
+}
+
+.action.primary {
+  background-color: var(--sl-color-accent);
 }

@@ -1,0 +1,28 @@
+---
+import type { MarkdownInstance } from "astro";
+type Props = {
+  text: MarkdownInstance<any>;
+};
+
+const { text } = Astro.props;
+---
+
+<div>
+  {(<text.Content />)}
+</div>
+
+<style>
+  div {
+    display: flex;
+    padding: 0.5rem;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    background-color: var(--sl-color-accent);
+    border-radius: 15px;
+    color: var(--sl-color-text-invert);
+    margin-top: 0 !important;
+    box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+  }
+</style>
