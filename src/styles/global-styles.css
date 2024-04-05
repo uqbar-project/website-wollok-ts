@@ -5,3 +5,8 @@
 .italics {
   font-style: italic;
 }
+
+/* call to action buttons should center their elements (see landing page) */
+.action {
+  justify-content: center;
+}
