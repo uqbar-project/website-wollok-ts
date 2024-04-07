@@ -1,0 +1,55 @@
+---
+import claseImage from "../../../../assets/clase.jpeg";
+import { Image } from "astro:assets";
+---
+
+<div style="position:relative">
+  <Image class="class-img" src={claseImage} alt="Wollok en la clase" />
+  <div class="description">
+    <h2 class="title">Una herramienta con sentido pedagógico</h2>
+    <p class="bullet-points">
+      Su lenguaje permite incorporar los conceptos principales del paradigma en
+      forma incremetal.
+      <br /><br />
+      Lográ programas con polimorfismo desde el primer día. Incrementa gradualmente
+      la complejidad con clases y mixins. Llega a dominar las colecciones usando
+      bloques de código (closures).
+      <br /><br />
+      Wollok está diseñado con una sintaxis liviana e intuitiva que hace foco en
+      los conceptos y facilita la transición hacia los lenguajes industriales.
+    </p>
+  </div>
+</div>
+
+<style>
+  .class-img {
+    filter: brightness(0.2);
+    opacity: 0.7;
+  }
+
+  .description {
+    z-index: 1;
+    text-align: end;
+    position: absolute;
+    top: 1rem;
+    left: 30%;
+    right: 5%;
+    bottom: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .description > .bullet-points {
+    color: #ffffff;
+    overflow-y: scroll;
+  }
+  .description > .title {
+    color: #ffffff;
+    height: min-content;
+  }
+  .description > .title {
+    padding-left: 40%;
+  }
+</style>

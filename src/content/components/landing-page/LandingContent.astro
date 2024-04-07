@@ -2,12 +2,15 @@
 import StripedSections from "../StripedSections.astro";
 import InfoGallery from "../info-gallery/InfoGallery.astro";
 const cards = await Astro.glob("./what-is-wollok/card-*.md");
+import PedagogicalTool from "./pedagogical-tool/PedagogicalTool.astro";
 ---
 
 <StripedSections>
   <div class="what-is-wollok">
     <InfoGallery title="¿Qué es Wollok?" cards={cards} />
   </div>
+  <PedagogicalTool />
+  
 </StripedSections>
 
 <style>
