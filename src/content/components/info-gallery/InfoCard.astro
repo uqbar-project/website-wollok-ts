@@ -7,21 +7,24 @@ type Props = {
 const { text } = Astro.props;
 ---
 
-<div>
-  {(<text.Content />)}
+<div class="card">
+  <text.Content />
 </div>
 
 <style>
-  div {
-    display: flex;
-    padding: 0.5rem;
+  .card {
+    flex: 1 1 0;
     aspect-ratio: 1 / 1;
-    text-align: center;
-    background-color: var(--sl-color-accent);
+    padding: 2rem;
     border-radius: 15px;
-    color: var(--sl-color-text-invert);
     margin-top: 0 !important;
+    
+    background-color: var(--sl-color-accent);
+    color: var(--sl-color-text-invert);
     box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.3);
+    
+    display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
   }
