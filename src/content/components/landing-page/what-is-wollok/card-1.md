@@ -1,1 +1,1 @@
-Wollok es un **lenguaje de programación y entorno de desarrollo integrado(IDE)** para ser utilizado en el dictado de materias iniciales de programación **orientada a objetos**.
+Wollok es un **lenguaje de programación y entorno de desarrollo integrado (IDE)** para ser utilizado en el dictado de materias iniciales de programación **orientada a objetos**.

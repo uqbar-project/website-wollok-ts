@@ -1,9 +1,5 @@
-.bold {
-  font-weight: bold;
-}
-
-.italics {
-  font-style: italic;
+:root {
+  --sl-font: 'Inter';
 }
 
 .social-icons > a {
