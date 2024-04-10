@@ -1,5 +1,12 @@
 :root {
   --sl-font: 'Inter';
+  --breakpoint-mobile: 50rem;
+}
+
+@media (max-width: 50em) {
+  .hide-mobile {
+    display: none;
+  }
 }
 
 .social-icons > a {
@@ -7,11 +14,15 @@
 }
 
 /* call to action buttons should center their elements (see landing page) */
-.action.secondary {
+.action:is(a){
+  display: flex;
   justify-content: center;
+}
+
+.action.secondary:is(a) {
   color: var(--sl-color-accent);
 }
 
-.action.primary {
+.action.primary:is(a){
   background-color: var(--sl-color-accent);
 }
