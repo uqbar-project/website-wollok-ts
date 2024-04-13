@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import fs from "fs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,6 +10,15 @@ export default defineConfig({
     starlight({
       title: "Wollok",
       description: "The official Wollok language website.",
+      expressiveCode: {
+        shiki: {
+          langs: [
+            JSON.parse(
+              fs.readFileSync("./src/shiki-grammars/wollok.json", "utf-8")
+            ),
+          ],
+        },
+      },
       favicon: "/favicon.ico",
       logo: {
         light: "./src/assets/branding/imagotipo-pos.svg",
