@@ -1,0 +1,72 @@
+---
+import claseImage from "../../../../assets/clase.jpeg";
+import { Image } from "astro:assets";
+---
+
+<div id="pedag-container">
+  <Image class="class-img" src={claseImage} alt="Wollok en la clase" />
+  <div class="description">
+    <h2 class="title">Una herramienta con sentido pedagógico</h2>
+    <div class="bullet-points">
+      <p>
+        Su lenguaje permite incorporar los conceptos principales del paradigma en
+        forma incremetal.
+      </p>
+      <p>
+        Lográ programas con polimorfismo desde el primer día. Incrementá gradualmente
+        la complejidad con clases y mixins. Llegá a dominar las colecciones usando
+        bloques de código como parámetros.
+      </p>
+      <p>
+        Wollok está diseñado con una sintaxis liviana e intuitiva que hace foco en
+        los conceptos y facilita la transición hacia los lenguajes industriales.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .class-img {
+    opacity: 0.4;
+  }
+
+  #pedag-container {
+    background-color: #000000d1;
+    position: relative;
+    margin-top: 0;
+  }
+
+
+  .description {
+    z-index: 1;
+    text-align: end;
+    position: absolute;
+    top: 1rem;
+    left: 30%;
+    right: 5%;
+    bottom: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .description *:is(h2, p) {
+    color: #ffffff;
+  }
+
+  .description > .bullet-points {
+    overflow-y: scroll;
+    font-weight: 500;
+  }
+
+  .description > .bullet-points > p {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+
+  .description > .title {
+    padding-left: 40%;
+    font-size: 2.5em;
+  }
+</style>

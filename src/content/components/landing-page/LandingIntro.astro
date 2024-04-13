@@ -1,28 +1,34 @@
 ---
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
-import Image from "astro/components/Image.astro";
-import home1 from "../../../assets/home1.jpeg";
+import pepitaExamplePath from "./pepita.txt?raw";
 ---
 
 <div>
   <div class="intro-container">
     <div class="welcome">
-      <h1>Bienvenid@</h1>
+      <h1>Wollok</h1>
+      <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
       <div class="actions">
         <CallToAction
           link="./getting_started/installation"
           variant="primary"
           icon={{ type: "icon", name: "rocket" }}
         >
-          Comenzar!
+          Instalar
         </CallToAction>
         <CallToAction link="./documentation/language" variant="secondary">
           Documentación
         </CallToAction>
       </div>
     </div>
-    <div class="hide-mobile" style="width: 45%;">
-      <Image src={home1} alt="Wollok en la clase" />
+    <div class="hide-mobile pepita-example">
+      <Tabs>
+        <TabItem label="Código">
+          <Code code={pepitaExamplePath} lang="wollok" />
+        </TabItem>
+        <TabItem label="Diagrama"> imagennn </TabItem>
+      </Tabs>
     </div>
   </div>
 </div>
@@ -34,6 +40,13 @@ import home1 from "../../../assets/home1.jpeg";
     align-items: center;
     flex-direction: row;
     padding: 2rem;
+    gap: 15px;
+    height: 50vh;
+  }
+
+  #wollok-intro-subtitle {
+    margin-top: 0;
+    font-size: 1.3rem;
   }
 
   .actions {
@@ -42,9 +55,19 @@ import home1 from "../../../assets/home1.jpeg";
     gap: 1rem;
   }
 
-  @media (max-width: 600px) {
-    .hide-mobile {
-      display: none;
+  .pepita-example {
+    width: 55%;
+    height: 100%;
+    margin: 0 !important;
+  }
+
+  .action {
+    justify-content: center;
+  }
+
+  @media (max-width: 50em) {
+    #wollok-intro-subtitle {
+      text-align: center;
     }
     .intro-container {
       justify-content: center;

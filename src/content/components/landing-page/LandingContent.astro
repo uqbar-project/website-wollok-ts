@@ -1,0 +1,22 @@
+---
+import InfoGallery from "../info-gallery/InfoGallery.astro";
+const cards = await Astro.glob("./what-is-wollok/card-*.md");
+import PedagogicalTool from "./pedagogical-tool/PedagogicalTool.astro";
+---
+
+<div class="striped">
+  <div class="what-is-wollok">
+    <InfoGallery title="¿Qué es Wollok?" cards={cards} />
+  </div>
+  <PedagogicalTool />
+</div>
+
+<style>
+  .what-is-wollok {
+    padding: 4rem 2rem;
+  }
+
+  .striped *:nth-child(odd) {
+    background-color: var(--sl-color-gray-6);
+  }
+</style>

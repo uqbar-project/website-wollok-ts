@@ -1,0 +1,43 @@
+---
+import type { MarkdownInstance } from "astro";
+import InfoCard from "./InfoCard.astro";
+type Props = {
+  title?: string;
+  cards: Array<MarkdownInstance<any>>;
+};
+const { title, cards } = Astro.props;
+---
+
+<div class="gallery-container">
+  {title && <h2 class="title">{title}</h2>}
+  <div class="cards">
+    {cards.map((card) => <InfoCard text={card} />)}
+  </div>
+</div>
+
+<style>
+
+  .gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .cards {
+    max-width: 50rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  @media (max-width: 50em){
+    .cards {
+      flex-direction: column;
+    }
+  }
+</style>

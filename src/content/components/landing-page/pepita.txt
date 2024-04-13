@@ -1,0 +1,9 @@
+object pepita {
+  var energia = 100
+  
+  method volar(kilometros) {
+    energia -= kilometros * 4
+  }
+  
+  method estaCansada() = energia < 40
+}
