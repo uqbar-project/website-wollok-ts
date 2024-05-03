@@ -1,12 +1,6 @@
----
-import claseImage from "../../../../assets/claseCropped.jpeg";
-import { Image } from "astro:assets";
----
-
-<div id="pedag-container">
-  <Image class="class-img" src={claseImage} alt="Wollok en la clase"/>
+<div id="commercial-container">
   <div class="description">
-    <h2 class="title">Una herramienta con sentido pedagógico...</h2>
+    <h2 class="title">...pensado desde la industria</h2>
     <div class="bullet-points">
       <p>
         Su lenguaje permite incorporar los conceptos principales del paradigma en
@@ -22,31 +16,6 @@ import { Image } from "astro:assets";
 </div>
 
 <style>
-  .class-img {
-    opacity: 0.4;
-  }
-
-  #pedag-container {
-    background-color: #000000d1;
-    position: relative;
-    margin-top: 0;
-  }
-
-
-  .description {
-    z-index: 1;
-    text-align: end;
-    position: absolute;
-    top: 1rem;
-    left: 30%;
-    right: 5%;
-    bottom: 5%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
   .description *:is(h2, p) {
     color: #ffffff;
   }
@@ -57,14 +26,14 @@ import { Image } from "astro:assets";
   }
 
   .description > .bullet-points > p {
-    margin-left: 25%;
+    margin-left: 2rem;
     font-size: 1.2em;
     font-weight: 500;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .description > .title {
-    padding-left: 40%;
+    padding-left: 2rem;
     font-size: 2.5em;
   }
 </style>
