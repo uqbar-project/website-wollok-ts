@@ -26,3 +26,7 @@
 .action.primary:is(a){
   background-color: var(--sl-color-accent);
 }
+
+div.tablist-wrapper {
+  overflow-x: clip;
+}
