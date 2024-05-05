@@ -30,3 +30,7 @@
 div.tablist-wrapper {
   overflow-x: clip;
 }
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent-hover);
+}
