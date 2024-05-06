@@ -6,7 +6,7 @@
 /* Dark mode colors. */
 :root {
   --sl-color-text-accent-inverted: #1d211f;
-  --sl-color-accent-hover: #6b1c25;
+  --sl-color-accent-hover: #b0525d;
   --sl-color-accent-low: #37172c;
   --sl-color-accent: #f9e9e9;
   --sl-color-accent-high: #a5a1a3;
@@ -24,7 +24,7 @@
 :root[data-theme="light"] {
   --sl-color-text-accent-inverted: #ffffff;
   --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-accent-hover: #e8cece;
+  --sl-color-accent-hover: #b15757;
   --sl-color-accent-low: #f5ecf1;
   --sl-color-accent: #810a10;
   --sl-color-accent-high: #490e37;
