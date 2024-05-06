@@ -13,7 +13,7 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/starlight": "^0.21.2",
     "astro": "^4.5.12",
-    "astro-embed": "^0.6.1",
+    "astro-embed": "^0.7.2",
     "sharp": "^0.32.5",
     "typescript": "^5.3.3",
     "wollok-ts": "^4.0.7"

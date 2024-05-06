@@ -34,3 +34,7 @@ div.tablist-wrapper {
 .sl-markdown-content a:hover {
   color: var(--sl-color-accent-hover);
 }
+
+div.feedback.show {
+  background-color: var(--sl-color-accent-hover) !important;
+}
