@@ -52,6 +52,7 @@ import { Image } from "astro:assets";
 
   .description > .bullet-points > p {
     margin-left: 0;
+    margin-bottom: 1rem;
     font-size: 1.2em;
     font-weight: 400;
     justify-content: flex-end;
@@ -60,5 +61,42 @@ import { Image } from "astro:assets";
   .description > .title {
     padding-left: 40%;
     font-size: 2.5em;
+  }
+
+  @media(max-width: 50em) {
+    #pedag-container {
+      margin-top: 0;
+    }
+
+    img {
+      width: auto !important;
+      height: 12em !important;
+      opacity: 1 !important;
+    }
+
+    .description {
+      position: initial;
+      top: 1rem;
+      right: 5%;
+      bottom: 5%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .description > .title {
+      font-size: 2em;
+      padding: 0 1rem 0 1rem;
+      text-align: start;
+    }
+
+    .description > .bullet-points > p {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      text-align: start;
+      margin-left: 1rem;
+    }
   }
 </style>

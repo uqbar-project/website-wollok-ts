@@ -1,5 +1,5 @@
 ---
-import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { Code } from "@astrojs/starlight/components";
 import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
 import pepitaExamplePath from "./pepita.txt?raw";
 import { Image } from 'astro:assets';
@@ -9,8 +9,10 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
 <div>
   <div class="intro-container">
     <div class="welcome">
-      <h1>Wollok</h1>
-      <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
+      <div class="titulo">
+        <h1>Wollok</h1>
+        <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
+      </div>
       <div class="actions">
         <CallToAction
           link="./getting_started/installation"
@@ -24,19 +26,17 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
           Documentación
         </CallToAction>
         <CallToAction link="https://youtu.be/AwkKZ41U6WE" variant="secondary" attrs={{title: "Acá Fer nos trae una demo Wollok en VSCode usando la versión 0.2.0"}}>
-          Video Tutorial
+          Tour
         </CallToAction>
       </div>
     </div>
-    <div class="hide-mobile pepita-example">
-      <Tabs>
-        <TabItem label="Código">
+    <div class="pepita-example">
+        <div class="codigo">
           <Code code={pepitaExamplePath} lang="wollok" />
-        </TabItem>
-        <TabItem label="Diagrama">
+        </div>
+        <div class="diagrama">
           <Image src={wollokDiagram} alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real."/>
-        </TabItem>
-      </Tabs>
+        </div>
     </div>
   </div>
 </div>
@@ -46,8 +46,8 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    padding: 2rem;
+    flex-direction: column;
+    padding: 1rem 2rem;
     gap: 15px;
     height: 35%;
   }
@@ -57,6 +57,22 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
     font-size: 1.3rem;
   }
 
+  .welcome {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    width: 100%;
+    align-items: end;
+    margin-bottom: 0;
+  }
+
+  .titulo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: start;
+  }
+
   .actions {
     display: flex;
     flex-direction: row;
@@ -64,35 +80,39 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
   }
 
   .pepita-example {
-    width: 55%;
-    height: 100%;
-    margin: 0 !important;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 7fr;
+    gap: 1rem;
   }
 
   .action {
     justify-content: center;
   }
 
+  .diagrama {
+    margin-top: 0 !important;
+  }
+
   @media (max-width: 50em) {
-    #wollok-intro-subtitle {
-      text-align: center;
-    }
     .intro-container {
       justify-content: center;
     }
-
-    .actions {
-      flex-direction: column;
-    }
-
-    .intro-container .welcome h1 {
-      text-align: center;
-    }
-
+    
     .welcome {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      text-align: start;
+      gap: 0;
+    }
+
+    #wollok-intro-subtitle div.titulo {
+      text-align: start;
+    }
+
+    .actions {
+      gap: 0.5rem;
+      align-self: center;
     }
   }
 </style>

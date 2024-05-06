@@ -46,14 +46,33 @@ import { Image } from "astro:assets";
   }
 
   .description > .bullet-points > p {
-    margin-left: 2rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.2em;
     font-weight: 400;
     justify-content: flex-start;
   }
 
   .description > .title {
-    padding-left: 2rem;
+    padding-left: 1rem;
     font-size: 2.5em;
+  }
+
+  @media(max-width: 50em) {
+    .commercial-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem !important;
+      margin-left: 0 !important;
+      padding: 0;
+    }
+    
+    .description > .title {
+      font-size: 2em;
+    }
+
+    .class-img {
+      align-self: end;
+    }
   }
 </style>
