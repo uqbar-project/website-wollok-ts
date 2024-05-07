@@ -3,9 +3,10 @@ import { Code } from "@astrojs/starlight/components";
 import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
 import pepitaExamplePath from "./pepita.txt?raw";
 import { Image } from 'astro:assets';
-import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
----
+import wollokDiagramDark from '/src/assets/wollok-lsp-diagram-dark.png';
+// import wollokDiagramLight from '/src/assets/wollok-lsp-diagram-light.png';
 
+---
 <div>
   <div class="intro-container">
     <div class="welcome">
@@ -35,7 +36,7 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
           <Code code={pepitaExamplePath} lang="wollok" />
         </div>
         <div class="diagrama">
-          <Image src={wollokDiagram} alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real."/>
+          <Image src={wollokDiagramDark} alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real."/>
         </div>
     </div>
   </div>
@@ -82,8 +83,8 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
   .pepita-example {
     width: 100%;
     display: grid;
-    grid-template-columns: 4fr 7fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 
   .action {
@@ -92,6 +93,11 @@ import wollokDiagram from '/src/assets/wollok-lsp-diagram.png';
 
   .diagrama {
     margin-top: 0 !important;
+  }
+
+  .diagrama > img {
+    height: auto;
+    width: 100%;
   }
 
   @media (max-width: 50em) {

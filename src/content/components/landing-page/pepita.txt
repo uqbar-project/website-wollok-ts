@@ -1,9 +1,15 @@
 object pepita {
   var energia = 100
   
-  method volar(kilometros) {
-    energia -= kilometros * 4
+  method energia() = energia
+
+  method comer(comida) {
+    energia += comida.energia()
   }
   
   method estaCansada() = energia < 40
+}
+
+class Semilla {
+  var property energia = 10
 }
