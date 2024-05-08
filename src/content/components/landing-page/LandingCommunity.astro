@@ -9,26 +9,24 @@ import { Image } from "astro:assets";
   <div class="content">
     <Image class="class-img" src={comunidadWollok} alt="Comunidad Wollok"/>
     <div class="comunidad-content">
-      <p>Estamos en contacto principalmente a través de <a id="discord" href="https://discord.gg/9vMbuabnuc">Discord</a>, ya sea
+      <p>Estamos en contacto principalmente a través de <a href="https://discord.gg/9vMbuabnuc">Discord</a>, ya sea
         <ul>
           <li>para organizar una <i>hackaton</i>,</li>
           <li>un asado,</li>
           <li>o el Concurso de <b>Wollok Game</b>, una interfaz gráfica para hacer videojuegos en Wollok.</li>
         </ul>
       </p>
-
-      <p>También Wollok forma parte de <b>trabajos de investigación</b>, proyectos finales, tesis y papers.</p>
-
-      <div>
-        ¡No dudes en acercarte si estás usando Wollok!
-      </div>
-
+      <p>También Wollok forma parte de <b>trabajos de investigación</b>, proyectos finales, tesis y papers. ¡No dudes en acercarte si estás usando Wollok!</p>
+      <p>
+        ¿Te parece que falta contar algo, encontraste algún error en las páginas, algo que se pueda mejorar?
+        <a href="https://github.com/uqbar-project/website-wollok-ts/issues/new">¡Ayudanos cargando un issue!</a>
+      </p>
     </div>
   </div>
 </div>
 
 <style>
-  .main {
+.main {
   margin: 1rem 1rem;
 }
 
@@ -40,6 +38,7 @@ import { Image } from "astro:assets";
 }
 
 .class-img {
+  border-radius: 10px;
   height: auto;
   width: 100%;
   opacity: 0.9;
@@ -49,8 +48,12 @@ import { Image } from "astro:assets";
   margin-top: 0 !important;
 }
 
-#discord {
-  color: var(--sl-color-text-accent);
+a {
+  color: var(--sl-color-accent) !important;
+}
+
+a:hover {
+  color: var(--sl-color-accent-hover) !important;
 }
 
 @media(max-width: 50em) {
