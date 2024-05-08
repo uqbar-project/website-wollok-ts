@@ -3,6 +3,7 @@ import InfoGallery from "../info-gallery/InfoGallery.astro";
 const cards = await Astro.glob("./what-is-wollok/card-*.md");
 import CommercialTool from "./commercial-tool/CommercialTool.astro";
 import PedagogicalTool from "./pedagogical-tool/PedagogicalTool.astro";
+import Separator from "../common/Separator.astro";
 ---
 
 <div class="striped">
@@ -10,9 +11,9 @@ import PedagogicalTool from "./pedagogical-tool/PedagogicalTool.astro";
     <InfoGallery title="¿Qué es Wollok?" cards={cards} />
   </div>
   <PedagogicalTool />
-  <div id="separador"/>
+  <Separator />
   <CommercialTool />
-  <div id="separador"/>
+  <Separator />
 </div>
 
 <style>
