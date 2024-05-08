@@ -1,15 +1,23 @@
+// podemos definir objetos...
 object pepita {
+
+  // ...que tienen atributos (referencias)
   var energia = 100
   
-  method energia() = energia
-
+  // hay métodos que cambian el estado interno de un objeto
   method comer(comida) {
     energia += comida.energia()
   }
   
+  // y métodos que calculan valores
   method estaCansada() = energia < 40
 }
 
+// además de los objetos, existen las clases
 class Semilla {
+
+  // los atributos se pueden definir como properties
+  // para generar automáticamente getters y setters
   var property energia = 10
+
 }
