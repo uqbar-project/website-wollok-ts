@@ -15,6 +15,14 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 2. Luego vamos a **renombrar el ejecutable** a wollok (o wollok.exe) para facilitar su uso desde una terminal y **lo ubicaremos dentro del PATH de nuestro sistema operativo** para que lo reconozca desde cualquier carpeta. A continuación te dejamos las instrucciones para cada caso.
 
+### Windows
+
+[Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53))
+
+### Linux
+
+[Linux](https://unix.stackexchange.com/questions/183295/adding-programs-to-path)
+
 ### Mac
 
 - Asumimos que descargaste la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado). Desde aquí vamos a renombrar el archivo ejecutable y le vamos a dar permisos de ejecución:
@@ -43,12 +51,8 @@ Ahora viene la parte más molesta: Mac introduce un chequeo de seguridad especia
 
 ![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
 
-### Descartar
 
-También recomendamos agregarlo a la variable de entorno PATH (acá hay instrucciones para [Linux](https://unix.stackexchange.com/questions/183295/adding-programs-to-path), [Mac](https://apple.stackexchange.com/questions/41542/adding-a-new-executable-to-the-path-environment-variable) y [Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)).
-
-
-## Extensiones de Wollok para Visual Studio Code
+## Extensiones de Wollok
 
 1. **Abrir el VSCode**
 
