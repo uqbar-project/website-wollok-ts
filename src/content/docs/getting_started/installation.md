@@ -27,18 +27,20 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 - Asumimos que descargaste la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado). Desde aquí vamos a renombrar el archivo ejecutable y le vamos a dar permisos de ejecución:
 
-![Rename & give access to wollok ts cli executable](../../../assets/wollok-ts-cli-mac-cmd-1.gif)
+![Rename & give access to wollok ts cli executable](../../../assets/wollok-ts-cli-mac-cmd.gif)
 
 Los comandos que ejecutamos son
 
 ```bash
 cd ~/Downloads
-ls -la wollok*                # tiene que aparecer el archivo que descargaste
-mv ./wollok-ts-cli* ./wollok  # renombramos el archivo (tiene que haber uno solo)
-chmod a+x ./wollok            # permisos de ejecución
-ls -la wollok                 # confirmamos que tiene permisos bien configurados
-                              #  deben ser algo como -rwxr-xr-x (revisar las x)
+ls -la wollok
+mv ./wollok-ts-cli* ./wollok
+chmod a+x ./wollok
+sudo mv ./wollok /usr/local/bin/wollok
+ls -la /usr/local/bin/wollok
 ```
+
+Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (_a_ll e_x_ecution access), pasarlo a la carpeta /usr/local/bin y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
 Ahora viene la parte más molesta: Mac introduce un chequeo de seguridad especial, por lo que vas a tener que
 
