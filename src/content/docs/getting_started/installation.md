@@ -36,11 +36,11 @@ cd ~/Downloads
 ls -la wollok
 mv ./wollok-ts-cli* ./wollok
 chmod a+x ./wollok
-sudo mv ./wollok /usr/local/bin/wollok
+sudo mv ./wollok /usr/local/bin/wollok # te va a pedir la clave de usuario root
 ls -la /usr/local/bin/wollok
 ```
 
-Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (_a_ll e_x_ecution access), pasarlo a la carpeta /usr/local/bin y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
+Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
 Ahora viene la parte más molesta: Mac introduce un chequeo de seguridad especial, por lo que vas a tener que
 
@@ -58,7 +58,7 @@ Ahora viene la parte más molesta: Mac introduce un chequeo de seguridad especia
 
 1. **Abrir el VSCode**
 
-2. Instalar las extensiones [`wollok-lsp-ide`](https://marketplace.visualstudio.com/items?itemName=uqbar.wollok-lsp-ide) y [`wollok-highlight`](https://marketplace.visualstudio.com/items?itemName=uqbar.wollok-highlight) disponibles en los links o directamente desde el _Marketplace_ del VSCode.
+2. Instalar las extensiones [`wollok-lsp-ide`](https://marketplace.visualstudio.com/items?itemName=uqbar.wollok-lsp-ide) y [`wollok-highlight`](https://marketplace.visualstudio.com/items?itemName=uqbar.wollok-highlight) disponibles en los links o directamente desde el _Marketplace_ del VSCode. El orden en el que instales las extensiones es indistinto.
 
 Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra esta imagen:
 
