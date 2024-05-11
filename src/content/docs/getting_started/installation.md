@@ -27,7 +27,7 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 - Asumimos que descargaste la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado). Desde aquí vamos a renombrar el archivo ejecutable y le vamos a dar permisos de ejecución:
 
-![Rename & give access to wollok ts cli executable](../../../assets/wollok-ts-cli-mac.gif)
+![Rename & give access to wollok ts cli executable](../../../assets/wollok-ts-cli-mac-cmd-1.gif)
 
 Los comandos que ejecutamos son
 
