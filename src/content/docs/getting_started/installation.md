@@ -9,49 +9,72 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 ## Wollok Command Line Interface
 
-> A partir de aquí vamos a necesitar levantar una terminal zsh, podés usar la terminal por defecto de Mac o cualquier otro programa como [Warp](https://www.warp.dev/)
-
 1. Descargar la _Wollok Command Line Interface_ (CLI) disponible para [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64), [MacOS](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64) (versión [arm64](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-arm64)) y [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe).
 
 2. Luego vamos a **renombrar el ejecutable** a wollok (o wollok.exe) para facilitar su uso desde una terminal y **lo ubicaremos dentro del PATH de nuestro sistema operativo** para que lo reconozca desde cualquier carpeta. A continuación te dejamos las instrucciones para cada caso.
 
 ### Windows
 
-[Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53))
+[Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)
 
 ### Linux
 
-[Linux](https://unix.stackexchange.com/questions/183295/adding-programs-to-path)
-
-### Mac
+- Para este punto vamos a necesitar levantar una terminal con `Ctrl + Alt + T` o buscando `Terminal` en la barra de herramientas
 
 - Asumimos que descargaste la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado). Desde aquí vamos a renombrar el archivo ejecutable y le vamos a dar permisos de ejecución:
 
-![Rename & give access to wollok ts cli executable](../../../assets/wollok-ts-cli-mac-cmd.gif)
-
-Los comandos que ejecutamos son
-
 ```bash
 cd ~/Downloads
-ls -la wollok
+ls -la wollok-ts-cli*
 mv ./wollok-ts-cli* ./wollok
 chmod a+x ./wollok
 sudo mv ./wollok /usr/local/bin/wollok # te va a pedir la clave de usuario root
 ls -la /usr/local/bin/wollok
 ```
 
+Te mostramos cómo se hace esta parte desde una terminal:
+
+<img src="/src/assets/wollok-ts-cli-linux-cmd.gif">
+
 Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
-Ahora viene la parte más molesta: Mac introduce un chequeo de seguridad especial, por lo que vas a tener que
+Para verificar que está correctamente instalado, escribimos `wollok --version` en la consola desde cualquier carpeta, y nos debe devolver el número de versión (también podemos ejecutar `wollok --help`):
 
-- ejecutar `wollok --version` la primera vez
-- va a aparecer una ventana avisando que no puede ejecutarlo, y hacemos click en la opción `Show in Finder`
-- desde el Finder hacemos click derecho y en las opciones, nuevamente Open
+<img src="/src/assets/wollok-ts-cli-linux-cmd-2.gif">
+
+
+### Mac
+
+- Para este punto vamos a necesitar levantar una terminal con `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad
+
+- Asumimos que descargaste la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado). Desde aquí vamos a renombrar el archivo ejecutable y le vamos a dar permisos de ejecución:
+
+```bash
+cd ~/Downloads
+ls -la wollok-ts-cli*
+mv ./wollok-ts-cli* ./wollok
+chmod a+x ./wollok
+sudo mv ./wollok /usr/local/bin/wollok # te va a pedir la clave de usuario root
+ls -la /usr/local/bin/wollok
+```
+
+Te mostramos cómo se logra desde una terminal [Warp](https://www.warp.dev/) de Mac, es exactamente igual que si lo hacés desde una terminal común.
+
+![Rename & give access to wollok ts cli executable in Mac](../../../assets/wollok-ts-cli-mac-cmd.gif)
+
+Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
+
+Para verificar que esté correctamente instalado, ecesitamos algunos pasos más gracias al mecanismo de seguridad que trae el sistema operativo Mac:
+
+- debemos ejecutar `wollok --version` la primera vez
+- va a aparecer una ventana avisando que no puede ejecutarlo, hacemos click en la opción `Show in Finder`
+- en el Finder hacemos click derecho y en las opciones, nuevamente Open
 - eso abre una Terminal (en nuestro caso no es la que estamos usando, por eso aparece una nueva ventana), y una **nueva ventana de confirmación**. Esta vez en lugar de `Show in Finder` seleccionamos `Open`
-- la parte buena es que una vez que ejecuta desde esa terminal, ya podemos utilizarlo normalmente, podemos volver a nuestra terminal original
-- volvemos a ejecutar `wollok --version` y ya funciona correctamente
+- la parte buena es que una vez que ejecuta desde esa terminal, ya podemos utilizarlo normalmente. Cerramos la terminal que nos abrió Mac y volvemos a nuestra terminal original
+- ejecutamos nuevamente `wollok --version` y ahora sí funciona correctamente
 
 ![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
+
 
 
 ## Extensiones de Wollok
