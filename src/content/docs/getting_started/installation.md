@@ -15,7 +15,39 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 ### Windows
 
-[Windows](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)
+- Para este punto vamos a levantar una terminal Powershell (lo ideal es que sea versión 7 ó posterior, pero también te va a funcionar con la versión 5). Podés buscar en la barra de herramientas y seleccionar la opción **Powershell 7 (x64)**
+
+- Luego hay que ejecutar los siguientes pasos, asumiendo que en la carpeta `Downloads` del usuario logueado te descargaste la versión de Windows
+
+```powershell
+cd .\Downloads
+ls ./wollok-ts-cli*
+mv ./wollok-ts-cli* ./wollok.exe
+# ya podés verificar que funciona
+./wollok --version
+```
+
+<img src="/src/assets/wollok-ts-cli-win-cmd.gif">
+
+> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+
+- Ahora vamos a hacer que ese ejecutable sea accesible desde cualquier carpeta, para lo cual, nos paramos nuevamente en nuestra carpeta raíz de usuario (en nuestro caso es `C:/Users/Usuario`) y copiamos el ejecutable en una nueva carpeta `Wollok`
+
+```powershell
+mkdir Wollok
+mv ./Downloads/wollok.exe ./Wollok
+ls ./Wollok       # verificamos que esté el ejecutable Wollok
+```
+
+<img src="/src/assets/wollok-ts-cli-path-win.gif">
+
+Y por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno (TODO: contar el paso a paso):
+
+<img src="/src/assets/wollok-ts-cli-path-win-env.gif">
+
+Ahora sí, nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version`:
+
+TODO: grabar video
 
 ### Linux
 
@@ -42,6 +74,7 @@ Para verificar que está correctamente instalado, escribimos `wollok --version` 
 
 <img src="/src/assets/wollok-ts-cli-linux-cmd-2.gif">
 
+> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 
 ### Mac
 
@@ -75,6 +108,7 @@ Para verificar que esté correctamente instalado, ecesitamos algunos pasos más 
 
 ![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
 
+> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 
 
 ## Extensiones de Wollok
