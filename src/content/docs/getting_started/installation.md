@@ -15,39 +15,33 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 
 ### Windows
 
-- Para este punto vamos a levantar una terminal Powershell (lo ideal es que sea versión 7 ó posterior, pero también te va a funcionar con la versión 5). Podés buscar en la barra de herramientas y seleccionar la opción **Powershell 7 (x64)**
+Teniendo en cuenta que en la carpeta `Downloads` del usuario logueado nos descargamos la versión de Wollok TS CLI de Windows y que el usuario se llama `Usuario`, haremos lo siguiente
 
-- Luego hay que ejecutar los siguientes pasos, asumiendo que en la carpeta `Downloads` del usuario logueado te descargaste la versión de Windows
+- crear una carpeta `Wollok` dentro del home del usuario (en este caso: `C:\Users\Usuario`)
+- mover el archivo de la carpeta `C:\Users\Usuario\Downloads` a `C:\Users\Usuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
+- renombrar el ejecutable a `wollok.exe` para que sea más comodo de utilizar
 
-```powershell
-cd .\Downloads
-ls ./wollok-ts-cli*
-mv ./wollok-ts-cli* ./wollok.exe
-# ya podés verificar que funciona
-./wollok --version
-```
+<img src="/src/assets/wollok-ts-cli-path-win-2.gif">
 
-<img src="/src/assets/wollok-ts-cli-win-cmd.gif">
+Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno:
 
-> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+- activamos la ventana de ejecución de comandos con las teclas `Windows` y `R`
+- escribimos `sysdm.cpl` que es el programa que levanta el `Panel de Control`
 
-- Ahora vamos a hacer que ese ejecutable sea accesible desde cualquier carpeta, para lo cual, nos paramos nuevamente en nuestra carpeta raíz de usuario (en nuestro caso es `C:/Users/Usuario`) y copiamos el ejecutable en una nueva carpeta `Wollok`
+<img src="/src/assets/wollok-ts-cli-edit-system-variables.png" alt="Activar variables de entorno">
 
-```powershell
-mkdir Wollok
-mv ./Downloads/wollok.exe ./Wollok
-ls ./Wollok       # verificamos que esté el ejecutable Wollok
-```
-
-<img src="/src/assets/wollok-ts-cli-path-win.gif">
-
-Y por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno (TODO: contar el paso a paso):
+- una vez posicionada en la solapa "Avanzados", presionamos el botón "Variables de entorno" (Environment variables)
+- en la primera de la listas (la que corresponde al usuario logueado), seleccionamos la variable Path (puede ser que tengas que scrollear para encontrarla) y luego presionamos el botón "Editar" (Edit)
+- hay que seleccionar con el mouse la primera línea vacía y escribimos allí la dirección de la carpeta donde dejamos el ejecutable, en nuestro caso `C:\Users\Usuario\Wollok`
+- hacemos click en "Ok" y nuevamente en "Ok" dos veces para salir
 
 <img src="/src/assets/wollok-ts-cli-path-win-env.gif">
 
-Ahora sí, nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version`:
+Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
 
-TODO: grabar video
+<img src="/src/assets/wollok-ts-cli-path-win-3.gif">
+
+> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 
 ### Linux
 
