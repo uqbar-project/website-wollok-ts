@@ -85,9 +85,9 @@ sudo mv ./wollok /usr/local/bin/wollok # te va a pedir la clave de usuario root
 ls -la /usr/local/bin/wollok
 ```
 
-Te mostramos cómo se logra desde una terminal [Warp](https://www.warp.dev/) de Mac, es exactamente igual que si lo hacés desde una terminal común.
+Te mostramos cómo hacerlo desde una terminal de Mac:
 
-![Rename & give access to wollok ts cli executable in Mac](../../../assets/wollok-ts-cli-mac-cmd.gif)
+![Rename & give access to wollok ts cli executable in Mac](../../../assets/wollok-ts-cli-mac-cmd-2.gif)
 
 Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
@@ -95,10 +95,10 @@ Para verificar que esté correctamente instalado, ecesitamos algunos pasos más 
 
 - debemos ejecutar `wollok --version` la primera vez
 - va a aparecer una ventana avisando que no puede ejecutarlo, hacemos click en la opción `Show in Finder`
-- en el Finder hacemos click derecho y en las opciones, nuevamente Open
-- eso abre una Terminal (en nuestro caso no es la que estamos usando, por eso aparece una nueva ventana), y una **nueva ventana de confirmación**. Esta vez en lugar de `Show in Finder` seleccionamos `Open`
-- la parte buena es que una vez que ejecuta desde esa terminal, ya podemos utilizarlo normalmente. Cerramos la terminal que nos abrió Mac y volvemos a nuestra terminal original
-- ejecutamos nuevamente `wollok --version` y ahora sí funciona correctamente
+- en el Finder hacemos click derecho y en las opciones, nuevamente `Open`
+- eso abre una Terminal, y una **nueva ventana de confirmación**. Esta vez en lugar de `Show in Finder` seleccionamos `Open`
+- ahora sí termina de ejecutarse el comando: cerramos la terminal que nos abrió Mac y volvemos a nuestra terminal original
+- a partir de ahora ya podemos ejecutar `wollok --version` normalmente
 
 ![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
 
