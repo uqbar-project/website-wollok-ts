@@ -105,7 +105,9 @@ Para verificar que esté correctamente instalado, ecesitamos algunos pasos más 
 > La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 
 
-## Extensiones de Wollok
+## Extensiones de Wollok para VSC
+
+Estas instrucciones son independientes del sistema operativo de tu máquina.
 
 1. **Abrir el VSCode**
 
