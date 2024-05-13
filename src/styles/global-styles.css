@@ -9,6 +9,15 @@
   }
 }
 
+:root[data-theme="light"] .hide-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .hide-dark {
+  display: none;
+}
+
+
 .social-icons > a {
   color: var(--sl-color-accent);
 }
