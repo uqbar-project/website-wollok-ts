@@ -41,19 +41,6 @@ import wollokDiagramDark from '/src/assets/wollok-lsp-diagram-dark.png';
   </div>
 </div>
 
-<script>
-// Hack para poder setear la imagen del diagrama
-const setTheme = () => {
-  const htmlTag = document.getElementsByTagName('html')[0]
-  const theme = htmlTag?.getAttribute('data-theme') ?? 'dark'
-  const diagramaImg = document.getElementById('diagramaImagen')
-  diagramaImg?.setAttribute('src', `/src/assets/wollok-lsp-diagram-${theme}.png`)
-}
-
-window.onload = setTheme
-window.onchange = setTheme
-</script>
-
 <style>
   .intro-container {
     display: flex;
