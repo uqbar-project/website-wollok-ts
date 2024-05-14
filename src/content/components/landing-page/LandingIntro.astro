@@ -1,34 +1,48 @@
 ---
-import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { Code } from "@astrojs/starlight/components";
 import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
 import pepitaExamplePath from "./pepita.txt?raw";
----
+import { Image } from 'astro:assets';
+import wollokDiagramDark from '/src/assets/wollok-lsp-diagram-dark.png';
+import wollokDiagramLight from '/src/assets/wollok-lsp-diagram-light.png';
 
+---
 <div>
   <div class="intro-container">
     <div class="welcome">
-      <h1>Wollok</h1>
-      <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
+      <div class="titulo">
+        <h1>Wollok</h1>
+        <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
+      </div>
       <div class="actions">
         <CallToAction
-          link="./getting_started/installation"
+          link="/website-wollok-ts/getting_started/installation"
           variant="primary"
           icon={{ type: "icon", name: "rocket" }}
+          attrs={{title: "Instalate Wollok en tu máquina en breves pasos siguiendo este link"}}
         >
           Instalar
         </CallToAction>
-        <CallToAction link="./documentation/language" variant="secondary">
+        <CallToAction link="/website-wollok-ts/documentation/language" variant="secondary" attrs={{title: "Si estás buscando cómo implementar un concepto o ayuda sobre los mensajes que podés mandar a un objeto, seguí este link"}}>
           Documentación
+        </CallToAction>
+        <CallToAction link="https://youtu.be/AwkKZ41U6WE" variant="secondary" attrs={{title: "Acá Fer nos trae una demo Wollok en VSCode usando la versión 0.2.0"}}>
+          Tour
         </CallToAction>
       </div>
     </div>
-    <div class="hide-mobile pepita-example">
-      <Tabs>
-        <TabItem label="Código">
+    <div class="pepita-example">
+        <div class="codigo">
           <Code code={pepitaExamplePath} lang="wollok" />
-        </TabItem>
-        <TabItem label="Diagrama"> imagennn </TabItem>
-      </Tabs>
+        </div>
+        <div class="diagrama">
+          {[ 
+            {src: wollokDiagramLight, hideCSS: 'hide-dark'},
+            {src: wollokDiagramDark, hideCSS: 'hide-light'}
+          ].map(({src, hideCSS}) => 
+            <Image src={src} class={hideCSS} id="diagramaImagen" alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real." />
+          )}
+        </div>
     </div>
   </div>
 </div>
@@ -38,15 +52,31 @@ import pepitaExamplePath from "./pepita.txt?raw";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    padding: 2rem;
+    flex-direction: column;
+    padding: 1rem 2rem;
     gap: 15px;
-    height: 50vh;
+    height: 35%;
   }
 
   #wollok-intro-subtitle {
     margin-top: 0;
     font-size: 1.3rem;
+  }
+
+  .welcome {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    width: 100%;
+    align-items: end;
+    margin-bottom: 0;
+  }
+
+  .titulo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: start;
   }
 
   .actions {
@@ -56,35 +86,50 @@ import pepitaExamplePath from "./pepita.txt?raw";
   }
 
   .pepita-example {
-    width: 55%;
-    height: 100%;
-    margin: 0 !important;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
   }
 
   .action {
     justify-content: center;
   }
 
+  .diagrama {
+    margin-top: 0 !important;
+  }
+
+  .diagrama > img {
+    height: auto;
+    width: 100%;
+  }
+
   @media (max-width: 50em) {
-    #wollok-intro-subtitle {
-      text-align: center;
-    }
     .intro-container {
       justify-content: center;
+      padding: 1rem 1rem;
     }
-
-    .actions {
-      flex-direction: column;
-    }
-
-    .intro-container .welcome h1 {
-      text-align: center;
-    }
-
+    
     .welcome {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      text-align: start;
+      gap: 0;
+    }
+
+    #wollok-intro-subtitle div.titulo {
+      text-align: start;
+    }
+
+    .actions {
+      gap: 0.5rem;
+      align-self: center;
+    }
+
+    .pepita-example {
+      display: flex;
+      flex-direction: column;
     }
   }
 </style>

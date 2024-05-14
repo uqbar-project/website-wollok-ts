@@ -1,0 +1,67 @@
+---
+import comunidadWollok from "../../../assets/comunidad.jpg";
+import { Image } from "astro:assets";
+---
+
+<div class="main">
+  <h2>Y también una comunidad</h2>
+  <div class="content">
+    <Image class="class-img" src={comunidadWollok} alt="Comunidad Wollok"/>
+    <div class="comunidad-content">
+      <p>Estamos en contacto principalmente a través de <a href="https://discord.gg/9vMbuabnuc">Discord</a>, ya sea
+        <ul>
+          <li>para organizar una <i>hackaton</i>,</li>
+          <li>un asado,</li>
+          <li>o el Concurso de <b>Wollok Game</b>, una interfaz gráfica para hacer videojuegos en Wollok.</li>
+        </ul>
+      </p>
+      <p>También Wollok forma parte de <b>trabajos de investigación</b>, proyectos finales, tesis y papers. Podés visitar nuestro <a href="https://github.com/uqbar-project/wollok-language">repositorio principal</a>. ¡No dudes en acercarte si estás usando Wollok!</p>
+      <p>
+        ¿Te parece que falta contar algo, encontraste algún error en las páginas, algo que se pueda mejorar?
+        <a href="https://github.com/uqbar-project/website-wollok-ts/issues/new">¡Ayudanos cargando un issue!</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+.main {
+  margin: 1rem 1rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.4fr 2fr;
+  gap: 2rem;
+  font-size: 1.2em;
+}
+
+.class-img {
+  border-radius: 10px;
+  height: auto;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.comunidad-content {
+  margin-top: 0 !important;
+}
+
+a {
+  color: var(--sl-color-accent) !important;
+}
+
+a:hover {
+  color: var(--sl-color-accent-hover) !important;
+}
+
+@media(max-width: 50em) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.2em;
+  }
+
+}
+</style>

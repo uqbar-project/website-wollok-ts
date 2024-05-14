@@ -1,0 +1,78 @@
+---
+import claseImage from "../../../../assets/ide2.png";
+import { Image } from "astro:assets";
+---
+
+<div class="commercial-container">
+  <div class="description">
+    <h2 class="title">...pensado desde la industria</h2>
+    <div class="bullet-points">
+      <p>
+        Como proponemos que los estudiantes programen desde el primer día con
+        testeo unitario, es importante que lo hagan en un Entorno Integrado de
+        Desarrollo dedicado. 
+      </p>
+      <p>
+        El reporte de errores, la generación automática de diagramas y su sistema de inferencia de tipos permiten
+        una experiencia que enseña que desarrollar software es más que solo programar.
+      </p>
+    </div>
+  </div>
+  <Image class="class-img" src={claseImage} alt="Entorno integrado de desarrollo (IDE)"/>
+</div>
+
+<style>
+  .commercial-container {
+    margin-top: 0 !important;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .class-img {
+    width: 21rem;
+    top: 0;
+    padding-right: 0;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .description > .bullet-points {
+    font-weight: 500;
+  }
+
+  .description > .bullet-points > p {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: 400;
+    justify-content: flex-start;
+  }
+
+  .description > .title {
+    padding-left: 1rem;
+    font-size: 2.5em;
+  }
+
+  @media(max-width: 50em) {
+    .commercial-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem !important;
+      margin-left: 0 !important;
+      padding: 0;
+    }
+    
+    .description > .title {
+      font-size: 2em;
+    }
+
+    .class-img {
+      align-self: end;
+    }
+  }
+</style>

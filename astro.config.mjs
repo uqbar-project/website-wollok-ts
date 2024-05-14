@@ -40,7 +40,7 @@ export default defineConfig({
         },
       },
       social: {
-        github: "https://github.com/uqbar-project/wollok",
+        github: "https://github.com/uqbar-project/wollok-language",
         discord: "https://discord.gg/9vMbuabnuc",
         twitter: "https://twitter.com/wollokLang",
       },

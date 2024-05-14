@@ -4,18 +4,14 @@ import { Image } from "astro:assets";
 ---
 
 <div id="pedag-container">
-  <Image class="class-img" src={claseImage} alt="Wollok en la clase" />
+  <Image class="class-img" src={claseImage} alt="Wollok en la clase"/>
   <div class="description">
-    <h2 class="title">Una herramienta con sentido pedagógico</h2>
+    <h2 class="title">Una herramienta con sentido pedagógico...</h2>
     <div class="bullet-points">
       <p>
         Su lenguaje permite incorporar los conceptos principales del paradigma en
-        forma incremetal.
-      </p>
-      <p>
-        Lográ programas con polimorfismo desde el primer día. Incrementá gradualmente
-        la complejidad con clases y mixins. Llegá a dominar las colecciones usando
-        bloques de código como parámetros.
+        forma incremental, desarrollando programas con polimorfismo desde el primer día
+        e incorporando progresivamente complejidad con clases, bloques de código y mixins.
       </p>
       <p>
         Wollok está diseñado con una sintaxis liviana e intuitiva que hace foco en
@@ -28,14 +24,13 @@ import { Image } from "astro:assets";
 <style>
   .class-img {
     opacity: 0.4;
+    width: 100%;
   }
 
   #pedag-container {
-    background-color: #000000d1;
     position: relative;
     margin-top: 0;
   }
-
 
   .description {
     z-index: 1;
@@ -51,22 +46,58 @@ import { Image } from "astro:assets";
     justify-content: flex-end;
   }
 
-  .description *:is(h2, p) {
-    color: #ffffff;
-  }
-
   .description > .bullet-points {
-    overflow-y: scroll;
     font-weight: 500;
   }
 
   .description > .bullet-points > p {
+    margin-left: 0;
+    margin-bottom: 1rem;
     font-size: 1.2em;
-    font-weight: 500;
+    font-weight: 400;
+    justify-content: flex-end;
   }
 
   .description > .title {
     padding-left: 40%;
     font-size: 2.5em;
+  }
+
+  @media(max-width: 50em) {
+    #pedag-container {
+      margin-top: 0;
+    }
+
+    img {
+      width: auto !important;
+      height: 12em !important;
+      opacity: 1 !important;
+    }
+
+    .description {
+      position: initial;
+      top: 1rem;
+      right: 5%;
+      bottom: 5%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .description > .title {
+      font-size: 2em;
+      padding: 0 1rem 0 1rem;
+      text-align: start;
+    }
+
+    .description > .bullet-points > p {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      text-align: start;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
   }
 </style>

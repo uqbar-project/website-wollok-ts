@@ -9,6 +9,15 @@
   }
 }
 
+:root[data-theme="light"] .hide-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .hide-dark {
+  display: none;
+}
+
+
 .social-icons > a {
   color: var(--sl-color-accent);
 }
@@ -25,4 +34,25 @@
 
 .action.primary:is(a){
   background-color: var(--sl-color-accent);
+}
+
+div.tablist-wrapper {
+  overflow-x: clip;
+}
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent-hover);
+}
+
+div.feedback.show {
+  background-color: var(--sl-color-accent-hover) !important;
+}
+
+div.sl-container {
+  max-width: 100vh;
+  margin-inline-start: 0;
+}
+
+span.sl-badge {
+  vertical-align: middle;
 }
