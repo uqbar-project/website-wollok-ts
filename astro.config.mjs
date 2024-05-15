@@ -5,7 +5,7 @@ import fs from "fs";
 // https://astro.build/config
 export default defineConfig({
   site: "https://uqbar-project.github.io",
-  base: "/",
+  base: "/website-wollok-ts",
   integrations: [
     starlight({
       title: "Wollok",
