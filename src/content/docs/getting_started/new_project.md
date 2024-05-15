@@ -55,5 +55,5 @@ code .
 
 Ahora que ya tenés un proyecto Wollok te invitamos a
 
-- Hacer el [Tour por las herramientas de VSCode](/tour).
-- O sino [ir a la documentación del lenguaje](/documentation).
+- Hacer el [Tour por las herramientas de VSCode](/website-wollok-ts/tour/console).
+- O [ir a la documentación del lenguaje](/website-wollok-ts/documentation/introduction).

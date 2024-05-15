@@ -158,6 +158,6 @@ Ya deberías poder usar VSCode con Wollok.
 
 ¿Cómo seguimos?
 
-- Podés ver cómo [crear un proyecto Wollok de cero](/getting_started/new_project).
-- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos](/tour) para sacarle todo el potencial al IDE.
-- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación](/documentation).
+- Podés ver cómo [crear un proyecto Wollok de cero](/website-wollok-ts/getting_started/new_project).
+- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos](/website-wollok-ts/tour/console) para sacarle todo el potencial al IDE.
+- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación](/website-wollok-ts/documentation/introduction).
