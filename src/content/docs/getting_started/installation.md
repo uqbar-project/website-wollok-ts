@@ -21,27 +21,29 @@ Teniendo en cuenta que en la carpeta `Downloads` del usuario logueado nos descar
 - mover el archivo de la carpeta `C:\Users\Usuario\Downloads` a `C:\Users\Usuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
 - renombrar el ejecutable a `wollok.exe` para que sea más comodo de utilizar
 
-<img src="/src/assets/wollok-ts-cli-path-win-2.gif">
+<img src="/src/assets/wollok-ts-cli-path-win-2.gif"/>
 
 Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno:
 
 - activamos la ventana de ejecución de comandos con las teclas `Windows` y `R`
 - escribimos `sysdm.cpl` que es el programa que levanta el `Panel de Control`
 
-<img src="/src/assets/wollok-ts-cli-edit-system-variables.png" alt="Activar variables de entorno">
+<img src="/src/assets/wollok-ts-cli-edit-system-variables.png" alt="Activar variables de entorno"/>
 
 - una vez posicionada en la solapa "Avanzados", presionamos el botón "Variables de entorno" (Environment variables)
 - en la primera de la listas (la que corresponde al usuario logueado), seleccionamos la variable Path (puede ser que tengas que scrollear para encontrarla) y luego presionamos el botón "Editar" (Edit)
 - hay que seleccionar con el mouse la primera línea vacía y escribimos allí la dirección de la carpeta donde dejamos el ejecutable, en nuestro caso `C:\Users\Usuario\Wollok`
 - hacemos click en "Ok" y nuevamente en "Ok" dos veces para salir
 
-<img src="/src/assets/wollok-ts-cli-path-win-env.gif">
+<img src="/src/assets/wollok-ts-cli-path-win-env.gif"/>
 
 Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
 
-<img src="/src/assets/wollok-ts-cli-path-win-3.gif">
+<img src="/src/assets/wollok-ts-cli-path-win-3.gif"/>
 
-> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::note[Sobre la versión]
+La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::
 
 ### Linux
 
@@ -60,15 +62,17 @@ ls -la /usr/local/bin/wollok
 
 Te mostramos cómo se hace esta parte desde una terminal:
 
-<img src="/src/assets/wollok-ts-cli-linux-cmd.gif">
+<img src="/src/assets/wollok-ts-cli-linux-cmd.gif"/>
 
 Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
 Para verificar que está correctamente instalado, escribimos `wollok --version` en la consola desde cualquier carpeta, y nos debe devolver el número de versión (también podemos ejecutar `wollok --help`):
 
-<img src="/src/assets/wollok-ts-cli-linux-cmd-2.gif">
+<img src="/src/assets/wollok-ts-cli-linux-cmd-2.gif"/>
 
-> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::note[Sobre la versión]
+La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::
 
 ### Mac
 
@@ -102,7 +106,9 @@ Para verificar que esté correctamente instalado, ecesitamos algunos pasos más 
 
 ![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
 
-> La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::note[Sobre la versión]
+La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::
 
 
 ## Extensiones de Wollok para VSC
@@ -121,7 +127,7 @@ Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra es
 
 ![Check extensions in Visual Studio Code](../../../assets/wollok-extensions-check-2.gif)
 
-<img width="449" alt="image" src="https://user-images.githubusercontent.com/4098184/204097656-18de3a1e-88c5-4315-8f1b-14480b59a50f.png">
+<img width="449" alt="image" src="https://user-images.githubusercontent.com/4098184/204097656-18de3a1e-88c5-4315-8f1b-14480b59a50f.png"/>
 
 
 ## Configuración
@@ -132,12 +138,13 @@ Ahora es necesario **configurar la extensión** para que pueda usar _Wollok-CLI_
 
 2. El primer ajuste que aparecerá es para indicar el _path_ donde se encuentra Wollok Command Line Interface (CLI). Para eso es necesario 1. utilizar el nombre "wollok" si seguiste los pasos de instalación o bien 2. copiar **la dirección _absoluta_ del ejecutable que te descargaste antes** y pegarlo en el campo.
 
-> ATENCIÓN ⚠️
-> Este paso es necesario para poder ejecutar código.
+:::caution[Atención]
+Este paso es necesario para poder ejecutar código.
+:::
 
-3. También hay otras configuraciones, como seleccionar el idioma en que querés que se muestren los mensajes de errores.
+1. También hay otras configuraciones, como seleccionar el idioma en que querés que se muestren los mensajes de errores.
 
-4. Al final debería verse algo así:
+2. Al final debería verse algo así:
 
 ![Settings](../../../assets/wollok-settings.png)
 
