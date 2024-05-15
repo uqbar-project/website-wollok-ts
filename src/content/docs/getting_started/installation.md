@@ -21,7 +21,7 @@ Teniendo en cuenta que en la carpeta `Downloads` del usuario logueado nos descar
 - mover el archivo de la carpeta `C:\Users\Usuario\Downloads` a `C:\Users\Usuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
 - renombrar el ejecutable a `wollok.exe` para que sea más comodo de utilizar
 
-<img src="/website-wollok-ts/src/assets/wollok-ts-cli-path-win-2.gif"/>
+<img src="/src/assets/wollok-ts-cli-path-win-2.gif"/>
 
 Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno:
 
@@ -62,7 +62,7 @@ ls -la /usr/local/bin/wollok
 
 Te mostramos cómo se hace esta parte desde una terminal:
 
-<img src="../../../assets/wollok-ts-cli-linux-cmd.gif" alt="Instalación Linux wollok ts cli"/>
+<img src="/src/assets/wollok-ts-cli-linux-cmd.gif" alt="Instalación Linux wollok ts cli"/>
 
 Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
