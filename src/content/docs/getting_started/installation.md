@@ -21,25 +21,25 @@ Teniendo en cuenta que en la carpeta `Downloads` del usuario logueado nos descar
 - mover el archivo de la carpeta `C:\Users\Usuario\Downloads` a `C:\Users\Usuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
 - renombrar el ejecutable a `wollok.exe` para que sea más comodo de utilizar
 
-<img src="/src/assets/wollok-ts-cli-path-win-2.gif"/>
+<img src="/website-wollok-ts/src/assets/wollok-ts-cli-path-win-2.gif"/>
 
 Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte de nuestro PATH. Para eso abrimos la configuración de variables de entorno:
 
 - activamos la ventana de ejecución de comandos con las teclas `Windows` y `R`
 - escribimos `sysdm.cpl` que es el programa que levanta el `Panel de Control`
 
-<img src="/src/assets/wollok-ts-cli-edit-system-variables.png" alt="Activar variables de entorno"/>
+![Activar variables de entorno](../../../assets/wollok-ts-cli-edit-system-variables.png)
 
 - una vez posicionada en la solapa "Avanzados", presionamos el botón "Variables de entorno" (Environment variables)
 - en la primera de la listas (la que corresponde al usuario logueado), seleccionamos la variable Path (puede ser que tengas que scrollear para encontrarla) y luego presionamos el botón "Editar" (Edit)
 - hay que seleccionar con el mouse la primera línea vacía y escribimos allí la dirección de la carpeta donde dejamos el ejecutable, en nuestro caso `C:\Users\Usuario\Wollok`
 - hacemos click en "Ok" y nuevamente en "Ok" dos veces para salir
 
-<img src="/src/assets/wollok-ts-cli-path-win-env.gif"/>
+![Variables de entorno avanzadas](../../../assets/wollok-ts-cli-path-win-env.gif)
 
 Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
 
-<img src="/src/assets/wollok-ts-cli-path-win-3.gif"/>
+![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -62,13 +62,13 @@ ls -la /usr/local/bin/wollok
 
 Te mostramos cómo se hace esta parte desde una terminal:
 
-<img src="/src/assets/wollok-ts-cli-linux-cmd.gif"/>
+<img src="../../../assets/wollok-ts-cli-linux-cmd.gif" alt="Instalación Linux wollok ts cli"/>
 
 Lo que hacemos es renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en ese directorio. El archivo debe tener las tres `x` correspondientes a los permisos de ejecución.
 
 Para verificar que está correctamente instalado, escribimos `wollok --version` en la consola desde cualquier carpeta, y nos debe devolver el número de versión (también podemos ejecutar `wollok --help`):
 
-<img src="/src/assets/wollok-ts-cli-linux-cmd-2.gif"/>
+![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
