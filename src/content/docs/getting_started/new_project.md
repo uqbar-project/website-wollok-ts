@@ -5,7 +5,7 @@ description: Cómo crear un proyecto Wollok
 
 ## Pre-requisitos
 
-Es importante que ya tengas Wollok instalado y tu VSCode configurado como lo describimos en la [sección anterior](/website-wollok-ts/getting_started/installation).
+Es importante que ya tengas Wollok instalado y tu VSCode configurado como lo describimos en la [sección anterior](/getting_started/installation).
 
 Asegurate que podés usar la _Wollok Command Line Interface_ (CLI) desde la consola, ya sea a patir del nombre del archivo que descargaste. Por ejemplo, probá desde una terminal:
 
@@ -55,5 +55,5 @@ code .
 
 Ahora que ya tenés un proyecto Wollok te invitamos a
 
-- Hacer el [Tour por las herramientas de VSCode](/website-wollok-ts/tour).
-- O sino [ir a la documentación del lenguaje](/website-wollok-ts/documentation).
+- Hacer el [Tour por las herramientas de VSCode](/tour).
+- O sino [ir a la documentación del lenguaje](/documentation).
