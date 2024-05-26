@@ -11,7 +11,7 @@ sidebar:
     <li class="list-group-item"><a href="https://github.com/wollok/tamagotchiGameComposicion">Tamagotchi</a></li>
     <li class="list-group-item"><a href="https://github.com/wollok/pacmanBasicGame">Pacman</a></li>
     <li class="list-group-item"><a href="https://github.com/wollok/Tateti-Game">Tateti</a></li>
-    <li class="list-group-item"><a href="https://github.com/wollok/ejemploDhondt-Game">Sistema Dhondt</a></li>
+    <li class="list-group-item"><a href="https://github.com/wollok/ejemploDhondt-Game">Sistema D'Hondt</a></li>
     <li class="list-group-item"><a href="https://github.com/wollok/sokobanGame">Sokoban</a></li>
     <li class="list-group-item"><a href="https://github.com/wollok/granjaDeOrsonGame">Granja de Orson</a></li>
     <li class="list-group-item"><a href="https://github.com/wollok/bobEsponjaGame">Bob Esponja</a></li>
