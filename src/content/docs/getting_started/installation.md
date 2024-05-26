@@ -7,7 +7,88 @@ description: Pasos para instalar Wollok
 
 Tener instalado [VSCode](https://code.visualstudio.com/).
 
-## Wollok Command Line Interface
+## Wollok Command Line Interface: vía Node
+
+:::note[Versión recomendada]
+Esta es la forma recomendada de instalar el CLI en tu entorno, por ser la variante más simple y además por tener optimizaciones que mejoran su performance
+:::
+
+### Windows
+
+Instalar la versión 20 de Node desde [el link oficial](https://nodejs.org/en) haciendo click en la opción "Download Node.js (LTS)". Luego ejecutás el instalador y seleccionás Next dejando todas las opciones por defecto. En caso de dudas te recomendamos que veas [este tutorial](https://www.youtube.com/watch?v=29mihvA_zEA71)
+
+Si la versión oficial no es la 20 en el momento en el que quieras descargarte el instalador, podés ir a [esta ventana](https://nodejs.org/en/download/package-manager) y allí seleccionar la última versión 20 de Node para tu sistema operativo. Una vez realizado este paso, te va a mostrar cómo es el mecanismo de instalación.
+
+![Instalación](../../../assets/node_install.gif)
+
+Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta
+
+```bash
+node -v
+# te debe devolver el número de versión 20.x.y
+```
+
+También deberíamos tener `npm` (el manejador de paquetes de Node) instalado:
+
+```bash
+npm -v
+# te debe devolver el número de versión
+```
+
+Ahora sí, instalamos wollok haciendo
+
+```bash
+npm i -g wollok-ts-cli
+```
+
+Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
+
+![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
+
+:::note[Sobre la versión]
+La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::
+
+### Linux
+
+Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download/package-manager). La opción más simple es que uses **nvm** (Node Version Manager), un ejecutable que te permite manejar diferentes versiones de Node en tu máquina local. Seleccioná la última versión que aparezca para Node 20, el sistema operativo Linux y la variante nvm.
+
+![Instalación](../../../assets/node_install.gif)
+
+Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta
+
+```bash
+node -v
+# te debe devolver el número de versión 20.x.y
+```
+
+También deberíamos tener `npm` (el manejador de paquetes de Node) instalado:
+
+```bash
+npm -v
+# te debe devolver el número de versión
+```
+
+Ahora sí, instalamos wollok haciendo
+
+```bash
+npm i -g wollok-ts-cli
+```
+
+Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
+
+![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
+
+:::note[Sobre la versión]
+La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
+:::
+
+
+## Wollok CLI: Alternativa vía ejecutable
+
+:::caution[Alternativa]
+Si ya instalaste el CLI de Wollok podés saltear este paso
+:::
 
 1. Descargar la _Wollok Command Line Interface_ (CLI) disponible para [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64), [MacOS](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64) (versión [arm64](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-arm64)) y [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe).
 
