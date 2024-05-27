@@ -21,7 +21,7 @@ Si la versión oficial no es la 20 en el momento en el que quieras descargarte e
 
 ![Instalación](../../../assets/node_install.gif)
 
-Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta
+Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta abrimos la terminal que puede ser Powershell, la línea de comandos CMD o Git Bash:
 
 ```bash
 node -v
@@ -41,7 +41,11 @@ Ahora sí, instalamos wollok haciendo
 npm i -g wollok-ts-cli
 ```
 
-Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
+Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
+
+```zsh
+wollok --version
+```
 
 ![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
 
@@ -75,7 +79,11 @@ Ahora sí, instalamos wollok haciendo
 npm i -g wollok-ts-cli
 ```
 
-Para comprobar que el CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/Usuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
+Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
+
+```zsh
+wollok --version
+```
 
 ![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
 
@@ -89,8 +97,27 @@ Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download
 
 ![Instalar node Mac](../../../assets/node_install_mac.gif)
 
+Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta abrimos una terminal con `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad:
 
-A partir de ahora ya podemos ejecutar `wollok --version` normalmente. Para este punto vamos a necesitar levantar una terminal con `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad.
+```bash
+node -v
+# te debe devolver el número de versión 20.x.y
+```
+
+También deberíamos tener `npm` (el manejador de paquetes de Node) instalado:
+
+```bash
+npm -v
+# te debe devolver el número de versión
+```
+
+Ahora sí, instalamos wollok haciendo
+
+```bash
+npm i -g wollok-ts-cli
+```
+
+Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
 
 ```zsh
 wollok --version
