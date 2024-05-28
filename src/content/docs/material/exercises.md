@@ -5,8 +5,9 @@ sidebar:
     order: 1
 ---
 
-Todos los ejemplos para descargar están en
-<a href="https://github.com/wollok">https://github.com/wollok</a>
+Todos los ejemplos para descargar están en [https://github.com/wollok](https://github.com/wollok).
+
+Si tenés un proyecto hecho en Wollok Xtext y lo querés migrar a Wollok TS te ofrecemos [este migrador](https://github.com/fdodino/migrador-wollok-ts/blob/main/migrar-wollok-ts.sh) (seguí las instrucciones que se muestran en el [README](https://github.com/fdodino/migrador-wollok-ts/blob/main/README.md))
 
 ## Objetos, mensajes y polimorfismo
 
