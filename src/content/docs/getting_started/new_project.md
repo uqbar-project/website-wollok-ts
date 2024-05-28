@@ -3,11 +3,11 @@ title: Nuevo proyecto
 description: Cómo crear un proyecto Wollok
 ---
 
-## Pre-requisitos
+## ⏪ Pre-requisitos
 
 Es importante que ya tengas Wollok instalado y tu VSCode configurado como lo describimos en la [sección anterior](/getting_started/installation).
 
-### Nuevo proyecto común
+### 🚀 Nuevo proyecto común
 
 Abrí una ventana terminal
 
@@ -31,7 +31,7 @@ wollok init --project ejemplo-aves    # o -p ejemplo-aves
 
 te va a crear toda la estructura de un proyecto Wollok.
 
-### Nuevo proyecto Game
+### 🎮 Nuevo proyecto Game
 
 Si tu intención es crear un proyecto con Wollok Game, tenés que utilizar este comando:
 
@@ -41,7 +41,12 @@ wollok init --project juego-pepita --game  # o -p juego-pepita -g
 
 ¡Listo! 🌟
 
-## Abrirlo en VSCode
+### 🔁 Quiero migrar un proyecto Wollok Xtext...
+
+Si tenés un proyecto hecho en Wollok Xtext y lo querés portar a Wollok TS te ofrecemos [este migrador](https://github.com/fdodino/migrador-wollok-ts/blob/main/migrar-wollok-ts.sh) (seguí las instrucciones que se muestran en el [README](https://github.com/fdodino/migrador-wollok-ts/blob/main/README.md))
+
+
+## 📄 Abrirlo en VSCode
 
 Para abrir un proyecto Wollok en el VSCode
 
