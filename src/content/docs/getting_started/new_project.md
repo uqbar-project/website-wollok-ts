@@ -3,53 +3,68 @@ title: Nuevo proyecto
 description: Cómo crear un proyecto Wollok
 ---
 
-## Pre-requisitos
+## ⏪ Pre-requisitos
 
 Es importante que ya tengas Wollok instalado y tu VSCode configurado como lo describimos en la [sección anterior](/getting_started/installation).
 
-Asegurate que podés usar la _Wollok Command Line Interface_ (CLI) desde la consola, ya sea a patir del nombre del archivo que descargaste. Por ejemplo, probá desde una terminal:
+### 🚀 Nuevo proyecto común
+
+Abrí una ventana terminal
+
+- en Windows puede ser CMD, Powershell o Git Bash (recomendado)
+- en Linux presionando `Ctrl` + `Alt` + `T` o escribiendo `Terminal` desde el menú principal
+- en Mac con las teclas `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad
+
+y utilizá el comando `wollok init` de CLI.
+
+Posicionate en la carpeta en la que querés trabajar.
 
 ```bash
-wollok-ts-cli-macos-arm64 --version
+wollok init --help
 ```
 
-O si renombraste el archivo a `wollok` queda:
+Te va a mostrar las opciones para crear un proyecto. Por ejemplo:
 
 ```bash
-wollok --version
+wollok init --project ejemplo-aves    # o -p ejemplo-aves
 ```
 
-Y deberías ver la versión de tu Wollok CLI.
+te va a crear toda la estructura de un proyecto Wollok.
 
-## wollok init
+### 🎮 Nuevo proyecto Game
 
-La forma más rápida de crear un nuevo proyecto wollok es con el comando `wollok init` de CLI.
-Para eso vamos a:
+Si tu intención es crear un proyecto con Wollok Game, tenés que utilizar este comando:
 
-1. Crear una **carpeta nueva** con el *nombre del proyecto.
-
-1. **Abrir una terminal** dentro de esa carpeta creada.
-
-1. Usar el comando `init` de tu Wollok CLI:
 ```bash
-wollok init
+wollok init --project juego-pepita --game  # o -p juego-pepita -g
 ```
 
-1. ¡Listo! 🌟
+¡Listo! 🌟
 
-## Abrirlo en VSCode
+### 🔁 Quiero migrar un proyecto Wollok Xtext...
 
-Para abrir un proyecto Wollok en el VSCode podés
+Si tenés un proyecto hecho en Wollok Xtext y lo querés portar a Wollok TS te ofrecemos [este migrador](https://github.com/fdodino/migrador-wollok-ts/blob/main/migrar-wollok-ts.sh) (seguí las instrucciones que se muestran en el [README](https://github.com/fdodino/migrador-wollok-ts/blob/main/README.md))
 
-- Desde una terminal podés ejecutar el comando `code` pasando el directorio del proyecto Wollok. Por ejemplo, si tu terminal está sobre la carpeta del proyecto, podés hacer:
+
+## 📄 Abrirlo en VSCode
+
+Para abrir un proyecto Wollok en el VSCode
+
+- podés ejecutar el comando `code` pasando el directorio del proyecto Wollok. Por ejemplo, si tu terminal está sobre la carpeta del proyecto, podés hacer:
+
 ```bash
+cd ejemplo-aves  # o como se llame el proyecto
 code .
 ```
 
-- También lo podés hacer desde el menú del VSCode, en `Archivo -> Abrir carpeta...`
+- también lo podés hacer desde el menú del VSCode, en `Archivo -> Abrir carpeta...`
 
-> Esto también sirve para abrir cualquier proyecto, incluyendo los que te clones con git o te compartan por otro lado.
+![Execute wollok ts cli](../../../assets/vsc-open-project-1.gif)
 
+
+:::note[Nota]
+Esto también sirve para abrir cualquier proyecto, incluyendo los que te clones con git o te compartan por otro lado.
+:::
 
 ## ¿Y ahora qué hago?
 
