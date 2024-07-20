@@ -1,0 +1,34 @@
+---
+import Badge from "@astrojs/starlight/components/Badge.astro";
+import { Method } from "wollok-ts";
+import { identifier, methodLabel } from "./utils";
+
+interface Props {
+  method: Method;
+}
+
+const { method } = Astro.props;
+---
+
+
+<div id="m-heading-container">
+  {method.isOverride && <Badge variant="note" text="override" />}
+  {method.isAbstract() && <Badge variant="caution" text="abstract" />}
+  {method.isNative() && <Badge variant="danger" text="native" />}
+  <h5 style="font-family: monospace; margin: 0;" id={identifier(method)}>{methodLabel(method)}</h5>
+</div>
+
+<style>
+  #m-heading-container {
+    margin-top: 0.5em;
+    gap: 0.1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sl-badge {
+    white-space: nowrap;
+  }
+</style>
+

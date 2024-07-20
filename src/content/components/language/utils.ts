@@ -1,5 +1,5 @@
-import { Entity, Field, Method, Node, Package, buildEnvironment } from 'wollok-ts'
-import { last, match, when } from 'wollok-ts/dist/extensions'
+import { Class, Entity, Field, Method, Mixin, Node, Package, Singleton, buildEnvironment } from 'wollok-ts'
+import { last, match, when, type List } from 'wollok-ts/dist/extensions'
 
 const expectedSort = ['lang', 'lib', 'game' /* ... and the rest */]
 function sortPackages() {
@@ -15,16 +15,35 @@ function sortPackages() {
 
 export const wollokPackages = sortPackages()
 
+const wollokEntitiesRelevantMembers = (entity: Entity): List<Field|Method> => (match(entity)(
+  when(Singleton)(singleton => singleton.members),
+  when(Class)(klass => klass.members),
+  when(Mixin)(mixin => mixin.members),
+  when(Node)(_ => [])
+) as List<Field|Method>).filter(node => !node.isSynthetic)
+
 export const wollokHeadings = wollokPackages.flatMap(pkg => ([
   buildHeading(2)(pkg),
-  ...pkg.members.map(buildHeading(3))
+  ...pkg.members.flatMap(member => ([
+    buildHeading(3)(member),
+    ...wollokEntitiesRelevantMembers(member).map(buildHeading(4))
+  ])),
 ]))
 
-function buildHeading(depth: number): (node: Package | Entity) => { depth: number, slug: string, text: string } {
+export function identifier(node: Package | Entity | Field | Method): string {
+  return match(node)(
+    when(Package)(pkg => pkg.fullyQualifiedName),
+    when(Entity)(entity => entity.fullyQualifiedName),
+    when(Field)(field => `${field.parent.fullyQualifiedName}.${field.name}`),
+    when(Method)(method => `${method.parent.fullyQualifiedName}.${method.name}-${method.parameters.length}`),
+  )
+}
+
+function buildHeading(depth: number): (node: Package | Entity | Field | Method) => { depth: number, slug: string, text: string } {
     return (node) => ({
         depth,
-        slug: node.fullyQualifiedName,
-        text: node.name ?? node.fullyQualifiedName,
+        slug: identifier(node),
+        text: node.name ?? identifier(node),
     })
 }
 

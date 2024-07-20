@@ -1,6 +1,7 @@
 ---
 import { Package } from "wollok-ts";
 import WollokEntity from "./WollokEntity.astro";
+import { identifier } from './utils';
 
 interface Props {
   wPackage: Package;
@@ -9,11 +10,26 @@ interface Props {
 const { wPackage } = Astro.props;
 ---
 
-<h2 id={wPackage.fullyQualifiedName}>
-  {wPackage.fileName!.substring("wollok/".length)}
-</h2>
+<div id="p-title-container">
+  <h2 id={identifier(wPackage)}>
+    {wPackage.fileName!.substring("wollok/".length)}
+  </h2>
+</div>
 
 {wPackage.members.map((entity) => <WollokEntity entity={entity as any} />)}
 
 <br />
 <hr />
+
+
+<style>
+  #p-title-container {
+    background-color: var(--sl-color-accent);
+    padding: 2em;
+    border-radius: 10px 10px 50%;
+  }
+
+  #p-title-container > h2 {
+    color: var(--sl-color-text-accent-inverted);
+  }
+</style>
