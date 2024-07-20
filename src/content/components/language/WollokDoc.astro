@@ -22,6 +22,11 @@ const sanitize = (documentation: string) =>
       (substring) => `<strong>${substring.slice(1)}</strong>`
     )
     .trim();
+const code = examples?.split("\n")
+        .slice(1) // Remove first line
+        .map(sanitize)
+        .filter((_) => _) // Remove empty lines after sanitization
+        .join("\n")
 ---
 
 {
@@ -34,15 +39,18 @@ const sanitize = (documentation: string) =>
   )
 }
 {
-  examples && (
+  code && (
     <Code
-      code={examples
-        .split("\n")
-        .slice(1) // Remove first line
-        .map(sanitize)
-        .filter((_) => _) // Remove empty lines after sanitization
-        .join("\n")}
-      lang="js"
+      code={code}
+      lang='js'
+      theme='github-dark'
+      class='hide-light'
+    />
+    <Code
+      code={code}
+      lang='js'
+      theme='github-light'
+      class='hide-dark'
     />
   )
 }
