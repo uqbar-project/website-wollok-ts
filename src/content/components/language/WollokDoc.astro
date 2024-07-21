@@ -2,6 +2,8 @@
 import { Code } from "astro:components";
 import { Node } from "wollok-ts";
 import { wollokDoc } from "./utils";
+import fs from "fs";
+
 
 interface Props {
   node: Node;
@@ -27,6 +29,11 @@ const code = examples?.split("\n")
         .map(sanitize)
         .filter((_) => _) // Remove empty lines after sanitization
         .join("\n")
+
+const codeThemes = [
+  {theme: 'github-dark', hide: 'hide-light'}, 
+  {theme: 'github-light', hide: 'hide-dark'}
+] as const
 ---
 
 {
@@ -39,18 +46,17 @@ const code = examples?.split("\n")
   )
 }
 {
-  code && (
+  code && (codeThemes.map(({theme, hide}) => (
     <Code
       code={code}
-      lang='js'
-      theme='github-dark'
-      class='hide-light'
+      lang={            
+        JSON.parse(
+          fs.readFileSync("./src/shiki-grammars/wollok.json", "utf-8")
+        )
+      }
+      theme={theme}
+      class={hide}
     />
-    <Code
-      code={code}
-      lang='js'
-      theme='github-light'
-      class='hide-dark'
-    />
+  ))
   )
 }
