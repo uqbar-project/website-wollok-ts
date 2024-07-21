@@ -15,7 +15,9 @@ const { method } = Astro.props;
   {method.isOverride && <Badge variant="note" text="override" />}
   {method.isAbstract() && <Badge variant="caution" text="abstract" />}
   {method.isNative() && <Badge variant="danger" text="native" />}
-  <h5 style="font-family: monospace; margin: 0;" id={identifier(method)}>{methodLabel(method)}</h5>
+  <!-- Hack so it displays Entity.method() on pagefind -->
+  <h5 style="font-family: monospace; margin: 0;" data-pagefind-ignore id={identifier(method)}>{methodLabel(method)}</h5>
+  <h5 style="display: none;" id={identifier(method)}>{method.parent.name}.{methodLabel(method)}</h5>
 </div>
 
 <style>
