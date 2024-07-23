@@ -2,8 +2,7 @@
 import { Code } from "astro:components";
 import { Node } from "wollok-ts";
 import { wollokDoc } from "./utils";
-import fs from "fs";
-
+import wollokHighlightConfig from "../../../shiki-grammars/wollok.json";
 
 interface Props {
   node: Node;
@@ -49,11 +48,7 @@ const codeThemes = [
   code && (codeThemes.map(({theme, hide}) => (
     <Code
       code={code}
-      lang={            
-        JSON.parse(
-          fs.readFileSync("./src/shiki-grammars/wollok.json", "utf-8")
-        )
-      }
+      lang={wollokHighlightConfig}
       theme={theme}
       class={hide}
     />
