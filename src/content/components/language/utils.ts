@@ -35,7 +35,7 @@ export function identifier(node: Package | Entity | Field | Method): string {
     when(Package)(pkg => pkg.fullyQualifiedName),
     when(Entity)(entity => entity.fullyQualifiedName),
     when(Field)(field => `${field.parent.fullyQualifiedName}.${field.name}`),
-    when(Method)(method => `${method.parent.fullyQualifiedName}.${method.name}-${method.parameters.length}`),
+    when(Method)(method => method.label),
   )
 }
 
