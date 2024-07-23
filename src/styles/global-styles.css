@@ -55,4 +55,5 @@ div.sl-container {
 
 span.sl-badge {
   vertical-align: middle;
+  white-space: nowrap;
 }

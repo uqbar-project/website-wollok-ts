@@ -2,6 +2,7 @@
 import { Code } from "astro:components";
 import { Node } from "wollok-ts";
 import { wollokDoc } from "./utils";
+import wollokHighlightConfig from "../../../shiki-grammars/wollok.json";
 
 interface Props {
   node: Node;
@@ -22,6 +23,16 @@ const sanitize = (documentation: string) =>
       (substring) => `<strong>${substring.slice(1)}</strong>`
     )
     .trim();
+const code = examples?.split("\n")
+        .slice(1) // Remove first line
+        .map(sanitize)
+        .filter((_) => _) // Remove empty lines after sanitization
+        .join("\n")
+
+const codeThemes = [
+  {theme: 'github-dark', hide: 'hide-light'}, 
+  {theme: 'github-light', hide: 'hide-dark'}
+] as const
 ---
 
 {
@@ -34,15 +45,13 @@ const sanitize = (documentation: string) =>
   )
 }
 {
-  examples && (
+  code && (codeThemes.map(({theme, hide}) => (
     <Code
-      code={examples
-        .split("\n")
-        .slice(1) // Remove first line
-        .map(sanitize)
-        .filter((_) => _) // Remove empty lines after sanitization
-        .join("\n")}
-      lang="js"
+      code={code}
+      lang={wollokHighlightConfig}
+      theme={theme}
+      class={hide}
     />
+  ))
   )
 }

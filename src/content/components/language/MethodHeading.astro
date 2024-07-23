@@ -1,0 +1,32 @@
+---
+import Badge from "@astrojs/starlight/components/Badge.astro";
+import { Method } from "wollok-ts";
+import { identifier, methodLabel } from "./utils";
+
+interface Props {
+  method: Method;
+}
+
+const { method } = Astro.props;
+---
+
+
+<div id="m-heading-container">
+  {method.isOverride && <Badge variant="note" text="override" />}
+  {method.isAbstract() && <Badge variant="caution" text="abstract" />}
+  {method.isNative() && <Badge variant="danger" text="native" />}
+  <!-- Hack so it displays Entity.method() on pagefind -->
+  <h5 style="font-family: monospace; margin: 0;" data-pagefind-ignore id={identifier(method)}>{methodLabel(method)}</h5>
+  <h5 style="display: none;" id={identifier(method)}>{method.parent.name}.{methodLabel(method)}</h5>
+</div>
+
+<style>
+  #m-heading-container {
+    margin-top: 0.5em;
+    gap: 0.1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+</style>
+

@@ -1,7 +1,8 @@
 ---
 import Badge from "@astrojs/starlight/components/Badge.astro";
 import { Class, Mixin, Singleton } from "wollok-ts";
-import { methodLabel } from "./utils";
+import { identifier } from "./utils";
+import MethodHeading from "./MethodHeading.astro";
 import WollokDoc from "./WollokDoc.astro";
 
 interface Props {
@@ -9,10 +10,12 @@ interface Props {
 }
 
 const { entity } = Astro.props;
+
+const methods = entity.methods.filter((method) => !method.isSynthetic);
 ---
 
-<h3 id={entity.fullyQualifiedName}>
-  <Badge variant="success" text={entity.kind} />{entity.name}
+<h3 id={identifier(entity)} class="entity-title">
+  <Badge variant="success" text={entity.kind} /><span>{entity.name}</span>
 </h3>
 
 <WollokDoc node={entity} />
@@ -20,7 +23,7 @@ const { entity } = Astro.props;
 {
   entity.fields.length > 0 && (
     <div>
-      <h5>Estado</h5>
+      <h4>Estado</h4>
 
       <table style="width:100%">
         <tr>
@@ -34,38 +37,37 @@ const { entity } = Astro.props;
               {field.isProperty && <Badge variant="caution" text="property" />}
               <strong>{field.name}</strong>
             </td>
-            <td>
+            <td id={identifier(field)}>
               <WollokDoc node={field} />
             </td>
           </tr>
         ))}
       </table>
-
-      <h5>Comportamiento</h5>
     </div>
   )
 }
 
-<table style="width:100%">
-  <tr>
-    <th>Método</th>
-    <th style="width:60%">WollokDoc</th>
-  </tr>
+{
+  methods.length > 0 && 
+  <div>
+    <h4>Comportamiento</h4>
   {
-    entity.methods
-      .filter((method) => !method.isSynthetic)
-      .map((method) => (
-        <tr>
-          <td>
-            {method.isOverride && <Badge variant="note" text="override" />}
-            {method.isAbstract() && <Badge variant="caution" text="abstract" />}
-            {method.isNative() && <Badge variant="danger" text="native" />}
-            <strong>{methodLabel(method)}</strong>
-          </td>
-          <td>
-            <WollokDoc node={method} />
-          </td>
-        </tr>
-      ))
+    methods.map((method) => (
+    <div>
+      <MethodHeading method={method} />
+      <WollokDoc node={method} />
+    </div>
+    ))
   }
-</table>
+  </div>
+}
+
+
+
+<style>
+
+
+  .entity-title > span{
+    text-decoration: underline;
+  }
+</style>
