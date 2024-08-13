@@ -10,7 +10,7 @@ Tener instalado [VSCode](https://code.visualstudio.com/).
 ## Wollok Command Line Interface: vía Node
 
 :::note[Versión recomendada]
-Esta es la forma recomendada de instalar el CLI en tu entorno, por ser la variante más simple y además por tener optimizaciones que mejoran su performance. Si llegás a tener inconvenientes, podés probar la [instalación alternativa](/website-wollok-ts/getting_started/installation_alternative).
+Esta es la forma recomendada de instalar el CLI en tu entorno, por ser la variante más simple y además por tener optimizaciones que mejoran su performance. Si llegás a tener inconvenientes, podés probar la [instalación alternativa](/getting_started/installation_alternative).
 :::
 
 ### Windows
@@ -174,6 +174,6 @@ Ya deberías poder usar VSCode con Wollok.
 
 ¿Cómo seguimos?
 
-- Podés ver cómo [crear un proyecto Wollok de cero](/website-wollok-ts/getting_started/new_project).
-- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos](/website-wollok-ts/tour/console) para sacarle todo el potencial al IDE.
-- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación](/website-wollok-ts/documentation/introduction).
+- Podés ver cómo [crear un proyecto Wollok de cero](/getting_started/new_project).
+- Si ya tenés un proyecto Wollok en tu VSCode te recomendamos hacer el [Tour por las herramientas que soportamos](/tour/console) para sacarle todo el potencial al IDE.
+- Si tenés dudas sobre algo del lenguaje podés [ir a la documentación](/documentation/introduction).

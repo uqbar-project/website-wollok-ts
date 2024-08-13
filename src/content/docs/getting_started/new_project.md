@@ -70,5 +70,5 @@ Esto también sirve para abrir cualquier proyecto, incluyendo los que te clones 
 
 Ahora que ya tenés un proyecto Wollok te invitamos a
 
-- Hacer el [Tour por las herramientas de VSCode](/website-wollok-ts/tour/console).
-- O [ir a la documentación del lenguaje](/website-wollok-ts/documentation/introduction).
+- Hacer el [Tour por las herramientas de VSCode](/tour/console).
+- O [ir a la documentación del lenguaje](/documentation/introduction).
