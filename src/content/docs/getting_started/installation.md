@@ -69,13 +69,13 @@ Ya deberías poder usar VSCode con Wollok.
 
 ## Videos explicativos
 
-![Windows](https://www.youtube.com/watch?v=kPxbjL7WUHc)
+**Windows** 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kPxbjL7WUHc?si=lmdkD9oF2SxMpFeg" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-![Linux] (https://www.youtube.com/watch?v=DCG-syufqhU)
-
+**Linux**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DCG-syufqhU?si=SBMGmBkEz6bS1-Wo" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Próximos pasos
-
 
 ¿Cómo seguimos?
 
