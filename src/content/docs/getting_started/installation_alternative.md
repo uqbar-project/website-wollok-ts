@@ -1,5 +1,5 @@
 ---
-title: Instalación alternativa
+title: Instalación alternativa 
 description: Pasos para instalar Wollok descargando ejecutable
 ---
 

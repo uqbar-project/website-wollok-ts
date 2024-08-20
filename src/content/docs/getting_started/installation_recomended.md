@@ -1,6 +1,8 @@
 ---
-title: Instalación Recomendada
+title: Instalación recomendada
 description: Pasos para instalar Wollok con Node
+sidebar:
+    order: 2
 ---
 
 ## Wollok Command Line Interface: vía Node
