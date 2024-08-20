@@ -62,11 +62,16 @@ En caso de haber seguido la instalación alternativa y no haber podido renombrar
 
 ![Settings](../../../assets/wollok-settings.png)
 
-
-
 **¡Listo!**
 
 Ya deberías poder usar VSCode con Wollok.
+
+
+## Videos explicativos
+
+![Windows](https://www.youtube.com/watch?v=kPxbjL7WUHc)
+
+![Linux] (https://www.youtube.com/watch?v=DCG-syufqhU)
 
 
 ## Próximos pasos
