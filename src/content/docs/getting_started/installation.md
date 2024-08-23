@@ -56,9 +56,6 @@ Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra es
 - Ir a la pestaña de "ajustes" (o "settings" en inglés) del VSCode: `Ctrl + ,` o desde el menú: `Code -> Preferencias -> Ajustes`. Y buscar por `wollok`.
 
 - El primer ajuste que aparecerá es para indicar el _path_ donde se encuentra Wollok Command Line Interface (CLI). Para eso es necesario Ingresar en el campo: `wollok`.
-:::note[Alternativa] 
-En caso de haber seguido la instalación alternativa y no haber podido renombrar el ejecutable o configurar la variable de ambiente, ingresar  **la dirección _absoluta_ del ejecutable de wollok-cli descargado**.
-:::
 
 - También hay otras configuraciones, como seleccionar el idioma en que querés que se muestren los mensajes de errores.
 
