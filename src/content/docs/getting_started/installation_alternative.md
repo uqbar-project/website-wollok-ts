@@ -1,5 +1,5 @@
 ---
-title: Instalación alternativa 
+title: -> Wollok CLI via ejecutable 
 description: Pasos para instalar Wollok descargando ejecutable
 ---
 
@@ -12,15 +12,6 @@ Es un serie de pasos que se debe realizar inicialmente y repetirla  cada vez que
 - Garantizar que tenga permiso de ejecución.
 
 La forma de realizarlos depende de cada Sistema Operativo
-
--  en una carpeta que esté la carpeta, consiste en descargar un archivo ejecutable según el sistema operativo, ubicarlo en una carpeta con el nombre correcto el Path y garantizar que tenga permiso de ejecución.
-Anta la 
-
-1. Descargar la _Wollok Command Line Interface_ (CLI) disponible para [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64), [MacOS](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64) (versión [arm64](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-arm64)) y 
-
-2. Luego vamos a **renombrar el ejecutable** a wollok (o wollok.exe) para facilitar su uso desde una terminal.
-3. Y también **lo ubicaremos dentro del PATH del sistema operativo** para que lo reconozca desde cualquier carpeta. 
-
 A continuación te dejamos las instrucciones para cada caso.
 
 ### Windows

@@ -1,5 +1,5 @@
 ---
-title: Instalación recomendada
+title: -> Wollok CLI via Node
 description: Pasos para instalar Wollok con Node
 sidebar:
     order: 2
