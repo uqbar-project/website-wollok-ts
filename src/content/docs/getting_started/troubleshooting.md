@@ -33,7 +33,7 @@ Get-ExecutionPolicy
 
 ## Problemas usando `nvm`
 
-Si ya tenías otra versión de `node` además de [la necesaria para Wollok](../installation), y usás `nvm`, es posible que tengas _problemas al usar el VSCode_ si **la versión `default` no es la esperaba**.
+Si ya tenías otra versión de `node` además de [la necesaria para Wollok](../installation_recomended), y usás `nvm`, es posible que tengas _problemas al usar el VSCode_ si **la versión `default` no es la esperaba**.
 
 Para eso podés verificar la versión por `default`:
 ```bash
@@ -46,7 +46,7 @@ nvm alias default 20
 ```
 
 :::note[Nota]
-La versión de `node` que usa Wollok puede cambiar. Guiarse por la que dice el [instructivo](../installation).
+La versión de `node` que usa Wollok puede cambiar. Guiarse por la que dice el [instructivo](../installation_recomended).
 :::
 
 
