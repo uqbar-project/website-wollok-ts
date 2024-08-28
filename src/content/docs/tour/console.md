@@ -20,7 +20,7 @@ Allí, elegir `Wollok: Start new REPL session`.
 <img width="975" alt="image" src="https://user-images.githubusercontent.com/4098184/204099843-8c81c40a-c9fc-4f46-b3ba-b00c5dab78ec.png">
 
 
-El comando levanta una sesión, construye el proyecto y pone la consola al nivel del archivo que tenemos abierto para que podamos usar los objetos definidos en él directaente.
+El comando levanta una sesión, construye el proyecto y pone la consola al nivel del archivo que tenemos abierto para que podamos usar los objetos definidos en él directamente.
 
 <video controls="" autoplay="" transition:persist>
   <source 
