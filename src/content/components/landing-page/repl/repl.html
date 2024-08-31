@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css" media="screen">
+        #editor { 
+        padding: 0.5rem;
+        z-index: 10;
+    }
+
+    .sl-markdown-content :not(a, strong, em, del, span, input, code) + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+        margin-top: 0;
+    }
+    </style>
+</head>
+<body>
+
+<div id="editor" style="height: 30rem;">// podemos definir objetos...
+object pepita {
+
+  // ...que tienen atributos (referencias)
+  var energia = 100
+  
+  // hay métodos que cambian el estado interno de un objeto
+  method comer(comida) {
+    energia += comida.energia()
+  }
+  
+  // y métodos que calculan valores
+  method estaCansada() = energia < 40
+}
+
+// además de los objetos, existen las clases
+class Semilla {
+
+  // los atributos se pueden definir como properties
+  // para generar automáticamente getters y setters
+  var property energia = 10
+
+}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.1/ace.min.js" integrity="sha512-QBhz0E6ubsnSBi2xwR3/nZHs/O4DS1dyuizmUsBWizI/zd5vQbcgocfB2dqN7sBq0lAuHSjciIUxCOrb68I3Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/gruvbox");
+    editor.session.setMode("ace/mode/wollok");
+    editor.setOptions({
+        fontSize: "13pt"
+    });
+</script>
+</body>
+</html>

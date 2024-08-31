@@ -1,0 +1,34 @@
+div, button {
+    background-color: var(sl-color-black);
+}
+
+.result {
+    background-color: black;
+    color: greenyellow;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0.5rem;
+}
+
+.result.error {
+    color: lightcoral;
+    font-weight: bold;
+}
+
+.expression {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    outline: none;
+    border-bottom-style: ridge;
+    border-bottom-width: 1px;
+    width: 85%;
+}
+
+.evaluate {
+    background-color: var(--sl-color-accent);
+    color: var(--sl-color-accent-low);
+    border: 0;
+    padding: 0 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 10px;
+}

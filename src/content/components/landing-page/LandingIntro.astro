@@ -1,11 +1,6 @@
 ---
-import { Code } from "@astrojs/starlight/components";
 import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
-import pepitaExamplePath from "./pepita.txt?raw";
-import { Image } from 'astro:assets';
-import wollokDiagramDark from '/src/assets/wollok-lsp-diagram-dark.png';
-import wollokDiagramLight from '/src/assets/wollok-lsp-diagram-light.png';
-
+import MainRepl from "./repl/MainRepl.astro";
 ---
 <div>
   <div class="intro-container">
@@ -31,19 +26,7 @@ import wollokDiagramLight from '/src/assets/wollok-lsp-diagram-light.png';
         </CallToAction>
       </div>
     </div>
-    <div class="pepita-example">
-        <div class="codigo">
-          <Code code={pepitaExamplePath} lang="wollok" />
-        </div>
-        <div class="diagrama">
-          {[ 
-            {src: wollokDiagramLight, hideCSS: 'hide-dark'},
-            {src: wollokDiagramDark, hideCSS: 'hide-light'}
-          ].map(({src, hideCSS}) => 
-            <Image src={src} class={hideCSS} id="diagramaImagen" alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real." />
-          )}
-        </div>
-    </div>
+    <MainRepl />
   </div>
 </div>
 
