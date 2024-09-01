@@ -12,11 +12,13 @@ export const ReplEvaluator = () => {
   const [expression, setExpression] = useState('')
   const [history, setHistory] = useState<string[]>([])
 
-  console.info('history', history)
+  const fontFamily = document.getElementsByClassName('ace_content')
+
+  console.info(fontFamily)
 
   const evaluate = () => {
     // @ts-ignore
-    // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
+    console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
     setHistory(history.concat(expression))
     setResult(Math.random() * 100)
     setResultClass('error')
@@ -33,13 +35,25 @@ export const ReplEvaluator = () => {
     setExpression(event.target.value)
   }
 
+  const reloadAndRefresh = () => {}
+
+  const reload = () => {}
+
   return <section className="repl">
     <div className="line" id="editor">
       <input type="text" className="expression" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
-      <button className="evaluate" onClick={() => evaluate()} title="Evaluar la expresión">
-        {/* https://github.com/feathericons/feather/blob/main/icons/alert-circle.svg */}
-        <img src="/src/assets/repl/evaluate.svg"/>
-      </button>
+      <div className="botonera">
+        <button className="evaluate" onClick={() => evaluate()} title="Evaluar la expresión">
+          {/* https://github.com/feathericons/feather/blob/main/icons/alert-circle.svg */}
+          <img src="/src/assets/repl/evaluate.svg"/>
+        </button>
+        <button className="refresh" onClick={() => reloadAndRefresh()} title="Recarga el editor e inicia una nueva sesión del REPL">
+          <img src="/src/assets/repl/refresh.svg"/>
+        </button>
+        <button className="reload" onClick={() => reload()} title="Recarga el editor y ejecuta la última sesión activa">
+          <img src="/src/assets/repl/reload.svg"/>
+        </button>
+      </div>
     </div>
     <div className={`result ${resultClass}`}>{result}</div>
   </section>
