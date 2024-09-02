@@ -1,4 +1,4 @@
-.line {
+.repl {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace;
 }
 
@@ -12,9 +12,12 @@ div, button {
     padding: 0.5rem;
 }
 
-.result.error {
+.normal {
+    color: white;
+}
+
+.error {
     color: lightcoral;
-    font-weight: bold;
 }
 
 .line {
@@ -74,7 +77,7 @@ button {
 }
 
 .reload:hover {
-    background-color: lightblue;
+    background-color: rgb(73, 130, 237);
     cursor: pointer;
 }
 

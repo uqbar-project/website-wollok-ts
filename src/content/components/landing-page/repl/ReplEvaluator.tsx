@@ -6,22 +6,49 @@ const replPackage = new Package({ name: 'repl' })
 const environment = link([replPackage])
 new Interpreter(Evaluation.build(environment, WRENatives))
 
-export const ReplEvaluator = () => {
-  const [result, setResult] = useState(0)
-  const [resultClass, setResultClass] = useState('ok')
-  const [expression, setExpression] = useState('')
-  const [history, setHistory] = useState<string[]>([])
+const results: Result[] = [
+  { errored: false, result: 'true' },
+  { errored: true, result: 'pepita does not understand volar' },
+  { errored: false, result: '5' },
+  { errored: true, result: 'Unknown reference pepita' },
+  { errored: false, result: '' },
+  { errored: false, result: '08/21/2024' },
+]
 
+const generateResult = (expression: string, { errored, result }: { errored: boolean, result: string }) =>
+  !expression ?
+  <>
+    <div> </div>
+  </> :
+  <>
+    <div className="normal">{expression}</div>
+    <div className={errored ? 'error' :  'ok'}>
+      {errored ? '✗' : '✓'} {result}
+    </div>
+  </>
+
+// TODO: import from wollok-ts
+type Result = {
+  errored: boolean,
+  error?: Error,
+  result: string,
+}
+
+export const ReplEvaluator = () => {
+  const [expression, setExpression] = useState('')
+  const [oldExpression, setOldExpression] = useState('')
+  const [history, setHistory] = useState<string[]>([])
+  const [result, setResult] = useState<Result>({ errored: false, result: '' })
   const fontFamily = document.getElementsByClassName('ace_content')
 
   console.info(fontFamily)
 
   const evaluate = () => {
     // @ts-ignore
-    console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
+    // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
     setHistory(history.concat(expression))
-    setResult(Math.random() * 100)
-    setResultClass('error')
+    setResult(results[Math.trunc(Math.random() * 6)]!)
+    setOldExpression(expression)
     setExpression('')
   }
 
@@ -35,7 +62,8 @@ export const ReplEvaluator = () => {
     setExpression(event.target.value)
   }
 
-  const reloadAndRefresh = () => {}
+  const reloadAndRefresh = () => {
+  }
 
   const reload = () => {}
 
@@ -44,7 +72,7 @@ export const ReplEvaluator = () => {
       <input type="text" className="expression" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botonera">
         <button className="evaluate" onClick={() => evaluate()} title="Evaluar la expresión">
-          {/* https://github.com/feathericons/feather/blob/main/icons/alert-circle.svg */}
+          {/* https://github.com/feathericons/feather/blob/main/icons */}
           <img src="/src/assets/repl/evaluate.svg"/>
         </button>
         <button className="refresh" onClick={() => reloadAndRefresh()} title="Recarga el editor e inicia una nueva sesión del REPL">
@@ -55,6 +83,8 @@ export const ReplEvaluator = () => {
         </button>
       </div>
     </div>
-    <div className={`result ${resultClass}`}>{result}</div>
+    <div className='result'>
+      {generateResult(oldExpression, result)}
+    </div>
   </section>
 }
