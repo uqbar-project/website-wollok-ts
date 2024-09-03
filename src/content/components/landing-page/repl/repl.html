@@ -1,129 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <style type="text/css" media="screen">
-        #editor { 
-        padding: 0.5rem 0;
-        z-index: 10;
+  <style type="text/css" media="screen">
+    .file {
+      display: flex;
+      flex-direction: column;
     }
 
-    .sl-markdown-content :not(a, strong, em, del, span, input, code) + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-        margin-top: 0;
+    #editor {
+      padding: 0.5rem 0;
+      z-index: 10;
     }
-    </style>
+
+    .sl-markdown-content :not(a, strong, em, del, span, input, code)+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+      margin-top: 0;
+    }
+
+    .menu_option {
+      background-color: white;
+      color: black;
+      width: 1.5rem;
+      border-radius: 2px;
+    }
+
+    .menu_option:hover {
+      background-color: beige;
+      cursor: pointer;
+    }
+
+    .theme {
+      min-width: 25rem;
+    }
+
+    .toolbar {
+      margin: 0 1rem;
+      gap: 5px;
+      display: flex;
+      flex-direction: row;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="editor" style="margin: 0.5rem; height: 35rem;">// podemos definir objetos...
+  <div class="file">
+    <div class="toolbar">
+      <img class="menu_option" src="/src/assets/repl/zoom-in.svg" title="Agrandar la letra" onclick="agrandarLetra()" />
+      <img class="menu_option" src="/src/assets/repl/zoom-out.svg" title="Achicar la letra" onclick="achicarLetra()" />
+      <select id="theme" class="theme" onchange="cambiarTema()" title="Cambiar tema del editor">
+        <option value="ambiance">Ambiance</option>
+        <option value="chaos">Chaos</option>
+        <option value="chrome">Chrome</option>
+        <option value="cloud9_day">Cloud9 Day</option>
+        <option value="cloud9_night">Cloud9 Night</option>
+        <option value="cloud9_night_low_color">Cloud9 Night Low Color</option>
+        <option value="cloud_editor_dark">Cloud Editor Dark</option>
+        <option value="cloud_editor">Cloud Editor</option>
+        <option value="clouds">Clouds</option>
+        <option value="clouds_midnight">Clouds Midnight</option>
+        <option value="cobalt">Cobalt</option>
+        <option value="crimson_editor">Crimson Editor</option>
+        <option value="dawn">Dawn</option>
+        <option value="dracula" selected>Dracula</option>
+        <option value="dreamweaver">Dreamweaver</option>
+        <option value="eclipse">Eclipse</option>
+        <option value="github_dark">Github Dark</option>
+        <option value="github">Github</option>
+        <option value="github_light_default">Github Light Default</option>
+        <option value="gob">Gob</option>
+        <option value="gruvbox_dark_hard">Gruvbox Dark Hard</option>
+        <option value="gruvbox">Gruvbox</option>
+        <option value="gruvbox_light_hard">Gruvbox Light Hard</option>
+        <option value="idle_fingers">Idle Fingers</option>
+        <option value="iplastic">Iplastic</option>
+        <option value="katzenmilch">Katzenmilch</option>
+        <option value="kr_theme">Kr Theme</option>
+        <option value="kuroir">Kuroir</option>
+        <option value="merbivore">Merbivore</option>
+        <option value="merbivore_soft">Merbivore Soft</option>
+        <option value="mono_industrial">Mono Industrial</option>
+        <option value="monokai">Monokai</option>
+        <option value="nord_dark">Nord Dark</option>
+        <option value="one_dark">One Dark</option>
+        <option value="pastel_on_dark">Pastel on Dark</option>
+        <option value="solarized_dark">Solarized Dark</option>
+        <option value="solarized_light">Solarized Light</option>
+        <option value="sqlserver">SQL Server</option>
+        <option value="terminal">Terminal</option>
+        <option value="textmate">Textmate</option>
+        <option value="tomorrow">Tomorrow</option>
+        <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+        <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+        <option value="tomorrow_night_eighties">Tomorrow Night '80s</option>
+        <option value="tomorrow_night">Tomorrow Night</option>
+        <option value="twilight">Twilight</option>
+        <option value="vibrant_ink">Vibrant Ink</option>
+        <option value="xcode">Xcode</option>
+      </select>
+    </div>
+    <div id="editor" style="margin: 0.5rem; height: 35rem;">// podemos definir objetos...
 object pepita {
 
   // ...que tienen atributos (referencias)
   var energia = 100
-  
+
   // hay métodos que cambian el estado interno de un objeto
   method comer(comida) {
     energia += comida.energia()
   }
-  
+
   // y métodos que calculan valores
-  method estaCansada() = energia < 40
+  method estaCansada() = energia < 40 
+
 }
 
 // además de los objetos, existen las clases
 class Semilla {
-
   // los atributos se pueden definir como properties
   // para generar automáticamente getters y setters
   var property energia = 10
+}</div>
+  </div>
 
-}
-</div>
+  <!-- ace 1.36.2 -->
+  <script src="/src/assets/repl/ace/ace.js"></script>
+  <script src="/src/assets/repl/ace/ext-beautify.js"></script>
+  <script src="/src/assets/repl/ace/ext-code_lens.js"></script>
+  <script src="/src/assets/repl/ace/ext-command_bar.js"></script>
+  <script src="/src/assets/repl/ace/ext-elastic_tabstops_lite.js"></script>
+  <script src="/src/assets/repl/ace/ext-emmet.js"></script>
+  <script src="/src/assets/repl/ace/ext-error_marker.js"></script>
+  <script src="/src/assets/repl/ace/ext-hardwrap.js"></script>
+  <script src="/src/assets/repl/ace/ext-inline_autocomplete.js"></script>
+  <script src="/src/assets/repl/ace/ext-keybinding_menu.js"></script>
+  <script src="/src/assets/repl/ace/ext-language_tools.js"></script>
+  <script src="/src/assets/repl/ace/ext-linking.js"></script>
+  <script src="/src/assets/repl/ace/ext-modelist.js"></script>
+  <script src="/src/assets/repl/ace/ext-options.js"></script>
+  <script src="/src/assets/repl/ace/ext-prompt.js"></script>
+  <script src="/src/assets/repl/ace/ext-rtl.js"></script>
+  <script src="/src/assets/repl/ace/ext-searchbox.js"></script>
+  <script src="/src/assets/repl/ace/ext-settings_menu.js"></script>
+  <script src="/src/assets/repl/ace/ext-simple_tokenizer.js"></script>
+  <script src="/src/assets/repl/ace/ext-spellcheck.js"></script>
+  <script src="/src/assets/repl/ace/ext-split.js"></script>
+  <script src="/src/assets/repl/ace/ext-static_highlight.js"></script>
+  <script src="/src/assets/repl/ace/ext-statusbar.js"></script>
+  <script src="/src/assets/repl/ace/ext-textarea.js"></script>
+  <script src="/src/assets/repl/ace/ext-themelist.js"></script>
+  <script src="/src/assets/repl/ace/ext-whitespace.js"></script>
+  <script src="/src/assets/repl/ace/keybinding-vscode.js"></script>
+  <script src="/src/assets/repl/ace/mode-wollok.js"></script>
+  <script src="/src/assets/repl/ace/theme-ambiance.js"></script>
+  <script src="/src/assets/repl/ace/theme-chaos.js"></script>
+  <script src="/src/assets/repl/ace/theme-chrome.js"></script>
+  <script src="/src/assets/repl/ace/theme-cloud9_day.js"></script>
+  <script src="/src/assets/repl/ace/theme-cloud9_night.js"></script>
+  <script src="/src/assets/repl/ace/theme-cloud9_night_low_color.js"></script>
+  <script src="/src/assets/repl/ace/theme-cloud_editor_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-cloud_editor.js"></script>
+  <script src="/src/assets/repl/ace/theme-clouds.js"></script>
+  <script src="/src/assets/repl/ace/theme-clouds_midnight.js"></script>
+  <script src="/src/assets/repl/ace/theme-cobalt.js"></script>
+  <script src="/src/assets/repl/ace/theme-crimson_editor.js"></script>
+  <script src="/src/assets/repl/ace/theme-dawn.js"></script>
+  <script src="/src/assets/repl/ace/theme-dracula.js"></script>
+  <script src="/src/assets/repl/ace/theme-dreamweaver.js"></script>
+  <script src="/src/assets/repl/ace/theme-eclipse.js"></script>
+  <script src="/src/assets/repl/ace/theme-github_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-github.js"></script>
+  <script src="/src/assets/repl/ace/theme-github_light_default.js"></script>
+  <script src="/src/assets/repl/ace/theme-gob.js"></script>
+  <script src="/src/assets/repl/ace/theme-gruvbox_dark_hard.js"></script>
+  <script src="/src/assets/repl/ace/theme-gruvbox.js"></script>
+  <script src="/src/assets/repl/ace/theme-gruvbox_light_hard.js"></script>
+  <script src="/src/assets/repl/ace/theme-idle_fingers.js"></script>
+  <script src="/src/assets/repl/ace/theme-iplastic.js"></script>
+  <script src="/src/assets/repl/ace/theme-katzenmilch.js"></script>
+  <script src="/src/assets/repl/ace/theme-kr_theme.js"></script>
+  <script src="/src/assets/repl/ace/theme-kuroir.js"></script>
+  <script src="/src/assets/repl/ace/theme-merbivore.js"></script>
+  <script src="/src/assets/repl/ace/theme-merbivore_soft.js"></script>
+  <script src="/src/assets/repl/ace/theme-mono_industrial.js"></script>
+  <script src="/src/assets/repl/ace/theme-monokai.js"></script>
+  <script src="/src/assets/repl/ace/theme-nord_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-one_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-pastel_on_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-solarized_dark.js"></script>
+  <script src="/src/assets/repl/ace/theme-solarized_light.js"></script>
+  <script src="/src/assets/repl/ace/theme-sqlserver.js"></script>
+  <script src="/src/assets/repl/ace/theme-terminal.js"></script>
+  <script src="/src/assets/repl/ace/theme-textmate.js"></script>
+  <script src="/src/assets/repl/ace/theme-tomorrow.js"></script>
+  <script src="/src/assets/repl/ace/theme-tomorrow_night_blue.js"></script>
+  <script src="/src/assets/repl/ace/theme-tomorrow_night_bright.js"></script>
+  <script src="/src/assets/repl/ace/theme-tomorrow_night_eighties.js"></script>
+  <script src="/src/assets/repl/ace/theme-tomorrow_night.js"></script>
+  <script src="/src/assets/repl/ace/theme-twilight.js"></script>
+  <script src="/src/assets/repl/ace/theme-vibrant_ink.js"></script>
+  <script src="/src/assets/repl/ace/theme-xcode.js"></script>
 
-<!-- ace 1.36.2 -->
-<script src="/src/assets/repl/ace/ace.js"></script>
-<script src="/src/assets/repl/ace/ext-beautify.js"></script>
-<script src="/src/assets/repl/ace/ext-code_lens.js"></script>
-<script src="/src/assets/repl/ace/ext-command_bar.js"></script>
-<script src="/src/assets/repl/ace/ext-elastic_tabstops_lite.js"></script>
-<script src="/src/assets/repl/ace/ext-emmet.js"></script>
-<script src="/src/assets/repl/ace/ext-error_marker.js"></script>
-<script src="/src/assets/repl/ace/ext-hardwrap.js"></script>
-<script src="/src/assets/repl/ace/ext-inline_autocomplete.js"></script>
-<script src="/src/assets/repl/ace/ext-keybinding_menu.js"></script>
-<script src="/src/assets/repl/ace/ext-language_tools.js"></script>
-<script src="/src/assets/repl/ace/ext-linking.js"></script>
-<script src="/src/assets/repl/ace/ext-modelist.js"></script>
-<script src="/src/assets/repl/ace/ext-options.js"></script>
-<script src="/src/assets/repl/ace/ext-prompt.js"></script>
-<script src="/src/assets/repl/ace/ext-rtl.js"></script>
-<script src="/src/assets/repl/ace/ext-searchbox.js"></script>
-<script src="/src/assets/repl/ace/ext-settings_menu.js"></script>
-<script src="/src/assets/repl/ace/ext-simple_tokenizer.js"></script>
-<script src="/src/assets/repl/ace/ext-spellcheck.js"></script>
-<script src="/src/assets/repl/ace/ext-split.js"></script>
-<script src="/src/assets/repl/ace/ext-static_highlight.js"></script>
-<script src="/src/assets/repl/ace/ext-statusbar.js"></script>
-<script src="/src/assets/repl/ace/ext-textarea.js"></script>
-<script src="/src/assets/repl/ace/ext-themelist.js"></script>
-<script src="/src/assets/repl/ace/ext-whitespace.js"></script>
-<script src="/src/assets/repl/ace/keybinding-vscode.js"></script>
-<script src="/src/assets/repl/ace/mode-wollok.js"></script>
-<script src="/src/assets/repl/ace/theme-ambiance.js"></script>
-<script src="/src/assets/repl/ace/theme-chaos.js"></script>
-<script src="/src/assets/repl/ace/theme-chrome.js"></script>
-<script src="/src/assets/repl/ace/theme-cloud9_day.js"></script>
-<script src="/src/assets/repl/ace/theme-cloud9_night.js"></script>
-<script src="/src/assets/repl/ace/theme-cloud9_night_low_color.js"></script>
-<script src="/src/assets/repl/ace/theme-cloud_editor_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-cloud_editor.js"></script>
-<script src="/src/assets/repl/ace/theme-clouds.js"></script>
-<script src="/src/assets/repl/ace/theme-clouds_midnight.js"></script>
-<script src="/src/assets/repl/ace/theme-cobalt.js"></script>
-<script src="/src/assets/repl/ace/theme-crimson_editor.js"></script>
-<script src="/src/assets/repl/ace/theme-dawn.js"></script>
-<script src="/src/assets/repl/ace/theme-dracula.js"></script>
-<script src="/src/assets/repl/ace/theme-dreamweaver.js"></script>
-<script src="/src/assets/repl/ace/theme-eclipse.js"></script>
-<script src="/src/assets/repl/ace/theme-github_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-github.js"></script>
-<script src="/src/assets/repl/ace/theme-github_light_default.js"></script>
-<script src="/src/assets/repl/ace/theme-gob.js"></script>
-<script src="/src/assets/repl/ace/theme-gruvbox_dark_hard.js"></script>
-<script src="/src/assets/repl/ace/theme-gruvbox.js"></script>
-<script src="/src/assets/repl/ace/theme-gruvbox_light_hard.js"></script>
-<script src="/src/assets/repl/ace/theme-idle_fingers.js"></script>
-<script src="/src/assets/repl/ace/theme-iplastic.js"></script>
-<script src="/src/assets/repl/ace/theme-katzenmilch.js"></script>
-<script src="/src/assets/repl/ace/theme-kr_theme.js"></script>
-<script src="/src/assets/repl/ace/theme-kuroir.js"></script>
-<script src="/src/assets/repl/ace/theme-merbivore.js"></script>
-<script src="/src/assets/repl/ace/theme-merbivore_soft.js"></script>
-<script src="/src/assets/repl/ace/theme-mono_industrial.js"></script>
-<script src="/src/assets/repl/ace/theme-monokai.js"></script>
-<script src="/src/assets/repl/ace/theme-nord_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-one_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-pastel_on_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-solarized_dark.js"></script>
-<script src="/src/assets/repl/ace/theme-solarized_light.js"></script>
-<script src="/src/assets/repl/ace/theme-sqlserver.js"></script>
-<script src="/src/assets/repl/ace/theme-terminal.js"></script>
-<script src="/src/assets/repl/ace/theme-textmate.js"></script>
-<script src="/src/assets/repl/ace/theme-tomorrow.js"></script>
-<script src="/src/assets/repl/ace/theme-tomorrow_night_blue.js"></script>
-<script src="/src/assets/repl/ace/theme-tomorrow_night_bright.js"></script>
-<script src="/src/assets/repl/ace/theme-tomorrow_night_eighties.js"></script>
-<script src="/src/assets/repl/ace/theme-tomorrow_night.js"></script>
-<script src="/src/assets/repl/ace/theme-twilight.js"></script>
-<script src="/src/assets/repl/ace/theme-vibrant_ink.js"></script>
-<script src="/src/assets/repl/ace/theme-xcode.js"></script>
+  <script>
+    const definirLetra = () => {
+      editor.setOptions({
+        fontSize: `${fontSize}pt`
+      })
+    }
 
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/gruvbox");
-    editor.session.setMode("ace/mode/wollok");
-    editor.setOptions({
-        fontSize: "13pt"
-    });
-</script>
+    const cambiarTema = () => {
+      editor.setTheme(`ace/theme/${document.getElementById('theme').value}`)
+    }
+
+
+    let fontSize = 13
+    let editor = ace.edit("editor")
+    cambiarTema()
+    editor.session.setMode("ace/mode/wollok")
+    definirLetra()
+
+    const agrandarLetra = () => {
+      fontSize++
+      definirLetra()
+    }
+
+    const achicarLetra = () => {
+      fontSize--
+      definirLetra()
+    }
+  </script>
 </body>
+
 </html>
