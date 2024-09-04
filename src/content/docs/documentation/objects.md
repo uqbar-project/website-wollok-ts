@@ -197,7 +197,7 @@ Por ejemplo, se puede tener diferentes objetos que representen cosas que pepita 
 ```wollok
 object alpiste{
     var peso = 2
-    method energia() { peso * 5 } 
+    method energia() { return peso * 5 } 
 }
 
 object arroz {
