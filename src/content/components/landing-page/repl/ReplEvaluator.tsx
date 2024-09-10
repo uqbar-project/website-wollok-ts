@@ -1,53 +1,36 @@
 import './ReplEvaluator.css'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { Package, link, Interpreter, Evaluation, WRENatives } from 'wollok-ts'
+import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON } from 'wollok-ts'
 
-const replPackage = new Package({ name: 'repl' })
-const environment = link([replPackage])
-new Interpreter(Evaluation.build(environment, WRENatives))
+const replPackage = new Package({ name: REPL })
+const environment = link([replPackage], fromJSON(WRE))
+const interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
 
-// TEMPORARY
-const results: Result[] = [
-  { errored: false, result: 'true' },
-  { errored: true, result: 'pepita does not understand volar' },
-  { errored: false, result: '5' },
-  { errored: true, result: 'Unknown reference pepita' },
-  { errored: false, result: '' },
-  { errored: false, result: '08/21/2024' },
-]
-
-const getResult = () => results[Math.trunc(Math.random() * results.length)]!
-
-// TODO: import from wollok-ts
-type Result = {
-  errored: boolean,
-  error?: Error,
-  result: string,
+const interpreteLine = (expression: string) => {
+  return interprete(interpreter, expression)
 }
-// END TEMPORARY
-
-const generateResult = (expression: string, { errored, result }: { errored: boolean, result: string }) =>
-  !expression ? 
-  undefined :
-  <div key={expression}>
-    <div className="normal">{expression}</div>
-    <div className={errored ? 'error' :  'ok'}>
-      {errored ? '✗' : '✓'} {result}
-    </div>
-  </div>
 
 export const ReplEvaluator = () => {
   const [expression, setExpression] = useState('')
   const [history, setHistory] = useState<string[]>([])
-  const [result, setResult] = useState<Result>({ errored: false, result: '' })
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
 
+  const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
+    !expression ? 
+    undefined :
+    <div key={expression}>
+      <div className="normal">{expression}</div>
+      <div className={errored ? 'error' :  'ok'}>
+        {errored ? '✗' : '✓'} {result} {error?.message}
+      </div>
+    </div>
+  
   const evaluate = () => {
     // @ts-ignore
     // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
     setHistory(history.concat(expression))
+    const result = interpreteLine(expression)
     setFormattedResult(generateResult(expression, result))
-    setResult(results[Math.trunc(Math.random() * 6)]!)
     setExpression('')
   }
 
@@ -65,7 +48,7 @@ export const ReplEvaluator = () => {
     const newResult = <div>
       {
       history.map((expression: string) =>
-        generateResult(expression, getResult()))
+        generateResult(expression, interpreteLine(expression)))
       }
     </div>
     setFormattedResult(newResult)
