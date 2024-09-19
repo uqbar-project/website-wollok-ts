@@ -68,4 +68,4 @@ Por favor reportalo como [issue en el repositorio de Github](https://github.com/
 
 Si tuviste problemas al instalar Wollok usando Node, te sugerimos probar con la [instalación alternativa](../installation_alternative) mientras encontramos una solución.
 
-También podés ponerte en contacto con el equipo por medio del [Discord de Uqbar](https://discord.gg/jPMTCwZG3f).
+También podés ponerte en contacto con el equipo por medio del [Discord de Uqbar](https://discord.gg/ZstgCPKEaa).
