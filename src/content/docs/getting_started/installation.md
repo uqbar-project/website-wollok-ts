@@ -33,6 +33,10 @@ De todas maneras, el código fuente es simplemente texto y se puede editar con c
 
 Instalar [VSCode](https://code.visualstudio.com/).
 
+:::note[Ya tengo instalado VSCode, ¿puedo usar el que tengo descargado?]
+Lo recomendable es que descargues la última versión de VSCode: al día de hoy la versión mínima de VSCode que necesita la extensión de Wollok es la 1.80 (junio 2023) ó posterior, pero puede que algunas funcionalidades como la ejecución del REPL o los tests no te aparezcan.
+:::
+
 ### Extensiones
 Estas instrucciones para instalar y configurar las extensiones de Wollok para VSC son independientes del sistema operativo de tu máquina.
 

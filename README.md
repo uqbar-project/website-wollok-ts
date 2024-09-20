@@ -1,20 +1,24 @@
-# Starlight Starter Kit: Basics
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+## Wollok Web Site
 
-```
-npm create astro@latest -- --template starlight
-```
+[![Deploy to GitHub Pages](https://github.com/uqbar-project/website-wollok-ts/actions/workflows/deploy.yaml/badge.svg)](https://github.com/uqbar-project/website-wollok-ts/actions/workflows/deploy.yaml) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+Wollok Programming Language Web Site - TS implementation
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Access it at : http://www.wollok.org
+
+If you are looking for the Wollok Xtext Implementation Site, please visit http://xtext.wollok.org
+
+
+## Technologies
+
+- [Astro + Starlight](https://starlight.astro.build)
+  - [Starlight’s docs](https://starlight.astro.build/)
+  - [Astro documentation](https://docs.astro.build)
 
 ## 🚀 Project Structure
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Like any Astro + Starlight project, you'll see the following folders and files:
 
 ```
 .
@@ -49,6 +53,21 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 🚀 Site deployment
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+Just push into the main branch and it automatically deploys using Github pages. For more information please check [deploy.yaml](./.github/workflows/deploy.yaml) file.
+
+## Developer environment
+
+[TODO]
+
+## 👩‍💻 Contributing
+
+All contributions are welcome!
+
+- You can [join the Discord channel!](https://discord.gg/ZstgCPKEaa)
+- There's a list of [good first issues](https://github.com/uqbar-project/website-wollok-ts/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to tackle, but in case of any hesitation you can always ping @PalumboN or @fdodino
+- You can fork the project and [create a *Pull Request*](https://help.github.com/articles/creating-a-pull-request-from-a-fork/). If you've never collaborated with an open source project before, you might want to read [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
+
+
+#### Powered by [Uqbar](https://uqbar.org/)
