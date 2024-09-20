@@ -9,7 +9,6 @@ Access it at : http://www.wollok.org
 
 If you are looking for the Wollok Xtext Implementation Site, please visit http://xtext.wollok.org
 
-
 ## Technologies
 
 - [Astro + Starlight](https://starlight.astro.build)
@@ -20,7 +19,7 @@ If you are looking for the Wollok Xtext Implementation Site, please visit http:/
 
 Like any Astro + Starlight project, you'll see the following folders and files:
 
-```
+```bash
 .
 ├── public/
 ├── src/
@@ -34,11 +33,10 @@ Like any Astro + Starlight project, you'll see the following folders and files:
 └── tsconfig.json
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
+- starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory.
+- each file is exposed as a route based on its file name.
+- images can be added to `src/assets/` and embedded in Markdown with a relative link.
+- static assets, like favicons, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
@@ -55,7 +53,9 @@ All commands are run from the root of the project, from a terminal:
 
 ## 🚀 Site deployment
 
-Just push into the main branch and it automatically deploys using Github pages. For more information please check [deploy.yaml](./.github/workflows/deploy.yaml) file.
+Just push into the main branch and it automatically deploys using Github pages.
+
+For more information please check [deploy.yaml](./.github/workflows/deploy.yaml) file.
 
 ## Developer environment
 
@@ -69,5 +69,4 @@ All contributions are welcome!
 - There's a list of [good first issues](https://github.com/uqbar-project/website-wollok-ts/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to tackle, but in case of any hesitation you can always ping @PalumboN or @fdodino
 - You can fork the project and [create a *Pull Request*](https://help.github.com/articles/creating-a-pull-request-from-a-fork/). If you've never collaborated with an open source project before, you might want to read [this guide](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
 
-
-#### Powered by [Uqbar](https://uqbar.org/)
+__Powered by [Uqbar](https://uqbar.org/)__
