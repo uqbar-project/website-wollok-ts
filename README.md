@@ -57,9 +57,23 @@ Just push into the main branch and it automatically deploys using Github pages.
 
 For more information please check [deploy.yaml](./.github/workflows/deploy.yaml) file.
 
-## Developer environment
+## 💻 Developer environment
 
-[TODO]
+You will need an Astro editor. We recomend [Visual Studio Code](https://code.visualstudio.com/) with some extensions.
+
+You can [download and import this profile](./Astro%20-Base.code-profile) in your Visual Studio Code. See this tutorial if you have any question.
+
+### Alternative: manually install VSC extensions
+
+Make sure you install the following extensions:
+
+- [Astro Essentials Extension Pack - Manuel Gil](https://marketplace.visualstudio.com/items?itemName=imgildev.vscode-astro-pack)
+- [Astro DB snippets - Manuel Gil](https://marketplace.visualstudio.com/items?itemName=SheltonLouis.astro-snippets)
+- [:Emojisense: - Matt Bierner](https://marketplace.visualstudio.com/items?itemName=bierner.emojisense)
+
+### Installing node, npm & nvm
+
+Follow the instructions on [Wollok TS page](https://uqbar-project.github.io/wollok-ts/pages/How-To-Contribute/Developer-environment.html) about installing Node, NPM & nvm.
 
 ## 👩‍💻 Contributing
 
