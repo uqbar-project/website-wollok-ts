@@ -5,6 +5,9 @@
     <script
       src="/src/assets/dynamicDiagram/lib/cytoscape.min.js"
     ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/assets/dynamicDiagram/styles/dynamicDiagram.css" />
     <style>
       #cy {
@@ -21,10 +24,9 @@
 let cy
 let currentElements = []
 
-function initializeCytoscape(container) {
-  console.info('inicializamosossssss')
+const initializeCytoscape = (container) => {
   const fontFace = {
-    // "font-family": "Inter",
+    "font-family": "Inter",
     "font-weight": "normal",
     "font-size": "data(fontsize)",
   }
@@ -130,11 +132,11 @@ function initializeCytoscape(container) {
   })
 }
 
-function updateLayout() {
+const updateLayout = () => {
   updateNodes(cy.elements())
 }
 
-function updateNodes(elements) {
+const updateNodes = (elements) => {
   const layout = elements.layout({
     name: "cose",
     animate: false,
@@ -147,19 +149,16 @@ function updateNodes(elements) {
   layout.run()
 }
 
-function objectsPositionChanged() {
+const objectsPositionChanged = () => {
   const newTitle = objectsKeepTheirPosition() ? 'ON -> objects will keep their positions (better performance when you have > 100 objects)' : 'OFF -> objects will be relocated to fit into the graph layout (graph is easier to read)'
   document.getElementById('togglePinObjectsDynamicDiagram').setAttribute('title', `Fix objects position: ${newTitle}`)
 }
 
-function objectsKeepTheirPosition() {
+const objectsKeepTheirPosition = () => {
   return document.getElementById('togglePinObjectsDynamicDiagram').checked
 }
 
-function reloadDiagram(elements) {
-  // TOOD: ver que se inicialice
-  // initializeCytoscape(document.getElementById('cy'))
-  //
+const reloadDiagram = (elements) => {
   currentElements = [...elements]
   changeElementsMode()
   const ids = elements.map((element) => element.data.id)
@@ -179,7 +178,7 @@ function reloadDiagram(elements) {
 /**
  * edges can't reference nodes that going to be arranged
  */
-function readyForLayoutElems(elements) {
+const readyForLayoutElems = (elements) => {
   const isInElems = (elem) => elements.some((element) => element.id() === elem.id())
 
   return elements.filter(
@@ -189,7 +188,7 @@ function readyForLayoutElems(elements) {
   )
 }
 
-function modeChanged() {
+const modeChanged = () => {
   const toggleMode = document.getElementById('toggleModeDynamicDiagram')
   const newTitle = toggleMode.checked ? 'Dark mode ON' : 'Light Mode ON'
   toggleMode.setAttribute('title', newTitle)
@@ -199,15 +198,11 @@ function modeChanged() {
   reloadDiagram(currentElements)
 }
 
-function backgroundColor() {
-  return isDarkMode() ? 'black' : 'white'
-}
+const backgroundColor = () => isDarkMode() ? 'black' : 'white'
 
-function isDarkMode() {
-  return document.getElementById('toggleModeDynamicDiagram').checked
-}
+const isDarkMode = () =>document.getElementById('toggleModeDynamicDiagram').checked
 
-function changeElementsMode() {
+const changeElementsMode = () => {
   currentElements.forEach(element => { element.data.mode = isDarkMode() ? 'dark' : 'light' })
 }
 
