@@ -28,12 +28,18 @@ Se aconseja si surgen conflictos con otras instalaciones de Node, si surgen difi
 En ambos casos, tener en cuenta las particularidades del sistema operativo.
 
 ### IDE
+
 El Entorno Integrado de Desarrollo (IDE) recomenado es Visual Studio Code (VSCode), por contar con las extensiones que hacen más grata la experiencia de aprender a programar con Wollok. 
 De todas maneras, el código fuente es simplemente texto y se puede editar con cualquier editor.
 
 Instalar [VSCode](https://code.visualstudio.com/).
 
+:::note[Ya tengo instalado VSCode, ¿puedo usar el que tengo descargado?]
+Lo recomendable es que descargues la última versión de VSCode: al día de hoy la versión mínima de VSCode que necesita la extensión de Wollok es la 1.80 (junio 2023) ó posterior, pero puede que algunas funcionalidades como la ejecución del REPL o los tests no te aparezcan.
+:::
+
 ### Extensiones
+
 Estas instrucciones para instalar y configurar las extensiones de Wollok para VSC son independientes del sistema operativo de tu máquina.
 
 1. **Abrir el VSCode**
