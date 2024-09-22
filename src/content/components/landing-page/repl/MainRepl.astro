@@ -1,22 +1,13 @@
 ---
 import "./MainRepl.css"
 import Repl from "./repl.html"
+import DynamicDiagram from "./dynamicDiagram.html"
 import { ReplEvaluator } from "./ReplEvaluator"
-import { Image } from 'astro:assets';
-import wollokDiagramDark from '/src/assets/wollok-lsp-diagram-dark.png';
-import wollokDiagramLight from '/src/assets/wollok-lsp-diagram-light.png';
 ---
 <section class="main-repl">
     <Repl client:load/>
     <div class="repl">
         <ReplEvaluator client:only />
-        <div class="dynamic-diagram">
-        {[ 
-            {src: wollokDiagramLight, hideCSS: 'hide-dark'},
-            {src: wollokDiagramDark, hideCSS: 'hide-light'}
-          ].map(({src, hideCSS}) => 
-            <Image src={src} class={hideCSS} id="diagramaImagen" alt="El diagrama dinámico permite visualizar el estado de tus objetos en tiempo real." />
-          )}
-        </div>
+        <DynamicDiagram/>
     </div>
 </section>

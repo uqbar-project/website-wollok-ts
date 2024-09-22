@@ -1,5 +1,5 @@
 import { Class, Entity, Field, Method, Mixin, Node, Package, Singleton, buildEnvironment } from 'wollok-ts'
-import { last, match, when, type List } from 'wollok-ts/dist/extensions'
+import { last, match, when, type List } from 'wollok-ts'
 
 const expectedSort = ['lang', 'lib', 'game' /* ... and the rest */]
 function sortPackages() {

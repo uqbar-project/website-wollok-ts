@@ -1,86 +1,88 @@
 .repl {
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace;
 }
 
-div, button {
-    background-color: var(sl-color-black);
+.replLine {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
-.result {
-    background-color: black;
-    color: greenyellow;
-    padding: 0.5rem;
+.botoneraReplExpression>div,
+.botoneraReplExpression>button {
+  background-color: var(sl-color-black);
 }
 
-.normal {
-    color: white;
+.replLine>.replExpression {
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  outline: none;
+  border-bottom-style: ridge;
+  border-bottom-width: 1px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
-.error {
-    color: lightcoral;
+.botoneraReplExpression {
+  display: flex;
+  flex-direction: row;
 }
 
-.line {
-    margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.botoneraReplExpression>button {
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  margin: 0 0.25rem;
 }
 
-.expression {
-    border-top-style: none;
-    border-left-style: none;
-    border-right-style: none;
-    outline: none;
-    border-bottom-style: ridge;
-    border-bottom-width: 1px;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+.botoneraReplExpression>.replEvaluate {
+  background-color: #b15757;
 }
 
-.botonera {
-    display: flex;
-    flex-direction: row;
+.botoneraReplExpression>.replRefresh {
+  background-color: white;
+  border: 1px solid gray;
 }
 
-button {
-    border: 0;
-    outline: 0;
-    border-radius: 10px;
-    padding: 0.5rem 0.5rem;
-    margin: 0 0.25rem;
+.botoneraReplExpression>.replReload {
+  background-color: cornflowerblue;
 }
 
-.evaluate {
-    background-color: #b15757;
+.botoneraReplExpression>.replEvaluate:hover {
+  background-color: lightcoral;
+  cursor: pointer;
 }
 
-.refresh {
-    background-color: white;
-    border: 1px solid gray;
+.botoneraReplExpression>.replRefresh:hover {
+  background-color: lightgray;
+  cursor: pointer;
 }
 
-.reload {
-    background-color: cornflowerblue;
+.botoneraReplExpression>.replReload:hover {
+  background-color: rgb(65, 124, 235);
+  cursor: pointer;
 }
 
-
-.evaluate:hover {
-    background-color: lightcoral;
-    cursor: pointer;
+.botoneraReplExpression img {
+  color: white;
 }
 
-.refresh:hover {
-    background-color: lightgray;
-    cursor: pointer;
+.repl>.replResult {
+  background-color: black;
+  color: greenyellow;
+  padding: 0.4rem;
+  border-radius: 5px;
+  margin: 0.25rem;
 }
 
-.reload:hover {
-    background-color: rgb(73, 130, 237);
-    cursor: pointer;
+.replResult .normal {
+  color: white;
 }
 
-img {
-    color: white;
+.replResult .error {
+  color: lightcoral;
 }
