@@ -91,11 +91,11 @@ export const ReplEvaluator = () => {
   const evaluate = () => {
     // @ts-ignore
     // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
+    if (!expression) return
     const newHistory = history.concat(expression)
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
     const result = interpreteLine(expression)
-    console.info('result', result)
     setFormattedResult(generateResult(expression, result))
     setExpression('')
     refreshDynamicDiagram()
