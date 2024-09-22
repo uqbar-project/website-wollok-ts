@@ -35,7 +35,8 @@
   position: absolute;
   right: 25px;
   width: 10em;
-  height: 4em;
+  top: 1em;
+  height: 3em;
   z-index: 10;
 }
 
