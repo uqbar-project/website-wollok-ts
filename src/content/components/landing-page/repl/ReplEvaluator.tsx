@@ -1,11 +1,11 @@
 import './ReplEvaluator.css'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE } from 'wollok-ts'
+import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER } from 'wollok-ts'
 import type { ElementDefinition } from 'cytoscape'
 
 const replPackage = new Package({ name: REPL })
 const environment = link([replPackage], fromJSON(WRE))
-const interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
+let interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
 
 const interpreteLine = (expression: string) => {
   return interprete(interpreter, expression)
@@ -51,6 +51,25 @@ const getFontSize = (text: string): string => {
 const getStyle = (sourceModule: string) =>
   [LIST_MODULE, SET_MODULE].includes(sourceModule) ? 'dotted' : 'solid'
 
+
+// Copied from utils.ts - wollok-ts-cli - should move to wollok-web-tools
+export const sanitizeStackTrace = (e?: Error): string => {
+  if (e?.message) {
+    const originalMessage = e.message.split('\n')
+    return originalMessage[0] ?? e.message
+  }
+
+  const indexOfTsStack = e?.stack?.indexOf(WOLLOK_EXTRA_STACK_TRACE_HEADER)
+  const fullStack = e?.stack?.slice(0, indexOfTsStack ?? -1) ?? ''
+
+  return fullStack
+    .replaceAll('\t', '  ')
+    .replaceAll('     ', '  ')
+    .replaceAll('    ', '  ')
+    .split('\n')
+    .filter(stackTraceElement => stackTraceElement.trim())
+    .join('\n')
+}
 /**************************************************************************************************************************************************************/
 
 export const ReplEvaluator = () => {
@@ -62,10 +81,10 @@ export const ReplEvaluator = () => {
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
     !expression ?
     undefined :
-    <div key={expression}>
+    <div key={Math.random() * 10000000000}>
       <div className="normal">{expression}</div>
       <div className={errored ? 'error' :  'ok'}>
-        {errored ? '✗' : '✓'} {result} {error?.message}
+        {errored ? '✗' : '✓'} {result} {sanitizeStackTrace(error)}
       </div>
     </div>
 
@@ -76,8 +95,13 @@ export const ReplEvaluator = () => {
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
     const result = interpreteLine(expression)
+    console.info('result', result)
     setFormattedResult(generateResult(expression, result))
     setExpression('')
+    refreshDynamicDiagram()
+  }
+
+  const refreshDynamicDiagram = () => {
     const elements = getDataDiagram(interpreter)
     // @ts-ignore
     reloadDiagram(elements)
@@ -115,6 +139,7 @@ export const ReplEvaluator = () => {
   }
 
   const reloadAndRefresh = () => {
+    reloadInterpreter()
     const newResult = <div>
       {
       history.map((expression: string) =>
@@ -125,7 +150,16 @@ export const ReplEvaluator = () => {
     setExpression('')
   }
 
-  const reload = () => {}
+  const reload = () => {
+    reloadInterpreter()
+    refreshDynamicDiagram()
+  }
+
+  const reloadInterpreter = () => {
+    setExpression('')
+    setFormattedResult(undefined)
+    interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
+  }
 
   return <section className="repl">
     <div className="replLine" id="editor">
