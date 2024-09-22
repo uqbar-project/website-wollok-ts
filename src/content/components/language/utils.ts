@@ -59,7 +59,7 @@ export function wollokDoc(node: Node): string {
 function commentMetadataFor(node: Node) {
     const inlinedReturn = (method: Method): Node => {
         const lastSentence = last(method.sentences)!
-        return lastSentence.descendants?.find(_ => _.metadata.length > 0) ?? method
+        return lastSentence?.descendants?.find(_ => _.metadata.length > 0) ?? method
     }
     // Solves bug on parsing start/end comments
     const index = node.parent.children.indexOf(node)

@@ -3,11 +3,11 @@ import comunidadWollok from "../../../assets/comunidad.jpg";
 import { Image } from "astro:assets";
 ---
 
-<div class="main">
+<div class="community-main">
   <h2>Y también una comunidad</h2>
-  <div class="content">
+  <div class="community-container">
     <Image class="class-img" src={comunidadWollok} alt="Comunidad Wollok"/>
-    <div class="comunidad-content">
+    <div class="community-content">
       <p>Estamos en contacto principalmente a través de <a href="https://discord.gg/ZstgCPKEaa">Discord</a>, ya sea
         <ul>
           <li>para organizar una <i>hackaton</i>,</li>
@@ -25,11 +25,15 @@ import { Image } from "astro:assets";
 </div>
 
 <style>
-.main {
+.community-main {
   margin: 1rem 1rem;
 }
 
-.content {
+.community-main h2 {
+  margin: 1rem 0 0 0;
+}
+
+.community-container {
   display: grid;
   grid-template-columns: 1.4fr 2fr;
   gap: 2rem;
@@ -41,9 +45,10 @@ import { Image } from "astro:assets";
   height: auto;
   width: 100%;
   opacity: 0.9;
+  margin: 1rem 0;
 }
 
-.comunidad-content {
+.community-content {
   margin-top: 0 !important;
 }
 
@@ -56,7 +61,7 @@ a:hover {
 }
 
 @media(max-width: 50em) {
-  .content {
+  .community-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
