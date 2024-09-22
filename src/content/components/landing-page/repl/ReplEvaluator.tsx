@@ -56,6 +56,7 @@ const getStyle = (sourceModule: string) =>
 export const ReplEvaluator = () => {
   const [expression, setExpression] = useState('')
   const [history, setHistory] = useState<string[]>([])
+  const [indexExpression, setIndexExpression] = useState(history.length)
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
@@ -71,7 +72,9 @@ export const ReplEvaluator = () => {
   const evaluate = () => {
     // @ts-ignore
     // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
-    setHistory(history.concat(expression))
+    const newHistory = history.concat(expression)
+    setHistory(newHistory)
+    setIndexExpression(newHistory.length)
     const result = interpreteLine(expression)
     setFormattedResult(generateResult(expression, result))
     setExpression('')
@@ -84,6 +87,27 @@ export const ReplEvaluator = () => {
     if (event.key == 'Enter') {
       evaluate()
     }
+    if (event.key == 'ArrowUp') {
+      goBackExpression()
+    }
+    if (event.key == 'ArrowDown') {
+      goForwardExpression()
+    }
+  }
+
+  const goBackExpression = () => {
+    const newIndex = Math.max(0, indexExpression - 1)
+    setNewIndex(newIndex)
+  }
+
+  const goForwardExpression = () => {
+    const newIndex = Math.min(history.length, indexExpression + 1)
+    setNewIndex(newIndex)
+  }
+
+  const setNewIndex = (newIndex: number) => {
+    setIndexExpression(newIndex)
+    setExpression(history[newIndex] ?? '')
   }
 
   const expressionChanged = (event: ChangeEvent<HTMLInputElement>) => {
