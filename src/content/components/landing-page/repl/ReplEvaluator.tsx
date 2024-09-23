@@ -1,11 +1,18 @@
 import './ReplEvaluator.css'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER } from 'wollok-ts'
+import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER, parse } from 'wollok-ts'
 import type { ElementDefinition } from 'cytoscape'
 
-const replPackage = new Package({ name: REPL })
-const environment = link([replPackage], fromJSON(WRE))
-let interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
+// TODO: import internal buildEnvironment from wollok-ts
+const buildInterpreter = () => {
+  // @ts-ignore
+  const content = document.getElementsByClassName('ace_text-layer')[0].innerText
+  const replPackage = parse.File(REPL).tryParse(content)
+  const environment = link([replPackage], fromJSON(WRE))
+  return new Interpreter(Evaluation.build(environment, WRENatives))
+}
+
+let interpreter = buildInterpreter()
 
 const interpreteLine = (expression: string) => {
   return interprete(interpreter, expression)
@@ -158,7 +165,7 @@ export const ReplEvaluator = () => {
   const reloadInterpreter = () => {
     setExpression('')
     setFormattedResult(undefined)
-    interpreter = new Interpreter(Evaluation.build(environment, WRENatives))
+    interpreter = buildInterpreter()
   }
 
   return <section className="repl">
