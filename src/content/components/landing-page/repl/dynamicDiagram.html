@@ -200,13 +200,17 @@ const modeChanged = () => {
 
 const backgroundColor = () => isDarkMode() ? 'black' : 'white'
 
-const isDarkMode = () =>document.getElementById('toggleModeDynamicDiagram').checked
+const isDarkMode = () => document.getElementById('toggleModeDynamicDiagram').checked
 
 const changeElementsMode = () => {
   currentElements.forEach(element => { element.data.mode = isDarkMode() ? 'dark' : 'light' })
 }
 
-setTimeout(() => { initializeCytoscape(document.getElementById('cy')) }, 1000)
+setTimeout(() => { 
+  initializeCytoscape(document.getElementById('cy'))
+  document.getElementById('toggleModeDynamicDiagram').checked = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
+  modeChanged()
+}, 1000)
 
     </script>
     <div id="main" class="mainDynamicDiagram">
