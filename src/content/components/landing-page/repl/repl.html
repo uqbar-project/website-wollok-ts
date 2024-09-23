@@ -236,8 +236,8 @@ class Semilla {
       changeFont()
     }
 
-    const mostrarErrores = (errores) => {
-      editor.getSession().setAnnotations(errores)
+    const showErrors = (errors) => {
+      editor.getSession().setAnnotations(errors)
     }
 
     const getEditorContent = () => editor.getValue()
