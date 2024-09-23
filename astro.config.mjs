@@ -65,7 +65,7 @@ export default defineConfig({
             },
             { label: "Objetos", link: "documentation/objects" },
             { label: "Tests", link: "documentation/tests" },
-            { label: "Collecciones", link: "documentation/collections" },
+            { label: "Colecciones", link: "documentation/collections" },
             { label: "Clases", link: "documentation/classes" },
             { label: "Wollok Game", link: "documentation/wollok_game" },
             { label: "Avanzado", link: "documentation/advanced" },
