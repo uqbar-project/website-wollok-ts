@@ -229,6 +229,12 @@ class Semilla {
       fontSize--
       definirLetra()
     }
+
+    const mostrarErrores = (errores) => {
+      editor.getSession().setAnnotations(errores)
+    }
+
+    const getEditorContent = () => editor.getValue()
   </script>
 </body>
 

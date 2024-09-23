@@ -1,21 +1,79 @@
 import './ReplEvaluator.css'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER, parse } from 'wollok-ts'
+import { Package, link, Interpreter, Evaluation, WRENatives, type ExecutionResult, interprete, REPL, WRE, fromJSON, getDynamicDiagramData, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference, LIST_MODULE, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER, parse, validate, WOLLOK_FILE_EXTENSION, type Problem } from 'wollok-ts'
 import type { ElementDefinition } from 'cytoscape'
 
-// TODO: import internal buildEnvironment from wollok-ts
-const buildInterpreter = () => {
-  // @ts-ignore
-  const content = document.getElementsByClassName('ace_text-layer')[0].innerText
-  const replPackage = parse.File(REPL).tryParse(content)
-  const environment = link([replPackage], fromJSON(WRE))
+type WollokError = {
+  line: number,
+  column?: number,
+  message: string,
+  type?: 'error' | 'info' | 'warning',
+}
+
+const mostrarError = (error: WollokError) => ({
+    row: error.line - 1,
+    column: error.column ?? 0,
+    text: error.message,
+    type: error.type ?? 'error',
+  })
+
+const buildEnvironment = (aPackage: Package) => {
+  const environment = link([aPackage], fromJSON(WRE))
   return new Interpreter(Evaluation.build(environment, WRENatives))
+}
+
+// ************************************************************************************************************
+// TODO: migrate from wollok-lsp-ide > reporter to wollok-web-tools
+const convertToHumanReadable = (code: string) => {
+  if (!code) {
+    return ''
+  }
+  const result = code.replace(
+    /[A-Z0-9]+/g,
+    (match) => ' ' + match.toLowerCase()
+  )
+  return (
+    result.charAt(0).toUpperCase() +
+    result.slice(1, result.length)
+  )
+}
+
+const interpolateValidationMessage = (message: string, ...values: string[]) =>
+  message.replace(/{\d*}/g, (match: string) => {
+    const index = match.replace('{', '').replace('}', '') as unknown as number
+    return values[index] || ''
+  })
+
+const getMessage = (message: string, values: string[]): string =>
+  interpolateValidationMessage(convertToHumanReadable(message), ...values)
+
+const reportValidationMessage = (problem: Problem): string =>
+  getMessage(problem.code, problem.values.concat())
+
+// ************************************************************************************************************
+
+const buildInterpreter = () => {
+  try {
+    // @ts-ignore
+    const content = getEditorContent()
+    const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
+    const interpreter = buildEnvironment(replPackage)
+    const problems = validate(interpreter.evaluation.environment)
+    // @ts-ignore
+    mostrarErrores(problems.map(problem => mostrarError({ line: problem.sourceMap?.start.line ?? 1, column: problem.sourceMap?.start.column ?? 0, message: reportValidationMessage(problem) ?? 'Unexpected Error', type: problem.level })))
+    return interpreter
+  } catch (e) {
+    console.info(e)
+    // @ts-ignore
+    mostrarErrores([mostrarError({ line: 1, message: e })])
+    return buildEnvironment(new Package({ name: REPL }))
+  }
 }
 
 let interpreter = buildInterpreter()
 
 const interpreteLine = (expression: string) => {
-  return interprete(interpreter, expression)
+  return interprete(interpreter!, expression)
 }
 
 /**************************************************************************************************************************************************************/
@@ -96,8 +154,6 @@ export const ReplEvaluator = () => {
     </div>
 
   const evaluate = () => {
-    // @ts-ignore
-    // console.info('el codigo es', document.getElementsByClassName('ace_text-layer')[0].innerText)
     if (!expression) return
     const newHistory = history.concat(expression)
     setHistory(newHistory)
