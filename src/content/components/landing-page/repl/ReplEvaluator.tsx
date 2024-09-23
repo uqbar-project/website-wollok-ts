@@ -155,6 +155,7 @@ export const ReplEvaluator = () => {
     </div>
     setFormattedResult(newResult)
     setExpression('')
+    refreshDynamicDiagram()
   }
 
   const reload = () => {
