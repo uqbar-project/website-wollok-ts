@@ -236,11 +236,38 @@ class Semilla {
       changeFont()
     }
 
-    const showErrors = (errors) => {
-      editor.getSession().setAnnotations(errors)
+    const showProblems = (problems) => {
+      editor.getSession().setAnnotations(problems)
+    }
+
+    const showError = (error) => {
+      editor.session.setAnnotations(
+        [
+          {
+            row: Math.max(0, editor.session.getLength() - 1),
+            column: 0,
+            text: error,
+            type: 'error',
+          }
+        ]
+      )
     }
 
     const getEditorContent = () => editor.getValue()
+
+    const debounce = (callback, wait) => {
+      let timerId
+      return (...args) => {
+        clearTimeout(timerId)
+        timerId = setTimeout(() => {
+          callback(...args)
+        }, wait)
+      };
+    }
+
+    editor.on('change', debounce(() => {
+      document.getElementById('validateEditor').click()
+    }, 2000))
   </script>
 </body>
 

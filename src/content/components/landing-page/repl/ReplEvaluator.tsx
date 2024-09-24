@@ -2,7 +2,7 @@ import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
 import { getDataDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
-import { showError, showProblem } from './replValidators'
+import { showProblem } from './replValidators'
 
 const buildEnvironment = (aPackage: Package) => {
   const environment = link([aPackage], fromJSON(WRE))
@@ -17,12 +17,12 @@ const buildInterpreter = () => {
     const interpreter = buildEnvironment(replPackage)
     const problems = validate(interpreter.evaluation.environment)
     // @ts-ignore
-    showErrors(problems.map(problem => showProblem(problem)))
+    showProblems(problems.map(problem => showProblem(problem)))
     return interpreter
   } catch (e) {
     console.info(e)
     // @ts-ignore
-    showErrors([showError(e)])
+    showError(e)
     return buildEnvironment(new Package({ name: REPL }))
   }
 }
@@ -135,6 +135,7 @@ export const ReplEvaluator = () => {
         <button className="replReload" onClick={() => reloadAndRefresh()} title="Recarga el editor y ejecuta la última sesión activa">
           <img src="/src/assets/repl/reload.svg"/>
         </button>
+        <button id="validateEditor" onClick={() => buildInterpreter()}/>
       </div>
     </div>
     {formattedResult && <div className='replResult'>

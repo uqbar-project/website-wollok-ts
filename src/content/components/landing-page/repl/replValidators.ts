@@ -1,20 +1,12 @@
 import { type Problem } from 'wollok-ts'
 
-export const showError = (error: any) => 
-  ({
-    row: 0,
-    column: 0,
-    text: error,
-    type: 'error'
-  })
-
 export const showProblem = (problem: Problem) => {
   const start = problem.sourceMap?.start
   return {
     row: start ? start.line - 1 : 0,
     column: start?.column ?? 0,
     text: reportValidationMessage(problem) ?? 'Unexpected Error',
-    type: problem.level
+    type: problem.level,
   }
 }
 
