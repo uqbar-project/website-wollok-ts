@@ -122,8 +122,11 @@ export const ReplEvaluator = () => {
   }
 
   return <section className="repl">
+    {formattedResult && <div className='replResult'>
+      {formattedResult}
+    </div>}
     <div className="replLine" id="editor">
-      <input type="text" className="replExpression" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botoneraReplExpression">
         <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
           {/* https://github.com/feathericons/feather/blob/main/icons */}
@@ -138,9 +141,6 @@ export const ReplEvaluator = () => {
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
       </div>
     </div>
-    {formattedResult && <div className='replResult'>
-      {formattedResult}
-    </div>}
   </section>
 }
 

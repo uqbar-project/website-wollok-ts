@@ -11,7 +11,9 @@ export const showProblem = (problem: Problem) => {
 }
 
 // ************************************************************************************************************
-// TODO: migrate from wollok-lsp-ide > reporter to wollok-web-tools
+// TODO 0: JSON mapping error codes with error messages i18ned
+// TODO 1: migrate from wollok-lsp-ide > reporter to wollok-ts
+// TODO 2: use it from here
 const convertToHumanReadable = (code: string) => {
   if (!code) {
     return ''

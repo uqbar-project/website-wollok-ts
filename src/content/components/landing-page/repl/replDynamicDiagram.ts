@@ -41,7 +41,7 @@ const getStyle = (sourceModule: string) =>
   [LIST_MODULE, SET_MODULE].includes(sourceModule) ? 'dotted' : 'solid'
 
 
-// Copied from utils.ts - wollok-ts-cli - should move to wollok-web-tools
+// Copied from utils.ts - wollok-ts-cli - should move to wollok-ts? (or wollok-web-tools)
 export const sanitizeStackTrace = (e?: Error): string => {
   if (e?.message) {
     const originalMessage = e.message.split('\n')
