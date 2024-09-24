@@ -1,9 +1,13 @@
 {
   "extends": "astro/tsconfigs/strictest",
-  "exclude": ["**/dist/**", "**/__coverage__/**"],
+  "exclude": [
+    "**/dist/**",
+    "**/__coverage__/**"
+  ],
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "jsxImportSource": "react"
   }
 }

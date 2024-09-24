@@ -1,5 +1,5 @@
 :root {
-  --sl-font: 'Inter';
+  --sl-font: 'ui-sans-serif', 'Ubuntu';
   --breakpoint-mobile: 50rem;
 }
 

@@ -1,0 +1,97 @@
+.repl {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace;
+}
+
+.replLine {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.botoneraReplExpression>div,
+.botoneraReplExpression>button {
+  background-color: var(sl-color-black);
+}
+
+.replLine>.replExpression {
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  outline: none;
+  border-bottom-style: ridge;
+  border-bottom-width: 1px;
+  padding: 0;
+  padding-left: 0.5rem;
+  margin: 0;
+  width: 100%;
+}
+
+.botoneraReplExpression {
+  display: flex;
+  flex-direction: row;
+}
+
+.botoneraReplExpression>button {
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  margin: 0 0.25rem;
+}
+
+.botoneraReplExpression>.replEvaluate {
+  background-color: #b15757;
+}
+
+.botoneraReplExpression>.replRefresh {
+  background-color: white;
+  border: 1px solid gray;
+}
+
+.botoneraReplExpression>.replReload {
+  background-color: cornflowerblue;
+}
+
+.botoneraReplExpression>.replEvaluate:hover {
+  background-color: lightcoral;
+  cursor: pointer;
+}
+
+.botoneraReplExpression>.replRefresh:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.botoneraReplExpression>.replReload:hover {
+  background-color: rgb(65, 124, 235);
+  cursor: pointer;
+}
+
+#validateEditor {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.botoneraReplExpression img {
+  color: white;
+}
+
+.repl>.replResult {
+  background-color: black;
+  color: greenyellow;
+  padding: 0.4rem;
+  border-radius: 5px;
+  margin: 0.25rem;
+}
+
+.replResult .normal {
+  color: white;
+}
+
+.replResult .error {
+  color: lightcoral;
+}
