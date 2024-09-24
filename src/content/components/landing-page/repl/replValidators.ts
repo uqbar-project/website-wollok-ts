@@ -11,9 +11,9 @@ export const showError = (error: any) =>
 export const showProblem = (problem: Problem) => {
   const start = problem.sourceMap?.start
   return {
-    row: start?.line ?? 0,
+    row: start ? start.line - 1 : 0,
     column: start?.column ?? 0,
-    message: reportValidationMessage(problem) ?? 'Unexpected Error',
+    text: reportValidationMessage(problem) ?? 'Unexpected Error',
     type: problem.level
   }
 }
