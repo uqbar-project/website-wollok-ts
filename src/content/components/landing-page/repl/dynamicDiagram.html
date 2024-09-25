@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/dynamicDiagram/styles/dynamicDiagram.css" />
+    <link rel="stylesheet" href="/dynamicDiagram/styles/dynamicDiagram.css" />
     <style>
       #cy {
         display: block;
@@ -218,11 +218,11 @@ setTimeout(() => {
         <button style="visibility: hidden;" id="reloadDiagram"></button>
         <button class="organize" onclick="updateLayout()" title="Relocate the objects and their relationships in the diagram">ORGANIZE</button>
         <div class="row">
-          <img src="/public/dynamicDiagram/images/dark-mode.png" id="imgModeDynamicDiagram" title="Dark/Light mode"/>
+          <img src="/dynamicDiagram/images/dark-mode.png" id="imgModeDynamicDiagram" title="Dark/Light mode"/>
           <input type="checkbox" id="toggleModeDynamicDiagram" class="toggle" onchange="modeChanged()">
         </div>
         <div class="row">
-          <img src="/public/dynamicDiagram/images/pin-objects.png" id="imgPinObjectsDynamicDiagram" title="Fix objects position"/>
+          <img src="/dynamicDiagram/images/pin-objects.png" id="imgPinObjectsDynamicDiagram" title="Fix objects position"/>
           <input type="checkbox" id="togglePinObjectsDynamicDiagram" class="toggle" onshow="objectsPositionChanged()" onchange="objectsPositionChanged()">
         </div>
       </div>

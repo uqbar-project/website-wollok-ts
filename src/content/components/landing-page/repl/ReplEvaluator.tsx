@@ -130,13 +130,13 @@ export const ReplEvaluator = () => {
       <div className="botoneraReplExpression">
         <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
           {/* https://github.com/feathericons/feather/blob/main/icons */}
-          <img src="/public/repl/evaluate.svg"/>
+          <img src="/repl/evaluate.svg"/>
         </button>
         <button className="replRefresh" onClick={() => reload()} title="Recarga el editor e inicia una nueva sesión del REPL">
-          <img src="/public/repl/refresh.svg"/>
+          <img src="/repl/refresh.svg"/>
         </button>
         <button className="replReload" onClick={() => reloadAndRefresh()} title="Recarga el editor y ejecuta la última sesión activa">
-          <img src="/public/repl/reload.svg"/>
+          <img src="/repl/reload.svg"/>
         </button>
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
       </div>
