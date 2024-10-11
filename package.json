@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "preinstall": "cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -22,6 +23,7 @@
     "react": "^18.3.1",
     "sharp": "^0.32.5",
     "typescript": "^5.3.3",
-    "wollok-ts": "4.1.6"
+    "wollok-ts": "4.1.8",
+    "wollok-web-tools": "1.1.4"
   }
 }

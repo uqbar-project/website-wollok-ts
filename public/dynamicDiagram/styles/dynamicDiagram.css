@@ -52,11 +52,11 @@
   align-self: flex-end;
 }
 
-#imgModeDynamicDiagram, #toggleModeDynamicDiagram {
+#imgModeDynamicDiagram, #toggle-mode {
   top: 5em;
 }
 
-#imgPinObjectsDynamicDiagram, #togglePinObjectsDynamicDiagram {
+#imgPinObjectsDynamicDiagram, #toggle-pin {
   top: 8em;
 }
 
