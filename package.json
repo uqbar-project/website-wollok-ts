@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "preinstall": "cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
+    "preinstall": "mkdir -p ./public/game/lib && cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && mkdir -p ./public/dynamicDiagram/lib && cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
