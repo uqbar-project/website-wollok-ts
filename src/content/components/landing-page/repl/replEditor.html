@@ -46,7 +46,7 @@
   </style>
 </head>
 
-<body onload="loadFile()">
+<body onload="loadEditorFile()">
 
   <!-- ace 1.36.2 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
@@ -183,9 +183,11 @@
         <option value="xcode">Xcode</option>
       </select>
       <img class="menu_option" id="editor_synced"/>
-      <img class="menu_option" src="/repl/save.png" title="Guardar" onclick="saveFile()" />
+      <img class="menu_option" src="/repl/save.png" title="Guardar los cambios en el navegador" onclick="saveFile()" />
+      <img class="menu_option" src="/repl/open.png" title="Cargar un archivo Wollok" onclick="openFile()" />
     </div>
     <div id="editor" style="margin: 0.5rem; height: 35rem; border: 1px solid gray;"></div>
+    <input type="file" id="customFile" name="customFile" accept=".wlk" style="display: none;" onchange="fileSelected()" />
   </div>
 
   <script>
@@ -291,7 +293,7 @@
     var property energia = 10
   }`
 
-    const loadFile = () => {
+    const loadEditorFile = () => {
       if (!localStorage.getItem(EDITOR_FILE)) {
         localStorage.setItem(EDITOR_FILE, defaultFile())
       }
@@ -362,6 +364,22 @@
       editor.getSession().setAnnotations(problems)
     }
 
+    const openFile = () => {
+      document.getElementById('customFile').click()
+    }
+
+    const fileSelected = () => {
+      const files = document.getElementById('customFile').files
+      if (!files.length) return;
+      const file = files[0]
+      if (!file) return;
+      const reader = new FileReader()
+      reader.readAsText(file, "UTF-8")
+      reader.onload = function (evt) {
+        const content  = evt.target.result
+        editor.setValue(content, -1)
+      }
+    }
   </script>
 
 </body>
