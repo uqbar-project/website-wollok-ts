@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
   <style type="text/css" media="screen">
     .file {
       display: flex;
@@ -18,15 +19,16 @@
     }
 
     .menu_option {
-      background-color: white;
       color: black;
-      width: 1.5rem;
+      width: 25px;
+      height: 25px !important;
       border-radius: 5px;
     }
 
     .menu_option:hover {
-      background-color: beige;
       cursor: pointer;
+      box-shadow: 0 0 5px gray;
+      text-shadow: 0 0 5px gray;
     }
 
     .theme {
@@ -39,16 +41,18 @@
       gap: 5px;
       display: flex;
       flex-direction: row;
+      align-items: center;
     }
   </style>
 </head>
 
-<body>
+<body onload="loadFile()">
 
   <div class="file">
     <div class="toolbar">
-      <img class="menu_option" src="/repl/zoom-in.svg" title="Agrandar la letra" onclick="zoomInFont()" />
-      <img class="menu_option" src="/repl/zoom-out.svg" title="Achicar la letra" onclick="zoomOutFont()" />
+      <img class="menu_option" src="/repl/zoom-in.png" title="Agrandar la letra" onclick="zoomInFont()" />
+      <img class="menu_option" src="/repl/zoom-out.png" title="Achicar la letra" onclick="zoomOutFont()" />
+      <img class="menu_option" src="/repl/save.png" title="Guardar" onclick="saveFile()" />
       <select id="theme" class="theme" onchange="changeTheme()" title="Cambiar tema del editor">
         <option value="ambiance">Ambiance</option>
         <option value="chaos">Chaos</option>
@@ -100,28 +104,7 @@
         <option value="xcode">Xcode</option>
       </select>
     </div>
-    <div id="editor" style="margin: 0.5rem; height: 35rem; border: 1px solid gray;">// podemos definir objetos...
-object pepita {
-
-  // ...que tienen atributos (referencias)
-  var energia = 100
-
-  // hay métodos que cambian el estado interno de un objeto
-  method comer(comida) {
-    energia += comida.energia()
-  }
-
-  // y métodos que calculan valores
-  method estaCansada() = energia < 40 
-
-}
-
-// además de los objetos, existen las clases
-class Semilla {
-  // los atributos se pueden definir como properties
-  // para generar automáticamente getters y setters
-  var property energia = 10
-}</div>
+    <div id="editor" style="margin: 0.5rem; height: 35rem; border: 1px solid gray;"></div>
   </div>
 
   <!-- ace 1.36.2 -->
@@ -202,7 +185,24 @@ class Semilla {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-vibrant_ink.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-xcode.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
   <script>
+    const EDITOR_FILE = 'wollok-editor-file'
+    const EDITOR_THEME = 'wollok-editor-theme'
+    const notifier = new Notyf({
+      position: {
+        x: 'center',
+        y: 'center',
+      },
+      types: [
+        {
+          type: 'success',
+          background: 'indianred',
+        }
+      ],
+    })
+
     const changeFont = () => {
       editor.setOptions({
         fontSize: `${fontSize}pt`
@@ -210,20 +210,27 @@ class Semilla {
     }
 
     const changeTheme = () => {
-      editor.setTheme(`ace/theme/${document.getElementById('theme').value}`)
+      const theme = document.getElementById('theme').value
+      editor.setTheme(`ace/theme/${theme}`)
+      localStorage.setItem(EDITOR_THEME, theme)
     }
 
     const changeMode = () => {
       const darkMode = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
       const cbTheme = document.getElementById('theme')
-      cbTheme.value = darkMode ? 'gruvbox' : 'cloud9_day'
+      const defaultTheme = darkMode ? 'gruvbox' : 'cloud9_day'
+      cbTheme.value = localStorage.getItem(EDITOR_THEME)
     }
 
     let fontSize = 13
     let editor = ace.edit("editor")
     changeMode()
     changeTheme()
-    editor.session.setMode("ace/mode/wollok")
+    editor.session.setOptions({
+      mode: 'ace/mode/wollok',
+      tabSize: 2,
+      useSoftTabs: true,
+    })
     changeFont()
 
     const zoomInFont = () => {
@@ -234,6 +241,39 @@ class Semilla {
     const zoomOutFont = () => {
       fontSize--
       changeFont()
+    }
+
+    const defaultFile = () => `// podemos definir objetos...
+object pepita {
+
+  // ...que tienen atributos (referencias)
+  var energia = 100
+
+  // hay métodos que cambian el estado interno de un objeto
+  method comer(comida) {
+    energia += comida.energia()
+  }
+
+  // y métodos que calculan valores
+  method estaCansada() = energia < 40 
+
+}
+
+// además de los objetos, existen las clases
+class Semilla {
+  // los atributos se pueden definir como properties
+  // para generar automáticamente getters y setters
+  var property energia = 10
+}`
+
+    const loadFile = () => {
+      editor.setValue(localStorage.getItem(EDITOR_FILE) ?? defaultFile(), -1)
+      editor.scrollToLine(1)
+    }
+
+    const saveFile = () => {
+      localStorage.setItem(EDITOR_FILE, getEditorContent())
+      notifier.success('File saved!')
     }
 
     const showProblems = (problems) => {
