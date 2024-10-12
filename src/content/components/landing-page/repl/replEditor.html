@@ -357,7 +357,9 @@
 
     const saveFile = () => {
       localStorage.setItem(EDITOR_FILE, getEditorContent())
-      notifier.success('File saved!')
+      synced = true
+      loadSyncedImage()
+      notifier.success('¡Archivo guardado!')
     }
 
     const showProblems = (problems) => {
@@ -378,6 +380,7 @@
       reader.onload = function (evt) {
         const content  = evt.target.result
         editor.setValue(content, -1)
+        notifier.success('Se cargó el archivo correctamente. Si quiere conservarlo, recuerde guardarlo antes de salir.')
       }
     }
   </script>
