@@ -191,6 +191,11 @@
   <script>
     const EDITOR_FILE = 'wollok-editor-file'
     const EDITOR_THEME = 'wollok-editor-theme'
+    const EDITOR_FONT_SIZE = 'wollok-editor-font-size'
+
+    const DEFAULT_FONT_SIZE = 13
+    const TAB_SIZE = 2
+
     const notifier = new Notyf({
       position: {
         x: 'center',
@@ -226,10 +231,11 @@
      * CHANGES
      ****************************************************************************************/
 
-    const changeFont = () => {
+    const changeFontSize = () => {
       editor.setOptions({
         fontSize: `${fontSize}pt`
       })
+      localStorage.setItem(EDITOR_FONT_SIZE, fontSize)
     }
 
     const changeTheme = () => {
@@ -292,6 +298,13 @@
       editor.setValue(localStorage.getItem(EDITOR_FILE), -1)
     }
 
+    const loadFontSize = () => {
+      if (!localStorage.getItem(EDITOR_FONT_SIZE)) {
+        localStorage.setItem(EDITOR_FONT_SIZE, DEFAULT_FONT_SIZE)
+      }
+      return localStorage.getItem(EDITOR_FONT_SIZE)
+    }
+
     const defaultTheme = () => {
       const darkMode = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
       return darkMode ? 'gruvbox' : 'cloud9_day'
@@ -303,16 +316,17 @@
       imgSynced.title = synced ? 'El editor está actualizado' : 'El editor tiene cambios pendientes sin guardar'
     }
 
-    let fontSize = 13
     let editor = ace.edit("editor")
     let synced = true
     let firstTime = true
+    let fontSize = loadFontSize()
     loadSyncedImage()
     loadTheme()
-    editor.session.setOptions({
+    editor.setOptions({
       mode: 'ace/mode/wollok',
-      tabSize: 2,
+      tabSize: TAB_SIZE,
       useSoftTabs: true,
+      fontSize: `${fontSize}pt`,
     })
 
     editor.on('change', debounce(() => {
@@ -325,20 +339,18 @@
       }
     }, 2000))
 
-    changeFont()
-
     /*****************************************************************************************
      * TOOLBAR ACTIONS
      ****************************************************************************************/
 
     const zoomInFont = () => {
       fontSize++
-      changeFont()
+      changeFontSize()
     }
 
     const zoomOutFont = () => {
       fontSize--
-      changeFont()
+      changeFontSize()
     }
 
     const saveFile = () => {
