@@ -125,7 +125,7 @@ export const ReplEvaluator = () => {
     {formattedResult && <div className='replResult'>
       {formattedResult}
     </div>}
-    <div className="replLine" id="editor">
+    <div className="replLine">
       <div className="botoneraReplExpression">
         <button className="replRefresh" onClick={() => reload()} title="Recarga el editor e inicia una nueva sesión del REPL">
           <img src="/repl/refresh.svg"/>

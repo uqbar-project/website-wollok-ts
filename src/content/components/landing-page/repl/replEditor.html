@@ -12,6 +12,9 @@
 
     #editor {
       padding: 0.5rem 0;
+      margin: 0.5rem;
+      height: 35rem;
+      border: 1px solid gray;
       z-index: 10;
       resize: vertical;
       overflow: auto;
@@ -21,7 +24,7 @@
       margin-top: 0;
     }
 
-    .menu_option {
+    .menu-option {
       color: indianred;
       border-radius: 5px;
     }
@@ -34,7 +37,13 @@
       color: var(--sl-color-banner-bg);
     }
 
-    .menu_option:hover {
+    .warning-editor {
+      color: #FFC72C;
+      right: 1rem;
+      margin-left: auto;
+    }
+
+    .menu-option:hover {
       cursor: pointer;
     }
 
@@ -137,10 +146,10 @@
 
   <div class="file">
     <div class="toolbar">
-      <div class="menu_option zoom" title="Agrandar la letra" onclick="zoomInFont()">
+      <div class="menu-option zoom" title="Agrandar la letra" onclick="zoomInFont()">
         <i class="fa-solid fa-font fa-xl"></i>
       </div>
-      <div class="menu_option zoom" title="Achicar la letra" onclick="zoomOutFont()">
+      <div class="menu-option zoom" title="Achicar la letra" onclick="zoomOutFont()">
         <i class="fa-solid fa-font fa-md"></i>
       </div>
       <select id="theme" class="theme" onchange="changeTheme()" title="Cambiar tema del editor">
@@ -193,15 +202,17 @@
         <option value="vibrant_ink">Vibrant Ink</option>
         <option value="xcode">Xcode</option>
       </select>
-      <!-- triangle-exclamation -->
-      <div class="menu_option save" title="Guardar los cambios en el navegador" onclick="saveFile()">
+      <div class="menu-option save" title="Guardar los cambios en el navegador" onclick="saveFile()">
         <i class="fa-solid fa-download fa-xl"></i>
       </div>
-      <div class="menu_option" title="Cargar un archivo Wollok" onclick="openFile()">
+      <div class="menu-option" title="Cargar un archivo Wollok" onclick="openFile()">
         <i class="fa-solid fa-file-arrow-up fa-xl"></i>
       </div>
-    </div>
-    <div id="editor" style="margin: 0.5rem; height: 35rem; border: 1px solid gray;"></div>
+      <div class="warning-editor" id="editor-synced" display="visibility: hidden">
+        <i class="fa-solid fa-triangle-exclamation fa-xl" title="El editor tiene cambios pendientes sin guardar"></i>
+      </div>
+      </div>
+    <div id="editor"></div>
     <input type="file" id="customFile" name="customFile" accept=".wlk" style="display: none;" onchange="fileSelected()" />
   </div>
 
@@ -329,9 +340,8 @@
     }
 
     const loadSyncedImage = () => {
-      // const imgSynced = document.getElementById('editor_synced')
-      // imgSynced.src = synced ? '/repl/synced.png' : '/repl/unsynced.png'
-      // imgSynced.title = synced ? 'El editor está actualizado' : 'El editor tiene cambios pendientes sin guardar'
+      const editorSynced = document.getElementById('editor-synced')
+      editorSynced.style.visibility = synced ? 'hidden' : 'visible'
     }
 
     let editor = ace.edit("editor")
