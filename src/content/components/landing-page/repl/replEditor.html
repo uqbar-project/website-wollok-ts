@@ -227,6 +227,7 @@
           }
         ]
       )
+      document.getElementById('editor').style.border = 'solid 2px indianred'
     }
 
     /*****************************************************************************************
@@ -332,6 +333,7 @@
     })
 
     editor.on('change', debounce(() => {
+      document.getElementById('editor').style.border = 'solid 1px gray'
       document.getElementById('validateEditor').click()
       if (firstTime) {
         firstTime = false
