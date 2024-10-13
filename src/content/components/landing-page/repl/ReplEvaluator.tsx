@@ -126,12 +126,7 @@ export const ReplEvaluator = () => {
       {formattedResult}
     </div>}
     <div className="replLine" id="editor">
-      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botoneraReplExpression">
-        <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
-          {/* https://github.com/feathericons/feather/blob/main/icons */}
-          <img src="/repl/evaluate.svg"/>
-        </button>
         <button className="replRefresh" onClick={() => reload()} title="Recarga el editor e inicia una nueva sesión del REPL">
           <img src="/repl/refresh.svg"/>
         </button>
@@ -139,6 +134,13 @@ export const ReplEvaluator = () => {
           <img src="/repl/reload.svg"/>
         </button>
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
+      </div>
+      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+      <div className="botoneraReplExpression">
+        <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
+          {/* https://github.com/feathericons/feather/blob/main/icons */}
+          <img src="/repl/evaluate.svg"/>
+        </button>
       </div>
     </div>
   </section>
