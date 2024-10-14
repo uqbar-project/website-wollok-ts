@@ -16,8 +16,12 @@ const buildInterpreter = () => {
     const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
     const interpreter = buildEnvironment(replPackage)
     const problems = validate(interpreter.evaluation.environment)
+
     // @ts-ignore
     showProblems(problems.map(problem => showProblem(problem)))
+    // @ts-ignore
+    markReplSessionSynced()
+
     return interpreter
   } catch (e) {
     console.info(e)
@@ -99,13 +103,13 @@ export const ReplEvaluator = () => {
 
   const reloadAndRefresh = () => {
     reloadInterpreter()
-    const newResult = <div>
+    const newResult = <>
       {
       history.map((expression: string) =>
         generateResult(expression, interpreteLine(expression)))
       }
-    </div>
-    setFormattedResult(newResult)
+    </>
+    setFormattedResult(history.length ? newResult : undefined)
     setExpression('')
     refreshDynamicDiagram()
   }

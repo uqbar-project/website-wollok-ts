@@ -65,83 +65,35 @@
 <body onload="loadEditorFile()">
 
   <!-- ace 1.36.2 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-beautify.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-code_lens.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-command_bar.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-elastic_tabstops_lite.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-emmet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-error_marker.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-hardwrap.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-inline_autocomplete.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-keybinding_menu.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-language_tools.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-linking.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-modelist.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-options.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-prompt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-rtl.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-searchbox.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-settings_menu.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-simple_tokenizer.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-spellcheck.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-split.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-static_highlight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-statusbar.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-textarea.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-themelist.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-whitespace.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/keybinding-vscode.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/mode-wollok.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-ambiance.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-chaos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-chrome.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_day.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_night.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_night_low_color.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud_editor_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud_editor.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-clouds.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-clouds_midnight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cobalt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-crimson_editor.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dawn.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dracula.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dreamweaver.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-eclipse.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github_light_default.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gob.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox_dark_hard.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox_light_hard.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-idle_fingers.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-iplastic.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-katzenmilch.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-kr_theme.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-kuroir.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-merbivore.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-merbivore_soft.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-mono_industrial.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-monokai.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-nord_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-one_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-pastel_on_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-solarized_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-solarized_light.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-sqlserver.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-terminal.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-textmate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_blue.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_bright.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_eighties.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-twilight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-vibrant_ink.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-xcode.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-beautify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-code_lens.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-command_bar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-elastic_tabstops_lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-emmet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-error_marker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-hardwrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-inline_autocomplete.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-keybinding_menu.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-language_tools.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-linking.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-modelist.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-options.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-prompt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-rtl.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-searchbox.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-settings_menu.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-simple_tokenizer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-spellcheck.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-split.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-static_highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-statusbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-textarea.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-themelist.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-whitespace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/keybinding-vscode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/mode-wollok.min.js"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
   <div class="file">
@@ -240,6 +192,13 @@
     /*****************************************************************************************
      * UTILS
      ****************************************************************************************/
+    const loadJS = (file) => {
+      const scriptElement = document.createElement("script")
+      scriptElement.type = "application/javascript"
+      scriptElement.src = file
+      document.body.appendChild(scriptElement)
+    }
+
     const getEditorContent = () => editor.getValue()
 
     const showError = (error) => {
@@ -292,6 +251,7 @@
         localStorage.setItem(EDITOR_THEME, defaultTheme())
       }
       const theme = localStorage.getItem(EDITOR_THEME)
+      loadJS(`https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-${theme}.min.js`)
       editor.setTheme(`ace/theme/${theme}`)
       const cbTheme = document.getElementById('theme')
       cbTheme.value = theme
@@ -363,6 +323,7 @@
       if (firstTime) {
         firstTime = false
       } else {
+        markReplSessionOutdated()
         synced = false
         loadSyncedImage()
       }
