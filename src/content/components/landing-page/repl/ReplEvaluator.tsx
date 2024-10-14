@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
 import { getDynamicDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
@@ -42,6 +42,11 @@ export const ReplEvaluator = () => {
   const [history, setHistory] = useState<string[]>([])
   const [indexExpression, setIndexExpression] = useState(history.length)
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
+  const resultRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
+  }, [formattedResult])
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
     !expression ?
@@ -59,7 +64,10 @@ export const ReplEvaluator = () => {
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
     const result = interpreteLine(expression)
-    setFormattedResult(generateResult(expression, result))
+    setFormattedResult(<>
+      {formattedResult}
+      {generateResult(expression, result)}
+    </>)
     setExpression('')
     refreshDynamicDiagram()
   }
@@ -126,7 +134,7 @@ export const ReplEvaluator = () => {
   }
 
   return <section className="repl">
-    {formattedResult && <div className='replResult'>
+    {formattedResult && <div className='replResult' ref={resultRef}>
       {formattedResult}
     </div>}
     <div className="replLine">
