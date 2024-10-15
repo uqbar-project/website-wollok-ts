@@ -792,38 +792,54 @@ ave.volar(madrid, new Date())
 
 ## Identidad vs Igualdad ###
 
-Wollok sigue las convenciones de igualdad e identidad que tienen Java / Smalltalk. Por defecto, dos objetos son iguales si son el mismo objeto.
+Wollok sigue las convenciones de igualdad e identidad que tienen Java / Smalltalk. Por defecto, dos objetos son iguales si son el mismo objeto, y utilizamos el mensaje `==`.
 
 ```wollok
-var pepita = new Ave()
-const amiga = pepita
-amiga == pepita   ==> true, son el mismo objeto
+class Mail {
+ const property asunto
+ const property emisor
+ const property receptor
+}
+
+const invitacion10Oct = new Mail(asunto = "Asado?", 
+      emisor = "dodain@gmail.com", receptor = "alf@gmail.com")
+const unMail = invitacion10Oct
+
+unMail == invitacion10Oct   ==> true, son el mismo objeto
 ```
 
-Pero para algunos objetos la igualdad está redefinida, por ejemplo dos strings son iguales si tienen los mismos caracteres:
+Pero si redefinimos el mensaje `==`, podemos indicar que dos objetos **pueden representar el mismo mail** si tienen el mismo asunto, el mismo emisor y el mismo receptor:
 
 ```wollok
-var unString = "hola"
-var otroString = "hola"
-unString == otroString ==> true, tienen los mismos caracteres
+class Mail {
+ const property asunto
+ const property emisor
+ const property receptor
+
+
+ override method == (otroMail) = 
+   asunto == otroMail.asunto() &&
+   emisor == otroMail.emisor() &&
+   receptor == otroMail.receptor()
+}
+
+const invitacion10Oct = new Mail(asunto = "Asado?", 
+  emisor = "dodain@gmail.com", receptor = "alf@gmail.com")
+
+const invitacion17Oct = new Mail(asunto = "Asado?", 
+  emisor = "dodain@gmail.com", receptor = "alf@gmail.com")
+
+> invitacion17Oct === invitacion10Oct  // el mensaje `===` pregunta por identidad
+✓ false   // no apuntan al mismo objeto...
+> invitacion17Oct == invitacion10Oct
+✓ true    // ...pero representan el mismo mail
 ```
 
 El operador == es equivalente al mensaje equals:
 
 ```wollok
-var unString = "hola"
-var otroString = "hola"
-unString.equals(otroString) ==> true, tienen los mismos caracteres
-```
-
-Para saber si dos referencias apuntan al mismo objeto, se utiliza el operador ===
-
-```wollok
-var unString = "hola"
-var otroString = "hola"
-unString === otroString  ==> false, no apuntan al mismo objeto
-otroString = unString
-unString === otroString  ==> true (ahora sí)
+> invitacion17Oct.equals(invitacion10Oct)
+✓ true    // representan el mismo mail
 ```
 
 En general, hay objetos que representan valores: los números, los strings, los booleanos, y los [value objects](https://en.wikipedia.org/wiki/Value_object), a ellos se les suele redefinir el == / equals en base a su estado.
