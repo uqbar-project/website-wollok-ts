@@ -63,7 +63,7 @@ export default defineConfig({
         label: "Tests",
         link: "documentation/tests"
       }, {
-        label: "Collecciones",
+        label: "Colecciones",
         link: "documentation/collections"
       }, {
         label: "Clases",
