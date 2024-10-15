@@ -5,6 +5,10 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"
     ></script>
+    <script
+      src="/dynamicDiagram/lib/diagram-index.js"
+    ></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -14,6 +18,13 @@
         display: block;
         height: 30rem;
         width: 50vw;
+        resize: vertical;
+        overflow: auto;
+      }
+
+      .warning-session {
+        color: #FFC72C;
+        margin: 1rem 1rem;
       }
     </style>
   </head>
@@ -21,209 +32,74 @@
   <body>
     <script>
 
-let cy
-let currentElements = []
+const DIAGRAM_MODE = 'wollok-diagram-mode'
+const DIAGRAM_PIN = 'wollok-diagram-pin'
 
-const initializeCytoscape = (container) => {
-  const fontFace = {
-    "font-family": "Inter",
-    "font-weight": "normal",
-    "font-size": "data(fontsize)",
+const MODE_DARK = 'dark'
+const MODE_LIGHT = 'light'
+
+const PIN_FIXED = 'fixed'
+const PIN_FREE = 'free'
+
+const defaultMode = () => localStorage.getItem('starlight-theme') ?? MODE_LIGHT
+const defaultPin = () => PIN_FREE
+
+const loadMode = () => {
+  if (!localStorage.getItem(DIAGRAM_MODE)) {
+    localStorage.setItem(DIAGRAM_MODE, defaultMode())
   }
-  const nodeStyle = {
-    ...fontFace,
-    "background-color": "#7cc0d8",
-    "line-color": "#000000",
-    label: "data(label)",
-    color: "#000",
-    "text-valign": "center",
-    "text-wrap": "wrap",
-    "text-max-width": "100px",
-    "border-style": "solid",
-    "border-color": "#248ac8",
-    "border-width": "1px",
+  return localStorage.getItem(DIAGRAM_MODE)
+}
+
+const loadPin = () => {
+  if (!localStorage.getItem(DIAGRAM_PIN)) {
+    localStorage.setItem(DIAGRAM_PIN, defaultPin())
   }
-
-  const edgeStyle = {
-    ...fontFace,
-    label: "data(label)",
-    width: "data(width)",
-    "line-color": "#000000",
-    "line-style": "data(style)",
-    "target-arrow-color": "#000000",
-    "target-arrow-shape": "vee",
-    "curve-style": "bezier",
-    "text-valign": "top",
-    "text-margin-y": "10px",
-    "font-size": "8px",
-  }
-
-  cy = cytoscape({
-    container,
-    zoom: 1,
-    maxZoom: 2,
-    minZoom: 0.5,
-    elements: [],
-
-    style: [
-      // the stylesheet for the graph
-      {
-        selector: "node",
-        style: nodeStyle,
-      },
-      {
-        selector: `node[mode = "dark"]`,
-        style: {
-          ...nodeStyle,
-          "line-color": "#000000",
-          "background-color": "#4F709C",
-          "border-color": "#6F8FC0",
-          color: "#FFFFFF",
-        },
-      },
-      {
-        selector: "edge",
-        style: edgeStyle,
-      },
-      {
-        selector: `edge[mode = "dark"]`,
-        style: {
-          ...edgeStyle,
-          "line-color": "#FFFFFF",
-          "target-arrow-color": "#FFFFFF",
-          color: "#FFFFFF",
-        }
-      },
-      {
-        selector: `node[type = "literal"]`,
-        style: {
-          ...fontFace,
-          "background-color": "#6fdc4b",
-          "border-color": "#26a324",
-        },
-      },
-      {
-        selector: `node[type = "literal"][mode = "dark"]`,
-        style: {
-          ...fontFace,
-          "background-color": "#BB2525",
-          "border-color": "#E53935",
-          color: "#FFFFFF",
-        },
-      },
-      {
-        selector: `node[type = "null"]`,
-        style: {
-          ...fontFace,
-          "background-color": "#FFFFFF",
-          "font-size": "10px",
-          "font-weight": "bold",
-          color: "#000000",
-          "border-color": "#000000",
-        },
-      },
-      {
-        selector: 'node[type = "REPL"]',
-        style: {
-          opacity: 0,
-        },
-      },
-    ],
-  })
+  return localStorage.getItem(DIAGRAM_PIN)
 }
 
-const updateLayout = () => {
-  updateNodes(cy.elements())
+const markReplSessionOutdated = () => {
+  document.getElementById('session-synced').style = 'visibility: visible;'
 }
 
-const updateNodes = (elements) => {
-  const layout = elements.layout({
-    name: "cose",
-    animate: false,
-    nodeDimensionsIncludeLabels: true,
-    fit: true,
-    nodeOverlap: 4,
-    randomize: false,
-  })
-
-  layout.run()
+const markReplSessionSynced = () => {
+  document.getElementById('session-synced').style = 'visibility: hidden;'
 }
 
-const objectsPositionChanged = () => {
-  const newTitle = objectsKeepTheirPosition() ? 'ON -> objects will keep their positions (better performance when you have > 100 objects)' : 'OFF -> objects will be relocated to fit into the graph layout (graph is easier to read)'
-  document.getElementById('togglePinObjectsDynamicDiagram').setAttribute('title', `Fix objects position: ${newTitle}`)
-}
-
-const objectsKeepTheirPosition = () => {
-  return document.getElementById('togglePinObjectsDynamicDiagram').checked
-}
-
-const reloadDiagram = (elements) => {
-  currentElements = [...elements]
-  changeElementsMode()
-  const ids = elements.map((element) => element.data.id)
-  cy.filter((element) => !ids.includes(element.id())).remove()
-  const newElements = elements.filter((element) => !cy.hasElementWithId(element.data.id))
-  if (newElements.length) {
-    const shouldUpdateLayout = !objectsKeepTheirPosition() || cy.elements().length === 0
-    const addedNodes = cy.add(newElements)
-    if (shouldUpdateLayout) {
-      updateLayout()
-    } else {
-      updateNodes(readyForLayoutElems(addedNodes))
-    }
-  }
-}
-
-/**
- * edges can't reference nodes that going to be arranged
- */
-const readyForLayoutElems = (elements) => {
-  const isInElems = (elem) => elements.some((element) => element.id() === elem.id())
-
-  return elements.filter(
-    (element) =>
-      element.isNode() ||
-      (element.isEdge() && isInElems(element.target()) && isInElems(element.source()))
-  )
-}
-
-const modeChanged = () => {
-  const toggleMode = document.getElementById('toggleModeDynamicDiagram')
-  const newTitle = toggleMode.checked ? 'Dark mode ON' : 'Light Mode ON'
-  toggleMode.setAttribute('title', newTitle)
-
-  document.getElementById('main').style = `background-color: ${backgroundColor()}`
-  cy.elements().remove()
-  reloadDiagram(currentElements)
-}
-
-const backgroundColor = () => isDarkMode() ? 'black' : 'white'
-
-const isDarkMode = () => document.getElementById('toggleModeDynamicDiagram').checked
-
-const changeElementsMode = () => {
-  currentElements.forEach(element => { element.data.mode = isDarkMode() ? 'dark' : 'light' })
-}
-
-setTimeout(() => { 
+setTimeout(() => {
   initializeCytoscape(document.getElementById('cy'))
-  document.getElementById('toggleModeDynamicDiagram').checked = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
+  document.getElementById('toggle-mode').checked = loadMode() === MODE_DARK
+  document.getElementById('toggle-pin').checked = loadPin() === PIN_FIXED
   modeChanged()
 }, 1000)
 
+const customModeChanged = () => {
+  modeChanged()
+  const mode = document.getElementById('toggle-mode').checked ? MODE_DARK : MODE_LIGHT
+  localStorage.setItem(DIAGRAM_MODE, mode)
+}
+
+const customObjectsPositionChanged = () => {
+  objectsPositionChanged()
+  const fixed = document.getElementById('toggle-pin').checked ? PIN_FIXED : PIN_FREE
+  localStorage.setItem(DIAGRAM_PIN, fixed)
+}
+
     </script>
     <div id="main" class="mainDynamicDiagram">
+      <div class="warning-session" id="session-synced" style="visibility: hidden">
+        <i class="fa-solid fa-triangle-exclamation fa-2xl" title="La sesión activa del REPL no está sincronizada con el editor"></i>
+      </div>
       <div class="botoneraDynamicDiagram">
         <button style="visibility: hidden;" id="reloadDiagram"></button>
         <button class="organize" onclick="updateLayout()" title="Relocate the objects and their relationships in the diagram">ORGANIZE</button>
         <div class="row">
           <img src="/dynamicDiagram/images/dark-mode.png" id="imgModeDynamicDiagram" title="Dark/Light mode"/>
-          <input type="checkbox" id="toggleModeDynamicDiagram" class="toggle" onchange="modeChanged()">
+          <input type="checkbox" id="toggle-mode" class="toggle" onchange="customModeChanged()">
         </div>
         <div class="row">
           <img src="/dynamicDiagram/images/pin-objects.png" id="imgPinObjectsDynamicDiagram" title="Fix objects position"/>
-          <input type="checkbox" id="togglePinObjectsDynamicDiagram" class="toggle" onshow="objectsPositionChanged()" onchange="objectsPositionChanged()">
+          <input type="checkbox" id="toggle-pin" class="toggle" onshow="objectsPositionChanged()" onchange="customObjectsPositionChanged()">
         </div>
       </div>
       <div id="cy"></div>

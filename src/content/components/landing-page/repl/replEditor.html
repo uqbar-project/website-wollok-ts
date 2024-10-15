@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style type="text/css" media="screen">
     .file {
       display: flex;
@@ -10,22 +12,38 @@
 
     #editor {
       padding: 0.5rem 0;
+      margin: 0.5rem;
+      height: 35rem;
+      border: 1px solid gray;
       z-index: 10;
+      resize: vertical;
+      overflow: auto;
     }
 
     .sl-markdown-content :not(a, strong, em, del, span, input, code)+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
       margin-top: 0;
     }
 
-    .menu_option {
-      background-color: white;
-      color: black;
-      width: 1.5rem;
+    .menu-option {
+      color: indianred;
       border-radius: 5px;
     }
 
-    .menu_option:hover {
-      background-color: beige;
+    .save {
+      color: steelblue;
+    }
+
+    .zoom {
+      color: var(--sl-color-banner-bg);
+    }
+
+    .warning-editor {
+      color: #FFC72C;
+      right: 1rem;
+      margin-left: auto;
+    }
+
+    .menu-option:hover {
       cursor: pointer;
     }
 
@@ -39,16 +57,53 @@
       gap: 5px;
       display: flex;
       flex-direction: row;
+      align-items: center;
     }
   </style>
 </head>
 
-<body>
+<body onload="loadEditorFile()">
+
+  <!-- ace 1.36.2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-beautify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-code_lens.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-command_bar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-elastic_tabstops_lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-emmet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-error_marker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-hardwrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-inline_autocomplete.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-keybinding_menu.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-language_tools.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-linking.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-modelist.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-options.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-prompt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-rtl.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-searchbox.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-settings_menu.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-simple_tokenizer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-spellcheck.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-split.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-static_highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-statusbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-textarea.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-themelist.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-whitespace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/keybinding-vscode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/mode-wollok.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
   <div class="file">
     <div class="toolbar">
-      <img class="menu_option" src="/repl/zoom-in.svg" title="Agrandar la letra" onclick="zoomInFont()" />
-      <img class="menu_option" src="/repl/zoom-out.svg" title="Achicar la letra" onclick="zoomOutFont()" />
+      <div class="menu-option zoom" title="Agrandar la letra" onclick="zoomInFont()">
+        <i class="fa-solid fa-font fa-xl"></i>
+      </div>
+      <div class="menu-option zoom" title="Achicar la letra" onclick="zoomOutFont()">
+        <i class="fa-solid fa-font fa-md"></i>
+      </div>
       <select id="theme" class="theme" onchange="changeTheme()" title="Cambiar tema del editor">
         <option value="ambiance">Ambiance</option>
         <option value="chaos">Chaos</option>
@@ -99,146 +154,52 @@
         <option value="vibrant_ink">Vibrant Ink</option>
         <option value="xcode">Xcode</option>
       </select>
-    </div>
-    <div id="editor" style="margin: 0.5rem; height: 35rem; border: 1px solid gray;">// podemos definir objetos...
-object pepita {
-
-  // ...que tienen atributos (referencias)
-  var energia = 100
-
-  // hay métodos que cambian el estado interno de un objeto
-  method comer(comida) {
-    energia += comida.energia()
-  }
-
-  // y métodos que calculan valores
-  method estaCansada() = energia < 40 
-
-}
-
-// además de los objetos, existen las clases
-class Semilla {
-  // los atributos se pueden definir como properties
-  // para generar automáticamente getters y setters
-  var property energia = 10
-}</div>
+      <div class="menu-option save" title="Guardar los cambios en el navegador" onclick="saveFile()">
+        <i class="fa-solid fa-download fa-xl"></i>
+      </div>
+      <div class="menu-option" title="Cargar un archivo Wollok" onclick="openFile()">
+        <i class="fa-solid fa-file-arrow-up fa-xl"></i>
+      </div>
+      <div class="warning-editor" id="editor-synced" display="visibility: hidden">
+        <i class="fa-solid fa-triangle-exclamation fa-xl" title="El editor tiene cambios pendientes sin guardar"></i>
+      </div>
+      </div>
+    <div id="editor"></div>
+    <input type="file" id="customFile" name="customFile" accept=".wlk" style="display: none;" onchange="fileSelected()" />
   </div>
 
-  <!-- ace 1.36.2 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-beautify.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-code_lens.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-command_bar.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-elastic_tabstops_lite.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-emmet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-error_marker.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-hardwrap.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-inline_autocomplete.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-keybinding_menu.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-language_tools.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-linking.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-modelist.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-options.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-prompt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-rtl.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-searchbox.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-settings_menu.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-simple_tokenizer.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-spellcheck.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-split.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-static_highlight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-statusbar.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-textarea.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-themelist.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ext-whitespace.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/keybinding-vscode.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/mode-wollok.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-ambiance.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-chaos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-chrome.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_day.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_night.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud9_night_low_color.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud_editor_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cloud_editor.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-clouds.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-clouds_midnight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-cobalt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-crimson_editor.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dawn.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dracula.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-dreamweaver.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-eclipse.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-github_light_default.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gob.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox_dark_hard.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-gruvbox_light_hard.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-idle_fingers.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-iplastic.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-katzenmilch.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-kr_theme.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-kuroir.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-merbivore.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-merbivore_soft.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-mono_industrial.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-monokai.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-nord_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-one_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-pastel_on_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-solarized_dark.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-solarized_light.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-sqlserver.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-terminal.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-textmate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_blue.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_bright.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night_eighties.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-tomorrow_night.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-twilight.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-vibrant_ink.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-xcode.js"></script>
-
   <script>
-    const changeFont = () => {
-      editor.setOptions({
-        fontSize: `${fontSize}pt`
-      })
+    const EDITOR_FILE = 'wollok-editor-file'
+    const EDITOR_THEME = 'wollok-editor-theme'
+    const EDITOR_FONT_SIZE = 'wollok-editor-font-size'
+
+    const DEFAULT_FONT_SIZE = 13
+    const TAB_SIZE = 2
+
+    const notifier = new Notyf({
+      position: {
+        x: 'center',
+        y: 'center',
+      },
+      types: [
+        {
+          type: 'success',
+          background: 'indianred',
+        }
+      ],
+    })
+
+    /*****************************************************************************************
+     * UTILS
+     ****************************************************************************************/
+    const loadJS = (file) => {
+      const scriptElement = document.createElement("script")
+      scriptElement.type = "application/javascript"
+      scriptElement.src = file
+      document.body.appendChild(scriptElement)
     }
 
-    const changeTheme = () => {
-      editor.setTheme(`ace/theme/${document.getElementById('theme').value}`)
-    }
-
-    const changeMode = () => {
-      const darkMode = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
-      const cbTheme = document.getElementById('theme')
-      cbTheme.value = darkMode ? 'gruvbox' : 'cloud9_day'
-    }
-
-    let fontSize = 13
-    let editor = ace.edit("editor")
-    changeMode()
-    changeTheme()
-    editor.session.setMode("ace/mode/wollok")
-    changeFont()
-
-    const zoomInFont = () => {
-      fontSize++
-      changeFont()
-    }
-
-    const zoomOutFont = () => {
-      fontSize--
-      changeFont()
-    }
-
-    const showProblems = (problems) => {
-      editor.getSession().setAnnotations(problems)
-    }
+    const getEditorContent = () => editor.getValue()
 
     const showError = (error) => {
       editor.session.setAnnotations(
@@ -251,9 +212,25 @@ class Semilla {
           }
         ]
       )
+      document.getElementById('editor').style.border = 'solid 2px indianred'
     }
 
-    const getEditorContent = () => editor.getValue()
+    /*****************************************************************************************
+     * CHANGES
+     ****************************************************************************************/
+
+    const changeFontSize = () => {
+      editor.setOptions({
+        fontSize: `${fontSize}pt`
+      })
+      localStorage.setItem(EDITOR_FONT_SIZE, fontSize)
+    }
+
+    const changeTheme = () => {
+      const theme = document.getElementById('theme').value
+      editor.setTheme(`ace/theme/${theme}`)
+      localStorage.setItem(EDITOR_THEME, theme)
+    }
 
     const debounce = (callback, wait) => {
       let timerId
@@ -265,10 +242,137 @@ class Semilla {
       };
     }
 
+    /*****************************************************************************************
+     * INITIALIZATION
+     ****************************************************************************************/
+
+    const loadTheme = () => {
+      if (!localStorage.getItem(EDITOR_THEME)) {
+        localStorage.setItem(EDITOR_THEME, defaultTheme())
+      }
+      const theme = localStorage.getItem(EDITOR_THEME)
+      loadJS(`https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/theme-${theme}.min.js`)
+      editor.setTheme(`ace/theme/${theme}`)
+      const cbTheme = document.getElementById('theme')
+      cbTheme.value = theme
+    }
+
+    const defaultFile = () => `// podemos definir objetos...
+  object pepita {
+
+    // ...que tienen atributos (referencias)
+    var energia = 100
+
+    // hay métodos que cambian el estado interno de un objeto
+    method comer(comida) {
+      energia += comida.energia()
+    }
+
+    // y métodos que calculan valores
+    method estaCansada() = energia < 40
+
+  }
+
+  // además de los objetos, existen las clases
+  class Semilla {
+    // los atributos se pueden definir como properties
+    // para generar automáticamente getters y setters
+    var property energia = 10
+  }`
+
+    const loadEditorFile = () => {
+      if (!localStorage.getItem(EDITOR_FILE)) {
+        localStorage.setItem(EDITOR_FILE, defaultFile())
+      }
+      editor.setValue(localStorage.getItem(EDITOR_FILE), -1)
+    }
+
+    const loadFontSize = () => {
+      if (!localStorage.getItem(EDITOR_FONT_SIZE)) {
+        localStorage.setItem(EDITOR_FONT_SIZE, DEFAULT_FONT_SIZE)
+      }
+      return localStorage.getItem(EDITOR_FONT_SIZE)
+    }
+
+    const defaultTheme = () => {
+      const darkMode = document.getElementsByTagName('html')[0].dataset.theme == 'dark'
+      return darkMode ? 'gruvbox' : 'cloud9_day'
+    }
+
+    const loadSyncedImage = () => {
+      const editorSynced = document.getElementById('editor-synced')
+      editorSynced.style.visibility = synced ? 'hidden' : 'visible'
+    }
+
+    let editor = ace.edit("editor")
+    let synced = true
+    let firstTime = true
+    let fontSize = loadFontSize()
+    loadSyncedImage()
+    loadTheme()
+    editor.setOptions({
+      mode: 'ace/mode/wollok',
+      tabSize: TAB_SIZE,
+      useSoftTabs: true,
+      fontSize: `${fontSize}pt`,
+    })
+
     editor.on('change', debounce(() => {
+      document.getElementById('editor').style.border = 'solid 1px gray'
       document.getElementById('validateEditor').click()
+      if (firstTime) {
+        firstTime = false
+      } else {
+        markReplSessionOutdated()
+        synced = false
+        loadSyncedImage()
+      }
     }, 2000))
+
+    /*****************************************************************************************
+     * TOOLBAR ACTIONS
+     ****************************************************************************************/
+
+    const zoomInFont = () => {
+      fontSize++
+      changeFontSize()
+    }
+
+    const zoomOutFont = () => {
+      fontSize--
+      changeFontSize()
+    }
+
+    const saveFile = () => {
+      localStorage.setItem(EDITOR_FILE, getEditorContent())
+      synced = true
+      loadSyncedImage()
+      notifier.success('¡Archivo guardado!')
+    }
+
+    const showProblems = (problems) => {
+      editor.getSession().setAnnotations(problems)
+    }
+
+    const openFile = () => {
+      document.getElementById('customFile').click()
+    }
+
+    const fileSelected = () => {
+      const files = document.getElementById('customFile').files
+      if (!files.length) return;
+      const file = files[0]
+      if (!file) return;
+      const reader = new FileReader()
+      reader.readAsText(file, "UTF-8")
+      reader.onload = function (evt) {
+        const content  = evt.target.result
+        editor.setValue(content, -1)
+        notifier.success('Se cargó el archivo correctamente. Si quiere conservarlo, recuerde guardarlo antes de salir.')
+      }
+    }
   </script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
-import { getDataDiagram, sanitizeStackTrace } from './replDynamicDiagram'
+import { getDynamicDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
 import { showProblem } from './replValidators'
 
@@ -16,8 +16,12 @@ const buildInterpreter = () => {
     const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
     const interpreter = buildEnvironment(replPackage)
     const problems = validate(interpreter.evaluation.environment)
+
     // @ts-ignore
     showProblems(problems.map(problem => showProblem(problem)))
+    // @ts-ignore
+    markReplSessionSynced()
+
     return interpreter
   } catch (e) {
     console.info(e)
@@ -38,6 +42,11 @@ export const ReplEvaluator = () => {
   const [history, setHistory] = useState<string[]>([])
   const [indexExpression, setIndexExpression] = useState(history.length)
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
+  const resultRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
+  }, [formattedResult])
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
     !expression ?
@@ -55,13 +64,16 @@ export const ReplEvaluator = () => {
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
     const result = interpreteLine(expression)
-    setFormattedResult(generateResult(expression, result))
+    setFormattedResult(<>
+      {formattedResult}
+      {generateResult(expression, result)}
+    </>)
     setExpression('')
     refreshDynamicDiagram()
   }
 
   const refreshDynamicDiagram = () => {
-    const elements = getDataDiagram(interpreter)
+    const elements = getDynamicDiagram(interpreter)
     // @ts-ignore
     reloadDiagram(elements)
   }
@@ -99,13 +111,13 @@ export const ReplEvaluator = () => {
 
   const reloadAndRefresh = () => {
     reloadInterpreter()
-    const newResult = <div>
+    const newResult = <>
       {
       history.map((expression: string) =>
         generateResult(expression, interpreteLine(expression)))
       }
-    </div>
-    setFormattedResult(newResult)
+    </>
+    setFormattedResult(history.length ? newResult : undefined)
     setExpression('')
     refreshDynamicDiagram()
   }
@@ -122,16 +134,11 @@ export const ReplEvaluator = () => {
   }
 
   return <section className="repl">
-    {formattedResult && <div className='replResult'>
+    {formattedResult && <div className='replResult' ref={resultRef}>
       {formattedResult}
     </div>}
-    <div className="replLine" id="editor">
-      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+    <div className="replLine">
       <div className="botoneraReplExpression">
-        <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
-          {/* https://github.com/feathericons/feather/blob/main/icons */}
-          <img src="/repl/evaluate.svg"/>
-        </button>
         <button className="replRefresh" onClick={() => reload()} title="Recarga el editor e inicia una nueva sesión del REPL">
           <img src="/repl/refresh.svg"/>
         </button>
@@ -139,6 +146,13 @@ export const ReplEvaluator = () => {
           <img src="/repl/reload.svg"/>
         </button>
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
+      </div>
+      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+      <div className="botoneraReplExpression">
+        <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
+          {/* https://github.com/feathericons/feather/blob/main/icons */}
+          <img src="/repl/evaluate.svg"/>
+        </button>
       </div>
     </div>
   </section>

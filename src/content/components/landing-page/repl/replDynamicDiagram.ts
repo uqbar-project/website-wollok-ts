@@ -1,45 +1,11 @@
-import type { ElementDefinition } from "cytoscape"
-import { getDynamicDiagramData, Interpreter, LIST_MODULE, Package, SET_MODULE, WOLLOK_EXTRA_STACK_TRACE_HEADER, type DynamicDiagramElement, type DynamicDiagramNode, type DynamicDiagramReference } from "wollok-ts"
+import type { ElementDefinition } from 'cytoscape'
+import { getDynamicDiagramData, Interpreter, Package, WOLLOK_EXTRA_STACK_TRACE_HEADER } from 'wollok-ts'
+import { getDataDiagram } from 'wollok-web-tools'
 
-/* Copied from ts-cli => should be migrated to wollok web tools */
-export const getDataDiagram = (interpreter: Interpreter, rootFQN?: Package): ElementDefinition[] =>
-  getDynamicDiagramData(interpreter, rootFQN)
-    .map((dynamicDiagramElement: DynamicDiagramElement) =>
-      dynamicDiagramElement.elementType === 'node' ? convertToCytoscapeNode(dynamicDiagramElement as DynamicDiagramNode) : convertToCytoscapeReference(dynamicDiagramElement as DynamicDiagramReference)
-    )
-
-const convertToCytoscapeNode = ({ id, type, label }: DynamicDiagramNode): ElementDefinition => ({
-  data: {
-    id,
-    label,
-    type,
-    fontsize: getFontSize(label),
-  },
-})
-
-const convertToCytoscapeReference = ({ id, label, sourceId, targetId, sourceModule, constant }: DynamicDiagramReference): ElementDefinition => ({
-  data: {
-    id,
-    label: `${label}${constant ? '🔒' : ''}`,
-    source: sourceId,
-    target: targetId,
-    width: sourceModule ? 1 : 1.5,
-    fontsize: getFontSize(label),
-    style: getStyle(sourceModule ?? ''),
-  },
-})
-
-
-const getFontSize = (text: string): string => {
-  const textWidth = text.length
-  if (textWidth > 8) return '7px'
-  if (textWidth > 5) return '8px'
-  return '9px'
+export function getDynamicDiagram(interpreter: Interpreter, rootFQN?: Package): ElementDefinition[] {
+  const objects = getDynamicDiagramData(interpreter, rootFQN)
+  return getDataDiagram(objects)
 }
-
-const getStyle = (sourceModule: string) =>
-  [LIST_MODULE, SET_MODULE].includes(sourceModule) ? 'dotted' : 'solid'
-
 
 // Copied from utils.ts - wollok-ts-cli - should move to wollok-ts? (or wollok-web-tools)
 export const sanitizeStackTrace = (e?: Error): string => {
