@@ -22,6 +22,10 @@ Podés ver cada juego, clonar el repositorio (o descargarlo como .zip), jugarlo 
 
 **Fecha de cierre:** Viernes 13/12
 
+**Más info en** [uqbar.org](https://uqbar.org/)
+
+## Juegos
+
 <div class="container">
     <ol class="list-group">
         <li class="list-group-item"><a href="https://github.com/AlexisF12/Proyecto-wollok">El Eternauta</a>

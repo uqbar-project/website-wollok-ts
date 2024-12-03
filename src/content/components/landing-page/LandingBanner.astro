@@ -1,19 +1,19 @@
 ---
 ---
 <div class="sl-banner">
-  <p>Si estás buscando el sitio web de la implementación de Wollok para Eclipse, te recomendamos visitar la página <a href="https://xtext.wollok.org/">xtext.wollok.org</a></p>
+  <slot />
 </div>
 
 <style>
-
 .sl-banner {
   background-color: var(--sl-color-banner-bg);
   color: var(--sl-color-text-accent-inverted);
   display: flex;
   flex-direction: row;
-  height: 4rem;
+  height: 3rem;
   align-items: center;
   justify-content: center;
+  margin: 1rem;
 }
 
 @media (max-width: 50em) {
