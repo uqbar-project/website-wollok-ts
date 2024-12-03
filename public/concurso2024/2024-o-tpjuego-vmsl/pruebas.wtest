@@ -1,0 +1,77 @@
+import mozo.*
+import clientes.*
+import platos.*
+import mueblesMapa.*
+import configuracion.*
+import main.*
+import vidasYpuntos.*
+describe "test de comportamiento basico" {
+  method initialize() {
+    game.clear()
+  }
+  
+  test "Mozo toma y entrega pedidos" {
+    const cliente = new Cliente()
+    const mesa = mesa1
+    cliente.sentarseEnMesa(mesa) // El mozo toma el pedido
+    
+    mozo.tomarPedido(cliente)
+    // Verificar que el cliente está esperando el plato (estado = 1)
+    assert.equals(1, cliente.estado()) // El mozo entrega el plato
+    
+    mozo.bandeja(cliente.plato())
+    mozo.entregarPlato(cliente, mesa1)
+    // Verificar que el cliente está comiendo (estado = 2)
+    assert.equals(2,cliente.estado())
+
+    // Verificar que la bandeja del mozo está vacía
+    assert.equals(null, mozo.bandeja())
+  }
+  
+  test "Aumenta la puntuacion" {
+    const cliente = new Cliente()
+    cliente.sentarseEnMesa(mesa1)
+    
+    mesa1.ocuparMesa(cliente) // El mozo toma el pedido y entrega el plato 
+    
+    
+    mozo.position(game.at(2, 11))
+    mozo.interactuarConCliente()
+    mozo.bandeja(cliente.plato())
+    mozo.entregarPlato(cliente, mesa1)
+    // Verificar que la puntuación se actualizó correctamente
+    assert.equals(
+      puntaje.puntaje(),
+      cliente.plato().puntaje() * cliente.paciencia()
+    )
+  }
+  
+  test "Disminuye la puntuacion" {
+    const cliente = new Cliente(plato = pasta)
+    cliente.sentarseEnMesa(mesa1)
+    
+    mesa1.ocuparMesa(cliente)
+    // El mozo toma el pedido equivocado y entrega el plato     
+    mozo.position(game.at(2, 11))
+    mozo.bandeja(ensalada)
+    mozo.entregarPlato(cliente, mesa1)
+    // Verificar que la puntuación se actualizó correctamente    
+    assert.equals(puntaje.puntaje(), -1000)
+  }
+  
+  test "Paciencia del cliente" {
+    const cliente = new Cliente()
+    const mesa = mesa1
+    cliente.sentarseEnMesa(mesa)
+    cliente.paciencia(0)
+    // Simular el paso del tiempo para agotar la paciencia del cliente
+    
+    
+    mesa.desocuparMesa()
+    vida.perderVida()
+    game.removeVisual(cliente)
+    // Verificar que el cliente fue eliminado y se perdió una vida
+    
+    assert.equals(2, vida.vidas().size())
+  }
+}
