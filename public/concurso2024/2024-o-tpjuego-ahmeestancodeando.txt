@@ -5,34 +5,6 @@ pruebas.wtest
 cursor.wlk
 diagramas/diagramaClases.svg
 casa.wlk
-Cosas_juego/MenuInicial.psd
-Cosas_juego/proyectiles/p.proyectilHielo.png
-Cosas_juego/proyectiles/p.proyectilFuego.png
-Cosas_juego/pasto.png
-Cosas_juego/screen1.png
-Cosas_juego/screen2.png
-Cosas_juego/slime_base.png
-Cosas_juego/magos/mago piedra.psd
-Cosas_juego/magos/mago fuego.psd
-Cosas_juego/magos/mago enojado.psd
-Cosas_juego/magos/magoInflacionario.psd
-Cosas_juego/magos/mago hielo.png
-Cosas_juego/magos/mago explosivo.psd
-Cosas_juego/marcos.psd
-Cosas_juego/portada/fontbolt (1).png
-Cosas_juego/portada/unofficial pdeplogo.png
-Cosas_juego/portada/title.psd
-Cosas_juego/portada/16782098.png
-Cosas_juego/portada/title1.jpg
-Cosas_juego/portada/New Project.jpg
-Cosas_juego/portada/La_Comunidad_De_la_Papa...png
-Cosas_juego/portada/795708241658060298-Photoroom-transformed.png
-Cosas_juego/piedra.png
-Cosas_juego/tablero.psd
-Cosas_juego/fondo2.psd
-Cosas_juego/tierra.png
-Cosas_juego/fondo.psd
-Cosas_juego/New Piskel.png
 main.wpgm
 slime.wlk
 administradorDeOleadas.wlk
