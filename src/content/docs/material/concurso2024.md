@@ -60,7 +60,7 @@ Podés ver cada juego, clonar el repositorio (o descargarlo como .zip), jugarlo 
         <li class="list-group-item"><a href="https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders">Memotest Copa América 2024</a>
             <a href="/concurso/TPGameIntegrador-wollokoders">(Probalo acá)</a>
         </li>
-        <li class="list-group-item"><a href="https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok">Maze of Crete</a>
+        <li class="list-group-item"><a href="https://github.com/juancamargo02/MazeOfCrete">Maze of Crete</a>
             <a href="https://xtext.wollok.org/">(en Xtext)</a>
         </li>
         <li class="list-group-item"><a href="https://github.com/obj1-unahur-2024s2/TPGameIntegrador-las-chicas-y-leo">Ghost Coffee</a>

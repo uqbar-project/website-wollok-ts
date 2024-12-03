@@ -30,10 +30,13 @@ function loadProject(baseFolder, fileNames) {
         const sounds = assets.filter(({url}) => url.match(/.(mp3|wav)/))
         const images = assets.filter(({url}) => !url.match(/.(mp3|wav)/))
         const { name: mainFile } = sources.find(({name}) => name.endsWith('.wpgm'))
-        const main = mainFile.slice(0, -4)
+        const main = mainFile.slice(0, -4).replaceAll('/', '.')
         return [main, sources, images, sounds]
     })
     .then(([main, sources, images, sounds]) => ({ main, sources, images, sounds }))
-    .then(project => new LocalGame(project).start(parent))
+    .then(project => {
+        parent.childNodes[0].remove()
+        new LocalGame(project).start(parent)
+    })
 
 }

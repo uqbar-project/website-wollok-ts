@@ -1,28 +1,64 @@
 ---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 import Game from '../../content/components/game/Game.astro'
 
+const names: Record<string, string> = {
+  'Proyecto-wollok': 'El Eternauta',
+  '2024-o-tpjuego-bestiasalgoritmicas': 'Sticky Blocks',
+  '2024-o-tpjuego-vmsl': 'Wollok Diner',
+  '2024-o-tpjuego-fundamentalistasdelstackoverflow': 'La bizarra aventura de Morcilla',
+  'Argentopolis-ts-WollokGame': 'Argentopolis',
+  'TPGameIntegrador-thecoders': 'Wololok',
+  'TPGameIntegrador-los-stormtrooper': 'Sin Retorno -Wollok Version-',
+  '2024-tpo-game-matrixgroup': 'Wollok Factory',
+  'FroguiWollokGame': 'Frogui',
+  'TPGameIntegrador-pixelados': 'Ahorcado',
+  'LoopGame': 'Loop',
+  'TPGameIntegrador-wollokoders': 'Memotest Copa América 2024',
+  'MazeOfCrete': 'Maze of Crete',
+  'TPGameIntegrador-las-chicas-y-leo': 'Ghost Coffee',
+  '2024-o-tpjuego-ahmeestancodeando': 'Magos vs Slimes: La comunidad de la papa',
+  '2024s2-tp-grupal-juego-grupo-1-uwu': 'DeSvARiaDoS',
+  'TPGameIntegrador-los-polimorficos': 'Las Aventuras de Coco',
+  '2024-o-tpjuego-laalmironeta': 'PokeWollok',
+}
+
 export function getStaticPaths() {
-  return [
-    {params: {id: '2024-o-tpjuego-ahmeestancodeando' } },
-    {params: {id: '2024-o-tpjuego-bestiasalgoritmicas' } },
-    {params: {id: '2024-o-tpjuego-fundamentalistasdelstackoverflow' } },
-    {params: {id: '2024-o-tpjuego-laalmironeta' } },
-    {params: {id: '2024-o-tpjuego-vmsl' } },
-    {params: {id: '2024-tpo-game-matrixgroup' } },
-    {params: {id: '2024s2-tp-grupal-juego-grupo-1-uwu' } },
-    {params: {id: 'Argentopolis-ts-WollokGame' } },
-    {params: {id: 'FroguiWollokGame' } },
-    {params: {id: 'LoopGame' } },
-    {params: {id: 'Proyecto-wollok' } },
-    {params: {id: 'TPGameIntegrador-las-chicas-y-leo' } },
-    {params: {id: 'TPGameIntegrador-los-polimorficos' } },
-    {params: {id: 'TPGameIntegrador-los-stormtrooper' } },
-    {params: {id: 'TPGameIntegrador-thecoders' } },
-    {params: {id: 'TPGameIntegrador-wollokoders' } },
+  const ids = [
+    'Proyecto-wollok',
+    '2024-o-tpjuego-bestiasalgoritmicas',
+    '2024-o-tpjuego-vmsl',
+    '2024-o-tpjuego-fundamentalistasdelstackoverflow',
+    'Argentopolis-ts-WollokGame',
+    'TPGameIntegrador-thecoders',
+    'TPGameIntegrador-los-stormtrooper',
+    '2024-tpo-game-matrixgroup',
+    'FroguiWollokGame',
+    'TPGameIntegrador-pixelados',
+    'LoopGame',
+    'TPGameIntegrador-wollokoders',
+    'MazeOfCrete',
+    'TPGameIntegrador-las-chicas-y-leo',
+    '2024-o-tpjuego-ahmeestancodeando',
+    '2024s2-tp-grupal-juego-grupo-1-uwu',
+    'TPGameIntegrador-los-polimorficos',
+    '2024-o-tpjuego-laalmironeta',
   ]
+
+  return ids.map(id => ({params: { id }}))
 }
 
 const { id } = Astro.params
+const name = names[id]!
 ---
 
-<Game name={id}/>
+<StarlightPage
+  frontmatter={{
+    title: name,
+    description: "Guía completa del lenguaje Wollok.",
+  }}
+>
+  <Game/>
+</StarlightPage>
+
+
