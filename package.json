@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "shx mkdir -p ./public/game/lib && shx cp ./node_modules/wollok-web-tools/dist/game/game-index.js ./public/game/lib && shx mkdir -p ./public/dynamicDiagram/lib && shx cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
+    "postinstall": "shx mkdir -p ./public/game/lib && shx cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && shx mkdir -p ./public/dynamicDiagram/lib && shx cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -24,7 +24,7 @@
     "sharp": "^0.32.5",
     "typescript": "^5.3.3",
     "wollok-ts": "4.1.8",
-    "wollok-web-tools": "1.1.5"
+    "wollok-web-tools": "^1.1.7"
   },
   "devDependencies": {
     "shx": "^0.3.4"

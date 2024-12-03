@@ -1,0 +1,28 @@
+---
+import Game from '../../content/components/game/Game.astro'
+
+export function getStaticPaths() {
+  return [
+    {params: {id: '2024-o-tpjuego-ahmeestancodeando' } },
+    {params: {id: '2024-o-tpjuego-bestiasalgoritmicas' } },
+    {params: {id: '2024-o-tpjuego-fundamentalistasdelstackoverflow' } },
+    {params: {id: '2024-o-tpjuego-laalmironeta' } },
+    {params: {id: '2024-o-tpjuego-vmsl' } },
+    {params: {id: '2024-tpo-game-matrixgroup' } },
+    {params: {id: '2024s2-tp-grupal-juego-grupo-1-uwu' } },
+    {params: {id: 'Argentopolis-ts-WollokGame' } },
+    {params: {id: 'FroguiWollokGame' } },
+    {params: {id: 'LoopGame' } },
+    {params: {id: 'Proyecto-wollok' } },
+    {params: {id: 'TPGameIntegrador-las-chicas-y-leo' } },
+    {params: {id: 'TPGameIntegrador-los-polimorficos' } },
+    {params: {id: 'TPGameIntegrador-los-stormtrooper' } },
+    {params: {id: 'TPGameIntegrador-thecoders' } },
+    {params: {id: 'TPGameIntegrador-wollokoders' } },
+  ]
+}
+
+const { id } = Astro.params
+---
+
+<Game name={id}/>

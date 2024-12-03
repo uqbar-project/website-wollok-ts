@@ -1,0 +1,11 @@
+---
+import "./Game.css"
+import WollokGame from "./wollokGame.html"
+
+const { name } = Astro.props
+---
+
+<section>
+    <h1>{name}</h1>
+    <WollokGame client:load/>
+</section>
