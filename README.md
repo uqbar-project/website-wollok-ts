@@ -61,7 +61,7 @@ For more information please check [deploy.yaml](./.github/workflows/deploy.yaml)
 
 You will need an Astro editor. We recomend [Visual Studio Code](https://code.visualstudio.com/) with some extensions.
 
-You can [download and import this profile](./Astro%20-Base.code-profile) in your Visual Studio Code. See this tutorial if you have any question.
+You can [download and import this profile](./Astro%20-Base.code-profile) in your Visual Studio Code. See [this tutorial](youtube.com/watch?v=QjvvqR9KyVo) if you have any question.
 
 ### Alternative: manually install VSC extensions
 
