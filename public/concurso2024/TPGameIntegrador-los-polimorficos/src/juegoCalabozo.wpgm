@@ -1,0 +1,12 @@
+import extras.*
+import wollok.game.*
+import niveles.*
+import personaje.*
+import juego.*   
+program CalabozoGame {
+	
+	juego.iniciarJuego()
+	game.showAttributes(coco) //Debug
+
+	game.start()
+}   

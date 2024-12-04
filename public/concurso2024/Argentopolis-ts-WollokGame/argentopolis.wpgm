@@ -1,0 +1,6 @@
+import wollok.game.*
+import juego.*
+
+program argentopolis {
+	juego.iniciar()
+}

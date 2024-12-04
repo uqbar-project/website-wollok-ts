@@ -1,0 +1,38 @@
+import wollok.game.*
+import jugador.*
+import utiles.*
+import computadora.*
+import constantes.*
+import elementos.*
+import escena.*
+import tienda.*
+import cliente.*
+
+program inicio {
+	game.width(20)
+	game.height(10)
+	game.cellSize(64)
+	game.title("Wollok Tycoon")
+	game.boardGround("oficina.png")
+	
+	portada.cargarEscena()
+	
+	keyboard.up().onPressDo({ jugador.moverse(arriba) })
+	keyboard.down().onPressDo({ jugador.moverse(abajo) })
+	keyboard.left().onPressDo({ jugador.moverse(izquierda) })
+	keyboard.right().onPressDo({ jugador.moverse(derecha) })
+	
+	keyboard.e().onPressDo({ jugador.programar() })
+	keyboard.e().onPressDo({ tienda.llegoCliente() })
+	keyboard.j().onPressDo({ tienda.venderEmpleados() })
+	
+	keyboard.r().onPressDo({ jugador.entregarProducto() })
+	keyboard.r().onPressDo({ jugador.sacaProducto() })
+	
+	keyboard.enter().onPressDo(
+		{ if (!oficina.visible()) portada.cambiarEscena(oficina) }
+	)
+	
+	
+	game.start()
+}

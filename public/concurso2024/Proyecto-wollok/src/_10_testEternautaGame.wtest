@@ -1,0 +1,43 @@
+import wollok.game.*
+import _07_personaje.*
+import _09_municion.*
+import _04_elementosEnEscenario.*
+
+
+describe "Disparos a Cascarudos, Hombres Robots y Juan" {
+
+	const cascarudo1 = new Cascarudo()
+	const hombreRobot1 = new HombreRobot()
+	const balaRifleDeJuan = new BalaDeRifle()
+	const balaRevolverDeJuan = new BalaDeRevolver()
+	const balaFusilDeJuan = new BalaDeFusil()
+
+	test "Cascarudo recibe 100 de daño por cada disparo de bala de rifle" {
+		cascarudo1.serImpactado(balaRifleDeJuan)
+		assert.equals(100, cascarudo1.vida())
+	}
+
+	test "Cascarudo recibe 50 de daño por cada disparo de bala de Revolver" {
+		cascarudo1.serImpactado(balaRevolverDeJuan)
+		assert.equals(150, cascarudo1.vida())
+	}
+
+	test "Vida de cascarudo queda en 40 luego de recibir 5 disparos de fusil" {
+		cascarudo1.serImpactado(balaFusilDeJuan)
+		cascarudo1.serImpactado(balaFusilDeJuan)
+		cascarudo1.serImpactado(balaFusilDeJuan)
+		cascarudo1.serImpactado(balaFusilDeJuan)
+		assert.equals(40, cascarudo1.vida())
+	}
+
+	test "vida de Hombre Robot queda en 50 al recibir disparo de bala de Revolver" {
+		hombreRobot1.serImpactado(balaRevolverDeJuan)
+		assert.equals(50, hombreRobot1.vida())
+	}
+
+	test "vida de Hombre Robot queda en 20 al recibir dos disparo de bala de Fusil" {
+		hombreRobot1.serImpactado(balaFusilDeJuan)
+		hombreRobot1.serImpactado(balaFusilDeJuan)
+		assert.equals(20, hombreRobot1.vida())
+	}
+}

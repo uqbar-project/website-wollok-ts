@@ -1,0 +1,38 @@
+import wollok.game.*
+
+import morcilla.*
+import entorno.*
+import jefe.*
+import proyectiles.*
+import interfaz.*
+
+program MorcillaGame {	
+	game.title("La Bizarra Aventura de MORCILLA")
+	game.boardGround("fondo.png")
+	game.height(32)
+	game.width(33)
+	game.cellSize(100)
+
+	fondo.mostrar()
+	
+	jefePerro.mostrar()
+	jefeGato.mostrar()
+
+	jefePerro.activarIdle()
+	jefeGato.activarIdle()
+
+	morcilla.mostrar()
+	administradorVidas.mostrarVidas()
+
+	game.schedule(10, { musicaNormal.play() })
+
+	// Mover a morcilla
+    keyboard.d().onPressDo({ morcilla.caminar(1) })
+	keyboard.a().onPressDo({ morcilla.caminar(-1) })
+	keyboard.space().onPressDo({ morcilla.saltar(1000) })
+	keyboard.f().onPressDo({ morcilla.ladrar() })
+
+	morcilla.crearHitbox()
+
+	game.start()
+}

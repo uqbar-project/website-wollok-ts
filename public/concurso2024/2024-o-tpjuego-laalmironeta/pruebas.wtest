@@ -1,0 +1,52 @@
+import modelos.*
+import juego.*
+
+
+describe "Grupo de test de combates" {
+
+  test " impactrueno efectivo ante squirtle" {
+    batalla.pokemon1(pikachu)
+    batalla.pokemon2(squirtle) 
+    batalla.ataca1(impactrueno)
+    assert.equals(290, squirtle.hp())
+
+  }
+
+  test "impactrueno baja bien vida a charmander" {
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca1(impactrueno)
+    assert.equals(305, charmander.hp())
+  }
+
+    test " si no es turno pokemon rival no ataca" {
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca2()
+    assert.that(pikachu.hp() == 320)
+  }
+
+    test " si no es turno pokemon propio no ataca" {
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)  
+    batalla.alternarTurno()
+    batalla.ataca1(impactrueno)
+    assert.that(charmander.hp() == 320)
+  }
+
+  test " descanso solo saca 1 de vida" {
+    batalla.pokemon1(pikachu) 
+    batalla.pokemon2(charmander)
+    batalla.ataca1(descanso)
+    assert.equals(319,charmander.hp())
+  }
+
+  test "fuego es debil a electrico" {
+
+    assert.notThat(fuego.esDebilA(electrico)) 
+  }
+
+
+}
+
+

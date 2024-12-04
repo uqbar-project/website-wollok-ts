@@ -1,0 +1,24 @@
+import wollok.game.*
+import personajes.personaje.*
+import enemigos.*
+import extras.*
+import posiciones.*
+import sonidos.*
+import juego.*
+import proyectiles.*
+import stats.*
+import managers.*
+import nivelManager.*
+
+
+program desvariados {
+
+    juego.tablero()
+
+    juego.inicio()
+
+    juego.teclas()
+
+    game.start()
+}
+

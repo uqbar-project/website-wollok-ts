@@ -1,0 +1,16 @@
+import wollok.game.*
+import juego.*
+import objetos.*
+import niveles.*
+program game {
+	game.boardGround("back.jpg")
+	game.width(16)
+  	game.height(11)
+ 	game.cellSize(100)
+  	game.title("Loop")
+  	juego.iniciar()
+  	game.start()
+
+}
+
+

@@ -1,0 +1,153 @@
+import wollok.game.*
+import personajes.personaje.*
+import personajes.armas.*
+import personajes.noel.*
+import personajes.dangalf.*
+import enemigos.*
+import estadosJuego.*
+import extras.*
+import juego.*
+import managers.*
+import nivelManager.*
+import pantallas.*
+import posiciones.*
+import proyectiles.*
+import stats.*
+import tienda.*
+
+describe "desvariados" {
+  const cura = new Cura(vidaDada = 20, image = "", position = game.at(0, 1))
+  const municion = new Balas(image = "", position = game.at(0, 2))
+  const zombie = new ZombieComun(vida = 1, position = game.at(5, 4))
+  
+  method initialize() {
+    game.width(20)
+    game.height(15)
+    game.addVisual(noel)
+  }
+  
+  test "hay cura" {
+    assert.that(managerItems.drops().isEmpty())
+    managerItems.spawnearCura(1, tablero.posicionRandom())
+    
+    assert.notThat(managerItems.drops().isEmpty())
+  }
+  
+  test "curación" {
+    assert.equals(60, puntosDeVida.vida())
+    
+    noel.herir(10)
+    assert.equals(50, puntosDeVida.vida())
+    
+    cura.colisionPj()
+    assert.equals(60, puntosDeVida.vida())
+  }
+  
+  test "sin munición para disparar" {
+    assert.doesNotThrowException({ pistola.validarAtaque() })
+    
+    pistola.cargador(0)
+    assert.throwsException({ pistola.validarAtaque() })
+  }
+  
+  test "hay munición" {
+    assert.that(managerItems.drops().isEmpty())
+    managerItems.spawnearMunicion(tablero.posicionRandom())
+    
+    assert.notThat(managerItems.drops().isEmpty())
+  }
+  
+  test "obtener munición" {
+    assert.equals(12, pistola.cargador())
+    noel.ataque(arriba)
+    assert.equals(11, pistola.cargador())
+    
+    municion.colisionPj()
+    assert.equals(12, pistola.cargador())
+  }
+  
+  test "especial no está listo" {
+    assert.equals(0, especial.zombiesAsesinados())
+    assert.throwsException({ especial.validarEspecial() })
+  }
+  
+  test "especial está listo y disparar" {
+    especial.zombiesAsesinados(6)
+    assert.equals(6, especial.zombiesAsesinados())
+    
+    assert.doesNotThrowException({ especial.validarEspecial() })
+    
+    especial.tirarEspecial()
+    assert.throwsException({ especial.validarEspecial() })
+  }
+  
+  test "hay zombie" {
+    assert.that(managerZombie.zombies().isEmpty())
+    managerZombie.spawneoRandom(1)
+    
+    assert.notThat(managerZombie.zombies().isEmpty())
+  }
+  
+  test "zombie ataca" {
+    assert.equals(60, puntosDeVida.vida())
+    game.addVisual(zombie)
+    zombie.atacarAgro() //Por defecto es noel cuando no se seleccionó el pj
+    
+    assert.equals(50, puntosDeVida.vida())
+  }
+  
+  test "zombie muere" {
+    game.addVisual(zombie)
+    managerZombie.agregarZ(zombie)
+    assert.notThat(managerZombie.zombies().isEmpty())
+    zombie.herir(1)
+    
+    assert.that(managerZombie.zombies().isEmpty())
+  }
+  
+  test "gasto de energía" {
+    assert.equals(10, barraDeEnergia.energia())
+    noel.mover(abajo)
+    
+    assert.equals(9, barraDeEnergia.energia())
+    
+    barraDeEnergia.energia(0)
+    
+    assert.throwsException({ barraDeEnergia.validarEnergia() })
+  }
+  
+  test "sin oro para comprar" {
+    assert.equals(0, tienda.oro())
+    assert.throwsException({ tienda.validarSiAlcanzaOro(1) })
+  }
+  
+  test "mejora de vida" {
+    tienda.oro(100)
+    assert.equals(60, puntosDeVida.vida())
+    
+    tienda.mejorarVida()
+    
+    assert.equals(50, tienda.oro())
+    assert.equals(80, puntosDeVida.vida())
+  }
+  
+  test "mejora de arma" {
+    tienda.oro(100)
+    assert.equals(pistola, noel.arma())
+    
+    tienda.mejorarArma()
+    
+    assert.equals(20, tienda.oro())
+    assert.equals(doblePistolas, noel.arma())
+  }
+  
+  test "mejora de energía" {
+    tienda.oro(100)
+    assert.equals(10, barraDeEnergia.energia())
+    
+    tienda.mejorarEnergia()
+    
+    assert.equals(50, tienda.oro())
+    assert.equals(13, barraDeEnergia.energiaMaxima())
+  }
+}
