@@ -1,5 +1,5 @@
 const parent = document.getElementById('game')
-const project = document.location.pathname.split('/').slice(-1)[0]
+const project = document.location.pathname.split('/').filter(x => x).slice(-1)[0]
 
 const BASE_FOLDER = '/concurso2024/'
 const GAMES_FILE = BASE_FOLDER + project + '.txt'
