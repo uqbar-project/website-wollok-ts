@@ -1,0 +1,23 @@
+import wollok.game.*
+import niveles.*
+import sonido.*
+
+// este script es el INICIAL, donde podremos ejecutar el videojuego
+
+program ghostCoffee {
+	game.title("Ghost Coffee")
+
+	game.width(18)
+	game.height(12)
+	game.cellSize(64)
+	// resolucion total = 1152 x 768
+
+	game.boardGround("fondoCoffee.png") // fondo de testeo
+
+    musica.iniciarCancion()
+
+	menu.iniciar()
+	
+	game.start()
+}
+ 

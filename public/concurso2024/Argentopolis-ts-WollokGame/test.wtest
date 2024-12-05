@@ -1,0 +1,58 @@
+import juego.*
+import jugadores.*
+import tablero.*
+import propiedades.*
+
+describe "test game"{
+const player1 = new Player(img = "jugador1.png", nombre="player1",numero=1)
+
+	test "jugador cobra" {
+		player1.cobrar(5000)
+		assert.equals(7500, player1.dinero())
+	}
+	
+	test "jugador paga"{
+		player1.pagar(2000)
+		assert.equals(500, player1.dinero())
+	}
+	
+	test "jugador acumula deuda y dinero no baja de 0"{
+		player1.pagar(5000)
+		assert.equals(2500, player1.deuda())
+		assert.equals(0, player1.dinero())
+	}
+	
+//	test "trasnferir propiedad"{
+//		buenosAires.transferirA(player1)
+//		assert.equals(buenosAires.titular(), player1)
+//	}
+//	
+//	test "jugador.mePertenece(propiedad)"{
+//		buenosAires.transferirA(player1)
+//		assert.that(player1.mePertenece(buenosAires))
+//	}
+//	
+//	test "jugador cae preso"{
+//		player1.caePreso()
+//		assert.that(player1.debeFianza())
+//		assert.equals(1000, player1.deuda())
+//	}
+//	
+//	test "buenos aires es provincia"{
+//		assert.that(buenosAires.esProvincia())
+//		assert.notThat(buenosAires.esTren())
+//		assert.notThat(buenosAires.esCasilleroEspecial())
+//	}
+//	
+//	test "sarmiento es tren"{
+//		assert.that(sarmiento.esTren())
+//		assert.notThat(sarmiento.esProvincia())
+//		assert.notThat(sarmiento.esCasilleroEspecial())
+//	}
+//	
+//	test "alquiler de provincia"{
+//		assert.equals(200,entreRios.alquiler())
+//	}
+
+
+}

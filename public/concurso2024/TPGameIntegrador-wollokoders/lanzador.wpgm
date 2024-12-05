@@ -1,0 +1,7 @@
+import wollok.game.*
+import juego.*
+
+program memo {
+	juego.configurar()
+	game.start()
+}

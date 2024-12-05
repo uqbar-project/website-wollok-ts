@@ -1,0 +1,22 @@
+import wollok.game.*
+import administradorDeJuego.*
+import menu.*
+
+
+program juego {
+
+	game.title("Magos VS Slimes")
+	game.height(6)
+	game.width(15)
+	game.cellSize(100)
+	game.start()
+	
+	game.addVisual(menuInicial)
+	menuInicial.iniciarMenu()
+	menuInicial.moverseEntreBotones()
+	menuInicial.activarBoton()
+	configuracion.iniciarConfig()
+	keyboard.x().onPressDo({administradorDeJuego.mostrarMenuInicial() sonidoPartida.ponerMusicaNormal()})
+
+}
+

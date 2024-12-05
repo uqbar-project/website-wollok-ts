@@ -1,0 +1,23 @@
+import wollok.game.*
+import personaje.*
+//import objetos.*
+import tituloJuego.*
+import creditos.*
+
+program SinRetorno {
+    //--definicion del tablero--
+    game.title("SinRetorno -Wollok Version-")
+	game.height(12)
+	game.width(12)
+    game.cellSize(32)
+    
+    //--Inicio del juego--
+    creditos.iniciar()
+    
+    //--Metodos que se aplican durante todo el juego (no deben repetirse)--
+    personaje.configurarTeclas()
+    personaje.animacion()
+    game.onCollideDo(personaje, { elemento => elemento.interaccion()})
+    
+    game.start()
+}

@@ -1,0 +1,87 @@
+import morcilla.*
+import interfaz.*
+import proyectiles.*
+import general.*
+
+describe "Tests de morcilla" {
+
+  method initialize() {
+    game.clear()
+    morcilla.mostrar()
+  }
+
+  test "Morcilla no puede exceder las barreras a derecha" {
+    morcilla.caminar(50)
+    assert.that(morcilla.position().x() < 30)
+  }
+
+    test "Morcilla no puede exceder las barreras a izquierda" {
+    morcilla.caminar(-50)
+    assert.that(morcilla.position().x() > 0)
+  }
+
+  test "La vida de morcilla está entre los valores normales" {
+    assert.that(morcilla.vidas() > 0 || morcilla.derrotado())
+  }
+
+  test "Morcilla se suspende si está saltando" {
+    assert.that(!morcilla.suspendido() && !morcilla.saltando()) // Si morcilla no está suspendido, no puede estar saltando
+  }
+}
+
+
+describe "Tests de Cinemáticas" {
+  
+  method initialize() {
+    game.clear()
+    morcilla.mostrar()
+  }
+  
+  test "Las cinemáticas calculan bien su duración" {
+    const cinematicaPrueba = new Cinematica(loop = false, id = "prueba", duracionFrame = 300, frames = ["frameEjemplo0.jpg", "frameEjemplo1.jpg", "frameEjemplo2.jpg"])
+    assert.that(300*3 <= cinematicaPrueba.duracion())
+  }
+}
+
+
+describe "Test de Colisión" {
+
+  method initialize() {
+    game.clear()
+    morcilla.mostrar()
+    morcilla.position(new PositionMejorada(x = 15, y = 15))
+  }
+
+  test "La hitbox 0 de morcilla funciona"{
+    const proyectilPrueba = new Proyectil(posicionInicial = new PositionMejorada(x = 15, y = 15), id = "A", velocidad = 100, delay = 300, sentido = dirDerecha)
+
+    assert.equals(hitboxMorcilla0.position().x(), 15)
+    assert.equals(hitboxMorcilla0.position().y(), 15)
+    assert.that(proyectilPrueba.position() == hitboxMorcilla0.position())
+
+  }
+
+    test "La hitbox 1 de morcilla funciona"{
+    const proyectilPrueba = new Proyectil(posicionInicial = new PositionMejorada(x = 15, y = 16), id = "A", velocidad = 100, delay = 300, sentido = dirDerecha)
+    
+    assert.equals(hitboxMorcilla1.position().x(), 15)
+    assert.equals(hitboxMorcilla1.position().y(), 16)
+    assert.that(proyectilPrueba.position() == hitboxMorcilla1.position())
+  }
+
+    test "La hitbox 2 de morcilla funciona"{
+    const proyectilPrueba = new Proyectil(posicionInicial = new PositionMejorada(x = 16, y = 15), id = "A", velocidad = 100, delay = 300, sentido = dirDerecha)
+    
+    assert.equals(hitboxMorcilla2.position().x(), 16)
+    assert.equals(hitboxMorcilla2.position().y(), 15)
+    assert.that(proyectilPrueba.position() == hitboxMorcilla2.position())
+  }
+
+    test "La hitbox 3 de morcilla funciona"{
+    const proyectilPrueba = new Proyectil(posicionInicial = new PositionMejorada(x = 16, y = 16), id = "A", velocidad = 100, delay = 300, sentido = dirDerecha)
+    
+    assert.equals(hitboxMorcilla3.position().x(), 16)
+    assert.equals(hitboxMorcilla3.position().y(), 16)
+    assert.that(proyectilPrueba.position() == hitboxMorcilla3.position())
+  }
+}

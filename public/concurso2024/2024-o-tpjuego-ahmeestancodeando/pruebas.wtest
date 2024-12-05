@@ -1,0 +1,229 @@
+import proyectil.*
+import administradorDeEnemigos.*
+import administradorDeOleadas.*
+import administradorDeMagos.*
+import adminProyectiles.*
+import administradorDeJuego.*
+import puntaje.*
+import slime.*
+import magos.*
+import game.*
+import casa.*
+import pala.*
+
+describe "Test de magos" {
+
+  test "Mago Fuego tiene vida" {
+    const mago = new MagoFuego(position = game.at(0,0))
+      assert.that(0<mago.vida())
+  }
+
+    test "Mago Healer tiene vida" {
+    const mago = new MagoIrlandes(position = game.at(0,0))
+      assert.that(0<mago.vida())
+  }
+
+    test "Mago Piedra tiene vida" {
+    const mago = new MagoPiedra(position = game.at(0,0))
+    assert.that(0<mago.vida())
+  }
+
+    test "Mago Fuego Recibe Daño" {
+      const mago = new MagoFuego(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Fuego muere" {
+      const mago = new MagoFuego(position = game.at(2,1))
+      mago.recibeDanioMago(1000)
+      assert.that(mago.estaMuerto())
+    }
+    test "Daño Proyectil Normal"{
+      const posicionTemporal = new MutablePosition(x=5, y=2)
+      administradorDeProyectiles.generarProyectil(posicionTemporal, proyectilNormal)
+      const proyectil = administradorDeProyectiles.proyectiles().asList().head()
+      assert.equals(proyectil.danio(), 50)
+    }
+
+    test "Mago Irlandes Recibe Daño" {
+      const mago = new MagoIrlandes(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Irlandes muere" {
+      const mago = new MagoIrlandes(position = game.at(2,1))
+      mago.recibeDanioMago(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+    test "Mago Hielo Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+    test "Daño Proyectil Penetrante"{
+      const posicionTemporal = new MutablePosition(x=5, y=2)
+      administradorDeProyectiles.generarProyectil(posicionTemporal, proyectilPenetrante)
+      const proyectil = administradorDeProyectiles.proyectiles().asList().head()
+      assert.equals(proyectil.danio(), 25)
+    }
+
+    test "Mago Hielo muere" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      mago.recibeDanioMago(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+    test "Mago Piedra Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Piedra muere" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      mago.recibeDanioMago(1000)
+      assert.that(mago.estaMuerto())
+    }
+    
+    test "Patapum Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+    test "Mago Explosivo Recibe Daño" {
+      const mago = new MagoExplosivo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanioMago(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Explosivo" {
+      const mago = new MagoExplosivo(position = game.at(2,1))
+      mago.recibeDanioMago(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+
+} 
+
+describe "group of tests for Slimes" {
+test "Slime Normal recibe daño"{
+  const posicionTemporal = new MutablePosition(x=5, y=2)
+  const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+  const slimevida = slime.vida()
+  slime.recibeDanioEnemigo(100)
+  assert.that(slimevida>slime.vida())
+}
+test "Slime Normal muere"{
+  const posicionTemporal = new MutablePosition(x=5, y=2)
+  const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+  const slimevida = slime.vida()
+  slime.recibeDanioEnemigo(1000)
+  assert.that(slime.sinVida())
+}
+
+}
+describe "group of tests for Puntaje" {
+  
+  test "Puntaje Suma"{
+    const cantPuntos = puntaje.puntos()
+    puntaje.sumarPuntos()
+    assert.that(cantPuntos < puntaje.puntos())
+  }
+
+  test "Tener un mago Irlandes aumenta en 10 la generacion de Capital"{ //Tener en cuenta que el obj puntaje empeiza con 50 puntos
+    const position = new MutablePosition(x = 6, y = 5)
+    puntaje.puntos(75)
+    administradorDeMagos.generarMago(magoIrlandesTienda, position)
+    puntaje.sumarPuntos()
+    assert.equals(20,puntaje.puntos())
+  }
+
+test "Resta Puntos"{
+    const cantPuntos = puntaje.puntos()
+    puntaje.restarPuntos(400)
+    assert.that(cantPuntos > puntaje.puntos())
+  }
+}
+
+describe "Funcionalidad" {
+  test "Si Slime llega a casa, muere"{
+    const casaPrueba = casa
+    const posicionTemporal = new MutablePosition(x=0, y=2)
+    const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+    slime.movete()
+    assert.that(slime.llegoACasa() && slime.estaMuerto())
+
+  }
+    test "Si Slime llega a casa, toda la fila muere"{
+    const casaPrueba = casa
+    const posicionTemporal = new MutablePosition(x=0, y=2)
+    const posicionTemporal2 = new MutablePosition(x=3, y=2)
+    const posicionTemporal3 = new MutablePosition(x=5, y=2)
+    const slime1 = new Slime(position = posicionTemporal, tipo=slimeBasico)
+    const slime2 = new Slime(position = posicionTemporal2, tipo=slimeBasico)
+    const slime3 = new Slime(position = posicionTemporal3, tipo=slimeBasico)
+    administradorDeEnemigos.enemigos().add(slime1)
+    administradorDeEnemigos.enemigos().add(slime2)
+    administradorDeEnemigos.enemigos().add(slime3)
+    slime1.movete()
+    slime1.estaMuerto()
+    assert.that(slime2.sinVida() && slime3.sinVida())
+
+  }
+  test "Si Casa se queda sin Vida pierde"{
+    const casaPrueba = casa
+    const pantallaPrueba = pantalla
+    casa.vida(1)
+    const posicionTemporal = new MutablePosition(x=0, y=2)
+    const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+    slime.movete()
+    assert.equals(derrota, pantallaPrueba.estado())
+  }
+
+   
+
+  test "Un proyectil impacta y saca vida"{
+    const magoFuego = new MagoFuego(position = game.at(0,0))
+    const posicionTemporal = new MutablePosition(x=1, y=0)
+    const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+    const vidaSlime = slime.vida()
+    magoFuego.disparar()
+    slime.movete()
+    administradorDeProyectiles.impactarProyectiles()
+    assert.that(vidaSlime <= slime.vida())
+  }
+  
+  test "Usar Pala elimina Mago"{
+    const position = new MutablePosition(x = 6, y = 5)
+    puntaje.puntos(75)
+    administradorDeMagos.generarMago(magoIrlandesTienda, position)
+    const magoAEliminar = administradorDeMagos.magos().asList().head()
+    pala.eliminarMago(magoAEliminar)
+    assert.that(administradorDeMagos.magos().isEmpty())
+    
+  }
+  test "cuando se matan todos los enemigos de un nivel, el nivel pasa de oleada"{
+    const nivel = new Nivel(oleadas=[[slimeBasico],[slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=2,nombre="nivelPrueba")
+    const oleadaInicial=nivel.oleadaActual()
+    const indiceInicial = nivel.indiceOleada()
+    nivel.seGeneroEnemigo()
+    nivel.seMurioEnemigo()
+    nivel.seGeneroEnemigo()
+    nivel.seMurioEnemigo() 
+    if(nivel.finalizo()){
+         nivel.siguienteOleada()
+    }
+    const indicePosterior = nivel.indiceOleada()
+    const oleadaSiguiente = nivel.oleadaActual()
+    assert.that(indiceInicial < indicePosterior)
+  }
+}

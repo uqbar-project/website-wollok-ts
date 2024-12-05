@@ -1,0 +1,22 @@
+import personajes.*
+import config.*
+import interfazJuego.*
+import configInterfaz.*
+import instrucciones.*
+import configInstrucciones.*
+program Wollolok {
+	game.title("Wollolok")
+	game.width(22)
+	game.height(11)
+	game.cellSize(50)
+
+	// Visualizar interfaz
+	interfaz.aparecerInterfaz()
+	configInterfaz.seleccionarDificultad()
+
+	config.configurarTeclas()
+	// tablero.visualizar()
+	
+	game.boardGround("mapa-chico.png")
+	game.start()
+}
