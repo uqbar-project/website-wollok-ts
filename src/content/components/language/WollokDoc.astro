@@ -41,7 +41,7 @@ const codeThemes = [
       .split("\n") // Same format than the code
       .map((text) => <p style="margin-top:0;" set:html={sanitize(text)} />)
   ) : (
-    <p style="margin-top:0;">No documentation available</p>
+    <p style="margin-top:0;"></p>
   )
 }
 {
