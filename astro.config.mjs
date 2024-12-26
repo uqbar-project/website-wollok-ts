@@ -87,6 +87,11 @@ export default defineConfig({
       autogenerate: {
         directory: "material"
       }
+    },{
+      label: "Novedades",
+      autogenerate: {
+        directory: "news"
+      }
     }, {
       label: "Quiero saber más",
       link: "/more_info"

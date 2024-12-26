@@ -2,29 +2,26 @@
 title: Concurso Wollok Game 2024
 description: Juegos participantes
 sidebar:
-    order: 4
+    order: 1
 ---
 
-Los juegos están ordenados por fecha de presentación.
+El sábado 14 de Diciembre nos jutamos en UTN para anunciar los ganadores y entregar los premios!
+![Entrega Premios](../../../assets/wgame-concurso-2024/wgame-concurso-2024-utn.png)
 
-Podés ver cada juego, clonar el repositorio (o descargarlo como .zip), jugarlo en Wollok, subir tu opinión (como issue) y votar a tu preferido.
-> Los juegos hechos en la versión de VSCode se pueden jugar directo desde acá. 
-> Esto es experimental, así que recomendamos probarlos en el IDE si detectan un error o el juego no funciona como se espera.
-
-⭐ Que le dejes un comentario es el mejor premio para l@s realizadores, y si detectas algún problema te agradecerán que se los reportes.
-
-🤔 Fijate los efectos gráficos y la forma de jugar, pero también mirá lo "objetoso" que esté hecho el código y las soluciones ingeniosas que encontraron los autores.
-
->👁️‍🗨️ ATENCIÓN: Algunos juego corren en la _versión de VSCode_ y otros en la _versión de Xtext_ de Wollok. >Asegurate de cargar el juego en la versión correcta para que funcione.
+## Podio
+##### 1er Premio &#x1F947; - _Sticky Blocks_
+##### 2do Premio &#129352; - _DeSvARiaDoS_
+##### 3er Premio &#129353; - _Sin Retorno: Wollok Version_
 
 
-**Link a la votación:** https://forms.gle/8TmYAGp8nNuJmJDS9
+## Menciones Especiales
+##### Adaptacion mas creativa - _Magos vs Slimes: La comunidad de la papa_
+##### Mas original - _Loop_
+##### Argentinidad al palo - _Argentopolis_
 
-**Fecha de cierre:** Viernes 13/12
-
-**Más info en** [uqbar.org](https://uqbar.org/)
 
 ## Juegos
+Participaron 18 juegos de 3 universidades distintas
 
 <div class="container">
     <ol class="list-group">
