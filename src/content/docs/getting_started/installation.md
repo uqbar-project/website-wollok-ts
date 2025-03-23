@@ -1,5 +1,5 @@
 ---
-title: Instalación
+title: Instalación/Actualización
 description: Pasos para instalar Wollok
 sidebar:
     order: 1
@@ -8,28 +8,33 @@ sidebar:
 ## Componentes básicos
 
 Tenemos estos tres componentes para instalar:
+
 - Wollok-CLI (el intérprete del lenguaje)
 - IDE (Visual Studio Code)
 - Extensiones (desarrolladas para VSCode)
 
+### Wollok CLI
 
-### Wollok CLI 
 El intérprete del lenguaje es Wollok-CLI (Command Line Interface)
-Es el ejecutable que corre los programas Wollok. 
+Es el ejecutable que corre los programas Wollok.
 Hay dos formas de instalarlo:
+
 - [Via Node](/getting_started/installation_recomended) (recomendada en computadoras de uso personal)
+
 :::note[Recomendada]
 Es la forma recomendada de instalar Wollok, por ser la variante más simple, por tener una forma de actualización ágil y por tener optimizaciones que mejoran su performance. Si llegás a tener inconvenientes, podés probar la otra alternativa.
 :::
-- [Descargando ejecutable](/getting_started/installation_alternative) (alternativa para computadoras de uso compartido) 
+
+- [Descargando ejecutable](/getting_started/installation_alternative) (alternativa para computadoras de uso compartido)
+
 :::caution[Alternativa]
-Se aconseja si surgen conflictos con otras instalaciones de Node, si surgen dificultades con la instalación recomendada, o si es para un uso eventual) 
+Se aconseja si surgen conflictos con otras instalaciones de Node, si surgen dificultades con la instalación recomendada, o si es para un uso eventual)
 :::
 En ambos casos, tener en cuenta las particularidades del sistema operativo.
 
 ### IDE
 
-El Entorno Integrado de Desarrollo (IDE) recomenado es Visual Studio Code (VSCode), por contar con las extensiones que hacen más grata la experiencia de aprender a programar con Wollok. 
+El Entorno Integrado de Desarrollo (IDE) recomenado es Visual Studio Code (VSCode), por contar con las extensiones que hacen más grata la experiencia de aprender a programar con Wollok.
 De todas maneras, el código fuente es simplemente texto y se puede editar con cualquier editor.
 
 Instalar [VSCode](https://code.visualstudio.com/).
@@ -56,7 +61,6 @@ Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra es
 
 <img width="449" alt="image" src="https://user-images.githubusercontent.com/4098184/204097656-18de3a1e-88c5-4315-8f1b-14480b59a50f.png"/>
 
-
 4. Ahora es necesario **configurar la extensión** para que pueda usar _Wollok-CLI_ para correr programas.
 
 - Ir a la pestaña de "ajustes" (o "settings" en inglés) del VSCode: `Ctrl + ,` o desde el menú: `Code -> Preferencias -> Ajustes`. Y buscar por `wollok`.
@@ -73,13 +77,14 @@ Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra es
 
 Ya deberías poder usar VSCode con Wollok.
 
-
 ## Videos explicativos
 
-**Windows** 
+### **Windows**
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kPxbjL7WUHc?si=lmdkD9oF2SxMpFeg" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-**Linux**
+### **Linux**
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DCG-syufqhU?si=SBMGmBkEz6bS1-Wo" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Próximos pasos

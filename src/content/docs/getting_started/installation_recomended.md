@@ -7,8 +7,7 @@ sidebar:
 
 ## Wollok Command Line Interface: vía Node
 
-
-### Windows
+### Instalación en Windows
 
 Instalar la versión 20 de Node desde [el link oficial](https://nodejs.org/en) haciendo click en la opción "Download Node.js (LTS)". Luego ejecutás el instalador y seleccionás Next dejando todas las opciones por defecto. En caso de dudas te recomendamos que veas [este tutorial](https://www.youtube.com/watch?v=29mihvA_zEA71)
 
@@ -48,7 +47,7 @@ wollok --version
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
 
-### Linux
+### Instalación en Linux
 
 Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download/package-manager). La opción más simple es que uses **nvm** (Node Version Manager), un ejecutable que te permite manejar diferentes versiones de Node en tu máquina local. Seleccioná la última versión que aparezca para Node 20, el sistema operativo Linux y la variante nvm.
 
@@ -76,7 +75,7 @@ npm i -g wollok-ts-cli
 
 Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
 
-```zsh
+```bash
 wollok --version
 ```
 
@@ -86,7 +85,7 @@ wollok --version
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
 
-### Mac
+### Instalación en Mac
 
 Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download/package-manager). La opción más simple es que uses **brew** o **nvm** (Node Version Manager), un ejecutable que te permite manejar diferentes versiones de Node en tu máquina local. Seleccioná la última versión que aparezca para Node 20, el sistema operativo Linux y la variante nvm o brew.
 
@@ -121,3 +120,23 @@ wollok --version
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
+
+### Actualización (en cualquier sistema operativo)
+
+Si ya instalaste el CLI de Wollok y querés actualizarlo, primero verificá qué versión tenés instalada. En la terminal escribí:
+
+```bash
+wollok --version
+```
+
+En una consola ejecutá el siguiente comando:
+
+```bash
+npm i -g wollok-ts-cli
+```
+
+Luego verificá si tenés un nuevo número de versión:
+
+```bash
+wollok --version
+```
