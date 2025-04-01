@@ -5,28 +5,30 @@ description: Pasos para instalar Wollok descargando ejecutable
 
 ## Wollok Command Line Interface: vía ejecutable
 
-Es un serie de pasos que se debe realizar inicialmente y repetirla  cada vez que haya una nueva versión disponible. 
+Es un serie de pasos que se debe realizar inicialmente y repetirla  cada vez que haya una nueva versión disponible.
+
 - Descargar un archivo ejecutable
 - Renombrarlo
 - Ubicarlo en una carpeta donde se tenga acceso
 - Garantizar que tenga permiso de ejecución.
 
 La forma de realizarlos depende de cada Sistema Operativo
-A continuación te dejamos las instrucciones para cada caso.
 
-### Windows
+:::note[Descarga]
+A continuación te dejamos las instrucciones para cada caso, para lo cual el primer paso es descargar la _Wollok Command Line Interface_ (Wollok-CLI) disponible para tu sistema operativo: [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe), [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64) o [Mac](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64).
+:::
 
-1. Descargar la _Wollok Command Line Interface_ (Wollok-CLI) disponible para [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe).
+### Instalación en Windows
 
 Teniendo en cuenta que nos descargamos la versión de Wollok CLI de Windows en la carpeta `Downloads` del usuario logueado  y que el usuario se llama `NombreDeUsuario`, haremos lo siguiente
 
-2. Crear una carpeta `Wollok` dentro del home del usuario (en este caso: `C:\Users\NombreDeUsuario`)
-3. Mover el archivo de la carpeta `C:\Users\NombreDeUsuario\Downloads` a `C:\Users\NombreDeUsuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
-4. Renombrar el ejecutable a `wollok.exe`.
+1. Crear una carpeta `Wollok` dentro del home del usuario (en este caso: `C:\Users\NombreDeUsuario`)
+2. Mover el archivo de la carpeta `C:\Users\NombreDeUsuario\Downloads` a `C:\Users\NombreDeUsuario\Wollok`. Es importante dejarlo dentro de las carpetas del usuario logueado para no tener problemas de permisos.
+3. Renombrar el ejecutable a `wollok.exe`.
 
 ![wollok-ts-cli-path-win-2](https://github.com/uqbar-project/website-wollok-ts/assets/4549002/e1a917d9-8bb4-4457-8592-3a44b751468d)
 
-5. Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte del PATH. Para eso abrimos la configuración de variables de entorno:
+4. Por último vamos a agregar la carpeta Wollok que acabamos de crear a la lista de carpetas que forman parte del PATH. Para eso abrimos la configuración de variables de entorno:
 
 - activamos la ventana de ejecución de comandos con las teclas `Windows` y `R`
 - escribimos `sysdm.cpl` que es el programa que levanta el `Panel de Control`
@@ -40,7 +42,7 @@ Teniendo en cuenta que nos descargamos la versión de Wollok CLI de Windows en l
 
 ![Variables de entorno avanzadas](../../../assets/wollok-ts-cli-path-win-env.gif)
 
-6. Para comprobar que Wollok-CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/NombreDeUsuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
+5. Para comprobar que Wollok-CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/NombreDeUsuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
 
 ![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
 
@@ -48,12 +50,12 @@ Teniendo en cuenta que nos descargamos la versión de Wollok CLI de Windows en l
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
 
-### Linux
+### Instalación en Linux
 
 1. Primero vamos a necesitar levantar una terminal con `Ctrl + Alt + T` o buscando `Terminal` en la barra de herramientas
 
-2. Asumimos que descargamos la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado), vamos a renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en esa carpeta y que tiene las tres `x` correspondientes a los permisos de ejecución. Lo hacemos con una serie de comandos como la siguiente: 
-   
+2. Asumimos que descargamos la versión del cli en la carpeta `~/Downloads` (`~` es la carpeta raíz del usuario logueado), vamos a renombrar el archivo a `wollok`, darle permisos de ejecución (`chmod a+x`), pasarlo a la carpeta `/usr/local/bin` y confirmar con `ls -la` que el archivo está en esa carpeta y que tiene las tres `x` correspondientes a los permisos de ejecución. Lo hacemos con una serie de comandos como la siguiente:
+
 ```bash
 cd ~/Downloads
 ls -la wollok-ts-cli*
@@ -75,7 +77,7 @@ Te mostramos cómo se hace esta parte desde una terminal:
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
 
-### Mac
+### Instalación en Mac
 
 1. Vamos a necesitar levantar una terminal con `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad
 
@@ -94,7 +96,6 @@ Te mostramos cómo hacerlo desde una terminal de Mac:
 
 ![Rename & give access to wollok ts cli executable in Mac](../../../assets/wollok-ts-cli-mac-cmd-2.gif)
 
-
 3. Para verificar que esté correctamente instalado necesitamos algunos pasos más gracias al mecanismo de seguridad que trae el sistema operativo Mac:
 
 - debemos ejecutar `wollok --version` la primera vez
@@ -110,3 +111,30 @@ Te mostramos cómo hacerlo desde una terminal de Mac:
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
 :::
 
+### Actualización (en cualquier sistema operativo)
+
+Si ya instalaste el CLI de Wollok y querés actualizarlo, primero verificá qué versión tenés instalada. En la terminal escribí:
+
+```bash
+wollok --version
+```
+
+Descargá el ejecutable disponible para tu sistema operativo: [Windows](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-win-x64.exe), [Linux](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-linux-x64) o [Mac](https://github.com/uqbar-project/wollok-ts-cli/releases/latest/download/wollok-ts-cli-macos-x64). Reemplazá el nuevo ejecutable por el anterior en la misma carpeta donde lo instalaste, si no recordás dónde lo ubicaste podés utilizar
+
+```bash
+# en Linux/Mac
+which wollok
+```
+
+o
+
+```bat
+:: en Windows
+where wollok
+```
+
+Luego verificá si tenés un nuevo número de versión:
+
+```bash
+wollok --version
+```
