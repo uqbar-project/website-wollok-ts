@@ -22,19 +22,19 @@ Hay dos formas de instalarlo:
 - [Via Node](/getting_started/installation_recomended) (recomendada en computadoras de uso personal)
 
 :::note[Recomendada]
-Es la forma recomendada de instalar Wollok, por ser la variante más simple, por tener una forma de actualización ágil y por tener optimizaciones que mejoran su performance. Si llegás a tener inconvenientes, podés probar la otra alternativa.
+Es la forma recomendada de instalar Wollok, por ser la variante más simple, por tener una forma de actualización ágil y por tener optimizaciones que mejoran su performance. Si llegás a tener inconvenientes, podés descargar el último ejecutable _no actualizado_ [aquí](https://github.com/uqbar-project/wollok-ts-cli/releases/tag/v0.3.0).
 :::
 
-- [Descargando ejecutable](/getting_started/installation_alternative) (alternativa para computadoras de uso compartido)
+<!-- - [Descargando ejecutable](/getting_started/installation_alternative) (alternativa para computadoras de uso compartido)
 
 :::caution[Alternativa]
 Se aconseja si surgen conflictos con otras instalaciones de Node, si surgen dificultades con la instalación recomendada, o si es para un uso eventual)
 :::
-En ambos casos, tener en cuenta las particularidades del sistema operativo.
+En ambos casos, tener en cuenta las particularidades del sistema operativo. -->
 
 ### IDE
 
-El Entorno Integrado de Desarrollo (IDE) recomenado es Visual Studio Code (VSCode), por contar con las extensiones que hacen más grata la experiencia de aprender a programar con Wollok.
+El Entorno Integrado de Desarrollo (IDE) recomendado es Visual Studio Code (VSCode), por contar con las extensiones que hacen más grata la experiencia de aprender a programar con Wollok.
 De todas maneras, el código fuente es simplemente texto y se puede editar con cualquier editor.
 
 Instalar [VSCode](https://code.visualstudio.com/).
