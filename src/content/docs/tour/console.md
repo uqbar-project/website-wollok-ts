@@ -1,6 +1,6 @@
 ---
-title: Consola Wollok
-description: Console Wollok en VSCode.
+title: Consola
+description: Consola Wollok en VSCode.
 sidebar:
   order: 2
 ---

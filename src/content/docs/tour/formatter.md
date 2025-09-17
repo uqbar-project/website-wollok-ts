@@ -1,9 +1,7 @@
 ---
-title: Formatter
+title: Formateador
 description: Formatter de Wollok en VSCode.
 ---
-
-### Formatter
 
 Wollok tiene un formateador basado en su sintaxis que estiliza el código y le da un formato homogéneo, algo necesario en un lenguaje educativo que propone proyectos donde se conforma un grupo de trabajo.
 

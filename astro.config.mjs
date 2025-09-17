@@ -54,7 +54,7 @@ export default defineConfig({
     }, {
       label: "Documentación",
       items: [{
-        label: "Introducción a Wollok",
+        label: "Introducción",
         link: "documentation/introduction"
       }, {
         label: "Objetos",
