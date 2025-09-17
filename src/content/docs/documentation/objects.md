@@ -30,7 +30,7 @@ console.println(miObjeto)
 
 A partir de aquí podemos acceder en cualquier parte del programa a la referencia "miObjeto".
 
-### Objetos anonimos ###
+### Objetos anónimos ###
 
 Otra opción es utilizar objetos literales sin explícitamente darle un nombre. Esto permite usarlos en el momento sin utilizar una referencia o asignarlo a una variable de alcance más limitado que el global.
 
@@ -45,7 +45,7 @@ El objeto creado sirve a modo de ejemplo didáctico, ya que es un objeto vacío.
 anObject{}
 ```
 
-### Metodos ###
+### Métodos ###
 
 Dentro de las llaves de un objeto se puede definir su comportamiento mediante la implementación de métodos. Por ejemplo representaremos un pájaro:
 

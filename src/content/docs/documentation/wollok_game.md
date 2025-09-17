@@ -5,7 +5,7 @@ sidebar:
     order: 5
 ---
 
-## ¿Que es?
+## ¿Qué es?
 
 Wollok-Game es una biblioteca de Wollok que sirve para crear juegos. La idea que propone es tener una especie de "tablero" en donde se puedan ubicar los objetos de algún programa de Wollok y éste se mostrará automáticamente en la pantalla.
 A continuación se describe cómo utilizarlo y las funcionalidades que proporciona.
@@ -30,7 +30,7 @@ Se levantará una ventana independiente del sistema operativo mostrando el table
 ![Tablero vacío](../../../assets/game/tableroVacio.png)
 
 
-## ¿Como se usa?
+## ¿Cómo se usa?
 
 
 ### Por consola ###
@@ -47,7 +47,7 @@ Y luego enviar los mensajes uno a uno, como habitualmente se usa la consola.
 >>> game.start()
 ```
 
-### Por consola, con archivo de codigo ###
+### Por consola, con archivo de código ###
 
 Una forma frecuente es usar un archivo .wlk y definir allí el código inicial como cualquier otro código wollok válido, hacerlo ejecutar y enviar los mensajes por consola para que se realicen las acciones deseadas. 
 
@@ -293,7 +293,7 @@ game.addVisualCharacter(wollok)
 
 ![wollok-character](../../../assets/game/wollokCharacter.gif)
 
-## ¡Tambien hablan!
+## ¡También hablan!
 
 Así es, **los objetos del juego pueden hablar**. Para eso hay que indicar el `objeto` del juego y el `texto` que dirá por medio del mensaje `game.say(objeto, texto)`:
 
@@ -348,7 +348,7 @@ program ejemplo {
 
 **Tip:** si necesitás esa imagen la podés descargar en el directorio assets del ejemplo [sokoban](https://github.com/wollok/sokobanGame)
 
-### Eventos automaticos
+### Eventos automáticos
 
 Una funcionalidad interesante que podemos implementar es que **la caja se mueva cada n segundos** (por ejemplo, cada 2 segundos), enviando el mensaje `onTick()` al objeto `game`, el lapso de repetición expresado en milisegundos, un identificador (string descriptivo) y el bloque de código que debe ejecutar:
 
@@ -550,7 +550,7 @@ Corriendo el mismo programa anterior deberíamos poder ver:
 
 ![Green pepita text](../../../assets/game/greenPepitaText.png)
 
-### Imagenes con texto
+### Imágenes con texto
 
 ¡Podemos combinar textos con imágenes! Para ello necesitamos que nuestro objeto defina qué _imagen_ va a mostrar, de la misma manera que veníamos haciendo antes. El texto siempre se dibujará por encima de la imagen.
 
@@ -746,7 +746,7 @@ describe "Mi describe" {
 }
 ```
 
-### Reproduccion de sonidos
+### Reproducción de sonidos
 
 Ya vimos que los sonidos no se pueden reproducir si el juego no empezó. Y en los tests no nos interesa iniciar el juego. Entonces, ¿qué sucede si alguna funcionalidad que queramos testear reproduce un sonido por atrás? Se lanza una excepción y el test falla.
 
