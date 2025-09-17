@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type JSX, type KeyboardEvent } from 'react'
 import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
 import { getDynamicDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
