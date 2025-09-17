@@ -15,7 +15,7 @@ const methods = entity.methods.filter((method) => !method.isSynthetic);
 ---
 
 <h3 id={identifier(entity)} class="entity-title">
-  <Badge variant="success" text={entity.kind} /><span>{entity.name}</span>
+  <Badge variant="success" size="medium" text={entity.kind} /><span>{entity.name}</span>
 </h3>
 
 <WollokDoc node={entity} />

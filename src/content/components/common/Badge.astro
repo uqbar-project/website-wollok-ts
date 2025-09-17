@@ -1,12 +1,13 @@
 ---
 interface Props {
   variant: "success" | "note" | "caution" | "danger";
+  size?: "small" | "medium";
   text: string;
 }
-const { variant, text } = Astro.props;
+const { size = 'small', variant, text } = Astro.props;
 ---
 
-<span class={`badge ${variant}`}>
+<span class={`badge ${variant} ${size}`}>
   {text}
 </span>
 
@@ -14,37 +15,46 @@ const { variant, text } = Astro.props;
 .badge {
   border-radius: 0.25rem;
   margin-right: 0.5em;
-  font-size: 0.9rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-weight: 500;
   display: inline-block;
   line-height: 1;
   overflow-wrap: anywhere;
+}
+
+.small {
+  font-size: 0.9rem;
   padding: 0.15rem 0.5rem;
   margin: 0 0.05rem;
 }
 
+.medium {
+  font-size: 1.3rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.05rem;
+}
+
 .success {
-  background-color: #28650b;
+  background-color: #6C8E58;
   color: #ffffff;
   border: 1px solid #4fdf0c;
 }
 
 .note {
-  background-color: #0f1c8a;
+  background-color: #5F738A;
   color: #ffffff;
   border: 1px solid #3d50f5;
 }
 
 .caution {
-  background-color: #f5bb3d;
+  background-color: #F7F299;
   color: #000000;
   border: 1px solid #a67c00;
   font-weight: 600;
 }
 
 .danger {
-  background-color: #8a0f3a;
+  background-color: #A65F5F;
   color: #ffffff;
   border: 1px solid #f53d7d;
 }
