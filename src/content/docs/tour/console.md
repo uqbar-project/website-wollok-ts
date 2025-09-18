@@ -35,16 +35,25 @@ También podés pegar código del portapapeles.
 
 #### Diagrama dinámico 
 
-Al iniciar el REPL se despliega un diagrama dinámico, donde se ve el estado interno de los objetos y sus referencias.
-
-A medida que se envían los mensajes, se ve como van quedando modificados los objetos en consecuencia. 
+Podés ver el diagrama dinámico en la pestaña [Diagrama dinámico](../dynamicdiagram).
 
 #### Recargar un archivo modificado
 
-Cuando modifiques un archivo .wlk, debés reiniciar la consola para recargar el arhivo modificado y vuelva a ejecutarse.
+Cuando modifiques un archivo .wlk, debés reiniciar la consola para recargar el archivo modificado y vuelva a ejecutarse.
 
-Esto se hace con el comando `:r` y luego Enter. 
+Esto se hace con el comando `:r` (o `:reload`) y luego Enter. 
 
+#### Recargar y volver a ejecutar la última sesión
+
+Muchas veces nos pasa que al probar en la consola, necesitamos hacer un cambio sobre una definición. Eso nos obliga a 1. hacer el cambio y 2. reiniciar la consola para volver a ejecutar todos los comandos de la última sesión nuevamente, lo que puede ser un proceso tedioso. Por suerte podemos usar el comando `:rr` (o `:rerun`) y luego Enter para recargar el archivo modificado y volver a ejecutar la última sesión.
+
+#### Terminar la sesión
+
+Para terminar la sesión, debés usar el comando `:q` (o `:quit`) y luego Enter.
+
+#### Menú de ayuda
+
+Podés acceder al menú de ayuda con el comando `:h` (o `:help`) y luego Enter.
 
 #### Importando archivos desde la consola
 
