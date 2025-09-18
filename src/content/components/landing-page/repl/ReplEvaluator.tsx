@@ -59,14 +59,15 @@ export const ReplEvaluator = () => {
     </div>
 
   const evaluate = () => {
-    if (!expression) return
-    const newHistory = history.concat(expression)
+    const sanitizedExpression = expression.trim()
+    if (!sanitizedExpression) return
+    const newHistory = history.concat(sanitizedExpression)
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
-    const result = interpreteLine(expression)
+    const result = interpreteLine(sanitizedExpression)
     setFormattedResult(<>
       {formattedResult}
-      {generateResult(expression, result)}
+      {generateResult(sanitizedExpression, result)}
     </>)
     setExpression('')
     refreshDynamicDiagram()
