@@ -23,12 +23,13 @@
   --sl-color-card-border: #cb7b7b;
   --sl-text-secondary: #000000;
   --sl-background-secondary: #e9c8c8;
+  --sl-text-accent-hover: #702121;
 }
 /* Light mode colors. */
 :root[data-theme="light"] {
   --sl-color-text-accent-inverted: #ffffff;
   --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-accent-hover: #d6d6d6;
+  --sl-color-accent-hover: #b15757;
   --sl-color-accent-low: #f5ecf1;
   --sl-color-accent: #810a10;
   --sl-color-accent-high: #490e37;
@@ -46,4 +47,5 @@
   --sl-color-card-border: #cb7b7b;
   --sl-text-secondary: #ffffff;
   --sl-background-secondary: #b15757;
+  --sl-text-accent-hover: #ebbaba;
 }
