@@ -7,7 +7,7 @@ sidebar:
 
 Al iniciar el REPL se despliega un diagrama dinámico, donde se ve el estado interno de los objetos y sus referencias.
 
-![dynamic diagram (dark mode)](../../../assets/dynamic-diagram/dynamicDiagramDark.png)
+![dynamic diagram (dark mode)](/assets/tour/dynamic-diagram/dynamicDiagramDark.png)
 
 A medida que se envían los mensajes, se ve como se modifican los objetos en consecuencia.
 
@@ -21,7 +21,7 @@ En ese caso podés utilizar el ícono reload (↻) que va a permitir ver el diag
 
 Otra opción mucho menos molesta es que ajustes el valor en la configuración del IDE (`Ctrl + ,`) + buscar `Wollok LSP IDE`. Allí te aparece la opción `Milliseconds to Open Dynamic Diagram`: podés subirle el tiempo.
 
-![settings](../../../assets/dynamic-diagram/settings.png)
+![settings](/assets/tour/dynamic-diagram/settings.png)
 
 ### Otras configuraciones
 
@@ -30,9 +30,9 @@ Otra opción mucho menos molesta es que ajustes el valor en la configuración de
 
 ### Opciones del diagrama
 
-De arriba hacia abajo podés ver:
+De arriba hacia abajo podés ver las siguientes opciones:
 
-![options](../../../assets/dynamic-diagram/options.png)
+<img src="/assets/tour/dynamic-diagram/options.png" alt="options" width="160" />
 
 - El botón `Organize` reorganiza los objetos en el diagrama dinámico tratando de facilitar la lectura (evitando colisiones de referencias)
 - El toggle on/off `Modo claro/oscuro` permite cambiar el modo del diagrama dinámico para esta sesión particular (independientemente del modo por defecto que tiene configurado el IDE)

@@ -59,7 +59,7 @@ code .
 
 - también lo podés hacer desde el menú del VSCode, en `Archivo -> Abrir carpeta...`
 
-![Execute wollok ts cli](../../../assets/vsc-open-project-1.gif)
+![Execute wollok ts cli](/assets/installation/newProject/vsc-open-project-1.gif)
 
 
 :::note[Nota]

@@ -92,9 +92,6 @@ export default defineConfig({
       autogenerate: {
         directory: "news"
       }
-    }, {
-      label: "Quiero saber más",
-      link: "/more_info"
     }]
   }), react()]
 });

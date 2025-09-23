@@ -137,7 +137,7 @@ Verificar que tenemos instalado Wollok CLI. En la terminal escribir:
 wollok --version
 ```
 
-![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
+![Verificación wollok ts cli](/assets/installation/recommended/wollok-ts-cli-path-win-3.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -173,7 +173,7 @@ Verificar que tenemos instalado Wollok CLI. En la terminal escribir:
 wollok --version
 ```
 
-![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
+![Verificación Linux wollok ts cli](/assets/installation/recommended/wollok-ts-cli-linux-cmd-2.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)

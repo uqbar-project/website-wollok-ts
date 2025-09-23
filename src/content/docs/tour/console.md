@@ -17,15 +17,13 @@ Acceder a los comandos usando `Ctrl + Shift + P` (o desde el menú `View -> Comm
 
 Allí, elegir `Wollok: Start new REPL session`. 
 
-<img width="975" alt="image" src="/assets/tour/startRepl.png">
+<img width="975" alt="image" src="/assets/tour/console/startRepl.png">
 
 
 El comando levanta una sesión, construye el proyecto y pone la consola al nivel del archivo que tenemos abierto para que podamos usar los objetos definidos en él directamente.
 
 <video controls="" autoplay="" transition:persist>
-  <source 
-    src="/assets/tour/replSession.mp4" 
-    type="video/mp4">
+  <source src="/assets/tour/console/replSession.mp4" type="video/mp4">
 </video>
 
 Podés enviar mensajes a objetos, crear referencias constantes o variables, probar cómo funcionan los números, las listas y otros objetos que vienen con Wollok, etc. 

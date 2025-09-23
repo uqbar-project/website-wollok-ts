@@ -15,7 +15,7 @@ Y lo más importante, cada año se incorporan y se revisan esas validaciones de 
 Sí, el código escrito retroalimenta al lenguaje.
 
 
-![image](/assets/tour/linter.png)
+![image](/assets/tour/validator/linter.png)
 
 Una muestra de cómo funciona el validador. 
 Al posicionarnos con el mouse sobre el elemento subrayado, se expande la descripción de la advertencia (en amarillo) o el error (en rojo).

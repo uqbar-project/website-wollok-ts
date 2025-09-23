@@ -27,7 +27,7 @@ game.start()
 
 Se levantará una ventana independiente del sistema operativo mostrando el tablero.
 
-![Tablero vacío](../../../assets/game/tableroVacio.png)
+![Tablero vacío](/assets/doc/game/tableroVacio.png)
 
 
 ## ¿Cómo se usa?
@@ -108,7 +108,7 @@ program ejemplo {
 ```
 
 <div class="container text-center">
-  <img src="../../../assets/game/tableroNuevo.png" class="img-fluid z-depth-1">
+  <img src="/assets/doc/game/tableroNuevo.png" class="img-fluid z-depth-1">
 </div>
 
 ## Dibujando objetos
@@ -167,7 +167,7 @@ Para elegir la imagen de un determinado objeto es necesario:
 
 Su proyecto debería tener una estructura similar a la siguiente:
 
-![Proyecto wollok](../../../assets/game/project.png)
+![Proyecto wollok](/assets/doc/game/project.png)
 
 Y el código del objeto a mostrar podría ser
 
@@ -189,7 +189,7 @@ game.addVisual(wollok)
 
 ¡Ya podemos visualizar nuestros objetos en pantalla!
 
-![Tablero con wollok](../../../assets/game/tableroConWollok.png)
+![Tablero con wollok](/assets/doc/game/tableroConWollok.png)
 
 Así como existe `game.addVisual(objeto)`, también se puede hacer `game.removeVisual(objeto)` cuando queremos dejar de tenerlo en el juego.
 
@@ -198,7 +198,7 @@ Así como existe `game.addVisual(objeto)`, también se puede hacer `game.removeV
 La estructura del proyecto debería verse de la siguiente manera:
 
 <div class="container text-center">
-  <img src="/../../../assets/game/tour/imgExplorerGame.png" class="img-fluid z-depth-1">
+  <img src="//assets/doc/game/tour/imgExplorerGame.png" class="img-fluid z-depth-1">
 </div>
 <br>
 
@@ -219,10 +219,10 @@ object caja {
 >>> game.addVisual(caja)
 ```
 
-![Caja Game](../../../assets/game/cajaGame.png)
+![Caja Game](/assets/doc/game/cajaGame.png)
 
 
-> ![Warning](../../../assets/game/warning.png) AVISO IMPORTANTE : Wollok Game no hace ninguna modificación a las imágenes para mostrarlas. De modo que deberán tener el **tamaño** y **orientación** apropiado para tu juego.
+> ![Warning](/assets/doc/game/warning.png) AVISO IMPORTANTE : Wollok Game no hace ninguna modificación a las imágenes para mostrarlas. De modo que deberán tener el **tamaño** y **orientación** apropiado para tu juego.
 
 -------
 
@@ -291,7 +291,7 @@ El objeto debe entender los mensajes `position()` y `position(nuevaPosition)`, l
 game.addVisualCharacter(wollok)
 ```
 
-![wollok-character](../../../assets/game/wollokCharacter.gif)
+![wollok-character](/assets/doc/game/wollokCharacter.gif)
 
 ## ¡También hablan!
 
@@ -301,7 +301,7 @@ Así es, **los objetos del juego pueden hablar**. Para eso hay que indicar el `o
 game.say(wollok, wollok.howAreYou())
 ```
 
-![Los objetos hablan](../../../assets/game/objetosHablan.png)
+![Los objetos hablan](/assets/doc/game/objetosHablan.png)
 
 ## Un juego interactivo
 
@@ -313,7 +313,7 @@ Una forma de hacer que tus objetos interactúen entre sí es por medio de colisi
 
 #### Ejemplo
 
-![colision-caja](../../../assets/game/colisionCaja.gif)
+![colision-caja](/assets/doc/game/colisionCaja.gif)
 
 #### En example.wpgm
 
@@ -382,7 +382,7 @@ object caja {
 
 Cuando ejecutamos el programa, vemos cómo la caja cada 2 segundos cambia de posición (y wollok debe andar con más cuidado):
 
-![on tick](../../../assets/game/onTick.gif)
+![on tick](/assets/doc/game/onTick.gif)
 
 ¿Y si queremos definir un evento que suceda una sola vez? También podemos hacerlo, enviando el mensaje `schedule(miliseconds, action)` al objeto `game` de la siguiente manera:
 
@@ -393,7 +393,7 @@ program ejemplo {
 }
 ```
 
-![schedule](../../../assets/game/schedule.gif)
+![schedule](/assets/doc/game/schedule.gif)
 
 Veremos otras aplicaciones más adelante.
 
@@ -444,7 +444,7 @@ program ejemplo {
 
 Esto hace que cuando paremos el mouse sobre dicho objeto, veamos su estado interno:
 
-![attributes](../../../assets/game/attributes.png)
+![attributes](/assets/doc/game/attributes.png)
 
 Si no queremos deshabilitarlo una vez activado (porque nos distrae tanta información en el tablero), podemos enviar el mensaje `hideAttributes()` a `game` indicando cuál es el objeto visual al que no queremos que se le vean los atributos:
 
@@ -475,7 +475,7 @@ program ejemplo {
 
 Esto produce que en el tablero se visualice la imagen de fondo: 
 
-![tablero con fondo especial](../../../assets/game/tableroConFondoEspecial.png)
+![tablero con fondo especial](/assets/doc/game/tableroConFondoEspecial.png)
 
 De aquí en más volveremos con el fondo convencional para que distraiga menos la atención.
 
@@ -514,7 +514,7 @@ program ejemplo {
 
 Deberíamos poder ver el texto _¡Pepita!_ escrito en el medio del tablero:
 
-![Pepita text](../../../assets/game/pepitaText.png)
+![Pepita text](/assets/doc/game/pepitaText.png)
 
 El color por defecto es **azul**, pero se puede modificar.
 
@@ -548,7 +548,7 @@ object pepita {
 
 Corriendo el mismo programa anterior deberíamos poder ver:
 
-![Green pepita text](../../../assets/game/greenPepitaText.png)
+![Green pepita text](/assets/doc/game/greenPepitaText.png)
 
 ### Imágenes con texto
 
@@ -578,7 +578,7 @@ object pepita {
 
 Corriendo el mismo programa anterior deberíamos poder ver:
 
-![Pepita with text](../../../assets/game/pepitaWithText.png)
+![Pepita with text](/assets/doc/game/pepitaWithText.png)
 
 ## Objetos invisibles
 
@@ -619,7 +619,7 @@ program ejemplo {
 
 Deberíamos poder observar que cuando pepita pasa por el origen, el objeto invisible le dice: ¡Cuidado!
 
-![Invisible object](../../../assets/game/invisibleObject.gif)
+![Invisible object](/assets/doc/game/invisibleObject.gif)
 
 ## Sonidos
 
@@ -836,7 +836,7 @@ program ejemplo {
 
 lo que pasa es que ocurre un error, y wollok es el que nos informa:
 
-![wollok reporta error](../../../assets/game/errorReporter1.gif)
+![wollok reporta error](/assets/doc/game/errorReporter1.gif)
 
 Por defecto, si hay un personaje es éste el responsable de avisar los errores que ocurren en el juego, y en caso de no haber personaje será cualquier objeto visual que esté en el tablero.
 
@@ -852,7 +852,7 @@ program ejemplo {
 
 Entonces cuando hay un error en un bloque de código que maneja Wollok Game, será la caja la que nos esté reportando un error:
 
-![caja reporta error](../../../assets/game/errorReporter2.gif)
+![caja reporta error](/assets/doc/game/errorReporter2.gif)
 
 
 ## Para seguirla ##

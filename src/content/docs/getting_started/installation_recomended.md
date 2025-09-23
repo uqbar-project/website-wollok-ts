@@ -13,7 +13,7 @@ Instalar la versión 20 de Node desde [el link oficial](https://nodejs.org/en) h
 
 Si la versión oficial no es la 20 en el momento en el que quieras descargarte el instalador, podés ir a [esta ventana](https://nodejs.org/en/download/package-manager) y allí seleccionar la última versión 20 de Node para tu sistema operativo. Una vez realizado este paso, te va a mostrar cómo es el mecanismo de instalación.
 
-![Instalación](../../../assets/node_install.gif)
+![Instalación](/assets/installation/recommended/node_install.gif)
 
 Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta abrimos la terminal que puede ser Powershell, la línea de comandos CMD o Git Bash:
 
@@ -41,7 +41,7 @@ Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
 wollok --version
 ```
 
-![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
+![Verificación wollok ts cli](/assets/installation/recommended/wollok-ts-cli-path-win-3.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -51,7 +51,7 @@ La versión que muestre será la última que te hayas descargado (no tiene que s
 
 Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download/package-manager). La opción más simple es que uses **nvm** (Node Version Manager), un ejecutable que te permite manejar diferentes versiones de Node en tu máquina local. Seleccioná la última versión que aparezca para Node 20, el sistema operativo Linux y la variante nvm.
 
-![Instalar node Mac](../../../assets/node_install_linux.gif)
+![Instalar node Mac](/assets/installation/recommended/node_install_linux.gif)
 
 Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta abrimos una terminal con `Ctrl` + `Alt` + `T`:
 
@@ -79,7 +79,7 @@ Verificamos que tenemos instalado Wollok CLI. En la terminal escribimos:
 wollok --version
 ```
 
-![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
+![Verificación Linux wollok ts cli](/assets/installation/recommended/wollok-ts-cli-linux-cmd-2.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -89,7 +89,7 @@ La versión que muestre será la última que te hayas descargado (no tiene que s
 
 Instalar la versión 20 de Node desde [este link](https://nodejs.org/en/download/package-manager). La opción más simple es que uses **brew** o **nvm** (Node Version Manager), un ejecutable que te permite manejar diferentes versiones de Node en tu máquina local. Seleccioná la última versión que aparezca para Node 20, el sistema operativo Linux y la variante nvm o brew.
 
-![Instalar node Mac](../../../assets/node_install_mac.gif)
+![Instalar node Mac](/assets/installation/recommended/node_install_mac.gif)
 
 Verifiquemos que tenemos node instalado en nuestro sistema, desde cualquier carpeta abrimos una terminal con `⌘ (Cmd) + Espacio` o buscando `Terminal` en el Launchpad:
 
