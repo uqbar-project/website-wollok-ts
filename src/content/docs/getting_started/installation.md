@@ -53,13 +53,13 @@ Estas instrucciones para instalar y configurar las extensiones de Wollok para VS
 
 Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra esta imagen:
 
-![Download VSCode Wollok Extensions](../../../assets/wollok-extensions.gif)
+![Download VSCode Wollok Extensions](/assets/installation/wollok-extensions.gif)
 
 3. Si todo salió bien deberías poder ver ambas extensiones instaladas en tu VSCode:
 
-![Check extensions in Visual Studio Code](../../../assets/wollok-extensions-check-2.gif)
+![Check extensions in Visual Studio Code](/assets/installation/wollok-extensions-check-2.gif)
 
-<img width="449" alt="image" src="https://user-images.githubusercontent.com/4098184/204097656-18de3a1e-88c5-4315-8f1b-14480b59a50f.png"/>
+<img width="449" alt="image" src="/assets/installation/extensions.png"/>
 
 4. Ahora es necesario **configurar la extensión** para que pueda usar _Wollok-CLI_ para correr programas.
 
@@ -71,7 +71,7 @@ Podés ir a la tab de Extensiones, buscar 'wollok' e instalarlas como muestra es
 
 - Al final debería verse algo así:
 
-![Settings](../../../assets/wollok-settings.png)
+![Settings](/assets/installation/wollok-settings.png)
 
 **¡Listo!**
 

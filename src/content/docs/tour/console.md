@@ -17,14 +17,14 @@ Acceder a los comandos usando `Ctrl + Shift + P` (o desde el menú `View -> Comm
 
 Allí, elegir `Wollok: Start new REPL session`. 
 
-<img width="975" alt="image" src="https://user-images.githubusercontent.com/4098184/204099843-8c81c40a-c9fc-4f46-b3ba-b00c5dab78ec.png">
+<img width="975" alt="image" src="/assets/tour/startRepl.png">
 
 
 El comando levanta una sesión, construye el proyecto y pone la consola al nivel del archivo que tenemos abierto para que podamos usar los objetos definidos en él directamente.
 
 <video controls="" autoplay="" transition:persist>
   <source 
-    src="https://user-images.githubusercontent.com/4098184/226200946-20c11dc0-8ac1-40ee-baec-38048b4b5e99.mp4" 
+    src="/assets/tour/replSession.mp4" 
     type="video/mp4">
 </video>
 
