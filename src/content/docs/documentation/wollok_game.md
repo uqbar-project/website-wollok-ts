@@ -199,7 +199,7 @@ program ejemplo {
 
 Así como existe `game.addVisual(objeto)`, también se puede hacer `game.removeVisual(objeto)` cuando queremos dejar de tenerlo en el juego.
 
-### En example.wlk
+En `example.wlk`
 
 ```wollok
 import wollok.game.*
@@ -411,9 +411,6 @@ Veremos otras aplicaciones más adelante.
 
 ### Eventos del teclado
 
-
-HASTA ACA
-
 Wollok Game permite capturar todos los eventos del teclado, para lo cual te recomendamos que leas la documentación del objeto autodefinido `keyboard`. En particular, podés definir qué tiene que pasar cuando un usuario presione una tecla. 
 Así, un _ENTER_ podría hacer que el personaje salude, y la tecla _p_ que el movimiento de la caja se detenga.
 
@@ -424,7 +421,7 @@ program ejemplo {
   game.addVisualCharacter(wollok)
   game.addVisual(caja)
   
-  game.onTick(2000, "movimiento",{ caja.movete() })
+  game.onTick(2000, "movimiento", { caja.movete() })
 
   // capturamos el evento ENTER del teclado
   keyboard.enter().onPressDo { game.say(wollok, wollok.howAreYou()) }
@@ -434,17 +431,18 @@ program ejemplo {
 }
 ```
 
-### Mostrar atributos de los objetos visuales ###
+<img src="/assets/doc/game/keyboardEvents.gif" alt="keyboard events" width="50%" height="auto" class="img-fluid z-depth-1"/>
+
+<!-- ### Mostrar atributos de los objetos visuales ###
 
 Incorporemos los siguientes atributos al objeto visual wollok:
 
 ```wollok
-object wollok {
+object personaje {
   var property position = game.origin()
   var version = "1.7.0"
   var lastUpdated = new Date()
-
-  method image() = "wollok.png"
+  ...
 }
 ```
 
@@ -452,8 +450,8 @@ También agregamos en el programa la configuración para ver las referencias de 
 
 ```wollok
 program ejemplo {
-  game.addVisualCharacter(wollok)
-  game.showAttributes(wollok)
+  game.addVisualCharacter(personaje)
+  game.showAttributes(personaje)
 	// etc.
 ```
 
@@ -469,11 +467,11 @@ program ejemplo {
   //...
   game.hideAttributes(wollok)
 }
-```
+``` -->
 
 ## Cambiando el fondo ##
 
-Es posible modificar el fondo de nuestro tablero, para lo cual podés buscar cualquier imagen que te guste, como [ésta](https://www.todopaisajes.com/fondos-de-pantalla-de-playas). Lo descargamos en una carpeta fuente de nuestro proyecto.
+Es posible modificar el fondo de nuestro tablero, para lo cual podés buscar cualquier imagen _libre de derechos de autor_ que te guste. La descargamos en la carpeta de _assets_ de nuestro proyecto.
 
 En el programa agregamos el mensaje correspondiente al objeto game:
 
@@ -490,7 +488,7 @@ program ejemplo {
 
 Esto produce que en el tablero se visualice la imagen de fondo: 
 
-![tablero con fondo especial](/assets/doc/game/tableroConFondoEspecial.png)
+<img src="/assets/doc/game/tableroConFondoEspecial.png" alt="tablero con fondo especial" width="50%" height="auto" class="img-fluid z-depth-1"/>
 
 De aquí en más volveremos con el fondo convencional para que distraiga menos la atención.
 
@@ -506,30 +504,28 @@ Para ello es necesario agregarle a nuestro objeto un método `text()` **que devu
 import wollok.game.*
 
 object pepita {
-	
 	method position() = game.center()
-	
 	method text() = "¡Pepita!"
 }
 ```
 
-Al correr el siguiente programa:
+Al correr este programa **nuevo**:
 
 ```wollok
-import wollok.game.*
-import pepita.*
+object pepita {
+  method position() = game.center()
+  method text() = "¡Pepita!"
+}
 
-program ejemplo {
-
+program otroEjemplo {
 	game.addVisual(pepita)
 	game.start()
-
 }
 ```
 
 Deberíamos poder ver el texto _¡Pepita!_ escrito en el medio del tablero:
 
-![Pepita text](/assets/doc/game/pepitaText.png)
+<img src="/assets/doc/game/pepitaText.png" alt="Pepita text" width="50%" height="auto" class="img-fluid z-depth-1"/>
 
 El color por defecto es **azul**, pero se puede modificar.
 
@@ -547,23 +543,20 @@ Para poder cambiar el color del texto debemos agregarle a nuestro objeto un mét
 import wollok.game.*
 
 object paleta {
-	const property verde = "00FF00FF"
+	const property verde = "009933FF"
 	const property rojo = "FF0000FF"
 }
 
 object pepita {
-	
 	method position() = game.center()
-	
 	method text() = "¡Pepita!"
-	
 	method textColor() = paleta.verde()
 }
 ```
 
 Corriendo el mismo programa anterior deberíamos poder ver:
 
-![Green pepita text](/assets/doc/game/greenPepitaText.png)
+<img src="/assets/doc/game/greenPepitaText.png" alt="Green pepita text" width="50%" height="auto" class="img-fluid z-depth-1"/>
 
 ### Imágenes con texto
 
@@ -575,44 +568,39 @@ Corriendo el mismo programa anterior deberíamos poder ver:
 import wollok.game.*
 
 object paleta {
-	const property verde = "00FF00FF"
+	const property verde = "009933FF"
 	const property rojo = "FF0000FF"
 }
 
 object pepita {
-	
 	method position() = game.center()
-	
 	method image() = "pepita.png"
-	
 	method text() = "¡Pepita!"
-	
 	method textColor() = paleta.verde()
 }
 ```
 
 Corriendo el mismo programa anterior deberíamos poder ver:
 
-![Pepita with text](/assets/doc/game/pepitaWithText.png)
+<img src="/assets/doc/game/pepitaWithText.png" alt="Pepita with text" width="50%" height="auto" class="img-fluid z-depth-1"/>
 
 ## Objetos invisibles
 
-También es posible definir objetos invisibles y agregarlos al tablero. Nos pueden servir, por ejemplo, para disparar colisiones. Es importante que estos objetos **no definan** los métodos `text()` e `image()`.
+También es posible definir objetos invisibles y agregarlos al tablero. Nos pueden servir, por ejemplo, para disparar colisiones. Es importante que estos objetos **no definan** los métodos `text()` ni `image()`.
 
 ### Ejemplo
+
+Creamos un archivo `pepita.wlk`:
 
 ```wollok
 import wollok.game.*
 
 object pepita {
-	
 	var property position = game.center()
-	
 	method image() = "pepita.png"
 }
 
 object invisible {
-	
 	method position() = game.origin()
 }
 ```
@@ -624,7 +612,6 @@ import wollok.game.*
 import pepita.*
 
 program ejemplo {
-
 	game.addVisualCharacter(pepita)
 	game.addVisual(invisible)
 	game.onCollideDo(invisible, {elemento => game.say(invisible, "¡Cuidado!")})
@@ -634,7 +621,7 @@ program ejemplo {
 
 Deberíamos poder observar que cuando pepita pasa por el origen, el objeto invisible le dice: ¡Cuidado!
 
-![Invisible object](/assets/doc/game/invisibleObject.gif)
+<img src="/assets/doc/game/invisibleObject.gif" alt="Invisible object" width="50%" height="auto" class="img-fluid z-depth-1"/>
 
 ## Sonidos
 
@@ -731,7 +718,7 @@ En el ejemplo mostramos cómo podemos *mutear* un sonido presionando la tecla **
 
 ## Testing
 
-En este apartado mostraremos algunas consideraciones que deberán  tener en cuenta a la hora de hacer tests con `wollok game`. Pero antes de comenzar, les recomendamos que lean los apuntes sobre testing: [Introducción al testeo unitario automatizado](https://docs.google.com/document/d/1Q_v48gZfRmVfLMvC0PBpmtZyMoALbh11AwmEllP__eY/edit?usp=drive_web) y [Testeo unitario automatizado avanzado](https://docs.google.com/document/d/1caDE_mlP1QMfzyVpyvh-tKshjAeYLXBkXDYrTX5zFUI/edit#?usp=drive_web).
+En este apartado mostraremos algunas consideraciones que deberán tener en cuenta a la hora de hacer tests con `wollok game`. Pero antes de comenzar, les recomendamos que lean los apuntes sobre testing: [Introducción al testeo unitario automatizado](https://docs.google.com/document/d/1Q_v48gZfRmVfLMvC0PBpmtZyMoALbh11AwmEllP__eY/edit?usp=drive_web) y [Testeo unitario automatizado avanzado](https://docs.google.com/document/d/1caDE_mlP1QMfzyVpyvh-tKshjAeYLXBkXDYrTX5zFUI/edit#?usp=drive_web).
 
 ### Game mantiene su estado
 
@@ -765,7 +752,7 @@ describe "Mi describe" {
 
 Ya vimos que los sonidos no se pueden reproducir si el juego no empezó. Y en los tests no nos interesa iniciar el juego. Entonces, ¿qué sucede si alguna funcionalidad que queramos testear reproduce un sonido por atrás? Se lanza una excepción y el test falla.
 
-Solucionar esto es un poco más complicado porque requiere de varios cambios. En un principio, el problema empieza cuando le enviamos el mensaje `play()` a un sonido. Lo que podríamos hacer es cambiar estos sonidos por otros objetos polimórficos que los "imiten". Es decir, estos nuevos objetos entenderán todos los mensajes que entienden los sonidos y cuando les mandemos el mensaje `play()` no harán nada. De esta manera no se lanzará una excepción y los test podrán pasar.
+Solucionar ésto es un poco más complicado porque requiere de varios cambios. En un principio, el problema empieza cuando le enviamos el mensaje `play()` a un sonido. Lo que podríamos hacer es cambiar estos sonidos por otros objetos polimórficos que los "imiten". Es decir, estos nuevos objetos entenderán todos los mensajes que entienden los sonidos y cuando les mandemos el mensaje `play()` no harán nada. De esta manera no se lanzará una excepción y los test podrán pasar.
 
 ```wollok
 object soundMock {
@@ -840,7 +827,7 @@ Cuando las cosas no salen como queremos y ocurre un error, el personaje especial
 
 ```wollok
 program ejemplo {
-  game.addVisualCharacter(wollok)  
+  game.addVisualCharacter(personaje)  
   game.addVisual(caja)
   game.whenCollideDo(wollok, { elemento => 
     const a = 1 / 0 //Se produce un error
