@@ -829,20 +829,23 @@ Cuando las cosas no salen como queremos y ocurre un error, el personaje especial
 program ejemplo {
   game.addVisualCharacter(personaje)  
   game.addVisual(caja)
+  game.errorReporter(personaje)
   game.whenCollideDo(wollok, { elemento => 
-    const a = 1 / 0 //Se produce un error
+    throw new DomainException(message = "No puede ser!")
   })
   game.start()
 }
 ```
 
-lo que pasa es que ocurre un error, y wollok es el que nos informa:
+Cuando tiramos un error de dominio (DomainException) el personaje nos lo informa:
 
-![wollok reporta error](/assets/doc/game/errorReporter1.gif)
+<img src="/assets/doc/game/errorReporter1.gif" alt="personaje reporta error" width="50%" height="auto" class="img-fluid z-depth-1">
 
-Por defecto, si hay un personaje es éste el responsable de avisar los errores que ocurren en el juego, y en caso de no haber personaje será cualquier objeto visual que esté en el tablero.
+Otros tipos de error (como `1 / 0` o tirar otro tipo de excepción) solo se loguean en la consola.
 
-Igualmente nosotros podemos decirle que otro sea el objeto que reporte los errores de Wollok Game, como la caja:
+<!-- Por defecto, si hay un personaje es éste el responsable de avisar los errores que ocurren en el juego, y en caso de no haber personaje será cualquier objeto visual que esté en el tablero. -->
+
+Nosotros podemos decirle que otro sea el objeto que reporte los errores de Wollok Game, como la caja:
 
 ```wollok
 program ejemplo {
@@ -854,7 +857,7 @@ program ejemplo {
 
 Entonces cuando hay un error en un bloque de código que maneja Wollok Game, será la caja la que nos esté reportando un error:
 
-![caja reporta error](/assets/doc/game/errorReporter2.gif)
+<img src="/assets/doc/game/errorReporter2.gif" alt="caja reporta error" width="50%" height="auto" class="img-fluid z-depth-1">
 
 
 ## Para seguirla ##
