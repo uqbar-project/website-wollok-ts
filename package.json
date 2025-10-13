@@ -1,7 +1,7 @@
 {
   "name": "website-wollok-ts",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "postinstall": "shx mkdir -p ./public/game/lib && shx cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && shx mkdir -p ./public/dynamicDiagram/lib && shx cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
     "dev": "astro dev",
