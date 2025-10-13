@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type JSX, type KeyboardEvent } from 'react'
 import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
 import { getDynamicDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
@@ -59,14 +59,15 @@ export const ReplEvaluator = () => {
     </div>
 
   const evaluate = () => {
-    if (!expression) return
-    const newHistory = history.concat(expression)
+    const sanitizedExpression = expression.trim()
+    if (!sanitizedExpression) return
+    const newHistory = history.concat(sanitizedExpression)
     setHistory(newHistory)
     setIndexExpression(newHistory.length)
-    const result = interpreteLine(expression)
+    const result = interpreteLine(sanitizedExpression)
     setFormattedResult(<>
       {formattedResult}
-      {generateResult(expression, result)}
+      {generateResult(sanitizedExpression, result)}
     </>)
     setExpression('')
     refreshDynamicDiagram()

@@ -33,18 +33,18 @@ Teniendo en cuenta que nos descargamos la versión de Wollok CLI de Windows en l
 - activamos la ventana de ejecución de comandos con las teclas `Windows` y `R`
 - escribimos `sysdm.cpl` que es el programa que levanta el `Panel de Control`
 
-![Activar variables de entorno](../../../assets/wollok-ts-cli-edit-system-variables.png)
+![Activar variables de entorno]/assets/installation/alternative/wollok-ts-cli-edit-system-variables.png)
 
 - una vez posicionada en la solapa "Avanzados", presionamos el botón "Variables de entorno" (Environment variables)
 - en la primera de la listas (la que corresponde al usuario logueado), seleccionamos la variable Path (puede ser que tengas que scrollear para encontrarla) y luego presionamos el botón "Editar" (Edit)
 - hay que seleccionar con el mouse la primera línea vacía y escribimos allí la dirección de la carpeta donde dejamos el ejecutable, en nuestro caso `C:\Users\NombreDeUsuario\Wollok`
 - hacemos click en "Ok" y nuevamente en "Ok" dos veces para salir
 
-![Variables de entorno avanzadas](../../../assets/wollok-ts-cli-path-win-env.gif)
+![Variables de entorno avanzadas]/assets/installation/alternative/wollok-ts-cli-path-win-env.gif)
 
 5. Para comprobar que Wollok-CLI se instaló correctamente nos posicionamos en una carpeta diferente a `C:/Users/NombreDeUsuario/Wollok` y ejecutamos `wollok --version` en cualquier terminal (podés usar Powershell, CMD o Git Bash, el resultado es el mismo):
 
-![Verificación wollok ts cli](../../../assets/wollok-ts-cli-path-win-3.gif)
+![Verificación wollok ts cli]/assets/installation/alternative/wollok-ts-cli-path-win-3.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -71,7 +71,7 @@ Te mostramos cómo se hace esta parte desde una terminal:
 
 3. Para verificar que está correctamente instalado, escribimos `wollok --version` en la consola desde cualquier carpeta, y nos debe devolver el número de versión (también podemos ejecutar `wollok --help`):
 
-![Verificación Linux wollok ts cli](../../../assets/wollok-ts-cli-linux-cmd-2.gif)
+![Verificación Linux wollok ts cli](/assets/installation/alternative/wollok-ts-cli-linux-cmd-2.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)
@@ -94,7 +94,7 @@ ls -la /usr/local/bin/wollok
 
 Te mostramos cómo hacerlo desde una terminal de Mac:
 
-![Rename & give access to wollok ts cli executable in Mac](../../../assets/wollok-ts-cli-mac-cmd-2.gif)
+![Rename & give access to wollok ts cli executable in Mac]/assets/installation/alternative/wollok-ts-cli-mac-cmd-2.gif)
 
 3. Para verificar que esté correctamente instalado necesitamos algunos pasos más gracias al mecanismo de seguridad que trae el sistema operativo Mac:
 
@@ -105,7 +105,7 @@ Te mostramos cómo hacerlo desde una terminal de Mac:
 - ahora sí termina de ejecutarse el comando: cerramos la terminal que nos abrió Mac y volvemos a nuestra terminal original
 - a partir de ahora ya podemos ejecutar `wollok --version` normalmente
 
-![Execute wollok ts cli](../../../assets/wollok-ts-cli-mac2.gif)
+![Execute wollok ts cli]/assets/installation/alternative/wollok-ts-cli-mac2.gif)
 
 :::note[Sobre la versión]
 La versión que muestre será la última que te hayas descargado (no tiene que ser 0.2.2)

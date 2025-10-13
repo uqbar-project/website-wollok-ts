@@ -1,7 +1,7 @@
 {
   "name": "website-wollok-ts",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "postinstall": "shx mkdir -p ./public/game/lib && shx cp ./node_modules/wollok-web-tools/dist/web/game-index.js ./public/game/lib && shx mkdir -p ./public/dynamicDiagram/lib && shx cp ./node_modules/wollok-web-tools/dist/dynamicDiagram/diagram-index.* ./public/dynamicDiagram/lib",
     "dev": "astro dev",
@@ -11,22 +11,29 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.10",
-    "@astrojs/react": "^3.6.2",
-    "@astrojs/starlight": "^0.21.2",
-    "@types/cytoscape": "^3.21.8",
-    "@types/react": "^18.3.4",
-    "@types/react-dom": "^18.3.0",
-    "astro": "^4.5.12",
-    "astro-embed": "^0.7.2",
-    "cytoscape": "^3.30.2",
-    "react": "^18.3.1",
-    "sharp": "^0.32.5",
-    "typescript": "^5.3.3",
-    "wollok-ts": "4.1.9",
-    "wollok-web-tools": "^1.1.7"
+    "@astrojs/check": "0.9.4",
+    "@astrojs/react": "4.3.1",
+    "@astrojs/starlight": "0.35.3",
+    "astro": "5.13.7",
+    "astro-embed": "0.9.1",
+    "cytoscape": "3.30.2",
+    "lucide-react": "0.544.0",
+    "react": "19.1.1",
+    "sharp": "0.34.3",
+    "typescript": "5.3.3",
+    "wollok-ts": "4.2.3",
+    "wollok-web-tools": "1.1.10"
   },
   "devDependencies": {
-    "shx": "^0.3.4"
+    "@types/cytoscape": "3.21.8",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
+    "shx": "0.4.0"
+  },
+  "overrides": {
+    "@ctrl/tinycolor": "4.1.0",
+    "@astrojs/starlight": {
+      "astro": "^5.13.7"
+    }
   }
 }

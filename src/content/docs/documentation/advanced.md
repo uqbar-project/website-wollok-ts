@@ -559,11 +559,7 @@ mixin Energy {
 
 mixin GetsHurt inherits Energy {
     method receiveDamage(amount) {
-        self.reduceEnergy(amount) 
-        // hereda método del padre
-        // estamos corrigiendo un reporte de error incorrecto de Wollok
-        // https://github.com/uqbar-project/wollok/issues/2006
-        // pero el programa funciona perfectamente
+        self.reduceEnergy(amount)
     }
     method energy()
     method energy(newEnergy)

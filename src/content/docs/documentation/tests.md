@@ -77,7 +77,7 @@ describe "Tests de Pepita" {
 Dentro del describe anterior podemos identificar 2 tipos de test, los que se trata de probar mensajes que tienen valor de retorno `energía inicial de pepita` y `pepita comienza siendo fuerte` o se busca probar que funcionen adecuadamente métodos con efecto como volar o comer, se envían primero dichos mensajes y luego el mensaje que se coloca en el assert es uno muy sencillo que se limita a exhibir el efecto causado.
 
 
-## Ejecución de los test ##
+## Ejecución de los tests ##
 
 En el IDE, teniendo seleccionado un archivo de tests, se clickea el botón de ejecutar (En el menú, Ejecutar > Ejecutar <Ctrl F11>).
 En caso que se tengan definidos varios archivos de tests, además de ejecutarlos uno por uno de la manera explicada, se los puede correr todos juntos (se selecciona el proyecto, menú, Ejecutar > Ejecutar como > Ejecutar todos los tests del proyecto Wollok).

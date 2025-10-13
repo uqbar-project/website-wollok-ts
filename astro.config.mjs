@@ -33,11 +33,11 @@ export default defineConfig({
         label: "English"
       }
     },
-    social: {
-      github: "https://github.com/uqbar-project/wollok-language",
-      discord: "https://discord.gg/ZstgCPKEaa",
-      twitter: "https://twitter.com/wollokLang"
-    },
+    social: [
+      { icon: 'github', label: 'GitHub', href: 'https://github.com/uqbar-project/wollok-language' },
+      { icon: 'discord', label: 'Discord', href: 'https://discord.gg/ZstgCPKEaa' },
+      { icon: 'twitter', label: 'Twitter', href: 'https://twitter.com/wollokLang' },
+    ],
     components: {
       Footer: "./src/content/components/Footer.astro"
     },
@@ -54,7 +54,7 @@ export default defineConfig({
     }, {
       label: "Documentación",
       items: [{
-        label: "Introducción a Wollok",
+        label: "Introducción",
         link: "documentation/introduction"
       }, {
         label: "Objetos",
@@ -92,9 +92,6 @@ export default defineConfig({
       autogenerate: {
         directory: "news"
       }
-    }, {
-      label: "Quiero saber más",
-      link: "/more_info"
     }]
   }), react()]
 });

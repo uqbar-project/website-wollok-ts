@@ -1,5 +1,5 @@
 ---
-import Badge from "@astrojs/starlight/components/Badge.astro";
+import Badge from "../common/Badge.astro";
 import { Class, Mixin, Singleton } from "wollok-ts";
 import { identifier } from "./utils";
 import MethodHeading from "./MethodHeading.astro";
@@ -15,7 +15,7 @@ const methods = entity.methods.filter((method) => !method.isSynthetic);
 ---
 
 <h3 id={identifier(entity)} class="entity-title">
-  <Badge variant="success" text={entity.kind} /><span>{entity.name}</span>
+  <Badge variant="success" size="medium" text={entity.kind} /><span>{entity.name}</span>
 </h3>
 
 <WollokDoc node={entity} />
@@ -48,26 +48,23 @@ const methods = entity.methods.filter((method) => !method.isSynthetic);
 }
 
 {
-  methods.length > 0 && 
-  <div>
-    <h4>Comportamiento</h4>
-  {
-    methods.map((method) => (
+  methods.length > 0 && (
     <div>
-      <MethodHeading method={method} />
-      <WollokDoc node={method} />
+      <h4>Comportamiento</h4>
+      {methods
+        .map((method) => (
+        <div>
+          <MethodHeading method={method} />
+          <WollokDoc node={method} />
+        </div>
+      ))}
     </div>
-    ))
-  }
-  </div>
+  )
 }
-
-
 
 <style>
 
-
-  .entity-title > span{
+  .entity-title > span {
     text-decoration: underline;
   }
 </style>

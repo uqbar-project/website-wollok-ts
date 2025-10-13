@@ -38,3 +38,5 @@ A continuación presentamos una serie de capítulos que integran los principales
 - <a href="https://docs.google.com/document/d/1lRTDAcsOwy7hkAM-UvTZtMHzN5fitrWyk1JAM-6NVJI/edit?usp=drive_web" target="_blank"><span class="badge mdb-color lighten-1 badge-pill">15</span> - Elementos de Diseño.</a>
 
 - <a href="https://docs.google.com/document/d/1VPKwf_cHcFTCj9JSYZ-xJmchX_n10bSJwxTUcmpd3w0/edit?usp=sharing" target="_blank"><span class="badge mdb-color lighten-1 badge-pill">16</span> - Herencia vs. composición. El proceso de Diseño.</a>
+
+- <a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf" target="_blank"><span class="badge mdb-color lighten-1 badge-pill">Anexo A</span> - Atajos de teclado.</a>

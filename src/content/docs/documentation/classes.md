@@ -26,7 +26,7 @@ class Ave {
 }
 ```
 
-### Instanciacion ###
+### Instanciación ###
 
 Para crear un Ave instanciamos un objeto de esa clase con la palabra reservada **new**, la cual retorna un objeto de la clase Ave:
 
@@ -100,7 +100,7 @@ class MyClass {
 
 Una clase con al menos un método abstracto se considera una **clase abstracta**. De nuevo, no hay ninguna palabra para indicar que una clase es abstracta, ya que es información que se puede inferir de la definición misma de la clase.
 
-### Redefinicion y super ###
+### Redefinición y super ###
 
 Las subclases pueden redefinir métodos ya implementados por su superclase. Para ello, debe explícitamente usar la palabra "override" antes de la definición del método.
 
@@ -230,7 +230,7 @@ const objetosQueVuelan = [ new Avion(), boomerang, object { method volar() {/*ha
 objetosQueVuelan.forEach { volador => volador.volar() }
 ```
 
-## Modularizacion ##
+## Modularización ##
 
 Wollok provee una serie de reglas y construcciones del lenguaje para fomentar programas modulares: separar clases y programas para ser usado por otros programas / bibliotecas.
 

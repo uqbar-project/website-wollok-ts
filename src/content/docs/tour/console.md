@@ -1,6 +1,6 @@
 ---
-title: Consola Wollok
-description: Console Wollok en VSCode.
+title: Consola
+description: Consola Wollok en VSCode.
 sidebar:
   order: 2
 ---
@@ -17,15 +17,13 @@ Acceder a los comandos usando `Ctrl + Shift + P` (o desde el menú `View -> Comm
 
 Allí, elegir `Wollok: Start new REPL session`. 
 
-<img width="975" alt="image" src="https://user-images.githubusercontent.com/4098184/204099843-8c81c40a-c9fc-4f46-b3ba-b00c5dab78ec.png">
+<img width="975" alt="image" src="/assets/tour/console/startRepl.png">
 
 
 El comando levanta una sesión, construye el proyecto y pone la consola al nivel del archivo que tenemos abierto para que podamos usar los objetos definidos en él directamente.
 
 <video controls="" autoplay="" transition:persist>
-  <source 
-    src="https://user-images.githubusercontent.com/4098184/226200946-20c11dc0-8ac1-40ee-baec-38048b4b5e99.mp4" 
-    type="video/mp4">
+  <source src="/assets/tour/console/replSession.mp4" type="video/mp4">
 </video>
 
 Podés enviar mensajes a objetos, crear referencias constantes o variables, probar cómo funcionan los números, las listas y otros objetos que vienen con Wollok, etc. 
@@ -35,16 +33,25 @@ También podés pegar código del portapapeles.
 
 #### Diagrama dinámico 
 
-Al iniciar el REPL se despliega un diagrama dinámico, donde se ve el estado interno de los objetos y sus referencias.
-
-A medida que se envían los mensajes, se ve como van quedando modificados los objetos en consecuencia. 
+Podés ver el diagrama dinámico en la pestaña [Diagrama dinámico](../dynamicdiagram).
 
 #### Recargar un archivo modificado
 
-Cuando modifiques un archivo .wlk, debés reiniciar la consola para recargar el arhivo modificado y vuelva a ejecutarse.
+Cuando modifiques un archivo .wlk, debés reiniciar la consola para recargar el archivo modificado y vuelva a ejecutarse.
 
-Esto se hace con el comando `:r` y luego Enter. 
+Esto se hace con el comando `:r` (o `:reload`) y luego Enter. 
 
+#### Recargar y volver a ejecutar la última sesión
+
+Muchas veces nos pasa que al probar en la consola, necesitamos hacer un cambio sobre una definición. Eso nos obliga a 1. hacer el cambio y 2. reiniciar la consola para volver a ejecutar todos los comandos de la última sesión nuevamente, lo que puede ser un proceso tedioso. Por suerte podemos usar el comando `:rr` (o `:rerun`) y luego Enter para recargar el archivo modificado y volver a ejecutar la última sesión.
+
+#### Terminar la sesión
+
+Para terminar la sesión, debés usar el comando `:q` (o `:quit`) y luego Enter.
+
+#### Menú de ayuda
+
+Podés acceder al menú de ayuda con el comando `:h` (o `:help`) y luego Enter.
 
 #### Importando archivos desde la consola
 

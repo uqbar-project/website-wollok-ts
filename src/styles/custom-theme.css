@@ -19,6 +19,11 @@
   --sl-color-gray-5: #353841;
   --sl-color-gray-6: #24272f;
   --sl-color-black: #17181c;
+  --sl-color-card: #cf8989;
+  --sl-color-card-border: #cb7b7b;
+  --sl-text-secondary: #000000;
+  --sl-background-secondary: #e9c8c8;
+  --sl-text-accent-hover: #702121;
 }
 /* Light mode colors. */
 :root[data-theme="light"] {
@@ -38,4 +43,9 @@
   --sl-color-gray-6: #eceef2;
   --sl-color-gray-7: #f5f6f8;
   --sl-color-black: #ffffff;
+  --sl-color-card: #692828;
+  --sl-color-card-border: #cb7b7b;
+  --sl-text-secondary: #ffffff;
+  --sl-background-secondary: #b15757;
+  --sl-text-accent-hover: #e6e6e6;
 }

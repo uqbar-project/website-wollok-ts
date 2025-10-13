@@ -77,7 +77,7 @@ edadAdulta = 18
 
 Existen objetos básicos que vienen con la distribución de Wollok. 
 
-### Numeros ###
+### Números ###
 
 Los números entienden una gran variedad de mensajes, como las operaciones matemáticas para sumar, restar, etc. Son objetos inmutables, esto quiere decir que 
 
