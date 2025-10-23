@@ -46,6 +46,7 @@ export const ReplEvaluator = () => {
 
   useEffect(() => {
     resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
+    refreshDynamicDiagram()
   }, [formattedResult])
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
@@ -76,7 +77,7 @@ export const ReplEvaluator = () => {
   const refreshDynamicDiagram = () => {
     const elements = getDynamicDiagram(interpreter)
     // @ts-ignore
-    reloadDiagram(elements)
+    try { reloadDiagram(elements) } catch { }
   }
 
   const keyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -148,7 +149,7 @@ export const ReplEvaluator = () => {
         </button>
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
       </div>
-      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o [1, 2].size()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o pepita.estaCansada()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botoneraReplExpression">
         <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
           {/* https://github.com/feathericons/feather/blob/main/icons */}
