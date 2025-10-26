@@ -1,25 +1,32 @@
 ---
 import comunidadWollok from "../../../assets/hackathon_2024_utn.png";
 import { Image } from "astro:assets";
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
+
+// Load translations
+const translations = isEnglish 
+  ? await import('../../i18n/en.json')
+  : await import('../../i18n/es.json');
+
+const t = translations.default;
 ---
 
 <div class="community-main">
-  <h2>Y también una comunidad</h2>
+  <h2>{t["landing.community.title"]}</h2>
   <div class="community-container">
-    <Image class="class-img" src={comunidadWollok} alt="Comunidad Wollok"/>
+    <Image class="class-img" src={comunidadWollok} alt={isEnglish ? "Wollok Community" : "Comunidad Wollok"}/>
     <div class="community-content">
-      <p>Estamos en contacto principalmente a través de <a href="https://discord.gg/ZstgCPKEaa">Discord</a>, ya sea
+      <p set:html={t["landing.community.p1"]} />
         <ul>
-          <li>para organizar una <i>hackathon</i>,</li>
-          <li>un asado,</li>
-          <li>o el Concurso de <b>Wollok Game</b>, una interfaz gráfica para hacer videojuegos en Wollok.</li>
+          <li set:html={t["landing.community.li1"]} />
+          <li set:html={t["landing.community.li2"]} />
+          <li set:html={t["landing.community.li3"]} />
         </ul>
-      </p>
-      <p>También Wollok forma parte de <b>trabajos de investigación</b>, proyectos finales, tesis y papers. Podés visitar nuestro <a href="https://github.com/uqbar-project/wollok-language">repositorio principal</a>. ¡No dudes en acercarte si estás usando Wollok!</p>
-      <p>
-        ¿Te parece que falta contar algo, encontraste algún error en las páginas, algo que se pueda mejorar?
-        <a href="https://github.com/uqbar-project/website-wollok-ts/issues/new">¡Ayudanos cargando un issue!</a>
-      </p>
+      <p set:html={t["landing.community.p2"]} />
+      <p set:html={t["landing.community.p3"]} />
     </div>
   </div>
 </div>
@@ -27,6 +34,7 @@ import { Image } from "astro:assets";
 <style>
 .community-main {
   margin: 1rem 1rem;
+  padding: 4rem 4rem;
 }
 
 .community-main h2 {
@@ -36,7 +44,7 @@ import { Image } from "astro:assets";
 .community-container {
   display: grid;
   grid-template-columns: 1.4fr 2fr;
-  gap: 2rem;
+  gap: 5rem;
   font-size: 1.2em;
 }
 

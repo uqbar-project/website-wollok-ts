@@ -1,19 +1,34 @@
 ---
 import InfoGallery from "../info-gallery/InfoGallery.astro";
-const cards = await Astro.glob("./what-is-wollok/card-*.md");
 import CommercialTool from "./commercial-tool/CommercialTool.astro";
 import PedagogicalTool from "./pedagogical-tool/PedagogicalTool.astro";
 import Separator from "../common/Separator.astro";
 import {Image} from "astro:assets";
 import srcSokoban from "../../../assets/juegoSokoban.gif";
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
+
+// Load translations
+const translations = isEnglish 
+  ? await import('../../i18n/en.json')
+  : await import('../../i18n/es.json');
+
+const t = translations.default;
+
+// Load cards based on locale - Astro.glob requires static paths
+const spanishCards = await Astro.glob("./what-is-wollok/card-*.md");
+const englishCards = await Astro.glob("./what-is-wollok/en/card-*.md");
+const cards = isEnglish ? englishCards : spanishCards;
 ---
 
 <div class="striped">
   <div class="what-is-wollok">
     <div class="cards">
-      <InfoGallery title="¿Qué es Wollok?" cards={cards} />
+      <InfoGallery title={t["landing.whatIsWollok"]} cards={cards} />
     </div>
-    <Image alt="Juego Sokoban" src={srcSokoban} />
+    <Image alt={isEnglish ? "Sokoban Game" : "Juego Sokoban"} src={srcSokoban} />
   </div>
   <PedagogicalTool />
   <Separator />
@@ -39,7 +54,7 @@ import srcSokoban from "../../../assets/juegoSokoban.gif";
     margin-top: 0;
     padding: 0;
     height: 0.3rem;
-    background: linear-gradient(to left, var(--sl-color-gray-6), var(--sl-color-accent));
+    background: --sl-color-accent;
   }
 
   @media(max-width: 50em) {
@@ -53,5 +68,10 @@ import srcSokoban from "../../../assets/juegoSokoban.gif";
 
     .cards {
       padding-bottom: 1rem;
+    }
+
+    .cards a {
+      color: #b15757;
+      text-decoration: none;
     }
 </style>

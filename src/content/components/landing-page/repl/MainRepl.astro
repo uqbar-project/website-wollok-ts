@@ -3,9 +3,13 @@ import "./MainRepl.css"
 import ReplEditor from "./replEditor.html"
 import DynamicDiagram from "./dynamicDiagram.html"
 import { ReplEvaluator } from "./ReplEvaluator"
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
 ---
-<section class="main-repl">
-    <ReplEditor client:load/>
+<section class="main-repl" data-locale={currentLocale}>
+    <ReplEditor client:load locale={currentLocale}/>
     <div class="repl">
         <ReplEvaluator client:only="react" />
         <DynamicDiagram client:load/>

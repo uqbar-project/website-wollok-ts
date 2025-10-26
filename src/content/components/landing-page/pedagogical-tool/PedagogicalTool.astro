@@ -1,22 +1,26 @@
 ---
 import claseImage from "../../../../assets/clase.jpeg";
 import { Image } from "astro:assets";
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
+
+// Load translations
+const translations = isEnglish 
+  ? await import('../../../i18n/en.json')
+  : await import('../../../i18n/es.json');
+
+const t = translations.default;
 ---
 
 <div id="pedag-container">
-  <Image class="class-img" src={claseImage} alt="Wollok en la clase"/>
+  <Image class="class-img" src={claseImage} alt={isEnglish ? "Wollok in the classroom" : "Wollok en la clase"}/>
   <div class="description">
-    <h2 class="title">Una herramienta con sentido pedagógico...</h2>
+    <h2 class="title">{t["landing.pedagogical.title"]}</h2>
     <div class="bullet-points">
-      <p>
-        Su lenguaje permite incorporar los conceptos principales del paradigma en
-        forma incremental, desarrollando programas con polimorfismo desde el primer día
-        e incorporando progresivamente complejidad con clases, bloques de código y mixins.
-      </p>
-      <p>
-        Wollok está diseñado con una sintaxis liviana e intuitiva que hace foco en
-        los conceptos y facilita la transición hacia los lenguajes industriales.
-      </p>
+      <p>{t["landing.pedagogical.p1"]}</p>
+      <p>{t["landing.pedagogical.p2"]}</p>
     </div>
   </div>
 </div>
