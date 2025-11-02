@@ -30,7 +30,8 @@ export default defineConfig({
         lang: "es"
       },
       en: {
-        label: "English"
+        label: "English",
+        lang: "en"
       }
     },
     social: [
@@ -43,6 +44,9 @@ export default defineConfig({
     },
     sidebar: [{
       label: "Comenzando con Wollok",
+      translations: {
+        en: "Getting Started with Wollok"
+      },
       autogenerate: {
         directory: "getting_started"
       }
@@ -53,30 +57,51 @@ export default defineConfig({
       }
     }, {
       label: "Documentación",
+      translations: {
+        en: "Documentation"
+      },
       items: [{
         label: "Introducción",
-        link: "documentation/introduction"
+        link: "documentation/introduction",
+        translations: {
+          en: "Introduction"
+        }
       }, {
         label: "Objetos",
-        link: "documentation/objects"
+        link: "documentation/objects",
+        translations: {
+          en: "Objects"
+        }
       }, {
         label: "Tests",
         link: "documentation/tests"
       }, {
         label: "Colecciones",
-        link: "documentation/collections"
+        link: "documentation/collections",
+        translations: {
+          en: "Collections"
+        }
       }, {
         label: "Clases",
-        link: "documentation/classes"
+        link: "documentation/classes",
+        translations: {
+          en: "Classes"
+        }
       }, {
         label: "Wollok Game",
         link: "documentation/wollok_game"
       }, {
         label: "Avanzado",
-        link: "documentation/advanced"
+        link: "documentation/advanced",
+        translations: {
+          en: "Advanced"
+        }
       }, {
         label: "Guía del lenguaje",
         link: "/documentation/language",
+        translations: {
+          en: "Language Guide"
+        },
         badge: {
           text: "WollokDoc",
           variant: "danger"
@@ -89,6 +114,9 @@ export default defineConfig({
       }
     },{
       label: "Novedades",
+      translations: {
+        en: "News"
+      },
       autogenerate: {
         directory: "news"
       }

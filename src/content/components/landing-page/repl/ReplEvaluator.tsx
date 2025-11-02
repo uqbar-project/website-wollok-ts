@@ -37,7 +37,33 @@ const interpreteLine = (expression: string) => {
   return interprete(interpreter!, expression)
 }
 
+// i18n translations
+const translations = {
+  es: {
+    refreshTitle: "Recarga el editor e inicia una nueva sesión del REPL",
+    reloadTitle: "Recarga el editor y ejecuta la última sesión activa",
+    evaluateTitle: "Evaluar la expresión",
+    placeholder: "Escribí una expresión como 2.even() o pepita.estaCansada()"
+  },
+  en: {
+    refreshTitle: "Reload the editor and start a new REPL session",
+    reloadTitle: "Reload the editor and run the last active session",
+    evaluateTitle: "Evaluate the expression",
+    placeholder: "Write an expression like 2.even() or pepita.isTired()"
+  }
+}
+
+const getLocale = (): 'es' | 'en' => {
+  // Check URL path for locale
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/en')) {
+    return 'en'
+  }
+  return 'es'
+}
+
 export const ReplEvaluator = () => {
+  const locale = getLocale()
+  const t = translations[locale]
   const [expression, setExpression] = useState('')
   const [history, setHistory] = useState<string[]>([])
   const [indexExpression, setIndexExpression] = useState(history.length)
@@ -141,17 +167,17 @@ export const ReplEvaluator = () => {
     </div>}
     <div className="replLine">
       <div className="botoneraReplExpression">
-        <button className="replRefresh" onClick={() => reload()} title="Recarga el editor e inicia una nueva sesión del REPL">
+        <button className="replRefresh" onClick={() => reload()} title={t.refreshTitle}>
           <img src="/repl/refresh.svg"/>
         </button>
-        <button className="replReload" onClick={() => reloadAndRefresh()} title="Recarga el editor y ejecuta la última sesión activa">
+        <button className="replReload" onClick={() => reloadAndRefresh()} title={t.reloadTitle}>
           <img src="/repl/reload.svg"/>
         </button>
         <button id="validateEditor" onClick={() => buildInterpreter()}/>
       </div>
-      <input type="text" className="replExpression" placeholder="Escribí una expresión como 2.even() o pepita.estaCansada()" onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
+      <input type="text" className="replExpression" placeholder={t.placeholder} onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botoneraReplExpression">
-        <button className="replEvaluate" onClick={() => evaluate()} title="Evaluar la expresión">
+        <button className="replEvaluate" onClick={() => evaluate()} title={t.evaluateTitle}>
           {/* https://github.com/feathericons/feather/blob/main/icons */}
           <img src="/repl/evaluate.svg"/>
         </button>

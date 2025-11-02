@@ -1,30 +1,34 @@
 ---
 import claseImage from "../../../../assets/ide2.png";
 import { Image } from "astro:assets";
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
+
+// Load translations
+const translations = isEnglish 
+  ? await import('../../../i18n/en.json')
+  : await import('../../../i18n/es.json');
+
+const t = translations.default;
 ---
 
 <div class="commercial-container">
   <div class="description">
-    <h2 class="title">...pensada desde la industria</h2>
+    <h2 class="title">{t["landing.commercial.title"]}</h2>
     <div class="bullet-points">
-      <p>
-        Como proponemos que los estudiantes programen desde el primer día con
-        testeo unitario, es importante que lo hagan en un Entorno Integrado de
-        Desarrollo dedicado. 
-      </p>
-      <p>
-        El reporte de errores, la generación automática de diagramas y su sistema de inferencia de tipos permiten
-        una experiencia que enseña que desarrollar software es más que solo programar.
-      </p>
+      <p>{t["landing.commercial.p1"]}</p>
+      <p>{t["landing.commercial.p2"]}</p>
     </div>
   </div>
-  <Image class="class-img" src={claseImage} alt="Entorno integrado de desarrollo (IDE)"/>
+  <Image class="class-img" src={claseImage} alt={isEnglish ? "Integrated Development Environment (IDE)" : "Entorno integrado de desarrollo (IDE)"}/>
 </div>
 
 <style>
   .commercial-container {
     margin-top: 0 !important;
-    padding-top: 2rem;
+    padding: 4rem 4rem;
     display: flex;
     flex-direction: row;
   }
@@ -55,7 +59,7 @@ import { Image } from "astro:assets";
 
   .description > .title {
     padding-left: 1rem;
-    font-size: 2.5em;
+    padding-bottom: 1rem;
   }
 
   @media(max-width: 50em) {

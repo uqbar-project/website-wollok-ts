@@ -170,6 +170,7 @@
 
   <script>
     const EDITOR_FILE = 'wollok-editor-file'
+    const EDITOR_LOCALE = 'wollok-editor-locale'
     const EDITOR_THEME = 'wollok-editor-theme'
     const EDITOR_FONT_SIZE = 'wollok-editor-font-size'
 
@@ -257,7 +258,9 @@
       cbTheme.value = theme
     }
 
-    const defaultFile = () => `// podemos definir objetos...
+    const defaultFile = (locale = 'es') => {
+      const samples = {
+        es: `// podemos definir objetos...
   object pepita {
 
     // ...que tienen atributos (referencias)
@@ -278,12 +281,68 @@
     // los atributos se pueden definir como properties
     // para generar automáticamente getters y setters
     var property energia = 10
+  }`,
+        en: `// we can define objects...
+  object pepita {
+
+    // ...that have attributes (references)
+    var energy = 100
+
+    // there are methods that change the object's internal state
+    method eat(food) {
+      energy += food.energy()
+    }
+
+    // and methods that calculate values
+    method isTired() = energy < 40
+
+  }
+
+  // besides objects, there are classes
+  class Seed {
+    // attributes can be defined as properties
+    // to automatically generate getters and setters
+    var property energy = 10
   }`
+      }
+      return samples[locale] || samples.es
+    }
+
+    const messages = {
+      es: {
+        fileSaved: '¡Archivo guardado!'
+      },
+      en: {
+        fileSaved: 'File saved!'
+      }
+    }
+
+    const getLocale = () => {
+      // First check data attribute from parent section
+      const mainRepl = document.querySelector('.main-repl')
+      if (mainRepl && mainRepl.dataset.locale) {
+        return mainRepl.dataset.locale
+      }
+      // Fallback: check URL path
+      if (window.location.pathname.startsWith('/en')) {
+        return 'en'
+      }
+      return 'es'
+    }
+
+    const locale = getLocale()
+    const t = messages[locale] || messages.es
 
     const loadEditorFile = () => {
-      if (!localStorage.getItem(EDITOR_FILE)) {
-        localStorage.setItem(EDITOR_FILE, defaultFile())
+      const savedLocale = localStorage.getItem(EDITOR_LOCALE)
+      const currentContent = localStorage.getItem(EDITOR_FILE)
+      
+      // If locale changed or no file exists, load default for current locale
+      if (!currentContent || savedLocale !== locale) {
+        localStorage.setItem(EDITOR_FILE, defaultFile(locale))
+        localStorage.setItem(EDITOR_LOCALE, locale)
       }
+      
       editor.setValue(localStorage.getItem(EDITOR_FILE), -1)
     }
 
@@ -347,7 +406,7 @@
       localStorage.setItem(EDITOR_FILE, getEditorContent())
       synced = true
       loadSyncedImage()
-      notifier.success('¡Archivo guardado!')
+      notifier.success(t.fileSaved)
     }
 
     const showProblems = (problems) => {

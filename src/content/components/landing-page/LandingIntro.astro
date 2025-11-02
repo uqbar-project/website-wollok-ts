@@ -2,23 +2,33 @@
 import MainRepl from "./repl/MainRepl.astro";
 import { Rocket, Book, Video } from 'lucide-react';
 
+// Get current locale and load translations
+const currentLocale = Astro.currentLocale || 'es';
+const isEnglish = currentLocale === 'en';
+
+// Load translations
+const translations = isEnglish 
+  ? await import('../../i18n/en.json')
+  : await import('../../i18n/es.json');
+
+const t = translations.default;
 ---
 <div>
   <div class="intro-container">
     <div class="welcome">
       <div class="titulo">
         <h1>Wollok</h1>
-        <p id="wollok-intro-subtitle">Aprendiendo a programar con objetos</p>
+        <p id="wollok-intro-subtitle">{t["landing.subtitle"]}</p>
       </div>
       <div class="actions">
-        <a href="/getting_started/installation" title="Instalate Wollok en tu máquina en breves pasos siguiendo este link" class="btn primary">
-          <Rocket className="icon" /> Instalar/Actualizar
+        <a href={isEnglish ? "/en/getting_started/installation" : "/getting_started/installation"} title={isEnglish ? "Install Wollok on your machine in a few steps by following this link" : "Instalate Wollok en tu máquina en breves pasos siguiendo este link"} class="btn primary">
+          <Rocket className="icon" /> {t["landing.install"]}
         </a>
-        <a href="/documentation/language" title="Si estás buscando cómo implementar un concepto o ayuda sobre los mensajes que podés mandar a un objeto, seguí este link" class="btn secondary">
-          <Book className="icon" /> Documentación
+        <a href={isEnglish ? "/en/documentation/language" : "/documentation/language"} title={isEnglish ? "If you're looking for how to implement a concept or help with messages you can send to an object, follow this link" : "Si estás buscando cómo implementar un concepto o ayuda sobre los mensajes que podés mandar a un objeto, seguí este link"} class="btn secondary">
+          <Book className="icon" /> {t["landing.documentation"]}
         </a>
-        <a href="https://youtu.be/AwkKZ41U6WE" title="Acá Fer nos trae una demo Wollok en VSCode usando la versión 0.2.0" class="btn secondary">
-          <Video className="icon" /> Tour
+        <a href="https://youtu.be/AwkKZ41U6WE" title={isEnglish ? "Here Fer brings us a Wollok demo in VSCode using version 0.2.0" : "Acá Fer nos trae una demo Wollok en VSCode usando la versión 0.2.0"} class="btn secondary">
+          <Video className="icon" /> {t["landing.tour"]}
         </a>
       </div>
     </div>

@@ -1,0 +1,32 @@
+---
+  title: "Welcome"
+  head:
+    # hide the title of the page
+    - tag: style
+      content: ".content-panel:has(h1#_top:not([data-page-title])) {
+        display: none;
+      }
+      .content-panel {
+        padding: 0 !important;
+      }
+
+      .sl-container {
+        max-width: 100% !important;
+      }
+
+      select {
+        width: 10em !important;
+        padding: 0.25em 1em 0.25em 2em !important;
+      }
+
+      select.astro4yphtoen {
+        color: red !important;
+      }
+      "
+  description: "Wollok website."
+  template: "splash"
+---
+import Landing from '../../components/landing-page/Landing.astro'
+
+<Landing/>
+
