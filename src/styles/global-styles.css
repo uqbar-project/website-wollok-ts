@@ -59,3 +59,7 @@ span.sl-badge {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+.header select {
+  width: 200px;
+}

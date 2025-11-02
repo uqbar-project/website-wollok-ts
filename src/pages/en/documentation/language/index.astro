@@ -1,0 +1,19 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import WollokPackage from "../../../../content/components/language/WollokPackage.astro";
+import {
+  wollokPackages,
+  wollokHeadings,
+} from "../../../../content/components/language/utils";
+---
+
+<StarlightPage
+  frontmatter={{
+    title: "Language Guide",
+    description: "Complete guide to the Wollok language.",
+  }}
+  headings={wollokHeadings}
+>
+  {wollokPackages.map((wPackage) => <WollokPackage wPackage={wPackage} />)}
+</StarlightPage>
+
