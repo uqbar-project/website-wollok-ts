@@ -198,7 +198,7 @@ Now you can put all the images you are going to use for the game there. You can 
 
 ```
 project
-    |- game.wpgm
+    |- myGame.wpgm
     |- package.json
     |- assets
         |- character.png
