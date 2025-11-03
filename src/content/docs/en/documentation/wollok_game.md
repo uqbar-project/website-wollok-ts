@@ -71,7 +71,7 @@ And then send the messages one by one, as the console is usually used.
 
 ```wollok
 wollok> game.start()
-🗂 ️  Serving assets from /Users/palumbongit/example/assets
+🗂 ️  Serving assets from /Users/palumbon/example/assets
 
 👾 Game available at http://localhost:3001
 ✓ true
