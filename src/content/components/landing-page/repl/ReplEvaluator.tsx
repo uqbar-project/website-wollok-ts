@@ -43,13 +43,13 @@ const translations = {
     refreshTitle: "Recarga el editor e inicia una nueva sesión del REPL",
     reloadTitle: "Recarga el editor y ejecuta la última sesión activa",
     evaluateTitle: "Evaluar la expresión",
-    placeholder: "Escribí una expresión como 2.even() o [1, 2].size()"
+    placeholder: "Escribí una expresión como 2.even() o pepita.estaCansada()"
   },
   en: {
     refreshTitle: "Reload the editor and start a new REPL session",
     reloadTitle: "Reload the editor and run the last active session",
     evaluateTitle: "Evaluate the expression",
-    placeholder: "Write an expression like 2.even() or [1, 2].size()"
+    placeholder: "Write an expression like 2.even() or pepita.isTired()"
   }
 }
 
@@ -72,6 +72,7 @@ export const ReplEvaluator = () => {
 
   useEffect(() => {
     resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
+    refreshDynamicDiagram()
   }, [formattedResult])
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
@@ -102,7 +103,7 @@ export const ReplEvaluator = () => {
   const refreshDynamicDiagram = () => {
     const elements = getDynamicDiagram(interpreter)
     // @ts-ignore
-    reloadDiagram(elements)
+    try { reloadDiagram(elements) } catch { }
   }
 
   const keyDown = (event: KeyboardEvent<HTMLInputElement>) => {
