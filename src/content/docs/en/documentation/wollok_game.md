@@ -115,7 +115,7 @@ Everyone from Wollok Game walks across the board. This is where the objects that
 - Has a **width**, expressed in _number of cells_, handled by the `game.width()` property
 - Has a **high**, expressed in _number of cells_, handled by the `game.height()` property
 - Has a **cell image**, which is set by `game.ground(image)`, where `image` is a string with the file name of the image.
-- Or you can declare an **image for the entire board, using `game.boardGround(image)`. The image will adapt to the measurements of the board (defined by its dimensions).
+- Or you can declare an **image for the entire board**, using `game.boardGround(image)`. The image will adapt to the measurements of the board (defined by its dimensions).
  
 For example
 
@@ -137,7 +137,7 @@ Now that we know how to view the game board, let's add visuals to interact. To d
 
 ### The positions
 
-**positions** are objects found in Wollok's _game_ library and define x and y coordinates. The simplest way to get a position is to ask the **game**:
+**Positions** are objects found in Wollok's _game_ library and define x and y coordinates. The simplest way to get a position is to ask the **game**:
 
 ```wollok
 wollok> game.at(2, 3)
@@ -583,7 +583,7 @@ From now on we will return with the conventional background so that it distracts
 
 Do you remember that we said that to draw an object it was necessary to define its image? Well, this is not entirely true. It is possible to display only text. 
 
-To do this, it is necessary to add a `text()` ** method to our object that returns the text to be displayed** as a string. It is important to define the position in which it should be displayed in the same way as we did before. The object may not have the `image()` method.
+To do this, it is necessary to add a `text()` method to our object that **returns the text to be displayed** as a string. It is important to define the position in which it should be displayed in the same way as we did before. The object may not have the `image()` method.
 
 By running this **new** program:
 
@@ -768,7 +768,7 @@ program control {
 }
 ```
 
-This allows us to *pause* the rain with the letter **p**, replay* with the letter **r**, and *stop* with the letter **s**.
+This allows us to *pause* the rain with the letter **p**, *replay* with the letter **r**, and *stop* with the letter **s**.
 
 ### Volume
 
@@ -912,6 +912,6 @@ describe "My describe" {
 
 The code for the examples mentioned is in [this repository](https://github.com/wollok/ejemploGameSite).
 
-You can also research [all of these examples](https://github.com/wollok) in the Wollok repository, and play the games presented in the [**Wollok Game Contest**](/news/concurso2024).
+You can also research [all of these examples](https://github.com/wollok) in the Wollok repository, and play the games presented in the [**Wollok Game Contest**](/en/news/concurso2024).
 
 Have fun!

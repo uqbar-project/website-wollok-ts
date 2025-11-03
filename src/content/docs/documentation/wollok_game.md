@@ -115,7 +115,7 @@ Todo el mundo de Wollok Game pasa por el tablero. Aquí es donde se van a agrega
 - Tiene un **ancho**, expresado en _cantidad de celdas_, manejado por la propiedad `game.width()`
 - Tiene un **alto**, expresado en _cantidad de celdas_, manejado por la propiedad `game.height()`
 - Tiene una **imagen de celda**, que se setea por medio de `game.ground(imagen)`, en donde `imagen` es un string con el nombre del archivo de la imagen.
-- O podés declara una **imagen para todo el tablero, por medio de `game.boardGround(imagen)`. La imagen se adaptará a las medidas del tablero (definido por sus dimensiones).
+- O podés declara una **imagen para todo el tablero**, por medio de `game.boardGround(imagen)`. La imagen se adaptará a las medidas del tablero (definido por sus dimensiones).
  
 Por ejemplo
 
