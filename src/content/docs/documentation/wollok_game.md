@@ -71,7 +71,7 @@ Y luego enviar los mensajes uno a uno, como habitualmente se usa la consola.
 
 ```wollok
 wollok> game.start()
-🗂️  Serving assets from /Users/palumbon/git/ejemplo/assets
+🗂️  Serving assets from /Users/palumbon/ejemplo/assets
 
 👾 Game available at http://localhost:3001
 ✓ true
@@ -98,7 +98,7 @@ Al ejecutar por consola este archivo, hacer
 
 ```wollok
 wollok:ejemplo> juego.iniciar() 
-🗂️  Serving assets from /Users/palumbon/git/ejemplo/assets
+🗂️  Serving assets from /Users/palumbon/ejemplo/assets
 
 👾 Game available at http://localhost:3001
 ✓ true
@@ -865,7 +865,7 @@ object soundMock {
 }
 ```
 
-Pero los sonidos se los pedimos al objeto `game()`. Entonces, tenemos que cambiar el objeto al cual le pedimos los sonidos. Vamos a crear un nuevo objeto que se va a encargar de crearlos por nosotros. Lo llamaremos `soundProducer`. Dicho objeto, en un principio, se lo pedirá a `game` porque necesitamos los sonidos de verdad. Lo interesante es que vamos a poder intercambiar a quién le pide los sonidos. Entonces, podemos tener otro objeto que nos de los sonidos "de mentira" para poder hacer nuestros tests. A este último lo llamaremos `soundProviderMock`. Bajando esto a tierra, podríamos tener algo como lo siguiente:
+Pero los sonidos se los pedimos al objeto `game`. Entonces, tenemos que cambiar el objeto al cual le pedimos los sonidos. Vamos a crear un nuevo objeto que se va a encargar de crearlos por nosotros. Lo llamaremos `soundProducer`. Dicho objeto, en un principio, se lo pedirá a `game` porque necesitamos los sonidos de verdad. Lo interesante es que vamos a poder intercambiar a quién le pide los sonidos. Entonces, podemos tener otro objeto que nos de los sonidos "de mentira" para poder hacer nuestros tests. A este último lo llamaremos `soundProviderMock`. Bajando esto a tierra, podríamos tener algo como lo siguiente:
 
 ```wollok
 import wollok.game.*
@@ -912,6 +912,6 @@ describe "Mi describe" {
 
 El código de los ejemplos mencionados está en [este repositorio](https://github.com/wollok/ejemploGameSite).
 
-También podés investigar [todos estos ejemplos](https://github.com/wollok?utf8=%E2%9C%93&q=game&type=&language=) en el repositorio de Wollok y jugar a los juegos del [**Concurso de Wollok Game**](/news/concurso2024)
+También podés investigar [todos estos ejemplos](https://github.com/wollok) en el repositorio de Wollok y jugar a los juegos del [**Concurso de Wollok Game**](/news/concurso2024)
 
 ¡Que te diviertas!
