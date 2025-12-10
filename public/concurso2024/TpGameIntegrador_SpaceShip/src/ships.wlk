@@ -56,7 +56,7 @@ class MainShip inherits Nave {
 	}
 
 	override method impactoLaser() {
-		game.sound("assets/whoosh.mp3").play()
+		game.sound("whoosh.mp3").play()
 		vidas.perderVida()
 		if (vidas.vidas() == 0) super()
 	}

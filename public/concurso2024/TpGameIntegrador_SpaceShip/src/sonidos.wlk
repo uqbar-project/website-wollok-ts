@@ -6,20 +6,20 @@ import vidas.*
 
 object sonidoWin {
 
-	method sonido() = "assets/winning.mp3"
+	method sonido() = "winning.mp3"
 
 	method play() {
-		game.sound("assets/winning.mp3").play()
+		game.sound("winning.mp3").play()
 	}
 
 }
 
 object sonidoGameOver {
 
-	method sonido() = "assets/game-over.mp3"
+	method sonido() = "game-over.mp3"
 
 	method play() {
-		game.sound("assets/game-over.mp3").play()
+		game.sound("game-over.mp3").play()
 	}
 
 }
@@ -27,7 +27,7 @@ object sonidoGameOver {
 object sonidoDisparos {
 
 	method play() {
-		game.sound("assets/laser.mp3").play()
+		game.sound("laser.mp3").play()
 	}
 
 }
@@ -35,14 +35,14 @@ object sonidoDisparos {
 object explosion {
 
 	method play() {
-		game.sound("assets/explosion.mp3").play()
+		game.sound("explosion.mp3").play()
 	}
 
 }
 
 object musicaDeFondo {
 
-	const musicaFondo = game.sound("assets/musicafondo.mp3")
+	const musicaFondo = game.sound("musicafondo.mp3")
 
 	
 	method iniciar() {

@@ -78,7 +78,7 @@ Participan 24 juegos de distintas universidades
             </small>
         </li>
         <li class="list-group-item">
-            Space Ship (Wollok Eclipse)
+            <a href="/concurso/TpGameIntegrador_SpaceShip">Space Ship</a>
             <small style="font-size: 0.7em;">
                 -
                 <a target="_blank" href="https://github.com/mauriaranngo/TpGameIntegrador_SpaceShip">Repositorio</a> 
