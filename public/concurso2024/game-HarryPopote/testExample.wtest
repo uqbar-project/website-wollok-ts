@@ -1,0 +1,47 @@
+import _04visuales.*
+import _07harry.*
+import _08dementores.*
+import _11hechizo.*
+import _03niveles.*
+
+
+describe "colisiones" {
+    const dementor1 = new Dementor(position = game.at(18,5), objeto = null)
+
+    const fragmento1 = new InvitacionHogwarts(image = "InvitacionHW1-rbg.png" , position = game.at(1, 10))
+    const fragmento2 = new InvitacionHogwarts(image = "InvitacionHW1-rbg.png" , position = game.at(1, 10)) 
+    const property fragmentos = [fragmento1, fragmento2]
+
+    test "un Dementor al colisionar con harry hace que este pierda una vida, las vidas iniciales de harry son 3"  {
+        dementor1.colisionarConHarry()
+        assert.equals(2, harry.vida())
+    }
+    test "harry al colisionar 3 veces con un dementor se queda sin vidas" {
+        dementor1.colisionarConHarry()
+        dementor1.colisionarConHarry()
+        dementor1.colisionarConHarry()
+        assert.that(harry.sinVidas())
+    }
+    test "harry al colisionar con Ron no pierde vidas"{
+        ron.colisionarConHarry()
+        assert.equals(3, harry.vidas())
+    }
+    test "harry al encontrar todos los fragmentos tiene invitacion completa"{
+        harry.encontrarFragmento(fragmento1)
+        harry.encontrarFragmento(fragmento2)
+        assert.that(harry.tieneInvitacionCompleta())
+    }
+}
+    describe "Se testea que el juego comienze con los hechizos desactivados y se activen en el nivel 2"{
+    test"Hechizo deshabilitado en Nivel 1"{
+        nivel1.jugarNivel()
+        assert.notThat(hechizo.disponible())        
+    }
+
+   test"Hechizo habilitado en Nivel 2"{
+        nivel2.jugarNivel()
+        assert.that(hechizo.disponible())        
+    }
+
+
+}

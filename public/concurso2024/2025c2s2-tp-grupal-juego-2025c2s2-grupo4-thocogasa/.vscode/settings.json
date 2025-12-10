@@ -1,0 +1,13 @@
+{
+  "cSpell.ignorePaths": [
+    "**/*.wlk",
+    "**/*.wpgm",
+    "**/*.wtest"
+  ],
+  // Opcional: ocultar estos archivos del explorador si quieres
+  "files.exclude": {
+    "**/*.wlk": false,
+    "**/*.wpgm": false,
+    "**/*.wtest": false
+  }
+}

@@ -1,0 +1,12 @@
+import castillo.*
+import niveles.*
+import wollok.game.*
+describe "prueba castillo" {
+
+  test "ubicacion va a la siguiente permitida por el entorno del nivel" {
+    personajePrincipal.moverseHaciaArriba()
+    personajePrincipal.moverseHaciaArriba()
+    assert.equals(personajePrincipal.position(), game.at(8,3))
+  }
+
+}

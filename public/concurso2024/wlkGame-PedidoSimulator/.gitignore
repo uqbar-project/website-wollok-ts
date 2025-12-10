@@ -1,0 +1,8 @@
+
+# Local history
+.history
+
+# Wollok Log
+*.log
+
+assets/papelera

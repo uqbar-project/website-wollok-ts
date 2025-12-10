@@ -1,0 +1,16 @@
+
+import wollok.game.*
+import escenas.menuPrincipal.*
+import escenas.cambioDeEscena.*
+
+program Ajedrez {
+	game.title("Last Pawn Standing")
+	game.cellSize(64)
+	game.height(8)
+	game.width(7)
+	
+	game.boardGround("Tablero.png")
+	managerEscena.cargar(menuPrincipal)
+
+	game.start()
+}

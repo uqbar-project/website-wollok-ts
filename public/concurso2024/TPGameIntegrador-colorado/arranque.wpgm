@@ -1,0 +1,11 @@
+import wollok.game.*
+import protagonista.*
+import nivelDosDificil.*
+import configuracionTeclas.*
+import juego.*
+
+
+program IniciarJuego {  
+    laUltimaClave.iniciar()
+    game.start()
+}

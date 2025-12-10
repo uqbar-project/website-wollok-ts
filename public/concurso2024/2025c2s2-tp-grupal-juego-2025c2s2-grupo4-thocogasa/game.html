@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Last Pawn Standing - Wollok Game</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Cargando Last Pawn Standing...</div>
+  </div>
+
+  <div id="wollok-game-container">
+    <iframe 
+      id="gameFrame" 
+      src="http://localhost:4200" 
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="controls-panel" id="controlsPanel">
+    <button class="panel-toggle" id="panelToggle">
+      <span class="arrow">◀</span>
+    </button>
+    
+    <div class="panel-content">
+      <h2 class="controls-title">CONTROLES</h2>
+      
+      <div class="control-item">
+        <img src="assets/RBlanco.png" alt="Rey" class="piece-icon">
+        <div class="control-keys">
+          <span class="key">←</span>
+          <span class="key">→</span>
+        </div>
+        <span class="control-label">Mover Rey</span>
+      </div>
+
+      <div class="control-item">
+        <img src="assets/PBlanco.png" alt="Peón" class="piece-icon">
+        <div class="control-keys">
+          <span class="key">1</span>
+        </div>
+        <div class="control-info">
+          <span class="control-label">Colocar Peón</span>
+          <span class="control-price">$20</span>
+        </div>
+      </div>
+
+      <div class="control-item">
+        <img src="assets/CBlanco.png" alt="Caballo" class="piece-icon">
+        <div class="control-keys">
+          <span class="key">2</span>
+        </div>
+        <div class="control-info">
+          <span class="control-label">Colocar Caballo</span>
+          <span class="control-price">$50</span>
+        </div>
+      </div>
+
+      <div class="control-item">
+        <img src="assets/ABlanco.png" alt="Alfil" class="piece-icon">
+        <div class="control-keys">
+          <span class="key">3</span>
+        </div>
+        <div class="control-info">
+          <span class="control-label">Disparar Alfil</span>
+          <span class="control-price">$70</span>
+        </div>
+      </div>
+
+      <div class="control-item">
+        <img src="assets/TBlanco.png" alt="Torre" class="piece-icon">
+        <div class="control-keys">
+          <span class="key">4</span>
+        </div>
+        <div class="control-info">
+          <span class="control-label">Disparar Torre</span>
+          <span class="control-price">$100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GAME_PORT = 4200;
+    const gameFrame = document.getElementById('gameFrame');
+    const loadingScreen = document.getElementById('loadingScreen');
+    const controlsPanel = document.getElementById('controlsPanel');
+    const panelToggle = document.getElementById('panelToggle');
+
+    gameFrame.src = `http://localhost:${GAME_PORT}`;
+
+    gameFrame.addEventListener('load', () => {
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+      }, 500);
+    });
+
+    setTimeout(() => {
+      loadingScreen.classList.add('hidden');
+    }, 3000);
+
+    panelToggle.addEventListener('click', () => {
+      controlsPanel.classList.toggle('collapsed');
+    });
+
+    function scaleGame() {
+      const availableHeight = window.innerHeight - 100;
+      const availableWidth = window.innerWidth - 350;
+      
+      const scaleHeight = availableHeight / 512;
+      const scaleWidth = availableWidth / 448;
+      const scale = Math.min(scaleHeight, scaleWidth, 1.5);
+      
+      gameFrame.style.transform = `scale(${scale})`;
+      gameFrame.style.transformOrigin = 'center center';
+    }
+
+    window.addEventListener('resize', scaleGame);
+    window.addEventListener('load', scaleGame);
+    scaleGame();
+
+    window.addEventListener('message', (event) => {
+      if (event.origin !== `http://localhost:${GAME_PORT}`) return;
+      
+      if (event.data.type === 'score') {
+        updateScore(event.data.value);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(key => {
+        const keyText = key.textContent.trim();
+        const pressedKey = e.key;
+        
+        if (
+          (keyText === '←' && pressedKey === 'ArrowLeft') ||
+          (keyText === '→' && pressedKey === 'ArrowRight') ||
+          (keyText === '1' && pressedKey === '1') ||
+          (keyText === '2' && pressedKey === '2') ||
+          (keyText === '3' && pressedKey === '3') ||
+          (keyText === '4' && pressedKey === '4')
+        ) {
+          key.style.transform = 'translateY(2px)';
+          key.style.boxShadow = 'inset 0 -1px 2px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.4)';
+          setTimeout(() => {
+            key.style.transform = '';
+            key.style.boxShadow = '';
+          }, 150);
+        }
+      });
+
+      gameFrame.contentWindow.postMessage({
+        type: 'keydown',
+        key: e.key,
+        code: e.code
+      }, `http://localhost:${GAME_PORT}`);
+    });
+
+    document.addEventListener('keyup', (e) => {
+      gameFrame.contentWindow.postMessage({
+        type: 'keyup',
+        key: e.key,
+        code: e.code
+      }, `http://localhost:${GAME_PORT}`);
+    });
+
+    gameFrame.addEventListener('error', () => {
+      loadingScreen.innerHTML = `
+        <div style="text-align: center;">
+          <div style="font-size: 3em; margin-bottom: 20px;">⚠️</div>
+          <div class="loading-text">No se pudo conectar al juego</div>
+          <div style="color: #fff; margin-top: 10px; font-size: 0.9em;">
+            Asegúrate de que Wollok esté ejecutándose en el puerto ${GAME_PORT}
+          </div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

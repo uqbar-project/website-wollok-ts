@@ -1,0 +1,10 @@
+import wollok.game.*
+import paloma.*
+import muros.*
+import juego.*
+import puntos.*
+
+program FlyPichon {
+	juego.inicio()
+	game.start()
+}

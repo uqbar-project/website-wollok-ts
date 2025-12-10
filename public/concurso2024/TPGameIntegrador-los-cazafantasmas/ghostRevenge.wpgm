@@ -1,0 +1,16 @@
+import wollok.game.*
+import fantasma.*
+import cazafantasmas.*
+import items.*
+import personas.*
+import controles.*
+import niveles.*
+import nivel1.*
+import nivel2.*
+import pantallaInicio.*
+
+//Iniciar Juego
+program GhostRevenge {
+    juego.configurar()
+}
+

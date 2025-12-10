@@ -1,0 +1,60 @@
+import oleadas.*
+import UI.*
+
+describe "Testeando UI" {
+    method initialize(){
+        oleada.crearOleada(5)
+        oleada.spawnearSiguienteEnemigo()
+        oleada.spawnearSiguienteEnemigo()
+    }
+  test "probando score" {
+    assert.equals(0, score.valor())
+    score.addScore(80)
+    assert.equals(80, score.valor())
+
+    score.reiniciar()
+    assert.equals(0, score.valor())
+  }
+  test "probando recurso" {
+    assert.equals(100, recurso.valor())
+
+    recurso.añadirRecursos(50)
+    assert.equals(150, recurso.valor())
+
+    recurso.restarRecursos(80)
+    assert.equals(70, recurso.valor())
+
+    recurso.reiniciar()
+
+    assert.equals(100, recurso.valor())
+  }
+  test "Probando piezas restantes" {
+    //oleada.crearOleada()
+    assert.equals(5, piezasRestantes.valorAMostrar())
+
+    oleada.spawnearSiguienteEnemigo()
+    const enemigo = oleada.enemigosActivos()
+    enemigo.remove(enemigo.first())
+
+    assert.equals(4, piezasRestantes.valorAMostrar())
+    
+    //Reinicia solo el valor
+    piezasRestantes.reiniciar()
+
+    assert.equals(4, piezasRestantes.valorAMostrar())
+  }
+  test "Probando Vida" {
+    assert.equals(3, vida.valor())
+    vida.perderVida()
+    assert.equals(2, vida.valor())
+
+    vida.reiniciar()
+    assert.equals(3, vida.valor())
+  }
+  test "Probando oleada actual" {
+    assert.equals(1, oleadaActual.valorAMostrar())
+
+    oleadaActual.reiniciar()
+    assert.equals(1, oleadaActual.valorAMostrar())
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "base-game",
+  "version": "1.0.0",
+  "resourceFolder": "assets",
+  "wollokVersion": "4.2.3",
+  "author": "Dario Asurey, Mayra Garcia, Agustín Fernández",
+  "license": "ISC"
+}

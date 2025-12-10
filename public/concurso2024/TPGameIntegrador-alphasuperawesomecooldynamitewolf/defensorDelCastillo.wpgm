@@ -1,0 +1,21 @@
+import enemigos.*
+import castillo.*
+import wollok.game.*
+import juegoBase.*
+import pantalla.*
+import menu.*
+import niveles.*
+import armas.*
+import intro.*
+
+//import enemigos.map 
+
+program DefensorDelCastillo {
+	//inicia
+	//ver que parce que va dos niveles para arriba
+	//cambiar el objeto a la clase
+	juego.iniciar()
+}
+
+//iniciar nivel de nuevo -> son doble
+//reiniciar nivel -> son triple 

@@ -1,0 +1,5 @@
+import wollok.game.*
+import estructura.*
+program pedidoSimulator {
+	compilador.iniciar()
+}

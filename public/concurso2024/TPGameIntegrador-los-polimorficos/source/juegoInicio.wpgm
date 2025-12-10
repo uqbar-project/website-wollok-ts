@@ -1,0 +1,15 @@
+import escenario.*
+import wollok.game.*
+import cachito.*
+import musicaFondo.*
+import escenas.*
+
+program bindingOfCachitto {
+	game.title("The Binding of Cachito")
+	cachito.configurarTeclas()
+	game.height(16)
+	game.width(11)
+	controles.iniciar()
+	game.onCollideDo(cachito, {objeto => objeto.interaccion()}) 
+	game.start()
+}

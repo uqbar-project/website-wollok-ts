@@ -1,0 +1,13 @@
+{
+  "name": "juego-chess",
+  "version": "1.0.0",
+  "resourceFolder": "assets",
+  "wollokVersion": "4.0.0",
+  "author": "GabrielNicolasKakazu",
+  "license": "ISC",
+  "game": {
+    "title": "Last Pawn Standing",
+    "html": "game.html",
+    "css": "game.css"
+  }
+}

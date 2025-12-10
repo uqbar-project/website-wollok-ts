@@ -1,0 +1,7 @@
+import juego.*
+
+program main {
+	juego.iniciarJuego()
+}
+
+ 

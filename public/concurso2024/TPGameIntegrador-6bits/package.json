@@ -1,0 +1,8 @@
+{
+  "name": "Prueba-Game",
+  "version": "1.0.0",
+  "wollokVersion": "4.0.0",
+  "author": "Seba",
+  "license": "ISC",
+  "resourceFolder" : "assets"
+}

@@ -1,0 +1,16 @@
+import wollok.game.*
+import personajes.*
+import objetos.*
+import nivelManager.*
+import screens.*
+
+program miJuego {
+  game.width(25)
+  game.height(10)
+  game.cellSize(65)
+  game.title("Heroe de la mazmorra")
+
+  game.start()
+  menuInicial.setup()
+
+}

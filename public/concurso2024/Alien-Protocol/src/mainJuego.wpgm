@@ -1,0 +1,25 @@
+import wollok.game.*
+/*import elementos.caja
+import src.Personajes.*
+import Personajes.*personaje.*
+import enemigo.Enemigo
+import Personajes.balas.*
+import Personajes.armas.*
+import Personajes.posiciones.*
+import mapas.**/
+import juego.*
+
+program alienGame {
+	game.title("Alien-Protocol")
+	game.height(12)
+	game.width(12)
+	game.ground("piso.png")
+	//game.height(11)
+	//game.width(11)
+
+  // game.boardGround("fondo2.jpg")
+	//game.ground("celda2.png")
+	
+	juego.iniciar()
+	game.start()
+}

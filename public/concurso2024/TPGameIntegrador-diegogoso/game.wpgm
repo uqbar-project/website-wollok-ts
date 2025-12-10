@@ -1,0 +1,20 @@
+import wollok.game.*
+import clases.*
+import hechizos.*
+import direcciones.*
+import juego.*
+
+program redWaterMystery {
+    juego.iniciarMenu()
+
+    game.title("gameGeneral")
+    
+    game.height(16)
+    
+    game.width(16)
+    
+    game.cellSize(64)
+
+    game.start()
+}
+
