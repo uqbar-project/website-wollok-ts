@@ -1,0 +1,301 @@
+import gameManager.*
+import general.*
+import tableroYCartas.*
+import interfaz.*
+import sonidosGlobales.*
+import controladores.*
+import highscores.*
+
+describe "Tests de gameManager" {
+    test "paresTotales y tipoDeJuego iniciales" {
+        gameManager.reiniciarAtributos()
+        assert.equals(1, gameManager.paresTotales())
+        assert.that(gameManager.tipoDeJuego())
+    }
+
+    test "sumarParEncontrado incrementa paresEncontrados" {
+        gameManager.reiniciarAtributos()
+        gameManager.sumarParEncontrado()
+        assert.equals(1, gameManager.paresEncontrados())
+    }
+
+    test "cambiar tipo de juego y pares totales al iniciar juego" {
+        gameManager.inicioDelJuego(5,false)
+        assert.equals(5, gameManager.paresTotales())
+        assert.notThat(gameManager.tipoDeJuego())
+        assert.that(gameManager.juegoIniciado())
+    }
+
+    test "reiniciarAtributos deja los valores iniciales" {
+        gameManager.inicioDelJuego(5, false)
+        gameManager.reiniciarAtributos()
+        assert.equals(1, gameManager.paresTotales())
+        assert.equals(0, gameManager.paresEncontrados())
+        assert.that(gameManager.tipoDeJuego())
+        assert.notThat(gameManager.juegoIniciado())
+    }
+
+    test "inicioDelJuego setea atributos correctamente" {
+        gameManager.reiniciarAtributos()
+        gameManager.inicioDelJuego(7, false)
+        assert.equals(7, gameManager.paresTotales())
+        assert.notThat(gameManager.tipoDeJuego())
+        assert.that(gameManager.juegoIniciado())
+    }
+
+    test "reiniciarTodo resetea todos los atributos y llama iniciar" {
+        gameManager.inicioDelJuego(4, false)
+        gameManager.iniciar()
+        gameManager.reiniciarTodo()
+        assert.equals(1, gameManager.paresTotales())
+        assert.equals(0, gameManager.paresEncontrados())
+        assert.that(gameManager.tipoDeJuego())
+        assert.notThat(gameManager.juegoIniciado()) 
+    }
+
+}
+
+describe "Tests de cursor" {
+    test "iniciar activa el teclado" {
+        cursor.iniciar()
+        assert.equals(true, cursor.keyboardActivo())
+    }
+
+    test "paralizar y reanudar acción" {
+        cursor.paralizarAccion()
+        assert.equals(false, cursor.permitirAccion())
+        cursor.reanudarAccion()
+        assert.equals(true, cursor.permitirAccion())
+    }
+
+}
+
+describe "Tests de comparador" {
+    test "procesarCarta cambia tengoUnaCarta" {
+        const cartaMock = new CartaDibujo(id=1)
+        comparador.procesarCarta(cartaMock)
+        assert.equals(true, comparador.tengoUnaCarta())
+    }
+
+    test "reiniciarAtributos deja valores iniciales" {
+        comparador.primerCarta() == 1
+        comparador.segundaCarta() == 2
+        comparador.tengoUnaCarta() 
+        comparador.reiniciarAtributos()
+        assert.equals(null, comparador.primerCarta())
+        assert.equals(null, comparador.segundaCarta())
+        assert.equals(false, comparador.tengoUnaCarta())
+    }
+    test "comparador lanza excepción si procesa carta nula" {
+        assert.throwsException({comparador.procesarCarta(null)})
+    }
+}
+
+describe "Tests de puntuacionMngr" {
+    test "sumar y restar puntos funcionan correctamente" {
+        puntuacionMngr.reiniciarAtributos()
+        puntuacionMngr.sumarPuntos()
+        assert.that(puntuacionMngr.puntos() > 0)
+        puntuacionMngr.restarPuntos()
+        assert.notThat(puntuacionMngr.puntos() < 0)
+    }
+
+    test "restarPuntos no deja puntos negativos" {
+        puntuacionMngr.reiniciarAtributos()
+        puntuacionMngr.restarPuntos()
+        assert.that(puntuacionMngr.puntos() >= 0)
+    }
+
+    test "reiniciarAtributos deja valores iniciales" {
+        puntuacionMngr.sumarPuntos()
+        puntuacionMngr.reiniciarAtributos()
+        assert.equals(0, puntuacionMngr.puntos())
+        assert.equals(0, puntuacionMngr.jugadas())
+        assert.equals(false, puntuacionMngr.bonusActivo())
+    }
+
+    
+}
+
+describe "Tests de tableroYCartas" {
+    test "crearCartas genera el número correcto de cartas y celdas" {
+        tableroSiete.reiniciarAtributos()
+        tableroSiete.generarTodasCartaNumero()
+        tableroSiete.crearCartas(3, true)
+        assert.equals(6, tableroSiete.cartas().size())
+        assert.equals(6, tableroSiete.celdas().size())
+    }
+
+    test "reiniciarAtributos deja todo vacío y resetea cartaNumero" {
+        tableroSiete.generarTodasCartaNumero()
+        tableroSiete.crearCartas(2, true)
+        tableroSiete.reiniciarAtributos()
+        assert.equals(0, tableroSiete.cartas().size())
+        assert.equals(0, tableroSiete.celdas().size())
+        assert.equals(0, tableroSiete.cartaNumero().size())
+    }
+
+    test "carta da vuelta y muestra el diseño" {
+        const carta = new CartaDibujo(id=1)
+        carta.voltear()
+        assert.that(carta.esVisible())
+        carta.voltear()
+        assert.notThat(carta.esVisible())
+    }
+
+    test "CartaTexto muestra imagen/nombre correcto" {
+        const carta = new CartaTexto(id=2)
+        carta.voltear()
+        assert.equals("SpriteT2.png", carta.image())
+    }
+
+    test "CartaTexto debe lanzar excepcion con id invalido" {
+        assert.throwsException({
+            const carta = new CartaTexto(id=99)
+            carta.voltear()
+            carta.nombreDibujo()
+        })
+    }
+}
+
+describe "Tests sonidosGlobales" {//SAMPLE_Siempre darán positivo
+    test "volumenMenu ajusta volumen sin error" {
+        sonidosGlobales.volumenMenu(0.7)
+        assert.that(true) 
+    }
+
+    test "volumenJuego ajusta volumen sin error" {
+        sonidosGlobales.volumenJuego(0.2)
+        assert.that(true)
+    }
+
+
+}
+
+describe "Tests de menuCrearHighscore" {
+    test "iniciar desactiva reinicio y activa highscoreMngr" {
+        menuCrearHighscore.reiniciarAtributos()
+        menuCrearHighscore.iniciar()
+        assert.equals(0, menuCrearHighscore.letrasIngresadas())
+        assert.equals(false, menuCrearHighscore.desactivarEditor())
+    }
+
+    test "sumarletraIngresada incrementa letrasIngresadas" {
+        menuCrearHighscore.reiniciarAtributos()
+        menuCrearHighscore.sumarletraIngresada()
+        assert.equals(1, menuCrearHighscore.letrasIngresadas())
+    }
+
+    
+}
+
+
+describe "Tests de FichaHighscore" {
+    test "puntajeString devuelve string con offset" {
+        const ficha = new FichaHighscore(inA="A", inB="B", inC="C", puntajeNum=123)
+        assert.equals("1123", ficha.puntajeString())
+    }
+
+    test "acceso a iniciales y puntaje" {
+        const ficha = new FichaHighscore(inA="X", inB="Y", inC="Z", puntajeNum=999)
+        assert.equals("X", ficha.inA())
+        assert.equals("Y", ficha.inB())
+        assert.equals("Z", ficha.inC())
+        assert.equals(999, ficha.puntajeNumero())
+    }
+
+    test "FichaHighscore.puntajeString lanza excepción si puntajeNum es nulo" {
+        assert.throwsException({
+            const ficha = new FichaHighscore(inA="A", inB="B", inC="C", puntajeNum=null)
+            ficha.puntajeString()
+        })
+    }
+}
+
+describe "Tests de menuListaHighscores" {
+    test "ingresar agrega un record" {
+        const ficha = new FichaHighscore(inA="A", inB="B", inC="C", puntajeNum=100)
+        menuListaHighscores.ingresar(ficha)
+        assert.that(menuListaHighscores.records().contains(ficha))
+    }
+
+    test "ordenarHighscores ordena por puntaje" {
+        menuListaHighscores.records().clear()
+        const ficha1 = new FichaHighscore(inA="A", inB="B", inC="C", puntajeNum=200)
+        const ficha2 = new FichaHighscore(inA="D", inB="E", inC="F", puntajeNum=300)
+        menuListaHighscores.ingresar(ficha1)
+        menuListaHighscores.ingresar(ficha2)
+        menuListaHighscores.ordenarHighscores()
+        assert.equals(ficha2, menuListaHighscores.listaHighscoresOrdenada().get(0))
+    }
+
+    test "mejoresCuatro devuelve hasta cuatro records" {
+        menuListaHighscores.listaHighscoresOrdenada().clear()
+        menuListaHighscores.listaHighscoresOrdenada().add(new FichaHighscore(inA="A", inB="B", inC="C", puntajeNum=1))
+        menuListaHighscores.listaHighscoresOrdenada().add(new FichaHighscore(inA="D", inB="E", inC="F", puntajeNum=2))
+        menuListaHighscores.listaHighscoresOrdenada().add(new FichaHighscore(inA="G", inB="H", inC="I", puntajeNum=3))
+        menuListaHighscores.listaHighscoresOrdenada().add(new FichaHighscore(inA="J", inB="K", inC="L", puntajeNum=4))
+        menuListaHighscores.listaHighscoresOrdenada().add(new FichaHighscore(inA="M", inB="N", inC="O", puntajeNum=5))
+        assert.equals(4, menuListaHighscores.mejoresCuatro().size())
+    }
+
+}
+describe "Tests de highscoreMngr" {
+    test "iniciar agrega visual y activa teclado" {
+        highscoreMngr.iniciar()
+        assert.that(game.hasVisual(highscoreMngr))
+        assert.equals(true, highscoreMngr.keyboardActivo())
+    }
+
+    test "desactivarEditor quita visual y reinicia atributos" {
+        highscoreMngr.iniciar()
+        highscoreMngr.desactivarEditor()
+        assert.notThat(game.hasVisual(highscoreMngr))
+        assert.equals(false, highscoreMngr.keyboardActivo())
+    }
+
+    test "plasmarPuntaje agrega los tres dígitos" {
+        highscoreMngr.puntajesPlasmados().clear()
+        highscoreMngr.plasmarPuntaje(123, game.at(3,3))
+        assert.equals(3, highscoreMngr.puntajesPlasmados().size())
+    }
+    test "pasarAlSiguenteCaracter mueve la posición" {
+        highscoreMngr.iniciar()
+        const posAntes = highscoreMngr.position()
+        highscoreMngr.pasarAlSiguenteCaracter()
+        assert.notEquals(posAntes, highscoreMngr.position())
+        highscoreMngr.desactivar()
+    }
+     test "destruirPlasmados limpia visuales y arrays" {
+        highscoreMngr.iniciar()
+        highscoreMngr.registrarLetra()
+        highscoreMngr.plasmarPuntaje(123, game.at(3,3))
+        highscoreMngr.destruirPlasmados()
+        assert.equals(0, highscoreMngr.letrasPlasmadas().size())
+        assert.equals(0, highscoreMngr.puntajesPlasmados().size())
+        highscoreMngr.desactivar()
+    }
+    test "registrarLetra lanza excepción si no hay letra seleccionada" {
+        assert.throwsException({
+            highscoreMngr.inicialesActuales.clear()
+            highscoreMngr.registrarLetra()
+        })
+    }
+
+    
+    
+}
+
+describe "Tests de visualNoHighscore" {
+    test "iniciar agrega visual y desactivar lo quita" {
+        visualNoHighscore.iniciar()
+        assert.that(game.hasVisual(visualNoHighscore))
+        visualNoHighscore.desactivar()
+        assert.notThat(game.hasVisual(visualNoHighscore))
+    }
+
+    test "getters devuelven valores correctos" {
+        assert.equals("NoRec.png", visualNoHighscore.image())
+        assert.equals(game.at(0,0), visualNoHighscore.position())
+    }
+}

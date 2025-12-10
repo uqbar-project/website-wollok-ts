@@ -1,0 +1,14 @@
+import wollok.game.*
+import teclasymenu.*
+import  sonidosEfecto.*
+
+program unahBLocks { 
+    game.title("UnahBlocks - TP Game")
+    game.cellSize(100) //cambio a celdas mas grandes adaptado a nuevos assets
+    game.height(12)
+    game.width(24)
+    game.boardGround('fondo.png')
+    menu.mostrar()
+    game.start()
+}
+

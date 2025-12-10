@@ -1,0 +1,13 @@
+import wollok.game.*
+import gameManager.*
+
+program MemoTest {
+
+	gameManager.configurarEscenario()
+
+	gameManager.configurarControles()
+	
+	gameManager.iniciar()
+
+	game.start()
+} 
