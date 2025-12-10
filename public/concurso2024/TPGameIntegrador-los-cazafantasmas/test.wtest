@@ -1,0 +1,66 @@
+import puntaje.*
+import wollok.game.*
+import fantasma.*
+import cazafantasmas.*
+import items.*
+import personas.*
+import controles.*
+import niveles.*
+import nivel1.*
+import nivel2.*
+import pantallaInicio.*
+
+describe "test del game" {
+  const cazafantasma = new Cazafantasma(nivelActual=nivel1)
+  const trampa = new Trampa()
+  const posion = new Pocion()
+  const persona1 = new Persona(nivelActual=nivel1)
+  const nivel1 = new Nivel1()
+  method initialize() {
+    game.addVisual(trampa)
+    game.addVisual(posion)
+    game.addVisual(persona1)
+  }
+  
+  test "El fantasma pierde 1 vida, porque el cazador lo atrapa" {
+    cazafantasma.atrapar(grimly)
+    assert.equals(2, vidaGrimly.vidasActuales())
+  }
+  
+  test "El fantasma pierde 1 vida, porque la trampa lo atrapa" {
+    trampa.actuar(grimly)
+    assert.equals(2, vidaGrimly.vidasActuales())
+  }
+  
+  test "El fantasma pierde una vida porque una trampa lo atrapa, pero recupera 1 vida, porque toma una posion" {
+    trampa.actuar(grimly)
+    posion.actuar(grimly)
+    assert.equals(3, vidaGrimly.vidasActuales())
+  }
+  
+  test "El fantasma gana 1200 puntos al asustar a un npc" {
+    persona1.asustarse(grimly)
+    assert.equals(1200, puntaje.puntosActuales())
+  }
+  
+  test "El fantasma es atacado tres veces por el cazador y muere" {
+    cazafantasma.atrapar(grimly)
+    cazafantasma.atrapar(grimly)
+    cazafantasma.atrapar(grimly)
+    assert.notThat(vidaGrimly.tieneVidas())
+  }
+  
+  test "El fantasma gana 1200 puntos al asustar a un npc pero pisa una trampa y pierde 750 puntos" {
+    persona1.asustarse(grimly)
+    trampa.actuar(grimly)
+    assert.equals(450, puntaje.puntosActuales())
+  }
+  
+  test "El fantasma gana 1200 puntos al asustar a un npc pero pisa una trampa y pierde 750 puntos,pero se toma una pocion y recupera esos 550 y tiene todas las vidas " {
+    persona1.asustarse(grimly)
+    trampa.actuar(grimly)
+    posion.actuar(grimly)
+    assert.equals(1000, puntaje.puntosActuales())
+    assert.equals(3, vidaGrimly.vidasActuales())
+  }
+}

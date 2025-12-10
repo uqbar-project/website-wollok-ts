@@ -1,0 +1,88 @@
+patrones: 
+
+	strategy en dificultades (ya esta)
+	
+	template method en letras (ya esta)
+	command para el manejo de letras en pantalla (que exploten las que se ven
+		y reste puntos por apreta una letra que no esta en pantalla)
+	observer para que cambie la vida o la puntuacion segun lo que pase con las letras
+		en pantallas
+	composite en barra de vida y puntuacion
+
+hacer mas lindo el codigo
+
+cosas a agregar:
+	
+	modo facil (tipo tutorial)
+
+	modo supervivencia (modo facil, modo dificil, modo extremo por puntuacion)
+
+
+	hacer que reste puntos cuando se apreta una letra que no esta en pantalla (faltan implementar)
+
+
+
+	letra simple de piedra (que haya que apretar varias veces la letra para que se rompa, contador)	
+
+
+	nuevas letras de color, hacer todas las letras de color  (no es prioridad)
+	
+	
+
+	cambiar letras rojas (hacer que aparezcan letras en pantalla)
+
+	
+	clase / objeto teclado (mas dificil) puede ser un observer
+
+
+	leaderboard estilo arcade ej: https://assetstorev1-prd-cdn.unity3d.com/key-image/651f1d9e-0c9a-4f3a-b173-7c0026fbf8d0.png 
+
+	( volatil. Por el momento tratar de hacerlo persistido, le pregunte al profe hernan alguna idea )
+
+
+	hacer un menu con explicacion (simple)
+	
+
+	bugs:
+
+	las letras quedan "vivas" despues de finalizar un juego y comenzar otro
+	por ejemplo:
+		si se pierde una partida y en pantalla quedo la letra "N"
+		en la proxima partida si se apreta la letra N, suma puntos aunque
+		la letra no este en pantalla 
+	
+
+
+
+
+
+
+
+	
+	strategy configurar teclado, las letras hagas diferentes cosas en diferentes pantallas
+
+	teclado sabe que estrategia tiene
+
+
+	estoy en menu
+	
+	menu sabe que si apretas a hace metodo1()
+
+	estoy en juego
+	
+	juego sabe que si apreteas a hace metodo1()
+
+
+
+	esVisible = true/false
+
+	false
+	
+	metodo1(){
+
+	if(si esta en menu){
+	asdasdasd
+	}
+	elif (si esta en juego){
+		
+	}

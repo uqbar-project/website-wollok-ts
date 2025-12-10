@@ -1,0 +1,158 @@
+import source.ubicaciones.*
+import cachito.*
+import enemigos.*
+import objetos.*
+import escenario.*
+import escenas.*
+import musicaFondo.*
+import dificultades.*
+
+describe "Funcionamiento de las puertas" {
+  test "colision de cachito con puerta de salida de la casa" {
+    puertaSalidaCasa.interaccion()
+    assert.that(cachito.estaEnUnExterior())
+  }
+  
+  test "colision de cachito con puerta de entrada al ovni" {
+    puertaSalidaCasa.interaccion()
+    puertaAlien.interaccion()
+    assert.equals(salaAlien, cachito.ubicacion())
+  }
+  
+  test "colision de cachito con puerta de entrada al nahuelito" {
+    puertaSalidaCasa.interaccion()
+    puertaNahuelito.interaccion()
+    assert.equals(salaNahuelito, cachito.ubicacion())
+  }
+  
+  test "colision de cachito con puerta de entrada a la luz mala" {
+    puertaSalidaCasa.interaccion()
+    puertaLuzMala.interaccion()
+    assert.equals(salaLuzMala, cachito.ubicacion())
+  }
+  
+  test "colision de cachito con puerta de salida al ovni" {
+    puertaSalidaCasa.interaccion()
+    puertaAlien.interaccion()
+    puertaSalidaAlien.interaccion()
+    assert.equals(pueblo, cachito.ubicacion())
+  }
+  
+  test "colision de cachito con puerta de salida al nahuelito" {
+    puertaSalidaCasa.interaccion()
+    puertaNahuelito.interaccion()
+    puertaSalidaNahuelito.interaccion()
+    assert.equals(pueblo, cachito.ubicacion())
+  }
+  
+  test "colision de cachito con puerta de salida a la luz mala" {
+    puertaSalidaCasa.interaccion()
+    puertaLuzMala.interaccion()
+    puertaSalidaLuzMala.interaccion()
+    assert.equals(pueblo, cachito.ubicacion())
+  }
+}
+
+describe "Funcionamiento del sistema de vidas" {
+  test "Cuando cachito va a la zona del nahuelito y es golpeado por una hola normal, le baja un corazon de vida y obtiene inmunidad" {
+    puertaSalidaCasa.interaccion()
+    puertaNahuelito.interaccion()
+    nahuelito.atacar()
+    const ola = new Ola()
+    ola.interaccion()
+    assert.equals(3, cachito.vida())
+    assert.that(cachito.tieneInmunidad())
+  }
+  
+  test "Cuando cachito va a la zona del nahuelito y es golpeado por una hola especial seguida de una hola normal, le baja solo un corazon de vida por la inmunidad" {
+    puertaSalidaCasa.interaccion()
+    puertaNahuelito.interaccion()
+    nahuelito.atacar()
+    const ola = new Ola()
+    ola.interaccion()
+    nahuelito.ataqueEspecial()
+    const olaRapida = new OlaRapida()
+    olaRapida.interaccion()
+    assert.equals(3, cachito.vida())
+    assert.that(cachito.tieneInmunidad())
+  }
+}
+
+describe "Teclas e interacciones" {
+  test "Cachito no puede entrar a la iglesia porque le falta derrotar a la Luz Mala" {
+    puertaSalidaCasa.interaccion()
+    totemA.interaccion()
+    totemN.interaccion()
+    iglesia.interaccion()
+    assert.notEquals(iglesia, cachito.ubicacion())
+    assert.equals(2, cachito.enemigosDerrotados())
+  }
+  
+  test "Cachito puede entrar a la iglesia luego de conseguir los 3 totems" {
+    puertaSalidaCasa.interaccion()
+    totemL.interaccion()
+    totemA.interaccion()
+    totemN.interaccion()
+    iglesia.interaccion()
+    assert.equals(iglesia, cachito.ubicacion())
+  }
+  
+  test "Al iniciar la casa, las teclas del menu se desactivan" {
+    game.clear()
+    casa.iniciar()
+    assert.notThat(accionesTeclas.pantallaValida())
+  }
+}
+
+describe "Pomberito" {
+  test "En dificultad Facil, la vida del pomberito es 4" {
+    dificultadFacil.configurar()
+    pomberito.iniciar()
+    assert.equals(4, pomberito.vida())
+  }
+  test "En dificultad Dificil, la vida del pomberito es 6" {
+    dificultadDificil.configurar()
+    pomberito.iniciar()
+    assert.equals(6, pomberito.vida())
+  }
+  
+  
+  test "Cachito consigue los totems, le lanza una piedra al pomberito como consecuencia su salud baja un punto" {
+    dificultadFacil.configurar()
+    totemL.interaccion()
+    totemA.interaccion()
+    totemN.interaccion()
+    iglesia.interaccion()
+    cachito.atacar()
+    assert.equals(3, pomberito.vida())
+  }
+}
+
+describe "Pantallas y Actualizacion dinamica de assets segun dificultad" {
+  test "El fondo de las salas de enemigos cambia segun la dificultad seleccionada" {
+    dificultadDificil.configurar()
+    salaLuzMala.iniciar()
+    salaNahuelito.iniciar()
+    assert.equals("fondoSala-nahuelito-dificil.png", salaNahuelito.image())
+    assert.equals("fondoSala-luzMala-dificil.png", salaLuzMala.image())
+  }
+  
+  test "La skin de la luz mala cambia segun la dificultad seleccionada" {
+    dificultadDificil.configurar()
+    luzMala.iniciar()
+    assert.equals("luzMalaH.png", luzMala.image())
+  }
+  
+  test "En la pantalla de game over se muestra la dificultad seleccionada" {
+    escenario.enDificil(true)
+    pantallaGameOver.iniciar()
+    assert.that(game.hasVisual(cartelDificil))
+  }
+  
+  test "Al reiniciar el juego desde la pantalla de game over, se puede cambiar la dificultad" {
+    dificultadDificil.configurar()
+    pantallaGameOver.iniciar()
+    pantallaGameOver.accionTecla3()
+    assert.equals(dificultadFacil, escenario.dificultad())
+  }
+}

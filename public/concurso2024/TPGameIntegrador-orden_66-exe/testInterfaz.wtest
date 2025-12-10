@@ -1,0 +1,25 @@
+import interfaz.*
+import colores.*
+
+describe "Interfaz" {
+  test "Nivel uno, un color" {
+    assert.equals(1, interfaz.secuenciaArealizar().size())
+  }
+  
+  test "Nivel dos, dos colores" {
+    assert.equals(1, interfaz.secuenciaArealizar().size())
+    interfaz.subirDeNivel()
+    assert.equals(2, interfaz.secuenciaArealizar().size())
+  }
+  
+  test "Nivel 10, 10 colores" {
+    assert.equals(0, interfaz.secuencias().size())
+    9.times(
+      { i =>
+        interfaz.subirDeNivel()
+        return interfaz.secuenciaArealizar()
+      }
+    )
+    assert.equals(10, interfaz.secuenciaArealizar().size())
+  }
+}

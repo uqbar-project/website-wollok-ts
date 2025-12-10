@@ -21,7 +21,33 @@ const names: Record<string, string> = {
   '2024s2-tp-grupal-juego-grupo-1-uwu': 'DeSvARiaDoS',
   'TPGameIntegrador-los-polimorficos': 'Las Aventuras de Coco',
   '2024-o-tpjuego-laalmironeta': 'PokeWollok',
+  // 2025
+  'TPGameIntegrador-nadie-se-salva-solo': 'Bombardeo de letras',
+  'TPGameIntegrador-wollok-game-los-pibes': "Wollok's Punch-Out!!",
+  'TPGameIntegrador-orden_66-exe': 'Wollok dice',
+  'TPGameIntegrador-los-simuladores': 'Fly Pichon',
+  'HeroeDeLaMazmorra': 'Héroe de la mazmorra',
+  'TPGameIntegrador-grupo-supercalifragilisticoespialidoso': 'Flappy Bird',
+  'TPGameIntegrador-alphasuperawesomecooldynamitewolf': 'Orcs defense',
+  'TPGameIntegrador-queso-rallado': 'UNAHeggs',
+  'WollokGame-Fogata': 'Fogata',
+  'TPGameIntegrador-diegogoso': 'Red Water Mystery',
+  'TPGameIntegrador-los-polimorficos-2025': 'The Binding of Cachito',
+  'TPGameIntegrador-colorado': 'La última clave',
+  '2025c2s2-tp-grupal-juego-2025c2s2-grupo4-thocogasa': 'Last Pawn Standing',
+  'wlkGame-PedidoSimulator': 'Pedido Simulator',
+  'TPGameIntegrador-los-cazafantasmas': 'Ghost Revenge',
+  '2025-objetos-tp-wollok-game-lambdacrew': 'Battle Wollok',
+  'TPGameIntegrador-estudiantes-last': 'MemoTest',
+  'TPGameIntegrador-6bits': 'Wollok Dungeons',
+  '2025-o-tpgame-thebreakingchange2': 'WoToDe',
+  'game-HarryPopote': 'Harry Popote',
+  '25s2c4-tp-grupal-juego-grupo-25s2c4-grupo-1': 'alana is you',
+  'levelDevil-juego-de-paradigmasDeProgramacion-2025': 'LevelDevil',
+  'Alien-Protocol': 'Alien Protocol',
 }
+
+// 2025 additions
 
 export function getStaticPaths() {
   const ids = [
@@ -43,6 +69,30 @@ export function getStaticPaths() {
     '2024s2-tp-grupal-juego-grupo-1-uwu',
     'TPGameIntegrador-los-polimorficos',
     '2024-o-tpjuego-laalmironeta',
+    // 2025
+    'TPGameIntegrador-nadie-se-salva-solo',
+    'TPGameIntegrador-wollok-game-los-pibes',
+    'TPGameIntegrador-orden_66-exe',
+    'TPGameIntegrador-los-simuladores',
+    'HeroeDeLaMazmorra',
+    'TPGameIntegrador-grupo-supercalifragilisticoespialidoso',
+    'TPGameIntegrador-alphasuperawesomecooldynamitewolf',
+    'TPGameIntegrador-queso-rallado',
+    'WollokGame-Fogata',
+    '2025-o-tpgame-thebreakingchange2',
+    'TPGameIntegrador-diegogoso',
+    'TPGameIntegrador-los-polimorficos-2025',
+    'TPGameIntegrador-colorado',
+    '2025c2s2-tp-grupal-juego-2025c2s2-grupo4-thocogasa',
+    'wlkGame-PedidoSimulator',
+    'TPGameIntegrador-los-cazafantasmas',
+    '2025-objetos-tp-wollok-game-lambdacrew',
+    'TPGameIntegrador-estudiantes-last',
+    'TPGameIntegrador-6bits',
+    'game-HarryPopote',
+    '25s2c4-tp-grupal-juego-grupo-25s2c4-grupo-1',
+    'levelDevil-juego-de-paradigmasDeProgramacion-2025',
+    'Alien-Protocol',
   ]
 
   return ids.map(id => ({params: { id }}))

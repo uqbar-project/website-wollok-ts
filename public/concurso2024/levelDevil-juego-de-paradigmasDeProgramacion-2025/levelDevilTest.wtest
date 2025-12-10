@@ -1,0 +1,130 @@
+import levelDevil.*
+import tecladoYMenu.*
+import niveles.*
+
+describe "Interacciones con objetos" {
+  test "Al interactuar con una Moneda el jugador gana 100 puntos" {
+    const jugador = gestorDeJugadores.jugadorActual()
+    jugador.resetearPuntaje()
+
+    const moneda = new Moneda(position = game.at(2, 1))
+    game.addVisual(moneda)
+
+    jugador.position(game.at(2, 1))
+
+    moneda.interactuarConPersonaje(jugador)
+
+    assert.equals(100, jugador.puntajeTemporalGanado())
+  } 
+
+  test "Al interactuar con una Moneda Falsa el jugador pierde 100 puntos" {
+    const jugador = gestorDeJugadores.jugadorActual()
+    jugador.resetearPuntaje()
+
+    const monedaFalsa = new MonedaFalsa(position = game.at(2, 1))
+    game.addVisual(monedaFalsa)
+
+    jugador.position(game.at(2, 1))
+
+    monedaFalsa.interactuarConPersonaje(jugador)
+
+    assert.equals(-100, jugador.puntajeTemporalPerdido())
+  }
+
+  test "Al interactuar con un pincho invisible el jugador muere, por ende se queda sin vidas" {
+    const jugador = gestorDeJugadores.jugadorActual()
+    jugador.resetearPuntaje() 
+
+    const pincho = new PinchoInvisible(position = game.at(1,1))
+    game.addVisual(pincho)
+
+    pincho.interactuarConPersonaje(jugador)
+
+    assert.equals(0,jugador.vidasActuales())
+  } 
+
+}
+
+// Extensión de PinchoMovil para testing que permite mover en una dirección específica
+class PinchoMovilTesteable inherits PinchoMovil {
+  method moverEn(direccion) {
+    const destino = direccion.moverEnDireccion(position)
+    const objetosEnDestino = game.getObjectsIn(destino)
+
+    const esMetaEnDestino = objetosEnDestino.any({obj => obj.esMeta()})
+    const validarPosition = direccion.validarPosition(destino)
+
+    if (!esMetaEnDestino and validarPosition) {
+      position = destino
+    }
+  }
+}
+
+describe "PinchoMovil vs Meta" {
+  test "PinchoMovil no debería poder pisar la Meta (reproducción del bug)" {
+    const posPincho = game.at(1, 1)
+    const posMeta = game.at(2, 1)
+
+    // Crear pisos para las posiciones para que getObjectsIn devuelva objetos
+    game.addVisual(new Piso(position = posPincho))
+    game.addVisual(new Piso(position = posMeta))
+
+    // Crear y agregar PinchoMovilTesteable y Meta
+    const pincho = new PinchoMovilTesteable(position = posPincho)
+    const meta = new Meta(position = posMeta)
+    game.addVisual(pincho)
+    game.addVisual(meta)
+
+    // Intentamos mover el pincho explícitamente hacia la derecha usando su método
+    pincho.moverEn(derecha)
+
+    // Esperamos que el PinchoMovil NO haya cambiado su posición hacia la Meta.
+    assert.notEquals(meta.position(), pincho.position())
+  }
+
+  test "El jugador pierde vida al tocar un PinchoMovil" {
+    satoruGojo.reiniciarVidas()
+    const pincho = new PinchoMovilTesteable(position = game.at(2, 0))
+
+    satoruGojo.position(game.at(1, 0))
+    game.addVisual(pincho)
+    game.addVisual(satoruGojo)
+
+    pincho.moverEn(izquierda)
+    pincho.interactuarConPersonaje(satoruGojo)
+
+    assert.equals(2, satoruGojo.vidasActuales())
+  }
+}
+
+
+describe "Niveles" {
+  test "Al iniciar el nivel se resetea el puntaje temporal" {
+    const jugador = gestorDeJugadores.jugadorActual()
+    jugador.sumaDePuntajeTemporalGanado(100)
+    juegoLevelDevil.iniciarNivel()
+
+    assert.equals(0, jugador.puntajeTemporalGanado())
+  }
+
+  test "Al completar nivel1 se pasa a nivel2" {
+    juegoLevelDevil.nivelActual(nivel1)
+    const jugador = jugadorLevelDevil
+    jugador.position(game.at(1,0))
+    game.addVisual(jugador)
+    const meta = new Meta(position = game.at(1, 1))
+    game.addVisual(meta)
+    jugador.moverA(arriba)
+    // Simular el paso del nivel (en el juego real, esto ocurre después de la animación)
+    juegoLevelDevil.siguienteNivel()
+    assert.equals(nivel2, juegoLevelDevil.nivelActual())
+  }
+
+  test "Al ganar un nivel se suman puntos al puntaje total" {
+    const jugador = gestorDeJugadores.jugadorActual()
+    jugador.resetearPuntaje()
+    jugador.sumaDePuntajeTemporalGanado(200)
+    juegoLevelDevil.siguienteNivel()
+    assert.that(jugador.puntaje() >= 200)
+  }
+}

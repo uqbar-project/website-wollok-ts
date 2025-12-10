@@ -1,0 +1,19 @@
+import wollok.game.*
+import _02juego.*
+
+
+
+program HarryGame {
+	game.title("Harry")
+	 
+	
+	// límites del juego
+	game.width(18)
+	game.height(12)
+	game.cellSize(38)	
+
+	juego.iniciar()
+	game.start()
+
+}
+

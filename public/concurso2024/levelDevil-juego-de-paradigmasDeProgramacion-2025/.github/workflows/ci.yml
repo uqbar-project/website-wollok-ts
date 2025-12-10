@@ -1,0 +1,21 @@
+name: build
+
+on: [push, pull_request]
+jobs:
+  wollok-ts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install wollok-ts-cli globally
+        run: npm install -g wollok-ts-cli
+
+      - run: wollok test --skipValidations -p ./
+        name: Run tests

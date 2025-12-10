@@ -6,7 +6,7 @@ sidebar:
 ---
 
 On Saturday, December 14th, we gathered at UTN to announce the winners and hand out the prizes!
-![Prize Ceremony](../../../../assets/wgame-concurso-2024/wgame-concurso-2024-utn.png)
+![Prize Ceremony](../../../../assets/wgame-concurso-2024-utn.png)
 
 ## Podium
 ##### 1st Prize &#x1F947; - _Sticky Blocks_

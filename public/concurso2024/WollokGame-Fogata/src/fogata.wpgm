@@ -1,0 +1,13 @@
+import wollok.game.*
+import videojuego.*
+
+program Fogata {
+	 
+    videojuego.tablero()
+
+    videojuego.controles()
+
+    videojuego.iniciar()
+    
+    game.start()
+}

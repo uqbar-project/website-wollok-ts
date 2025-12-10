@@ -1,0 +1,7 @@
+import wollok.game.*
+import levelDevil.juegoLevelDevil
+
+program levelDevilGame {
+    juegoLevelDevil.iniciar()
+    game.start()
+}

@@ -1,0 +1,94 @@
+import rey.*
+import UI.*
+import aliado.*
+import aliados.*
+import enemigo.*
+import enemigos.*
+import wollok.game.*
+import images.*
+import mecanicas.*
+import oleadas.*
+
+describe "tests de peones" {
+  method initialize() {
+    game.height(8)
+    game.width(7)
+    reyBlanco.reiniciar()
+    mecanicasJuego.verificacionActiva(true)
+  }
+  
+  test "falla capturar enemigos" {
+    const blanco4 = new PeonBlanco(position = game.at(1, 6))
+    const blanco5 = new PeonBlanco(position = game.at(2, 5))
+    game.addVisual(blanco4)
+    game.addVisual(blanco5)    
+
+    blanco4.intentarCapturar()
+    assert.equals(game.at(1, 6), blanco4.position())
+    assert.equals(game.at(2, 5), blanco5.position())
+  }
+  
+  /* NO FUNCA PORQUE coronar agrega un el visual del accesorio y lo toma como un elemento duplicado
+  test "coronar" {    
+    const coronable = new PeonBlanco(
+      position = game.at(4, 6)
+    )
+
+    game.addVisual(coronable)
+    
+    coronable.intentarCoronar() //no hace nada porque blanco no está en ultima fila
+    assert.notThat(coronable.esUltimaFila())
+    assert.equals(100, reyBlanco.recursos())
+
+    coronable.mover(4, 7) //ahora sí está en ultima fila
+    assert.that(coronable.esUltimaFila())
+    coronable.intentarCoronar() //ahora sí puede coronar
+    assert.equals(200, reyBlanco.recursos())
+  }*/
+}
+
+describe "tests de caballos" {
+  method initialize() {
+    game.height(8)
+    game.width(7)
+    reyBlanco.reiniciar()
+    mecanicasJuego.verificacionActiva(true)
+  }
+  const nuevoCaballo = new CaballoBlanco() 
+  const otroCaballo = new CaballoBlanco()
+
+  test "colocar caballo" {
+    assert.that(reyBlanco.puedeColocar(nuevoCaballo, reyBlanco.position().up(1)))
+    reyBlanco.intentarColocarPieza(nuevoCaballo)
+    assert.equals(50, recurso.valor())
+    // chequea el valor descontado de Recursos
+
+     //pero ya no puedo colocar OTRO CABALLO
+    assert.notThat(reyBlanco.puedeColocar(otroCaballo, reyBlanco.position().up(1)))
+    
+    reyBlanco.intentarColocarPieza(otroCaballo) //esto no hace nada
+    assert.equals(50, recurso.valor()) //los recursos se mantineen en 50 
+  }
+
+  test "capturar con caballo varias piezas"{
+    const negroA = new PeonEnemigo(position = game.at(3, 4))
+    const negroB = new AlfilNegro(position = game.at(4, 2))
+    reyBlanco.intentarColocarPieza(nuevoCaballo)
+    assert.equals(50, recurso.valor())
+
+    game.addVisual(negroA)
+    game.addVisual(negroB)
+
+    nuevoCaballo.capturar(negroB)
+    assert.equals(80, recurso.valor()) //50+30
+
+    assert.notThat(game.getObjectsIn(game.at(4, 2)).isEmpty())
+    assert.equals(2, nuevoCaballo.combo()) // combo = 1 + 1
+    
+    nuevoCaballo.capturar(negroA)
+    assert.equals(100, recurso.valor())  //(80) + (10*2)
+    assert.equals(3, nuevoCaballo.combo()) // combo = 2+1
+  }
+
+
+}

@@ -1,0 +1,161 @@
+import menus.*
+import config.*
+import musica.*
+import niveles.*
+import visuales.*
+import corazones.*
+import movimientos.*
+import proyectiles.*
+import wollok.game.*
+
+describe "Tests de menus" {
+    method initialize() { juegoPorNiveles.iniciarJuego() }
+    test "No deja abrir la pausa en el menu de inicio" {
+      assert.that(menuInicio.abierto())
+      menuPausa.abrir()
+      assert.notThat(menuPausa.abierto())
+    }
+    test "No deja abrir la ventana de controles si el menu de pausa no esta abierto" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      assert.notThat(menuPausa.abierto())
+      menuControles.abrir()
+      assert.notThat(menuControles.abierto())
+    }
+    test "La pausa se abre y cierra normalmente" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      assert.notThat(menuPausa.abierto())
+      menuPausa.abrir()
+      assert.that(menuPausa.abierto())
+      menuPausa.abrir()
+      assert.notThat(menuPausa.abierto())
+    }
+    test "La ventana de controles se abre y cierra normalmente" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      menuPausa.abrir()
+      assert.notThat(menuControles.abierto())
+      menuControles.abrir()
+      assert.that(menuControles.abierto())
+      menuControles.abrir()
+      assert.notThat(menuControles.abierto())
+    }
+    test "Se puede volver al menu de inicio desde la pausa" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      menuPausa.abrir()
+      juegoPorNiveles.nivelActual().volverAlMenu()
+      assert.that(menuInicio.abierto())
+    }
+
+    test "No se puede abrir el menu de pausa en una pantalla de carga" {
+      menuInicio.cerrar()
+      assert.notThat(menuPausa.abierto())
+      menuPausa.abrir()
+      assert.notThat(menuPausa.abierto())
+    }
+
+    test "La musica funciona en cada nivel" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      assert.that(juegoPorNiveles.nivelActual().musica().estado())
+    }
+
+    test "La musica se detiene al volver al menu" {
+      menuInicio.cerrar()
+      juegoPorNiveles.nivelActual().pantalla().cerrar()
+      menuPausa.abrir()
+      juegoPorNiveles.nivelActual().volverAlMenu()
+      assert.notThat(juegoPorNiveles.nivelActual().musica().estado())
+    }
+    
+}
+
+describe "Grupo de tests de niveles" {
+    method initialize() { juegoPorNiveles.iniciarJuego() }
+    test "El primer nivel al iniciar es el nivel uno" { 
+      assert.equals(nivelUno, juegoPorNiveles.nivelActual()) 
+    }
+    test "Ahora el nivel es el dos por el cambio de índice" {
+      juegoPorNiveles.indice(1)
+      assert.equals(nivelDos, juegoPorNiveles.nivelActual()) 
+    }
+    test "Ahora el nivel es el dos porque el nivel uno ya se ganó, el gusano murió" {
+      gusano.perderVida()
+      gusano.perderVida()
+      gusano.perderVida()
+      assert.that(gusano.estaMuerto())
+      assert.that(nivelUno.estaGanado())
+      assert.equals(nivelDos, juegoPorNiveles.nivelActual()) 
+    }
+    test "Ahora es el nivel tres por el cambio de índice"{
+      juegoPorNiveles.indice(2)
+      assert.equals(nivelTres, juegoPorNiveles.nivelActual())
+    }
+}
+describe "Grupo de test de enemigos" {
+  test "Gusano pierde todas sus vidas y muere" {
+    nivelUno.enemigo().perderVida()
+    nivelUno.enemigo().perderVida()
+    nivelUno.enemigo().perderVida()
+    assert.equals(0, nivelUno.enemigo().vidas())
+    assert.that(nivelUno.enemigo().estaMuerto())
+  }
+  test "nivelUno se reinicia, Gusano vuelve a tener todas sus vidas y a estar en su posición original" {
+    juegoPorNiveles.indice(0)
+    juegoPorNiveles.nivelActual().iniciarNivel()
+    assert.equals(3,juegoPorNiveles.nivelActual().enemigo().vidas())
+    assert.equals(8, juegoPorNiveles.nivelActual().enemigo().position().x())
+    assert.equals(2, juegoPorNiveles.nivelActual().enemigo().position().y())
+  }
+
+  test "Caracol pierde todas sus vidas y muere" {
+    nivelDos.enemigo().perderVida()
+    nivelDos.enemigo().perderVida()
+    nivelDos.enemigo().perderVida()
+    nivelDos.enemigo().perderVida()
+    assert.equals(0, nivelDos.enemigo().vidas())
+    assert.that(nivelDos.enemigo().estaMuerto())
+  }
+  test "nivelDos se reinicia, Caracol vuelve a tener todas sus vidas y a estar en su posición original" {
+    juegoPorNiveles.indice(1)
+    juegoPorNiveles.nivelActual().iniciarNivel()
+    assert.equals(4,juegoPorNiveles.nivelActual().enemigo().vidas())
+    assert.equals(8, juegoPorNiveles.nivelActual().enemigo().position().x())
+    assert.equals(2, juegoPorNiveles.nivelActual().enemigo().position().y())
+  }
+
+  test "Demonio pierde todas sus vidas y muere" {
+    nivelTres.enemigo().perderVida()
+    nivelTres.enemigo().perderVida()
+    nivelTres.enemigo().perderVida()
+    nivelTres.enemigo().perderVida()
+    nivelTres.enemigo().perderVida()
+    assert.equals(0, nivelTres.enemigo().vidas())
+    assert.that(nivelTres.enemigo().estaMuerto())
+  }
+  test "nivelTres se reinicia, Demonio vuelve a tener todas sus vidas y a estar en su posición original" {
+    juegoPorNiveles.indice(2)
+    juegoPorNiveles.nivelActual().iniciarNivel()
+    assert.equals(5,juegoPorNiveles.nivelActual().enemigo().vidas())
+    assert.equals(8, juegoPorNiveles.nivelActual().enemigo().position().x())
+    assert.equals(2, juegoPorNiveles.nivelActual().enemigo().position().y())
+  }
+}
+
+describe "Grupo de test del mago" {
+  test "el mago pierde todas sus vidas y muere, pero revive como gandalf el blanco y tiene sus 3 vidas de nuevo" {
+    mago.perderVida()
+    mago.perderVida()
+    mago.perderVida()
+    assert.equals(3, mago.vidas())
+    assert.equals(4, mago.position().x())
+    assert.equals(14, mago.position().y())
+  }
+  test "El visual del mago existe en el tablero" {
+    menuInicio.cerrar()
+    juegoPorNiveles.nivelActual().pantalla().cerrar()
+    assert.that(game.hasVisual(mago))
+  }
+}

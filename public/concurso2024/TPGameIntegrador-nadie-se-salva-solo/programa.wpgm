@@ -1,0 +1,13 @@
+import wollok.game.*
+import juego.*
+
+
+program Game {
+	juego.configurarTeclado()
+	juego.iniciar()	
+	// hice rollback a ultimo commit de cuando entregamos el juego porque lo rompi todo
+	// le agregue para que marque error cuando apretas una tecla que no esta en pantalla
+	
+}
+
+

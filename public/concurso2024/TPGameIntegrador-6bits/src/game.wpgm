@@ -1,0 +1,8 @@
+import menus.*
+import config.*
+import musica.*
+import niveles.*
+import visuales.*
+import wollok.game.*
+
+program wollokDungeons { juegoPorNiveles.iniciarJuego() } 

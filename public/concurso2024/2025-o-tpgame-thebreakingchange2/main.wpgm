@@ -1,0 +1,6 @@
+import wollok.game.*
+import models_game.tdGame
+
+program TowerDefenseGame {
+	tdGame.start()
+}

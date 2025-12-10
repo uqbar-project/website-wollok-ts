@@ -1,0 +1,60 @@
+import unahBlocks.*
+import niveles.*
+import teclasymenu.*
+
+describe "Testeando movimientos" {
+  test "Avanzar hacia arriba" {
+    
+    dino.position(game.at(0, 0))
+    dino.moverArriba()
+    assert.equals(game.at(0,1), dino.position())
+
+  }
+  test "Avanzar hacia abajo" {
+    
+    dino.position(game.at(0, 0))
+    dino.moverAbajo()
+    assert.equals(game.at(0,-1), dino.position())
+
+  }
+  test "Avanzar hacia la derecha" {
+    
+    dino.position(game.at(0, 0))
+    dino.moverDerecha()
+    assert.equals(game.at(1,0), dino.position())
+
+  }
+  test "Avanzar hacia la izquierda" {
+    
+    dino.position(game.at(0, 0))
+    dino.moverIzquierda()
+    assert.equals(game.at(-1,0), dino.position())
+
+  }
+}
+
+describe "Testeando colisiones" {
+  test "El dino no puede atravesar una pared" {
+    
+    //nivel1.cargar(dino)
+
+    const pared = new Pared(position=new Position(x=0,y=1))
+    movimientoTeclado.configurar(dino, nivel1)
+    dino.position(game.at(0,0))
+    //keyboard.up().onPressDo({dino.moverArriba() })
+    dino.moverArriba()
+    assert.equals(game.at(0,0), dino.position())
+  }
+
+}
+
+describe "Testeando la caja" {
+   test "El dino empuja una caja" {
+    
+    //const caja = new Caja(position=new Position(x=0,y=1),llegadas=new Position(x=10,y=3),nivel=nivel1)
+    dino.position(game.at(0,0))
+    keyboard.up().onPressDo({dino.moverArriba() })
+    assert.equals(game.at(0,0), dino.position())
+
+  }
+}

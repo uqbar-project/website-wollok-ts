@@ -1,0 +1,39 @@
+import UI.*
+import rey.*
+import aliado.*
+import aliados.*
+import enemigo.*
+import enemigos.*
+import wollok.game.*
+import images.*
+import mecanicas.*
+import oleadas.*
+import proyectiles.*
+
+describe "tests de proyectiles" {
+    method initialize() {
+        game.height(8)
+        game.width(7)
+        reyBlanco.reiniciar()
+        mecanicasJuego.verificacionActiva(true)
+    }
+
+    const t1 = new TorreBlanca()
+    const b1 = new AlfilBlanco()
+
+    test "fallo disparo por falta de recursos" {
+        recurso.actualizar(60)
+        reyBlanco.disparar(t1) //falla porque torre sale 100
+        assert.equals(60, recurso.valor())
+        reyBlanco.disparar(b1) //falla porque alfil sale 70
+        assert.equals(60, recurso.valor())
+    }
+
+test "disparo con recursos suficientes" {
+        recurso.actualizar(170)
+        reyBlanco.disparar(t1) //falla porque torre sale 100
+        assert.equals(70, recurso.valor())
+        reyBlanco.disparar(b1) //falla porque alfil sale 70
+        assert.equals(0, recurso.valor())
+    }
+}

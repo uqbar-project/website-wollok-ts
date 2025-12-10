@@ -2,11 +2,11 @@
 title: Concurso Wollok Game 2024
 description: Juegos participantes
 sidebar:
-    order: 1
+    order: 2
 ---
 
 El sábado 14 de Diciembre nos jutamos en UTN para anunciar los ganadores y entregar los premios!
-![Entrega Premios](../../../assets/wgame-concurso-2024/wgame-concurso-2024-utn.png)
+![Entrega Premios](../../../assets/wgame-concurso-2024-utn.png)
 
 ## Podio
 ##### 1er Premio &#x1F947; - _Sticky Blocks_

@@ -1,0 +1,70 @@
+import wollok.game.*
+import weapons.*
+import juego.*
+import ships.*
+import sonidos.*
+import tablero.*
+import vidas.*
+
+describe "definiendo naves"{
+	const nave1 = new MainShip(color = rojo)
+	
+	
+	test "funciona recibir impacto"{
+		vidas.perderVida()
+		assert.that(vidas.vidas() == 1)
+	
+	}
+	test "funciona el cambiar de imagen"{
+		vidasMotherShip.perderVida()
+		assert.that(vidasMotherShip.image()=="image/barra3.jpeg")
+	}
+	test "funciona sumar punto"{
+		juego.sumarPunto()
+		assert.that(juego.puntos() == 1)
+	}
+	test "funcionan los reiniciar vidas"{
+		vidas.perderVida()
+		assert.that(vidas.vidas() == 1)
+		vidas.reiniciarVidas()
+		assert.that(vidas.vidas() == 2)
+		vidasMotherShip.perderVida()
+		vidasMotherShip.perderVida()
+		assert.that(vidasMotherShip.vidasMother() == 2)
+		vidasMotherShip.reiniciarVidas()
+		assert.that(vidasMotherShip.vidasMother() == 4)
+		
+	}
+	test "funciona cambiar color"{
+		assert.that(nave1.color() == rojo)
+		nave1.cambiarColor()
+		assert.that(nave1.color() == verde)
+		nave1.cambiarColor()
+		assert.that(nave1.color() == azul)
+		nave1.cambiarColor()
+		assert.that(nave1.color() == rojo)
+	}
+	test "funcionan los tableros"{
+		juego.modo(dificil)
+		assert.that(tableroDificultad.image() == "image/dificil.png")
+		juego.modo(normal)
+		assert.that(tableroDificultad.image() == "image/normal.png")
+	}
+	
+
+
+	test "ver que funciona la funcion de jefe final"{
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		juego.sumarPunto()
+		assert.that(game.allVisuals().size() == 4)//motherShip, mainShip, y sus respectivas vidas
+	}}

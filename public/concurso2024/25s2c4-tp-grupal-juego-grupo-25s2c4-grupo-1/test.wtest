@@ -1,0 +1,168 @@
+import wollok.game.*
+import jugador.*
+import direcciones.*
+import objetos.*
+import administracion.*
+import entidadBasicas.*
+import niveles.*
+import menu.*
+
+
+
+describe "movimiento del jugador" {
+    const jugador  = new Jugador(position = game.at(3,4), image = "dino_der.png", esPisable = true)
+    const muro     = new Muro   (position = game.at(4,4), image = "murito.png", esPisable = false)
+    const palabraA = new Palabra(position = game.at(2,4), image = "door.png", esPisable = false, palabra = "Door")
+    const rocaA    = new Roca   (position = game.at(3,3), image = "roca.png", esPisable = false, puedeMoverse = true)
+    const rocaB    = new Roca   (position = game.at(3,2), image = "roca.png", esPisable = false, puedeMoverse = true)
+
+    method initialize(){
+		game.height(10)
+		game.width(10)
+
+		game.clear()
+		
+        game.addVisual(muro)
+        game.addVisual(palabraA)
+        game.addVisual(rocaA)
+        game.addVisual(rocaB)
+        game.addVisual(jugador)
+	}
+
+
+    test "Interaccion del Menu"{
+        
+        menu.iniciar()
+
+        assert.that(true)
+
+        //testeo que este todo ok cuando inicia menu.
+        assert.equals( game.at(0,0),fondoMenu.position() )
+        assert.equals( game.at(1,9),btnStart.position() )
+        assert.equals( game.at(2,8),labelS.position() ) 
+        assert.equals( game.at(6,9),btnInstructtions.position() )
+        assert.equals( game.at(7,8),labelI.position() )
+        assert.equals( game.at(11,9),btnExit.position() )                       
+        assert.equals( game.at(12,8),labelE.position() )
+        assert.equals( game.at(6,2),gifExit.position() )
+        assert.equals("welcomeAlanaa.png",fondoMenu.image())  
+        assert.equals("salir.gif", gifExit.image())
+        assert.equals("start.png", btnStart.image())
+        assert.equals("instructtions.png", btnInstructtions.image())
+        assert.equals("exit.png", btnExit.image())
+        assert.equals("(PRESS S)", labelS.text())
+        assert.equals("(PRESS I)", labelI.text())
+        assert.equals("(PRESS E)", labelE.text())
+       
+       
+        
+        menu.abrirMenuInstrucciones()
+        assert.equals( game.at(0,0),instruciones.position() )
+        assert.equals("instrucciones.png",instruciones.image())
+
+        
+        instruciones.siguienteInstruccion()
+        assert.equals( game.at(0,0),instruciones.position() )
+        assert.equals("instruciones3.gif",instruciones.image())
+
+
+         instruciones.anteriorInstruccion()
+         assert.equals( game.at(0,0),instruciones.position() )
+         assert.equals("instrucciones.png",instruciones.image())    
+
+        
+        
+
+    }
+
+
+    //test de objeto pisable
+    test "Movimiento del jugador cuando no hay una palabra" {
+        jugador.mover(arriba)
+
+        assert.equals(game.at(3,5), jugador.position())
+    }
+
+    //test de objeto que es obstaculo
+    test "Movimiento del jugador cuando un muro que no es pisable" {
+        jugador.mover(derecha)
+
+        assert.equals(game.at(3,4), jugador.position())
+    }
+
+    //test de objetos movibles
+    test "Movimiento del jugador cuando hay rocas" {
+        jugador.mover(derecha)
+        jugador.mover(abajo)
+
+        assert.equals(game.at(3,3), jugador.position())
+        assert.equals(game.at(3,2), rocaA.position())
+        assert.equals(game.at(3,1), rocaB.position())
+    }
+}
+
+
+describe "Cambio de estado" {
+    const jugador = new Jugador(position = game.at(3,2), image = "dino_der.png", esPisable = true)
+    const muro    = new Muro   (position = game.at(2,2), image = "murito.png", esPisable = false)
+    const roca    = new Roca   (position = game.at(4,2), image = "murito.png", esPisable = false, puedeMoverse = false)
+
+    const wall     = new Palabra(position = game.at(1,4), image = "door.png", esPisable = true, palabra = "Wall")
+    const is      = new Palabra(position = game.at(2,4), image = "is.png", esPisable = true, palabra = "Is")
+    const walkable = new Palabra(position = game.at(3,4), image = "open.png", esPisable = true, palabra = "Walkable")
+    
+    const rock = new Palabra(position = game.at(1,6), image = "door.png", esPisable = true, palabra = "Rock")
+    const push = new Palabra(position = game.at(3,6), image = "open.png", esPisable = true, palabra = "Push")
+    
+    const nivelTest = new Nivel(mapa = test5,posicionPersonaje = game.at(1,5),frasesValidas = #{"Door Is Open", "Wall Is Walkable", "Rock Is Push", "Water Is Evapora", "Wall Is Door","Door Is Wall","Rock Is Door","Door Is Rock","Door Is Walkable","Door Is Push","Water Is Door","Water Is Walkable","Water Is Push","Wall Is Rock"},tiempoDeNivel = 60)
+
+
+    method initialize(){
+		game.height(10)
+		game.width(10)
+
+		game.clear()
+
+        nivelTest.inicializar()
+		
+        game.addVisual(muro)
+        game.addVisual(roca)
+
+        game.addVisual(wall)
+        game.addVisual(is)
+        game.addVisual(walkable)
+        
+        game.addVisual(rock)
+        game.addVisual(push)
+
+        game.addVisual(jugador)
+	}
+
+    test "Comprobar que muro y roca son obstaculos" {
+        jugador.mover(izquierda)
+        assert.equals(game.at(3,2), jugador.position())
+
+        jugador.mover(derecha)
+        assert.equals(game.at(3,2), jugador.position())
+    }
+    test "Mover cuando la palabra para formar la frase muro es pisable" {
+        registroDeObjetos.agregarMuro(muro)
+
+        muroPisable.ejecutar()
+
+        jugador.mover(izquierda)
+
+        assert.equals(game.at(2,2), jugador.position())
+    }
+
+    test "Mover cuando la palabra para formar la frase roca es empujable" {
+        registroDeObjetos.agregarRoca(roca)
+
+        rocaMovible.ejecutar()
+
+        jugador.mover(derecha)
+
+        assert.equals(game.at(4,2), jugador.position())
+        assert.equals(game.at(5,2), roca.position())
+    }
+}

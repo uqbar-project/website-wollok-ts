@@ -1,0 +1,698 @@
+import protagonista.*
+import visualesExtra.*
+import direccion.*
+import gestores.*
+import escenariosManager.*
+import videojuego.*
+import npcEstados.*
+import puertas.*
+import enemigos.*
+import npcAtaques.*
+import dialogosManager.*
+import diapositivasManager.*
+import eventos.*
+import escenariosMapas.*
+
+// ############################################################################################################################ \\
+
+    // VARIABLES PARA TESTEO DE CONFIGURADORES DE ESCENARIOS:
+	const escenarioX = constructorEscenario.construir({}, {}, "")
+	const eventoX    = new EventoLoopIndividual(sujetoUnico = protagonista, comportamiento = {})
+	const configuradorTEST    = {escenario => escenario.actualizarVisuales([protagonista, puertaNorte]); escenario.actualizarEventos([eventoX])} // Mapa test.
+	const configuradorSigTEST = {puertaNorte.irHacia(granero)}
+
+    //VARIABLES PARA TESTEO DE FUNCIONAMIENTO DE PUERTAS:
+	const configuracionActualTEST    = {escenario => escenario.actualizarVisuales([puertaNorte, puertaOeste])}
+	const configuracionSiguienteTEST = {puertaNorte.irHacia(bifurcacion); puertaOeste.irHacia(fogata)}
+	const escenarioParaTestear       = constructorEscenario.construir(configuracionActualTEST, configuracionSiguienteTEST, "")          
+
+// ############################################################################################################################ \\
+
+describe "Movimiento del personaje:"{
+    
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+        protagonista.position(game.at(0,0))
+        game.addVisual(protagonista)
+    }   
+
+    test "El personaje parte de la posicion (0,0) hacia la posicion (2,0) sin problemas."{
+        protagonista.mover(derecha,2)
+        assert.equals(game.at(2,0), protagonista.position())
+    }
+
+    test "El personaje se mueve 2 celdas arriba, 2 celdas a la derecha y la posicion coincide."{
+        protagonista.mover(arriba,2)
+        protagonista.mover(derecha,2)
+        assert.equals(game.at(2,2), protagonista.position())
+    }
+
+    test "El personaje se mueve 2 celdas a la derecha,3 arriba y 4 a la izquierda, pero no sale del tablero."{
+        protagonista.mover(derecha,2)
+        protagonista.mover(arriba,3)
+        assert.throwsException({protagonista.mover(izquierda,4)})
+    }
+
+    test "El personaje no puede salir del tablero por el Oeste."{
+        assert.throwsException({protagonista.mover(izquierda, 10)})
+        assert.that(gestorDeCeldasTablero.estaDentroDelTablero(protagonista.position()))
+    }
+
+    test "El personaje no sale del tablero por el Norte."{
+		assert.throwsException({protagonista.mover(arriba, 20)})
+		assert.that(gestorDeCeldasTablero.estaDentroDelTablero(protagonista.position()))
+    }
+
+    test "El personaje no sale del tablero por el Este."{
+		assert.throwsException({protagonista.mover(derecha, 20)})         
+		assert.that(gestorDeCeldasTablero.estaDentroDelTablero(protagonista.position()))
+    }
+
+    test "El personaje no sale del tablero por el Sur."{
+		assert.throwsException({protagonista.mover(abajo, 20)})
+        assert.that(gestorDeCeldasTablero.estaDentroDelTablero(protagonista.position()))
+    }
+
+    test "El personaje se mueve 3 a la derecha, 3 a la izquierda y queda en el mismo lugar."{
+        protagonista.mover(derecha,3)
+        protagonista.mover(izquierda,3)
+        assert.equals(game.at(0,0), protagonista.position())
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Movimiento del personaje con colisiones:"{
+
+    method initialize(){
+        game.width(20)
+        game.height(20)
+        game.cellSize(100)
+
+        amiga.position(game.at(5,0))
+        fogataOBJ.position(game.at(2,2))
+        carpa.position(game.at(5,5))
+        protagonista.position(game.at(0,0))
+
+        game.addVisual(amiga)
+        game.addVisual(fogataOBJ)
+        game.addVisual(carpa)
+        game.addVisual(protagonista)
+    }
+    
+    test "El personaje se mueve 7 pasos hacia la derecha pero no puede atravesar a la amiga y queda a su izquierda."{
+        assert.equals(game.at(5,0),amiga.position())
+        protagonista.mover(derecha,4)
+        assert.equals(game.at(4,0), protagonista.position())
+
+        assert.throwsException({protagonista.mover(derecha)}) // El personaje intenta moverse, pero no puede atravesar a la amiga.
+        assert.equals(game.at(4,0), protagonista.position())
+    }
+
+    test "El personaje no puede atravesar obstáculos."{
+        const obstaculo = new Obstaculo()
+        obstaculo.position(game.at(0,3))
+        game.addVisual(obstaculo)
+        protagonista.mover(arriba,2)
+        assert.equals(game.at(0,2), protagonista.position())
+        assert.equals(game.at(0,3), obstaculo.position())
+        assert.throwsException({protagonista.mover(arriba)})
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento de puertas:"{
+   
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+        videojuego.escenario(escenarioParaTestear)
+        escenarioParaTestear.puestaEnEscena()    
+    }
+   
+    test "La puerta norte cambia de escenarioTEST al escenarioBifurcacion."{
+        puertaNorte.interaccion()
+        assert.equals(bifurcacion, videojuego.escenario())
+    }
+    
+    test "La puerta norte cambia de escenarioTEST al escenarioInicial."{
+        puertaOeste.interaccion()
+        assert.equals(fogata, videojuego.escenario())
+    }
+}
+
+// ############################################################################################################################ \\
+
+
+describe "Funcionamiento de dialogo inicial entre el protagonista y la amiga:"{
+    
+    method initialize(){
+        game.width(5)
+        game.height(5)
+        game.cellSize(100)
+
+        protagonista.position(game.at(2, 2))
+        amiga.position(game.at(2, 1))
+
+        game.addVisual(protagonista)
+        game.addVisual(amiga)
+
+        gestorDeDialogo.dialogo(dialogoEscenarioInicial)
+        gestorDeDialogo.esMomentoDeDialogar(true)
+    }
+
+    test "No se interactúa si NO es tiempo de diálogo."{
+        gestorDeDialogo.esMomentoDeDialogar(false)
+        const initialSize = gestorDeDialogo.dialogo().dialogoEscenario().size()
+
+        gestorDeDialogo.interactuarConNPC()
+        assert.equals(initialSize, gestorDeDialogo.dialogo().dialogoEscenario().size()) // El tamaño del dialogo no debería cambiar.
+    }
+
+    test "No se interactúa si el protagonista está lejos."{
+        protagonista.position(game.at(4, 4))
+        const initialSize = gestorDeDialogo.dialogo().dialogoEscenario().size()
+
+        gestorDeDialogo.interactuarConNPC()
+        assert.equals(initialSize, gestorDeDialogo.dialogo().dialogoEscenario().size()) // El tamaño del diálogo no debería cambiar.
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Ataque sobre lobo:"{
+    const lobo = new Lobo()
+
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+
+        protagonista.position(game.at(1,1))
+        lobo.position(game.at(2,1))
+        protagonista.estadoCombate(agresivoProtagonistaH)
+
+        game.addVisual(protagonista)
+        game.addVisual(lobo)
+    }
+
+    test "El protagonista armado derrota al lobo."{
+        assert.equals(20, lobo.vida()) // Vida del lobo antes de ataque.
+        assert.equals(agresivoProtagonistaH, protagonista.estadoCombate())
+        protagonista.atacar()
+        lobo.atacarEnemigo()          
+        assert.equals(15, lobo.vida()) // Vida del lobo despues de ataque.
+        assert.equals(100, protagonista.vida())
+    }
+
+    test "El protagonista desarmado no puede eliminar al lobo."{
+        protagonista.estadoCombate(pasivoProtagonista)
+        protagonista.atacar()
+        assert.equals(20, lobo.vida()) // Lobo sigue con la vida en 10.
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Ataque sobre guardabosques:"{
+    
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+
+        protagonista.position(game.at(3,3))
+        guardabosques.position(game.at(4,3))
+        protagonista.estadoCombate(agresivoProtagonistaH)
+        guardabosques.estadoCombate(agresivoGuardabosques)
+        game.addVisual(protagonista)
+        game.addVisual(guardabosques)
+    }
+
+    test "El protagonista armado le baja la vida al guardabosques al atacarlo."{
+        assert.equals(40, guardabosques.vida())
+        protagonista.atacar()
+        assert.equals(35, guardabosques.vida())
+        assert.equals(100, protagonista.vida()) // El guardabosques no ataca automaticamente.
+    }
+
+    test "El protagonista desarmado no afecta al guardabosques."{
+        protagonista.estadoCombate(pasivoProtagonista)
+        protagonista.atacar()
+        assert.equals(40, guardabosques.vida()) // No se reduce la vida.
+    }
+
+    test "Si el guardabosques ataca, el protagonista pierde vida."{
+        protagonista.atacadoPor(guardabosques) //NOTA: atacarEnemigo usa game.schedule. Para simular, usamos atacadoPor directamente.
+        assert.equals(98, protagonista.vida())
+    }
+
+    test "El guardabosques desarmado no puede atacar."{
+        guardabosques.estadoCombate(pasivoProtagonista)
+        guardabosques.atacarEnemigo()
+        assert.equals(100, protagonista.vida()) // No recibió  daño.
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Cambio de estado desarmado a armado:"{ // Mapa test.
+    const configuracionActualTEST    = {e => e.actualizarVisuales([protagonista, hacha])}
+    const configuracionSiguienteTEST = {puertaNorte.irHacia(bifurcacion); puertaOeste.irHacia(fogata)}
+    const escenarioParaTestear = constructorEscenario.construir(configuracionActualTEST, configuracionSiguienteTEST, "")
+
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+        videojuego.escenario(escenarioParaTestear)
+        escenarioParaTestear.puestaEnEscena()  
+    }
+
+    test "Al interactuar con el hacha el protagonista cambia de estado desarmado a armado."{
+        assert.equals(pasivoProtagonista, protagonista.estadoCombate())
+        hacha.interaccion()
+        assert.equals(agresivoProtagonistaH, protagonista.estadoCombate())
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Comportamiento del lobo:"{
+    const lobo      = new Lobo()
+    const obstaculo = new Obstaculo(position = game.at(4, 3))
+
+    method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+
+        protagonista.position(game.at(3, 3))
+        protagonista.estadoCombate(agresivoProtagonistaH)
+
+        lobo.position(game.at(5, 3))
+        game.addVisual(protagonista)
+        game.addVisual(lobo)
+        game.addVisual(obstaculo)
+    }
+
+    test "El lobo no se mueve si ya está sobre el protagonista."{
+        lobo.position(protagonista.position())
+        const posicionInicial = lobo.position()
+
+        lobo.perseguirEnemigo()
+        assert.equals(posicionInicial, lobo.position()) // No se mueve.
+    }
+
+    test "El lobo no se mueve si está muerto."{
+        lobo.actualizarAMuerto()
+        const posicionInicial = lobo.position()
+        lobo.perseguirEnemigo()
+        assert.equals(posicionInicial, lobo.position())
+    }
+
+    test "El lobo ataca al protagonista si está sobre él."{
+        protagonista.vida(10)
+        lobo.position(protagonista.position())
+
+        protagonista.atacadoPor(lobo) // NOTA: Usamos atacadoPor(visual) directamente.
+        assert.equals(6, protagonista.vida())
+    }
+
+    test "El lobo se mueve hacia el protagonista si no está sobre él."{
+        // Movimiento simple en línea recta horizontal.
+        protagonista.position(game.at(2, 2))
+        lobo.position(game.at(4, 2))
+
+        const posicionInicial = lobo.position()
+        lobo.perseguirEnemigo()
+        const nuevaPosicion = lobo.position()
+
+        assert.equals(game.at(3,2), nuevaPosicion) // Se mueve a (3,2), una celda hacia la izquierda.   
+    }
+
+    test "El lobo esquiva obstáculo al perseguir al protagonista."{
+        lobo.perseguirEnemigo()
+        assert.equals(game.at(4,2), lobo.position()) // Se dirige hacia la celda en diagonal al noreste.
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Comportamiento del guardabosque:"{
+
+	method initialize(){
+        game.width(7)
+        game.height(7)
+        game.cellSize(100)
+
+        protagonista.position(game.at(3,3))
+        guardabosques.position(game.at(4,3))
+        protagonista.estadoCombate(agresivoProtagonistaH)
+        guardabosques.estadoCombate(agresivoGuardabosques)
+        game.addVisual(protagonista)
+        game.addVisual(guardabosques)
+    }
+
+    test "El guardabosque no se mueve si está muerto."{
+        const posicionInicial = guardabosques.position()
+        guardabosques.actualizarAMuerto()
+        guardabosques.perseguirEnemigo()
+        assert.equals(posicionInicial, guardabosques.position())
+    }
+
+    test "El guardabosques dispara con la escopeta y daña al protagonista."{
+        assert.equals(100, protagonista.vida())
+        protagonista.atacadoPor(bala1) // Ejecutamos el daño de forma directa simulando el impacto.
+        assert.equals(93, protagonista.vida())
+    }
+
+    test "La bala no daña al guardabosques."{
+        bala1.position(guardabosques.position()) // Forzamos a la bala a estar sobre el guardabosques.
+        game.addVisual(bala1)
+        
+        bala1.interaccion()
+        assert.equals(40, guardabosques.vida())
+    }
+
+    test "La bala desaparece al salir del tablero."{
+        protagonista.atacadoPor(bala1)
+
+        game.removeVisual(bala1) // Simulamos que la bala fue eliminada del juego.
+        assert.equals([], game.getObjectsIn(bala1.position()).filter({visual => visual == bala1}))
+    }
+
+    test "Varias balas dañan al protagonista acumulativamente."{
+        protagonista.atacadoPor(bala1)
+        assert.equals(93, protagonista.vida())
+
+        protagonista.atacadoPor(bala2)
+        assert.equals(86, protagonista.vida())
+    }
+
+    test "La bala daña al lobo si lo alcanza."{
+        const lobo = new Lobo()
+        lobo.vida(20)
+        lobo.position(game.at(2,2))
+        bala1.position(lobo.position())
+
+        game.addVisual(lobo)
+        game.addVisual(bala1)
+
+        bala1.interaccion() // Simulamos que la bala impacta.
+        assert.equals(13, lobo.vida()) // Recibe 10 de daño.
+    }
+}
+// ############################################################################################################################ \\
+
+describe "El protagonista tiene distinto daño según el arma que agarre:"{
+
+    test "El protagonista se arma con el hacha y su daño es de 5."{
+        assert.equals(0, protagonista.daño())
+        hacha.interaccion()
+        assert.equals(5, protagonista.daño())
+    }
+     test "El protagonista se arma con el tridente y su daño es de 3."{
+        assert.equals(0, protagonista.daño())
+        tridente.interaccion()
+        assert.equals(3, protagonista.daño())
+    }
+     test "El protagonista se arma con la manopla y su daño es de 7."{
+        assert.equals(0, protagonista.daño())
+        manopla.interaccion()
+        assert.equals(7, protagonista.daño())
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento de los configuradores de escenario:"{
+    
+    test "El configurador de escenarios modifica el estado del escenario."{
+        assert.equals([], escenarioX.visualesEnEscena())
+        assert.equals([], escenarioX.eventos())
+        escenarioX.configuradorTotal(configuradorTEST, {})
+        escenarioX.configurar()
+        assert.equals([protagonista,puertaNorte], escenarioX.visualesEnEscena())
+        assert.equals([eventoX], escenarioX.eventos())
+    }
+
+    test "El configurador de escenario Siguiente modifica las puertas."{
+        puertaNorte.irHacia(fogata)
+        assert.equals(fogata,puertaNorte.irHacia())
+        escenarioX.configuradorTotal({}, configuradorSigTEST)
+        escenarioX.configurarEscenarioSiguiente()
+        puertaNorte.irHacia(granero)
+    }
+
+    test "El configurador de escenario siguiente modifica a otros escenarios."{
+        const nuevoEscenario    = constructorEscenario.construir({}, {}, "")
+        const nuevoConfigurador = {escenario => escenario.actualizarVisuales([protagonista]); escenario.actualizarEventos([eventoX])}
+        const configuracionSiguienteX = {nuevoEscenario.configuradorTotal(nuevoConfigurador, {})}
+
+        // Se le da al escenarioX un configurador para el escenario siguiente a este.
+        escenarioX.configuradorTotal({}, configuracionSiguienteX)
+
+        // El escenario "nuevoEscenario" comienza con visuales y eventos vacíos.
+        assert.equals([], nuevoEscenario.visualesEnEscena())
+        assert.equals([], nuevoEscenario.eventos())
+
+        // El escenarioX le modifica a nuevoEscenario sus configuradores.
+        escenarioX.configurarEscenarioSiguiente() 
+
+        // El nuevoEscenario se modifica a si mismo con los configuradores que le dio el escenarioX.
+        nuevoEscenario.configurar()
+		assert.equals([protagonista], nuevoEscenario.visualesEnEscena())
+        assert.equals([eventoX], nuevoEscenario.eventos())
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento de escenarios al agregar visuales:"{
+    const nuevoEscenario    = constructorEscenario.construir({}, {}, "")
+    const nuevoConfigurador = {escenario => escenario.actualizarVisuales([protagonista]); escenario.actualizarEventos([eventoX])}
+
+    test "El escenario cumple su función de mostrar los visuales en escena."{
+        nuevoEscenario.configuradorTotal(nuevoConfigurador, {})
+        nuevoEscenario.puestaEnEscena()
+        assert.that(game.allVisuals().contains(protagonista))
+    }
+
+    test "El escenario cumple su función de limpiar los visuales en escena."{
+        nuevoEscenario.configuradorTotal(nuevoConfigurador, {})
+        nuevoEscenario.puestaEnEscena()
+        assert.that(game.allVisuals().contains(protagonista))
+
+        nuevoEscenario.limpiar()
+        assert.notThat(game.allVisuals().contains(protagonista))
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento de gestor de celdas del tablero:"{
+
+    method initialize(){
+        game.width(20)
+        game.height(20)
+        game.cellSize(100)
+        const obstaculoUno = new Obstaculo(position = game.at(6,5))
+        const obstaculoDos = new Obstaculo(position = game.at(4,5))
+        game.addVisual(obstaculoUno)
+        game.addVisual(obstaculoDos)
+    }
+     
+    test "El gestor de Celdas confirma que el lobo no puede moverse a sus lados por los obstáculos."{
+        const lobo = new Lobo(position = game.at(5,5))
+        game.addVisual(lobo)
+        assert.notThat(gestorDeCeldasTablero.puedeMoverA(derecha, lobo))
+        assert.notThat(gestorDeCeldasTablero.puedeMoverA(izquierda, lobo))
+    }
+
+    test "El gestor de Celdas confirma que el lobo está dentro del tablero."{
+        const lobo = new Lobo(position = game.at(5,5))
+        game.addVisual(lobo)
+        assert.that(gestorDeCeldasTablero.estaDentroDelTablero(lobo.position()))
+    }
+
+    test "El gestor de celdas confirma que el lobo puede moverse arriba u abajo, entre otros."{
+        const lobo = new Lobo(position = game.at(5,5))
+        game.addVisual(lobo)
+        const lindantesSinObstaculos = gestorDeCeldasTablero.lindantesSinObstaculos(lobo.position(), lobo)
+        const celdaArribaLobo = game.at(5,6)
+        const celdaAbajoLobo = game.at(5,4)
+        assert.that(lindantesSinObstaculos.contains(celdaArribaLobo))
+        assert.that(lindantesSinObstaculos.contains(celdaAbajoLobo))
+    }
+
+    test "Por más que la bala se quite del juego, su posición debería estar dentro del tablero."{
+        game.addVisual(bala1)
+        bala1.position(game.at(2,2))
+        assert.that(gestorDeCeldasTablero.estaDentroDelTablero(bala1.position()))
+
+        game.removeVisual(bala1)
+        assert.that(gestorDeCeldasTablero.estaDentroDelTablero(bala1.position()))
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento del gestor de diapositivas:" {
+
+    method initialize(){
+        gestorDeDiapositivas.peliculaAMostrar(new Pelicula(pelicula = [d0, d1, d2]))
+        gestorDeDiapositivas.bloqueFinalizacion({juego, gestor => gestor.configuracionFinal()})
+        gestorDeDiapositivas.esHoraDeDiapositiva(true)
+    }
+
+    test "El mensaje procesarDiapositiva avanza el iterador de la película." {
+        const pelicula = new Pelicula(pelicula = [d0, d1])
+        assert.equals(d0, pelicula.diapositivaActual())
+        pelicula.procesarDiapositiva()
+        assert.equals(d1, pelicula.diapositivaActual())
+    }
+
+    test "Procesa todas las diapositivas y ejecuta el bloque final." {
+        // Ejecutamos varias veces para terminar la película.
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+
+        assert.equals(null, gestorDeDiapositivas.peliculaAMostrar())  // Ya no hay pelicula activa.
+        assert.notThat(gestorDeDiapositivas.esHoraDeDiapositiva())    // No es hora de mostrar mas diapositivas.
+    }
+
+    test "No procesa si no es hora de diapositiva." {
+        gestorDeDiapositivas.esHoraDeDiapositiva(false)
+        const peliculaAntes = gestorDeDiapositivas.peliculaAMostrar()
+
+        gestorDeDiapositivas.interactuarDiapositivas()
+        assert.equals(peliculaAntes, gestorDeDiapositivas.peliculaAMostrar())
+    }
+
+    test "Las diapositivas se eliminan visualmente del juego." {
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+        gestorDeDiapositivas.interactuarDiapositivas()
+
+        assert.equals(null, gestorDeDiapositivas.peliculaAMostrar())
+        assert.notThat(game.hasVisual(d0))
+        assert.notThat(game.hasVisual(d1))
+        assert.notThat(game.hasVisual(d2))
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento del gestor de movimiento con el protagonista:"{
+
+    method initialize(){
+        game.width(5)
+        game.height(5)
+        game.cellSize(100)
+        protagonista.position(game.at(2, 2))
+        game.addVisual(protagonista)
+    }
+
+    test "Se mueve a la derecha si no hay obstáculos."{
+        gestorDeMovimiento.mover(derecha, protagonista)
+        assert.equals(game.at(3, 2), protagonista.position())
+    }
+
+    test "La imagen se actualiza correctamente según la dirección."{
+        gestorDeMovimiento.mover(arriba, protagonista)
+        assert.equals("prota-desarmado-arriba.png", protagonista.image())
+
+        gestorDeMovimiento.mover(derecha, protagonista)
+        assert.equals("prota-desarmado-derecha.png", protagonista.image())
+    }
+
+    test "No cambia imagen si se mueve con moverHaciaSinCambiarImagen."{
+        //Por defecto el protagonista mira "abajo".
+        gestorDeMovimiento.moverHaciaSinCambiarImagen(izquierda, protagonista) 
+
+        assert.equals(game.at(1, 2), protagonista.position())
+        assert.equals("prota-desarmado-abajo.png", protagonista.image())
+    }
+} 
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento del gestor de lobos:"{
+
+    method initialize(){
+        game.width(20)
+        game.height(20)
+        game.cellSize(100)
+    }
+
+    test "El gestor de lobos guarda los lobos en su colección para gestionar."{
+        // Usamos el objeto l que instancia lobos en la matriz (el tablero).
+        l.construir(game.at(0,0))
+        l.construir(game.at(0,1))
+        l.construir(game.at(0,2))
+
+        assert.equals(3, gestorDeLobos.lobosEscenario().size()) // Guarda los lobos en su lista.
+        assert.equals(6, gestorDeLobos.eventosLobos().size()) // Los lobos tienen 2 eventos para perseguir y atacar.
+        
+        gestorDeLobos.limpiarLobos()
+        assert.that(gestorDeLobos.lobosEscenario().isEmpty()) // Guarda los lobos en su lista.
+        assert.that(gestorDeLobos.eventosLobos().isEmpty())
+    }
+}
+
+// ############################################################################################################################ \\
+
+describe "Funcionamiento del gestor de direcciones:" {
+
+    test "Devuelve derecha cuando la nueva posición está a la derecha." {
+        const desde = game.at(2, 2)
+        const hasta = game.at(3, 2)
+
+        assert.equals(derecha, gestorDeDirecciones.direccionALaQueSeMovio(desde, hasta))
+    }
+
+    test "Devuelve izquierda cuando la nueva posición está a la izquierda." {
+        const desde = game.at(2, 2)
+        const hasta = game.at(1, 2)
+
+        assert.equals(izquierda, gestorDeDirecciones.direccionALaQueSeMovio(desde, hasta))
+    }
+
+    test "Devuelve arriba cuando la nueva posición está arriba." {
+        const desde = game.at(2, 2)
+        const hasta = game.at(2, 3)
+
+        assert.equals(arriba, gestorDeDirecciones.direccionALaQueSeMovio(desde, hasta))
+    }
+
+    test "Devuelve abajo cuando la nueva posición está abajo." {
+        const desde = game.at(2, 2)
+        const hasta = game.at(2, 1)
+
+        assert.equals(abajo, gestorDeDirecciones.direccionALaQueSeMovio(desde, hasta))
+    }
+
+    test "direccionDeBala devuelve izquierda si el enemigo está a la izquierda." {
+        const enemigo = game.at(1, 2)
+        const tirador = game.at(3, 2)
+
+        assert.equals(izquierda, gestorDeDirecciones.direccionDeBala(enemigo, tirador))
+    }
+
+    test "direccionDeBala devuelve abajo si el enemigo está abajo." {
+        const enemigo = game.at(2, 1)
+        const tirador = game.at(2, 3)
+
+        assert.equals(abajo, gestorDeDirecciones.direccionDeBala(enemigo, tirador))
+    }
+}
+
+// ############################################################################################################################ \\

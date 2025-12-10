@@ -1,0 +1,442 @@
+import src.muro.*
+import src.movimiento.*
+import src.tanque.*
+import battlecity.*
+import src.halcon.*
+import src.bala.*
+import src.base.*
+import src.powerUps.*
+
+describe "Tanque y sus interacciones" {
+
+	const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ) )
+	const tanqueTesteo2 = new TanqueJugador(posicion = new Position(x = 5, y = 6 ), spawn = new Position(x = 1, y = 1))
+	test "Si el tanque no tiene direccion al iniciar el juego, su posicion se mantiene igual al moverse" 
+	{
+		const posicionInicial = tanqueTesteo.position()
+
+		tanqueTesteo.mover_tanque(sinDireccion)
+
+		assert.equals(posicionInicial, tanqueTesteo.position())
+	}
+	
+	test "Si el tanque se mueve hacia la izquierda, su posicion en avanza 1 en esta direccion" 
+	{
+
+		tanqueTesteo.mover_tanque(izquierda)
+
+		assert.equals(new Position(x = 4, y = 5), tanqueTesteo.position())
+	}
+
+	test "Si el tanque se mueve hacia la derecha, su posicion en avanza 1 en esta direccion" 
+	{
+		tanqueTesteo.mover_tanque(derecha)
+
+		assert.equals(new Position(x = 6, y = 5), tanqueTesteo.position())
+	}
+
+	test "Si el tanque se mueve hacia arriba, su posicion en avanza 1 en esta direccion" 
+	{
+		tanqueTesteo.mover_tanque(arriba)
+
+		assert.equals(new Position(x = 5, y = 6), tanqueTesteo.position())
+	}
+
+	test "Si el tanque se mueve hacia abajo, su posicion en avanza 1 en esta direccion" 
+	{
+		tanqueTesteo.mover_tanque(abajo)
+
+		assert.equals(new Position(x = 5, y = 4), tanqueTesteo.position())
+	}
+
+	test "Si el tanque se mueve cerca de los bordes del tablero, mantiene su posicion y no avanza"
+	{
+		tanqueTesteo.position(new Position(x = 0, y = 0))
+
+		const posicionTanque = tanqueTesteo.position()
+
+		tanqueTesteo.mover_tanque(abajo)
+
+		assert.equals(posicionTanque, tanqueTesteo.position())
+	}
+
+	test "Si el tanque tiene los controles invertidos activados, e intenta moverse hacia arriba lo hara hacia abajo"
+	{
+		tanqueTesteo.controlesInvertidos(true)
+		tanqueTesteo.mover_tanque(arriba)
+
+		assert.equals(new Position(x = 5, y = 4), tanqueTesteo.position())
+	}
+
+	test "Si el tanque tiene los controles invertidos activados, e intenta moverse hacia abajo lo hara hacia arriba"
+	{
+		tanqueTesteo.controlesInvertidos(true)
+		tanqueTesteo.mover_tanque(abajo)
+
+		assert.equals(new Position(x = 5, y = 6), tanqueTesteo.position())
+	}
+
+	test "Si el tanque tiene los controles invertidos activados, si intenta moverse hacia izquierda lo hara hacia la derecha"
+	{
+		tanqueTesteo.controlesInvertidos(true)
+		tanqueTesteo.mover_tanque(izquierda)
+
+		assert.equals(new Position(x = 6, y = 5), tanqueTesteo.position())
+	}
+
+	test "Si el tanque tiene los controles invertidos activados, si intenta moverse hacia derecha lo hara hacia izquierda"
+	{
+		tanqueTesteo.controlesInvertidos(true)
+		tanqueTesteo.mover_tanque(derecha)
+
+		assert.equals(new Position(x = 4, y = 5), tanqueTesteo.position())
+	}
+
+	test "Si el tanque intenta moverse en una direccion donde hay un muro de ladrillos, o un muro reforzado, o agua, no avanza y se queda en su posicion"
+	{
+		const posicionIncial = tanqueTesteo.position()
+		const muro_ladrillos = new Muro_Ladrillos (position = new Position (x = 5, y = 6))
+		const muro_reforzado = new Muro_Reforzado (position = new Position (x = 5, y = 4))
+		const agua = new Parche_De_Agua (position = new Position (x = 4, y = 5))
+
+		game.addVisual(tanqueTesteo)
+		game.addVisual(muro_ladrillos)
+		game.addVisual(muro_reforzado)
+		game.addVisual(agua)
+
+		tanqueTesteo.mover_tanque(arriba)
+		tanqueTesteo.mover_tanque(abajo)
+		tanqueTesteo.mover_tanque(izquierda)
+
+		assert.equals(posicionIncial, tanqueTesteo.position())
+	}
+
+	test "Si el tanque intenta moverse en direccion donde hay un arbusto, el tanque avanza"
+	{
+		const arbusto = new Arbustos (position = new Position (x = 4, y = 5))
+
+		game.addVisual(tanqueTesteo)
+		game.addVisual(arbusto)
+		tanqueTesteo.mover_tanque(izquierda)
+
+		assert.equals(arbusto.position(), tanqueTesteo.position())
+	}
+
+	test "Si el tanque se convierte en un tanque acuatico, entonces puede avanzar sobre el agua"
+	{
+		const agua = new Parche_De_Agua (position = new Position (x = 4, y = 5))
+
+		tanqueTesteo.habilitarIrPorAgua(true)
+		game.addVisual(agua)
+		game.addVisual(tanqueTesteo)
+
+		tanqueTesteo.mover_tanque(izquierda)
+
+		assert.equals(agua.position(), tanqueTesteo.position())
+
+	}
+
+	test "Si 2 tanques estan de frente y uno decide moverse, no avanzara y se quedara en su posicion"
+	{
+		const posicionInicial = tanqueTesteo.position()
+
+		game.addVisual(tanqueTesteo)
+		game.addVisual(tanqueTesteo2)
+
+		tanqueTesteo.mover_tanque(arriba)
+
+		assert.equals(posicionInicial, tanqueTesteo.position())
+	}
+
+	test "Si un tanque gana una ronda, aumenta su contador de rondas ganadas en 1"
+	{
+		tanqueTesteo.ganar_ronda()
+
+		assert.equals(2, tanqueTesteo.rondas_ganadas())
+	}
+
+	test "Si un tanque dispara una bala, tendra en el campo una bala activa en el campo"
+	{
+		tanqueTesteo.disparar_de_tanques()
+
+		assert.equals(1, tanqueTesteo.balas_que_disparo_el_tanque().size())
+	}
+
+	test "Si un tanque dispara tres veces, solo tendra una bala activa ya que su cargador inicial es de una bala"
+	{
+		tanqueTesteo.disparar_de_tanques()
+		tanqueTesteo.disparar_de_tanques()
+		tanqueTesteo.disparar_de_tanques()
+
+		assert.equals(1, tanqueTesteo.balas_que_disparo_el_tanque().size())
+	}
+
+	test "Si un tanque dispara tres veces, pero tiene un cargador de 2 balas, tendra solo 2 balas activas"
+	{
+		tanqueTesteo.aumentarMunicionEn(2)
+
+		tanqueTesteo.disparar_de_tanques()
+		tanqueTesteo.disparar_de_tanques()
+		tanqueTesteo.disparar_de_tanques()
+
+		assert.equals(2, tanqueTesteo.balas_que_disparo_el_tanque().size())
+	}
+
+}
+
+describe "Balas y sus interacciones" 
+{
+	const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ), direccion = arriba)
+	const bala_de_prueba = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo)
+	test "Una bala al ser disparada por un tanque toma la direccion en la que mira ese tanque y se desplaza una posicion en esa direccion"
+	{
+		bala_de_prueba.moverBalas()
+
+		assert.equals(new Position (x = 5, y = 6), bala_de_prueba.position())
+	}
+	test "Si una bala pasa por unos arbustos, la bala se oculta entre los arbustos"
+	{
+		const arbustos = new Arbustos (position = new Position(x = 5, y = 6 ))
+
+		game.addVisual(bala_de_prueba)
+		game.addVisual(arbustos)
+
+		bala_de_prueba.moverBalas()
+		
+		assert.equals(true, bala_de_prueba.oculto())
+		assert.equals("invisible.png", bala_de_prueba.image())
+	}
+
+	test "Si una bala que le pertenece al tanque choca contra el objetivo (tanque, muro, o bordes del tablero), la bala desaparece y se borra de las balas activas del tanque"
+	{
+		const bala_tanque = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo)
+		const tanqueTesteo2 = new TanqueJugador(posicion = new Position(x = 5, y = 6 ))
+
+		tanqueTesteo.balas_que_disparo_el_tanque().add(bala_tanque)
+		game.addVisual(bala_tanque)
+		game.addVisual(tanqueTesteo2)
+		bala_tanque.moverBalas()
+
+		assert.equals(0, tanqueTesteo.balas_que_disparo_el_tanque().size())
+	}
+
+	test "Si una bala que le pertenece al tanque choca contra otro tanque, el tanque golpeado es mandado a la zona de 'espera' fuera de los limites del mapa para respawnear"
+	{
+		const bala_tanque = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo)
+		const tanqueTesteo2 = new TanqueJugador(posicion = new Position(x = 5, y = 6 ), spawn = new Position(x = 1, y = 1))
+
+		game.addVisual(bala_tanque)
+		game.addVisual(tanqueTesteo2)
+		bala_tanque.moverBalas()
+
+		assert.equals(new Position(x = 12, y = 12), tanqueTesteo2.position())
+	}
+
+}
+
+describe "Muros y sus interacciones"
+{
+	test "Si un muro de ladrillos con durabilidad 3 impacta con una bala, le resta su durabilidad al muro en 1"
+	{
+		const muro_ladrillos = new Muro_Ladrillos (position = new Position(x = 5, y = 5 ))
+		const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ), direccion = arriba)
+		const bala_de_prueba = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo)
+
+		muro_ladrillos.recibirImpactoDeBala(bala_de_prueba)
+
+		assert.equals(2, muro_ladrillos.durabilidad())
+	}
+
+	test "Si un muro reforzado con durabilidad 3 impacta con una bala que no puede romper muros reforzados, su durabilidad se mantiene igual"
+	{
+		const muro_reforzado = new Muro_Reforzado (position = new Position(x = 5, y = 5 ))
+		const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ), direccion = arriba)
+		const bala_de_prueba = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo, rompeMurosReforzados = false)
+
+		muro_reforzado.recibirImpactoDeBala(bala_de_prueba)
+
+		assert.equals(3, muro_reforzado.durabilidad())
+	}
+
+	test "Si un muro reforzado con durabilidad 3 impacta con una bala que puede romper muros reforzados, su durabilidad baja en 1"
+	{
+		const muro_reforzado = new Muro_Reforzado (position = new Position(x = 5, y = 5 ))
+		const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ), direccion = arriba)
+		const bala_de_prueba = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo, rompeMurosReforzados = true)
+
+		muro_reforzado.recibirImpactoDeBala(bala_de_prueba)
+
+		assert.equals(2, muro_reforzado.durabilidad())
+	}
+
+}
+
+describe "Halcon y sus interacciones"
+{
+	const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ) )
+	const tanqueTesteo2 = new TanqueJugador(posicion = new Position(x = 5, y = 6 ), spawn = new Position(x = 1, y = 1))
+	test "Si un tanque toca una medalla halcon que no le pertenece, se llevara esa medalla"
+	{
+		const medalla_halcon = new Halcon (posicion = new Position(x = 6 , y = 5), lePerteneceA = tanqueTesteo2, origen_bandera = new Position(x = 6 , y = 5))
+
+		game.addVisual(tanqueTesteo)
+		game.addVisual(medalla_halcon)
+		
+		medalla_halcon.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(true, tanqueTesteo.lleva_una_bandera())
+		assert.equals(medalla_halcon, tanqueTesteo.bandera_que_lleva())
+	}
+
+	test "Si un tanque toca la medalla halcon que es suya, no podra llevarsela"
+	{
+		const medalla_halcon = new Halcon (posicion = new Position(x = 5 , y = 5), lePerteneceA = tanqueTesteo, origen_bandera = new Position(x = 5 , y = 5))
+
+		game.addVisual(medalla_halcon)
+		game.addVisual(tanqueTesteo)
+
+		medalla_halcon.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(false, tanqueTesteo.lleva_una_bandera())
+		assert.equals(null, tanqueTesteo.bandera_que_lleva())
+	}
+
+	test "Si un tanque toca la medalla halcon que es suya, pero queda en una parte del mapa, al tocarlo la medalla volvera a su posicion origen (origen bandera)"
+	{
+		const medalla_halcon = new Halcon (posicion = new Position(x = 5 , y = 5), lePerteneceA = tanqueTesteo, origen_bandera = new Position(x = 3 , y = 5))
+
+		game.addVisual(medalla_halcon)
+		game.addVisual(tanqueTesteo)
+
+		medalla_halcon.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(new Position(x = 3 , y = 5), medalla_halcon.position())
+	}
+
+	test "Si un tanque toca la medalla halcon que es suya, pero que esta en la base del rival, al tocarlo la medalla volvera a su posicion origen (origen bandera), dejara de estar capturada y el tanque tendra habilitada la capacidad de respawnear nuevamente"
+	{
+		const medalla_halcon = new Halcon (posicion = new Position(x = 5 , y = 5), lePerteneceA = tanqueTesteo, origen_bandera = new Position(x = 3 , y = 5), capturada = true)
+
+		medalla_halcon.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(new Position(x = 3 , y = 5), medalla_halcon.position())
+		assert.equals(false, medalla_halcon.aSidoCapturada())
+		assert.equals(true, tanqueTesteo.respawn())
+	}
+
+	test "Si el tanque lleva la medalla halcon del rival y es eliminado, el tanque suelta la medalla en la posicion que se encontraba antes de ser eliminado"
+	{
+		const medalla_halcon = new Halcon (posicion = new Position(x = 5 , y = 5), lePerteneceA = tanqueTesteo2, origen_bandera = new Position(x = 3 , y = 5))
+		const bala_enemiga = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = tanqueTesteo2)
+
+		medalla_halcon.teChocoUnTanque(tanqueTesteo)
+		tanqueTesteo.mover_tanque(derecha)
+		tanqueTesteo.mover_tanque(derecha)
+		tanqueTesteo.recibirImpactoDeBala(bala_enemiga)
+
+		assert.equals(new Position(x = 7 , y = 5), medalla_halcon.position())
+	}
+}
+
+describe "Base y sus interacciones"
+{
+	const base = new Base(disenio_base = "base_P1.png", lePerteneceA = tanqueTesteo, ubicacion = new Position(x = 6, y = 5))
+	const base_tanqueTesteo2 = new Base(disenio_base = "base_P1.png", lePerteneceA = tanqueTesteo2, ubicacion = new Position(x = 4, y = 5))
+	const medalla_halcon = new Halcon (posicion = new Position(x = 5 , y = 5), lePerteneceA = tanqueTesteo2, origen_bandera = new Position(x = 3 , y = 5))
+	const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ), banderaQueLleva = medalla_halcon)
+
+	const tanqueTesteo2 = new TanqueJugador(posicion = new Position(x = 5, y = 6 ), spawn = new Position(x = 1, y = 1))
+
+	test "Si un tanque toca su propia base portando una medalla halcon, la medalla halcon se posicionara sobre la base, cambia el estado de la medalla a capturada y el quita la posibilidad de respawnear al tanque que le pertenece la medalla"
+	{
+		game.addVisual(tanqueTesteo)
+		game.addVisual(base)
+		tanqueTesteo.mover_tanque(derecha)
+		base.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(base.position(), medalla_halcon.position())
+		assert.equals(true, medalla_halcon.aSidoCapturada())
+		assert.equals(false, tanqueTesteo2.respawn())
+	}
+
+	test "Si un tanque toca la base del rival portando la medalla del halcon del rival, este no cambiara su estado a capturada y no soltara la bandera en esa posicion"
+	{
+		game.addVisual(tanqueTesteo)
+		game.addVisual(base_tanqueTesteo2)
+		tanqueTesteo.mover_tanque(izquierda)
+		base_tanqueTesteo2.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(false, medalla_halcon.aSidoCapturada())
+		assert.equals(true, tanqueTesteo2.respawn())
+	}
+}
+
+describe "Power Ups y sus interacciones con el tanque"
+{
+	const tanqueTesteo = new TanqueJugador(posicion = new Position(x = 5, y = 5 ))
+	test "Si el tanque colisiona con el power up 'aumentar_balas' aumenta la cantidad de balas que puede disparar a 2"
+	{
+		aumentar_balas.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(2, tanqueTesteo.cargador())
+	}
+
+	test "Si el tanque colisiona con el power up 'invertir_controles' activa el control invertido del tanque rival"
+	{
+		invertir_controles.teChocoUnTanque(jugador1_tanque)
+
+		assert.equals(true, jugador2_tanque.controlesInvertidos())
+	}
+
+	test "Si el tanque colisiona con el power up 'escudo' el tanque se vuelve inmune"
+	{
+		escudo.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(true, tanqueTesteo.inmune())
+	}
+
+	test "Si el tanque colisiona con el power up 'pasarPorAgua' el tanque puede ir por agua"
+	{
+		pasarPorAgua.teChocoUnTanque(tanqueTesteo)
+
+		assert.equals(true, tanqueTesteo.irPorAgua())
+	}
+
+	test "Si el tanque colisiona con el power up 'aumentar_velocidad_balas' el tanque reduce en 20 los milisegundos que tarda en moverse las balas del tanque"
+	{
+		aumentar_velocidad_balas.teChocoUnTanque(jugador1_tanque)
+
+		assert.equals(80, jugador1_tanque.velocidad_balas())
+	}
+
+	test "Si el tanque colisiona con el power up 'aumentar_velocidad_balas' 6 veces, los milisegundos no bajaran mas alla del valor de 1"
+	{	
+		jugador1_tanque.aumentarVelocidadBala(20)
+		aumentar_velocidad_balas.teChocoUnTanque(jugador1_tanque)
+
+		assert.equals(1, jugador1_tanque.velocidad_balas())
+	}
+
+	test "Si el tanque colisiona con el power up 'romper_muros_irrompibles' el tanque convierte sus balas en balas reforzadas"
+	{
+		romper_muros_irrompibles.teChocoUnTanque(tanqueTesteo)
+
+		tanqueTesteo.disparar_de_tanques()
+
+		assert.equals(true, tanqueTesteo.romper_murosReforzados())
+		assert.equals(true, tanqueTesteo.balas_que_disparo_el_tanque().head().rompeMurosReforzados())
+	}
+
+	test "Si el tanque toma un par de powerUps y luego es eliminado, pierde todos sus powerUps"
+	{	
+		const bala_enemiga = new Bala (posicion = new Position (x = 5, y = 5), direccion = arriba, lePerteneceA = jugador2_tanque)
+		aumentar_balas.teChocoUnTanque(jugador1_tanque)
+		aumentar_velocidad_balas.teChocoUnTanque(jugador1_tanque)
+
+		jugador1_tanque.recibirImpactoDeBala(bala_enemiga)
+
+		assert.equals(1, jugador1_tanque.cargador())
+		assert.equals(100, jugador1_tanque.velocidad_balas())
+	}
+	
+}

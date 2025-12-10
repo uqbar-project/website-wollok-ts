@@ -1,0 +1,16 @@
+import wollok.game.*
+import administracion.*
+import menu.*
+
+
+program prueba {
+
+	game.title("Alana is You")
+	game.height(11)
+	game.width(17)
+	game.cellSize(50)	
+	menu.iniciar()    
+	
+	game.start()
+}
+

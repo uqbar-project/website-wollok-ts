@@ -1,0 +1,8 @@
+import battlecity.juegoBattleCity
+import wollok.game.*
+import tanque.*
+program juego {
+    juegoBattleCity.jugar()
+}
+
+

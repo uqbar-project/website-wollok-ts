@@ -1,0 +1,10 @@
+import wollok.game.*
+import Boxeadores.*
+import pantallas.*
+import juego.*
+import imagenYSonido.*
+
+program PunchOut {
+	juego.iniciar()
+	game.start()
+}

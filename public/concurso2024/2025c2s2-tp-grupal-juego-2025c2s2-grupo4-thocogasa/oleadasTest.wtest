@@ -1,0 +1,119 @@
+import enemigo.*
+import enemigos.*
+import aliados.*
+import aliado.*
+import oleadas.*
+import rey.*
+import mecanicas.*
+import wollok.game.*
+
+describe "test de Enemigos" {
+    method initialize(){
+        game.height(8)
+        game.width(7)
+        reyBlanco.reiniciar()
+
+    }
+  test "Crear oleadas, y confirmar si el spawner funciona " {
+    assert.equals(0, oleada.enemigosRestantes())
+    assert.that(oleada.enemigosRestantes() == 0)
+
+    oleada.crearOleada(5)
+    assert.equals(5, oleada.enemigosRestantes())
+
+    oleada.crearOleada(1)
+    assert.equals(6, oleada.enemigosRestantes()) 
+  }
+  test "Spawnear Enemigos, disminuye enemigosPorSpawnear y aumenta enemigos activos " {
+    assert.equals(0, oleada.enemigosPorSpawnear().size())
+    assert.equals(0,  oleada.enemigosActivos().size())
+
+    oleada.crearOleada(4)
+
+    assert.equals(4, oleada.enemigosPorSpawnear().size())
+    assert.equals(0, oleada.enemigosActivos().size())
+
+    oleada.spawnearSiguienteEnemigo()
+
+    assert.equals(3, oleada.enemigosPorSpawnear().size())
+    assert.equals(1, oleada.enemigosActivos().size())
+
+    oleada.spawnearSiguienteEnemigo()
+    oleada.spawnearSiguienteEnemigo()
+    oleada.spawnearSiguienteEnemigo()
+
+    assert.equals(0, oleada.enemigosPorSpawnear().size())
+    assert.equals(4, oleada.enemigosActivos().size())
+  }
+  test "No spawnear enemigo si no quedan por spawnear" {
+    assert.equals(0, oleada.enemigosPorSpawnear().size())
+    assert.equals(0, oleada.enemigosActivos().size())
+
+    oleada.spawnearSiguienteEnemigo()
+
+    assert.equals(0, oleada.enemigosPorSpawnear().size())
+    assert.equals(0, oleada.enemigosActivos().size())
+  }
+
+  test "Revisar si el enemigo se mueve una posicion al iniciar spawner"{
+    oleada.crearOleada(1)
+
+    const enemigoAntesDeSpawnear = oleada.enemigosPorSpawnear().first()
+    const posicionDelEnemigoAntesDeMover = enemigoAntesDeSpawnear.position()
+    // Asumimos que la posición inicial del Enemigo es (x, 7)
+
+    oleada.spawnearSiguienteEnemigo()
+
+    const posicionEnXinicial = enemigoAntesDeSpawnear.position().x()
+    const posicionEnYinicial = enemigoAntesDeSpawnear.position().y()
+
+    assert.equals(posicionEnYinicial, enemigoAntesDeSpawnear.position().y())
+    console.println("ene Antes Spaw: "+enemigoAntesDeSpawnear.position())
+
+    oleada.moverTodosLosEnemigos()
+    
+    const enemigoDespuesDeMover = oleada.enemigosActivos().first()
+    console.println("ene : "+enemigoDespuesDeMover.position())
+    assert.equals(posicionEnYinicial - 1, enemigoDespuesDeMover.position().y())
+    
+    // También verificamos que la coordenada X no cambió
+    assert.equals(posicionEnXinicial, enemigoDespuesDeMover.position().x())
+    
+  // Vemos que la lista no se haya limpiado
+    assert.equals([enemigoDespuesDeMover], oleada.enemigosActivos())
+  }
+  test "Probar Reiniciar" {
+    oleada.crearOleada(4)
+    oleada.spawnearSiguienteEnemigo()
+    oleada.moverTodosLosEnemigos()
+
+    oleada.reiniciar()
+
+    assert.equals([], oleada.enemigosPorSpawnear())
+    assert.equals([], oleada.enemigosActivos())
+    assert.notThat(oleada.spawnerActivo())
+    assert.notThat(oleada.movimientoActivo())
+    assert.notThat(oleada.enTransicion())
+  }
+
+}
+  /*
+  iniciarOleada
+
+  - iniciar spawner
+      if el spawner s e encuentra nactivo 
+        comienza -spawnearSiguienteEnemigo
+           -si enemigosPorSpawnear no es vacia
+             => se crea un nuevo enemigo  con el primero de la lista 
+                se saca de enmigosASpawner
+                Se agrega a enimigosActivos 
+                Se muestra
+  - iniciar iniciarMovimientoEnemigos
+             - si movimientoActivo esta apagado -osea si es cierto que esta apagado -
+             se cambia el movimiento a activo
+             y cada x cantidad de tiempos se hace el moverTodosLosEnemigos
+                 => que se le pasa toda la lista de enemigos que estan activos
+                 y con un foreach  a cada enemigo de la lista se le aplica enemigo.avanzar()
+                       = que hace que la posicion del peon se mueva hacia adelante 
+                       
+  */

@@ -1,0 +1,235 @@
+import models_game.Round
+import models_game.Queue
+import models_game.Core
+import models_game.Stage
+import models_enemies.*
+import models_towers.*
+
+describe "Tests de interaccion entre torres y enemigos" {
+
+  const basicEnemy = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  const armoredEnemy = new ArmoredEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  const explosiveEnemy = new ExplosiveEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  
+  test "Cuando una torre basica ataca a un enemigo basico este pierde vida igual al poder de la torre" {
+    basicTower.attackEnemy(basicEnemy)
+    assert.equals(99, basicEnemy.hp())
+  }
+  
+  test "Cuando una torre perforante ataca a un enemigo basico este pierde vida igual al poder de la torre" {
+    piercingTower.attackEnemy(basicEnemy)
+    assert.equals(99, basicEnemy.hp())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo basico este pierde vida igual al poder de la torre" {
+    slowingTower.attackEnemy(basicEnemy)
+    assert.equals(100, basicEnemy.hp())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo basico este reduce su velocidad a la mitad" {
+    slowingTower.attackEnemy(basicEnemy)
+    assert.equals(0.5, basicEnemy.speed())
+  }
+  
+  test "Cuando una torre basica ataca a un enemigo blindado este no pierde vida" {
+    basicTower.attackEnemy(armoredEnemy)
+    assert.equals(100, armoredEnemy.hp())
+  }
+  
+  test "Cuando una torre perforante ataca a un enemigo blindado este pierde vida igual al poder de la torre" {
+    piercingTower.attackEnemy(armoredEnemy)
+    assert.equals(99, armoredEnemy.hp())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo blindado este no pierde vida" {
+    slowingTower.attackEnemy(armoredEnemy)
+    assert.equals(100, armoredEnemy.hp())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo blindado este reduce su velocidad a la mitad" {
+    slowingTower.attackEnemy(armoredEnemy)
+    assert.equals(0.5, armoredEnemy.speed())
+  }
+  
+  test "Cuando una torre basica ataca a un enemigo explosivo este pierde vida igual al poder de la torre" {
+    basicTower.attackEnemy(explosiveEnemy)
+    assert.equals(99, explosiveEnemy.hp())
+  }
+  
+  test "Cuando una torre perforante ataca a un enemigo explosivo este muere instantaneamente" {
+    piercingTower.attackEnemy(explosiveEnemy)
+    assert.that(explosiveEnemy.isDead())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo explosivo este pierde vida igual al poder de la torre" {
+    slowingTower.attackEnemy(explosiveEnemy)
+    assert.equals(100, explosiveEnemy.hp())
+  }
+  
+  test "Cuando una torre ralentizante ataca a un enemigo explosivo este reduce su velocidad a la mitad" {
+    slowingTower.attackEnemy(explosiveEnemy)
+    assert.equals(0.5, explosiveEnemy.speed())
+  }
+
+  test "Cuando una torre ralentizante ataca a un enemigo multiples veces, su velocidad no puede disminuir por debajo del 0.25" {
+    slowingTower.attackEnemy(explosiveEnemy)
+    slowingTower.attackEnemy(explosiveEnemy)
+    slowingTower.attackEnemy(explosiveEnemy)
+    slowingTower.attackEnemy(explosiveEnemy)
+    slowingTower.attackEnemy(explosiveEnemy)
+    assert.equals(0.25, explosiveEnemy.speed())
+  }
+}
+
+describe "Tests de deteccion de las torres" {
+  const basicTowerTest = basicTower.cloneInPosition(game.at(0,0))
+  const enemyInRange = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.at(0, 1),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  const enemyInRangeFirst = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.at(0, 1),
+    pathIndex = 100,
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  const enemyOutsideRange = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.at(3, 3),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  
+  test "Un enemigo ubicado a menos o igual cantidad casilleros del rango de la torre forma parte de sus enemigos en rango" {
+    assert.that(basicTowerTest.isInRange(enemyInRange))
+  }
+  
+  test "Un enemigo ubicado a mas casilleros del rango de la torre no forma parte de sus enemigos en rango" {
+    assert.notThat(basicTowerTest.isInRange(enemyOutsideRange))
+  }
+  
+
+  test "Solo los enemigos en rango forman parte de los enemigos en rango de una torre" {
+    assert.equals([enemyInRange], basicTowerTest.enemiesInRange([enemyInRange, enemyOutsideRange]))
+  }
+
+  test "Si no hay enemigos en rango el enemigo a atacar es null" {
+    assert.equals(null, basicTowerTest.enemyToAttack([]))
+  }
+
+  test "El enemigo a ser atacado por una torre es el enemigo en rango mas avanzado en el path" {
+    assert.equals(enemyInRangeFirst, basicTowerTest.enemyToAttack([enemyInRange, enemyOutsideRange, enemyInRangeFirst]))
+  }
+}
+
+describe "Pruebas de los recursos" {
+
+  const testStage = new Stage(path = [], rounds = new Queue(list=[]), towers = [], resources = 100)
+  test "Cuando se coloca una torre los recursos de un nivel disminuyen en su coste" {
+    testStage.addTower(basicTower)
+    assert.equals(50, testStage.resources()) 
+  }
+  test "Cuando se coloca una torre esta forma parte de las torres de la stage" {
+    testStage.addTower(basicTower)
+    assert.that(testStage.towers().contains(basicTower)) 
+  }
+}
+
+describe "Pruebas de stage" {
+  const basicEnemy = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+
+  const enemyToLoseStage = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 100,
+    speed = 1
+  )
+
+  const testStage = new Stage(path = [], rounds = new Queue(list=[]), towers = [], resources = 100)
+
+  const testIncompleteStage = new Stage(path = [], rounds = new Queue(list=[new Round(enemiesQueue = [], resourcesReward = 0)]), towers = [], resources = 100)
+  test "Una stage pierde vida cuando un enemigo le hace danio" {
+    basicEnemy.doDamage(testStage)
+    assert.equals(90, testStage.hp()) 
+  }
+  test "El enemigo muere al hacer danio"{
+    basicEnemy.doDamage(testStage)
+    assert.that(basicEnemy.isDead())
+  }
+
+  test "Una stage deberia perder si su vida llega a cero"{
+    enemyToLoseStage.doDamage(testStage)
+    assert.that(testStage.shouldLose())
+  }
+
+  test "Una stage esta completa (ganada) cuando ya no quedan rondas" {
+    assert.that(testStage.isComplete())
+  }
+
+  test "Una stage no esta completa (ganada) cuando todavia le quedan rondas" {
+    assert.notThat(testIncompleteStage.isComplete())
+  }
+}
+
+describe "Tests de ataque de las torres" {
+  const basicEnemy = new BasicEnemy(
+    movementTick = game.tick(1000, {}, true),
+    position = game.origin(),
+    hp = 100,
+    power = 10,
+    speed = 1
+  )
+  test "Luego de atacar, una torre deja su ataque en enfriamiento" {
+    basicTower.attackEnemy(basicEnemy)
+    assert.that(basicTower.attackInCooldown())
+  }
+
+  test "Una torre con el ataque en enfriamiento no puede atacar" {
+    const torreEnEnfriamiento = new Tower(
+      position = game.at(99,99),
+      power = 1,
+      attackSpeed = 1000,
+      range = 4,
+      attack = basicAttack,
+      cost = 50,
+      image = "tower_basic",
+      attackInCooldown = true
+    )
+  assert.notThat(torreEnEnfriamiento.canAttack())
+  }
+
+    test "Una torre con el ataque que no esta en enfriamiento puede atacar" {
+    assert.that(basicTower.canAttack())
+  }
+}
