@@ -2,7 +2,7 @@
 title: Concurso Wollok Game 2024
 description: Juegos participantes
 sidebar:
-    order: 1
+    order: 2
 ---
 
 El sábado 14 de Diciembre nos jutamos en UTN para anunciar los ganadores y entregar los premios!
