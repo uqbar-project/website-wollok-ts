@@ -27,8 +27,8 @@ function loadProject(baseFolder, fileNames) {
                 url: PROJECT_FOLDER + name
             }))
         
-        const sounds = assets.filter(({url}) => url.match(/.(mp3|wav)/))
-        const images = assets.filter(({url}) => !url.match(/.(mp3|wav)/))
+        const sounds = assets.filter(({url}) => url.match(/.(mp3|wav|ogg)/))
+        const images = assets.filter(({url}) => !url.match(/.(mp3|wav|ogg)/))
         const { name: mainFile } = sources.find(({name}) => name.endsWith('.wpgm'))
         const main = mainFile.slice(0, -4).replaceAll('/', '.')
         return [main, sources, images, sounds]
