@@ -1,0 +1,195 @@
+import wollok.game.*
+import menues.*
+import flappy.*
+import pipes.*
+import score.*
+import ambiente.*
+import sound.*
+
+
+program FlappyTest {
+  game.title("flappy bird")
+  game.boardGround(fondo.image())
+  game.cellSize(10)
+  game.width(120)
+  game.height(90)
+  game.addVisual(flappyBird)
+  game.addVisual(piso)
+  game.addVisual(menu)
+
+  var menuDificultad = false
+  var enJuego = false
+  var perdio = false
+  const pipesTop = []
+  const pipesBottom = []
+  //var maxScore = 0
+  const musicaFondo = game.sound("background.wav")
+  musicaFondo.shouldLoop(true)
+  
+  game.onTick(100, "flappy cae",
+  {
+      if(enJuego){
+      flappyBird.caer()
+      piso.avanzar()
+      }
+  })
+
+
+  game.onTick(33, "pipes se mueven", {
+    if(enJuego){
+      pipesTop.forEach(
+        {p => p.avanzar()
+        if (p.xPOS() <= -5){
+          p.desaparecer()
+          pipesTop.remove(p)
+        }
+        }
+      )
+      pipesBottom.forEach(
+        {p => p.avanzar()
+        if (p.xPOS() <= -5){
+          p.desaparecer()
+          pipesBottom.remove(p)
+        }
+        }
+      )
+    }
+  })
+  
+  game.onTick(1900, "pipe aparece", {
+    if(enJuego){
+      pipesBottom.add(new PipeBottom())
+      pipesTop.add(new PipeTop(altura = pipesBottom.last().y()))
+      game.addVisual(pipesBottom.last())
+      game.addVisual(pipesTop.last())
+    }
+  })
+
+  game.onTick(10, "Sumar Score", {
+    if(enJuego and !pipesBottom.isEmpty() and
+      pipesBottom.first().position().x() == flappyBird.position().x() and
+      !pipesBottom.first().yaSumo()
+    ){
+      pipesBottom.first().sumar()
+      score.sumar()
+      point.play()
+    }
+
+  })
+
+  game.onTick(10,"Game over", {
+    if(enJuego and 
+      !pipesBottom.isEmpty() and !pipesTop.isEmpty() and
+      pipesBottom.first().position().x() == flappyBird.position().x() and( 
+      pipesBottom.first().position().y() + 67 >= flappyBird.position().y() or
+      pipesTop.first().position().y() <= flappyBird.position().y()
+      ) 
+      or flappyBird.position().y() <= 7
+    ){
+      musicaFondo.stop()
+      enJuego = false
+      perdio = true
+      game.addVisual(gameOver)
+      piso.detener()
+      hit.play()
+    }
+
+  })
+
+  game.onTick(1000, "musica", {
+    if(enJuego){
+      musicaFondo.play()
+    }else{
+      musicaFondo.stop()
+    }
+  })
+
+  keyboard.space().onPressDo {
+    if (!enJuego and !menuDificultad and !perdio) {
+      swoosh.play()
+      flappyBird.reiniciar()
+      score.reiniciar()
+      flappyBird.flap()
+      pipesTop.forEach({p => p.desaparecer()})
+      pipesTop.clear()
+      pipesBottom.forEach({p => p.desaparecer()})
+      pipesBottom.clear()
+      enJuego = true
+      game.removeVisual(menu)
+      game.removeVisual(gameOver)
+      game.addVisual(flappyBird)
+      score.position(game.center())
+    }
+    flappyBird.flap()
+  }
+
+  keyboard.space().onPressDo{
+    if (!enJuego and perdio){
+      flappyBird.reiniciar()
+      score.reiniciar()
+      pipesTop.forEach({p => p.desaparecer()})
+      pipesTop.clear()
+      pipesBottom.forEach({p => p.desaparecer()})
+      pipesBottom.clear()
+      enJuego = false
+      perdio = false
+      game.addVisual(menu)
+      game.removeVisual(gameOver)
+      game.addVisual(flappyBird)
+      score.position(game.center())
+    }
+  } 
+
+
+
+  keyboard.d().onPressDo {
+  if(!enJuego and !menuDificultad ){
+    menuDificultad = true
+    game.removeVisual(menu)
+    game.removeVisual(score)
+    game.addVisual(pantallaDificultad)
+    wing.play()
+  }
+}
+
+  keyboard.num1().onPressDo {
+    if(menuDificultad and !enJuego) {dificultad.facil() wing.play()}
+  }
+  keyboard.num2().onPressDo {
+    if(menuDificultad and !enJuego) {dificultad.medio() wing.play()}
+  }
+  keyboard.num3().onPressDo {
+    if(menuDificultad and !enJuego) {dificultad.dificil() wing.play()}
+  }
+  keyboard.enter().onPressDo {
+    if(menuDificultad and !enJuego) {
+      game.removeVisual(pantallaDificultad)
+      game.addVisual(menu)
+      menuDificultad = false
+      wing.play()
+    }
+  }
+
+
+
+
+  keyboard.r().onPressDo {
+    if(!menuDificultad){
+      flappyBird.reiniciar()
+      score.reiniciar()
+      enJuego = false
+      pipesTop.forEach({p => game.removeVisual(p)})
+      pipesTop.clear()
+      pipesBottom.forEach({p => game.removeVisual(p)})
+      pipesBottom.clear()
+      game.addVisual(menu)
+      game.removeVisual(gameOver)
+      game.addVisual(flappyBird)
+    }
+  }
+  
+
+  
+
+  game.start()
+}   
