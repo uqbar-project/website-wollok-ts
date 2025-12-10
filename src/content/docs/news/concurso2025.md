@@ -4,7 +4,10 @@ description: Juegos participantes
 sidebar:
     order: 1
 ---
-El sábado 13 de Diciembre nos jutamos en UNAHUR para anunciar los ganadores y entregar los premios!
+<!-- El sábado 13 de Diciembre nos jutamos en UNAHUR para anunciar los ganadores y entregar los premios! -->
+
+![Concurso 2025](../../../assets/flyer-concurso-2025.png)
+
 
 ## Juegos
 Participan 24 juegos de distintas universidades
