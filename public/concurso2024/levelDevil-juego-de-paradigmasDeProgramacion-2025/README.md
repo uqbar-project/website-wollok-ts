@@ -6,7 +6,7 @@
     <img src="ImagenesDeReadme/Logo_V3.png" alt="Logo de Level Devil" width="300"/>
 </div>
 
-**Desarrollado por:** Grupo **GroupNotFound** de la materia *Paradigmas de Programación* K1054 martes a la noche, 2025 Anual - UTN Facultad Regional de Buenos Aires
+**Desarrollado por:** Grupo **GroupNotFound** de la materia *Paradigmas de Programación (**Profesor:** Alfredo Sanzo)* K1054 martes a la noche, 2025 Anual - UTN Facultad Regional de Buenos Aires.
 
 ---
 
@@ -54,17 +54,25 @@ Potencial Defensivo = (Vidas × 10) + Bonificación del Personaje
 
 ### Pantalla de Inicio
 <div align="center">
-<img src="ImagenesDeReadme/PantallaDeInicio.png" alt="Pantalla de Inicio" width="600"/>
+    <img src="ImagenesDeReadme/PantallaDeInicio.png" alt="Pantalla de Inicio" width="600"/>
 </div>
 
-### Menú de Selección de Personajes
+### 👥 Menú de Selección de Personajes
 <div align="center">
-<img src="ImagenesDeReadme/PantallaDePersonajes.png" alt="Pantalla de Personajes" width="600"/>
+    <img src="ImagenesDeReadme/PantallaDePersonajes.png" alt="Pantalla de Personajes" width="600"/>
 </div>
 
-### Gameplay - Primer Nivel
+### Gameplay - Niveles
 <div align="center">
-<img src="ImagenesDeReadme/PrimerNivelVisual.png" alt="Primer Nivel Visual" width="600"/>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: fit-content;">
+        <img src="ImagenesDeReadme/Nivel1.png" alt="Nivel 1" width="600"/>
+        <img src="ImagenesDeReadme/Nivel2.png" alt="Nivel 2" width="600"/>
+        <img src="ImagenesDeReadme/Nivel3.png" alt="Nivel 3" width="600"/>
+        <img src="ImagenesDeReadme/Nivel4.png" alt="Nivel 4" width="600"/>
+        <img src="ImagenesDeReadme/Nivel4.png" alt="Nivel 5" width="600"/>
+        <img src="ImagenesDeReadme/Nivel4.png" alt="Nivel 6" width="600"/>
+        <img src="ImagenesDeReadme/Nivel4.png" alt="Nivel 7" width="600" style="grid-column: 1 / -1; justify-self: center;"/>
+    </div>
 </div>
 
 ## 🕹️ Cómo Jugar

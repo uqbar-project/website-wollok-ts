@@ -255,11 +255,11 @@ object satoruGojo inherits JugadorNoCansado(
 class Piso {
     var property position
 
-    const imagenes = ["Piso1.png", "Piso2.png", "Piso3.png"]
     var imagen = ""
     method image() = imagen
 
     method imagenAleatoria(){
+        const imagenes = ["Piso1.png", "Piso2.png", "Piso3.png"]
         imagen = imagenes.anyOne()
     }
 
@@ -278,11 +278,11 @@ class Piso {
 class Pared {
     const property position
     
-    const imagenes = ["Muro1.png", "Muro2.png", "Muro3.png", "Muro4.png"]
     var imagen = ""
     method image() = imagen
 
     method imagenAleatoria(){
+        const imagenes = ["Muro1.png", "Muro2.png", "Muro3.png", "Muro4.png"]
         imagen = imagenes.anyOne()
     }
 
