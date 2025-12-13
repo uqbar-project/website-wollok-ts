@@ -24,11 +24,9 @@ class Obstaculo {
     method movimientoAleatorio() {
         if (movimiento){
             const nuevaPos = game.at(0.randomUpTo(game.width()).truncate(0),3.randomUpTo(game.height()).truncate(0))
-            if (self.zonasPermitidas(nuevaPos)) {
+            if ( self.zonasPermitidas(nuevaPos) && game.getObjectsIn(nuevaPos).isEmpty() ) {
                 position = nuevaPos
-            } /*else {
-                self.movimientoAleatorio()
-            }*/ //Comento el llamado recursivo para ver la performance
+            }
         }
     }
 }

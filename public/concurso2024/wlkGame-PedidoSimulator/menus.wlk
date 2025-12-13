@@ -62,10 +62,10 @@ object menu {
   }
   
   method configurarTeclas() {
-    keyboard.u().onPressDo( { if (u.activo()) { botonIniciar.realizarAccion(self) self.detener() } })
-    keyboard.i().onPressDo({ if (i.activo()) botonInstrucciones.realizarAccion(self) })
-    keyboard.o().onPressDo({ if (o.activo()) { self.mutearSonido() botonCreditos.realizarAccion(self) } })
-    keyboard.p().onPressDo({ if (p.activo()) { self.sonidoOff() game.schedule(150, { botonSalir.realizarAccion(self) }) } }) 
+    keyboard.u().onPressDo( { if (u.activo()) { botonIniciar.realizarAccion() self.detener() } })
+    keyboard.i().onPressDo({ if (i.activo()) botonInstrucciones.realizarAccion() })
+    keyboard.o().onPressDo({ if (o.activo()) { self.mutearSonido() botonCreditos.realizarAccion() } })
+    keyboard.p().onPressDo({ if (p.activo()) { self.sonidoOff() game.schedule(150, { botonSalir.realizarAccion() }) } }) 
     // el game.schedule es para que con un mínimo delay, efectue la accion de game.stop(). De esta forma, el sonido deja de sonar.
   }
   
@@ -78,7 +78,7 @@ object botonIniciar {
   
   method position() = position
   
-  method realizarAccion(unMenu) {
+  method realizarAccion() {
     partida.iniciar()
   }
 }
@@ -90,7 +90,7 @@ object botonInstrucciones {
   
   method position() = position
   
-  method realizarAccion(unMenu) {
+  method realizarAccion() {
     menuInstrucciones.iniciar()
   }
 }
@@ -102,47 +102,50 @@ object botonCreditos {
   
   method position() = position
   
-  method realizarAccion(unMenu) {
+  method realizarAccion() {
     menuCreditos.iniciar()
   }
 }
 /*
   Se creo una clase abstracta para "Boton Volver" y objetos que heredan de esta clase.
-  Pense en que el metodo "realizarAccion" tenga el metodo "unMenu.detener()" y hacer el override en cada objeto utilizando el super() + su acción puntual.
+  Pense en que el metodo "realizarAccion" tenga el metodo ".detener()" y hacer el override en cada objeto utilizando el super() + su acción puntual.
   El tema de esto es que la clase, por el momento no quedaria abstracta y no me gusta (Por mas que nunca instanciemos algo de dicha clase)
 */
 class BotonVolver {
 
-  const position = game.at(3, 2)
+  var position = game.at(3, 2)
 
   method image() = "btn_volver.png"
 
   method position() = position
 
-  method realizarAccion(unMenu)
+  method realizarAccion()
+
+  method nuevaPosicion(unaPosicion) {
+    position = unaPosicion
+  }
 
 }
 
 object botonVolverCreditos inherits BotonVolver() {
 
-  override method realizarAccion(unMenu) {
-    unMenu.detener()
+  override method realizarAccion() {
+    menuCreditos.detener()
     menu.desmutearSonido()
   }
-
 }
 
 object botonVolverInstrucciones inherits BotonVolver() {
 
-  override method realizarAccion(unMenu) {
-    unMenu.detener()
+  override method realizarAccion() {
+    menuInstrucciones.detener()
   }
 }
 
 object botonVolverPausa inherits BotonVolver() {
 
-  override method realizarAccion(unMenu) {
-    unMenu.detener()
+  override method realizarAccion() {
+    menuPausa.detener()
   }
 }
 
@@ -154,7 +157,7 @@ object botonSalir {
   
   method position() = position
   
-  method realizarAccion(unMenu) {
+  method realizarAccion() {
     menuSalir.iniciar()
     game.stop()
   }
@@ -168,7 +171,7 @@ object botonGameOver {
   
   method position() = position
   
-  method realizarAccion(unMenu) {
+  method realizarAccion() {
     menuGameOver.detener()
     menu.iniciar()
   }
@@ -225,7 +228,7 @@ object menuGameOver {
   }
 
   method configurarTeclas() {
-    keyboard.m().onPressDo({ if (activo) botonGameOver.realizarAccion(self) })
+    keyboard.m().onPressDo({ if (activo) botonGameOver.realizarAccion() })
   }
 }
 
@@ -283,7 +286,7 @@ object menuCreditos {
   }
 
   method configurarTeclas() {
-    keyboard.v().onPressDo({ if (activo) botonVolverCreditos.realizarAccion(self) })
+    keyboard.v().onPressDo({ if (activo) botonVolverCreditos.realizarAccion() })
   }
 
 }
@@ -307,11 +310,13 @@ object menuInstrucciones {
   }
 
   method renderizarBotones() {
+    botonVolverInstrucciones.nuevaPosicion(game.at(1,13))
     game.addVisual(botonVolverInstrucciones)
   }
   
   method limpiarBotones() {
     game.removeVisual(botonVolverInstrucciones)
+    botonVolverInstrucciones.nuevaPosicion(game.at(3,2))
   }
 
   method iniciar() {
@@ -330,7 +335,7 @@ object menuInstrucciones {
   }
 
   method configurarTeclas() {
-    keyboard.v().onPressDo({ if (activo) botonVolverInstrucciones.realizarAccion(self) })
+    keyboard.v().onPressDo({ if (activo) botonVolverInstrucciones.realizarAccion() })
   }
 
 }
@@ -359,10 +364,12 @@ object menuPausa {
   }
 
   method renderizarBotones() {
+    botonVolverPausa.nuevaPosicion(game.at(1,13))
     game.addVisual(botonVolverPausa)
   }
   
   method limpiarBotones() {
+    botonVolverPausa.nuevaPosicion(game.at(3,2))
     game.removeVisual(botonVolverPausa)
   }
 
@@ -386,7 +393,7 @@ object menuPausa {
   }
 
   method configurarTeclas() {
-    keyboard.v().onPressDo({ if (activo) botonVolverPausa.realizarAccion(self) })
+    keyboard.v().onPressDo({ if (activo) botonVolverPausa.realizarAccion() })
   }
   
 }

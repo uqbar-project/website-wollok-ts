@@ -19,6 +19,7 @@ assets/camioneta_dev1.png
 assets/pedido_panaderia.png
 assets/iconos_dinero_7.png
 assets/map_final3.png
+assets/screen_exit.png
 assets/cliente3_dev.png
 assets/cliente1_avatar.png
 assets/iconos_dinero_5.png
@@ -26,24 +27,21 @@ assets/transparente.png
 assets/iconos_dinero_4.png
 assets/mensajeFinal.png
 assets/btn_reiniciar.png
+assets/screen_menu.png
 assets/map_final4.png
-assets/screenshots/screen_exit.png
-assets/screenshots/screen_menu.png
-assets/screenshots/scren_lvl1.png
-assets/screenshots/screen_instrucciones.png
-assets/screenshots/screen_creditos.png
-assets/screenshots/screen_gameover.png
 assets/transicion_nivel3.png
 assets/iconos_dinero_0.png
 assets/menu_salir.png
 assets/iconos_dinero_1.png
 assets/transicion_nivel2.png
 assets/map_final5.png
+assets/scren_lvl1.png
 assets/pedido_verdu.png
 assets/winner_finish_sound.mp3
 assets/btn_salir.png
 assets/iconos_dinero_$.png
 assets/iconos_dinero_3.png
+assets/screen_instrucciones.png
 assets/iconos_dinero_2.png
 assets/cliente4_avatar.png
 assets/personaje5.png
@@ -67,6 +65,7 @@ assets/cliente_especial_avatar.png
 assets/personaje_bicicleta_dev.png
 assets/pedido_botellas.png
 assets/paperboy_main_theme.mp3
+assets/screen_creditos.png
 assets/personaje.png
 assets/cliente4_dev.png
 assets/pedido_especial.png
@@ -74,6 +73,7 @@ assets/personaje_moto_dev.png
 assets/npc_piquete_dev.png
 assets/personaje_moto_pantallaFinal_ok.png
 assets/cliente_especial_dev.png
+assets/screen_gameover.png
 assets/bache_dev.png
 assets/fondoMenu_dev.png
 assets/imagen_pausa_nivel2.png
@@ -105,4 +105,3 @@ assets/gta_game_over.mp3
 assets/btn_iniciar.png
 assets/icono_player.png
 assets/pantalla_win.png
-gitignore.txt

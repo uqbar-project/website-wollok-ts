@@ -9,7 +9,6 @@
 ## Capturas
 
 ![Menu Principal](assets/screenshots/screen_menu.png)
-![Instrucciones](assets/screenshots/screen_instrucciones.png)
 ![Creditos](assets/screenshots/screen_creditos.png)
 ![Partida](assets/screenshots/scren_lvl1.png)
 ![Game Over](assets/screenshots/screen_gameover.png)
