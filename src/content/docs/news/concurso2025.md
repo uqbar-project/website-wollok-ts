@@ -4,13 +4,34 @@ description: Juegos participantes
 sidebar:
     order: 1
 ---
-<!-- El sábado 13 de Diciembre nos jutamos en UNAHUR para anunciar los ganadores y entregar los premios! -->
+El sábado 13 de Diciembre nos jutamos en UNAHUR para anunciar los ganadores y entregar los premios!
 
-![Concurso 2025](../../../assets/flyer-concurso-2025.png)
+_Más info en [la bitácora del concurso](https://docs.google.com/document/d/e/2PACX-1vRP4cpaTBdel3Yrc6E9V6ia1NZTf31ufxa9D7wQ4msj5QjdZZJD0xXmUSVOzpjjhQ/pub)._
 
+![Entrega Premios](../../../assets/wgame-concurso-2025-unahur.jpeg)
+
+<!-- ![Concurso 2025](../../../assets/flyer-concurso-2025.png) -->
+
+
+## Podio
+**1er Premio &#x1F947;** - _The Binding of Cachito_
+
+**2do Premio &#129352;** - _WoToDe_
+
+**3er Premio &#129353;** - _Ghost Revenge_
+
+
+## Menciones Especiales
+**Mejor puzzle** - _La última clave_
+
+**Mención Honorífica 1** - _Pedido Simulator_
+
+**Mención Honorífica 2** - _Orcs defense_
+
+---
 
 ## Juegos
-Participan 24 juegos de distintas universidades
+Participaron **24 juegos** de distintas universidades
 
 <div class="container">
     <ol class="list-group">
