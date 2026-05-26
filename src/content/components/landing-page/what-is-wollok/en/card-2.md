@@ -2,6 +2,6 @@ It is an _open source_ project developed by <a href="https://uqbar.org" target="
 
 <style>
   .sl-markdown-content a {
-    color: var(--sl-color-text-accent-inverted);
+     color: #00E5FF;  /*var(--sl-color-text-accent-inverted)*/
   }
 </style>
