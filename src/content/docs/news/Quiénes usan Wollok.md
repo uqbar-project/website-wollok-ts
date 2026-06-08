@@ -2,10 +2,6 @@
 title: ¿Quienes usan wollok?
 description: universidades
   
----
-
-#### Universidades que utilizan wollok:
-#### Para enseñar sobre POO (Programacion Orientada a Objetos)
 
 ---
 
@@ -29,7 +25,7 @@ description: universidades
     <h4 class="nombre_uni">Universidad Nacional de Quilmes (UNQ)</h4> 
    </a>
 
-   <p class="materia">Materia:  <b>Programación con Objetos 1</b> - <a href="https://sites.google.com/view/unq-cpi-obj1-c1/home">asignatura</p>
+   <p class="materia">Materia:  <b>Programación con Objetos 1</b> - <a href="https://www.unq.edu.ar/carrera/58-licenciatura-en-informatica/">carrera</p>
 
    <img src="https://thfvnext.bing.com/th/id/OIP.gYZmvyRN3qo6LJwtLIfYOAAAAA?w=213&h=90&c=7&r=0&o=7&cb=thfvnextfalcon&pid=1.7&rm=3" alt="imagen UNQ"> 
 
@@ -67,6 +63,7 @@ description: universidades
 <style>
 
    .universidad{
+      text-align: center;
       margin-top: 40px;
       margin-bottom: 40px;
       font-size: 19px;
@@ -86,7 +83,10 @@ description: universidades
    }
    
    .universidad img{
-      width: 100%;
+      /*text-align: center;*/
+      display: block;
+      margin: auto;
+      width: 50%;
       max-width: 656px;
       height: auto;
    }
