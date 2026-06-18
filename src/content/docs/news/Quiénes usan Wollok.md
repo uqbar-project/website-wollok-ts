@@ -79,7 +79,7 @@ description: universidades
    }
 
    .nombre_uni{
-      color: white;
+      color: var(--sl-color-accent);
    }
    
    .universidad img{
