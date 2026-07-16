@@ -1,40 +1,16 @@
 import { useEffect, useRef, useState, type ChangeEvent, type JSX, type KeyboardEvent } from 'react'
-import { Evaluation, Interpreter, Package, REPL, WOLLOK_FILE_EXTENSION, WRE, WRENatives, fromJSON, interprete, link, parse, validate, type ExecutionResult } from 'wollok-ts'
+import { Evaluation, Interpreter, Package, REPL, RuntimeObject, TO_STRING_METHOD, WOLLOK_FILE_EXTENSION, WRE, fromJSON, get, interprete, link, natives, parse, validate, type Execution, type ExecutionResult, type NativeFunction, type Natives } from 'wollok-ts'
 import { getDynamicDiagram, sanitizeStackTrace } from './replDynamicDiagram'
 import './ReplEvaluator.css'
 import { showProblem } from './replValidators'
 
-const buildEnvironment = (aPackage: Package) => {
+// TODO: Use (or fix) the merge function
+const newInterpreter = (aPackage: Package, printFunction: NativeFunction) => {
   const environment = link([aPackage], fromJSON(WRE))
-  return new Interpreter(Evaluation.build(environment, WRENatives))
-}
-
-const buildInterpreter = () => {
-  try {
-    // @ts-ignore
-    const content = getEditorContent()
-    const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
-    const interpreter = buildEnvironment(replPackage)
-    const problems = validate(interpreter.evaluation.environment)
-
-    // @ts-ignore
-    showProblems(problems.map(problem => showProblem(problem)))
-    // @ts-ignore
-    markReplSessionSynced()
-
-    return interpreter
-  } catch (e) {
-    console.info(e)
-    // @ts-ignore
-    showError(e)
-    return buildEnvironment(new Package({ name: REPL }))
-  }
-}
-
-let interpreter = buildInterpreter()
-
-const interpreteLine = (expression: string) => {
-  return interprete(interpreter!, expression)
+  const native = natives()
+  const console = get<Natives>(native, 'wollok.lib.console')!
+  console['println'] = printFunction
+  return new Interpreter(Evaluation.build(environment, native))
 }
 
 // i18n translations
@@ -70,6 +46,8 @@ export const ReplEvaluator = () => {
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
   const resultRef = useRef<HTMLInputElement>(null)
 
+  let log: string // from console
+
   useEffect(() => {
     resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
     refreshDynamicDiagram()
@@ -77,13 +55,14 @@ export const ReplEvaluator = () => {
 
   const generateResult = (expression: string, { errored, result, error }: ExecutionResult) =>
     !expression ?
-    undefined :
-    <div key={Math.random() * 10000000000}>
-      <div className="normal">{expression}</div>
-      <div className={errored ? 'error' :  'ok'}>
-        {errored ? '✗' : '✓'} {result} {sanitizeStackTrace(error)}
+      undefined :
+      <div key={Math.random() * 10000000000}>
+        <div className="normal">{expression}</div>
+        <div className="normal">{log}</div>
+        <div className={errored ? 'error' : 'ok'}>
+          {errored ? '✗' : '✓'} {result} {sanitizeStackTrace(error)}
+        </div>
       </div>
-    </div>
 
   const evaluate = () => {
     const sanitizedExpression = expression.trim()
@@ -141,8 +120,8 @@ export const ReplEvaluator = () => {
     reloadInterpreter()
     const newResult = <>
       {
-      history.map((expression: string) =>
-        generateResult(expression, interpreteLine(expression)))
+        history.map((expression: string) =>
+          generateResult(expression, interpreteLine(expression)))
       }
     </>
     setFormattedResult(history.length ? newResult : undefined)
@@ -161,6 +140,41 @@ export const ReplEvaluator = () => {
     interpreter = buildInterpreter()
   }
 
+  const interpreteLine = (expression: string) => {
+    return interprete(interpreter!, expression)
+  }
+
+  // NATIVES
+  const println: NativeFunction = function* (_self: RuntimeObject, obj: RuntimeObject): Execution<void> {
+    const wollokString = yield* this.send(TO_STRING_METHOD, obj)
+    const innerString = wollokString!.innerString!
+    log = innerString
+  }
+
+  let interpreter = buildInterpreter()
+
+  function buildInterpreter() {
+    try {
+      // @ts-ignore
+      const content = getEditorContent()
+      const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
+      const interpreter = newInterpreter(replPackage, println)
+      const problems = validate(interpreter.evaluation.environment)
+
+      // @ts-ignore
+      showProblems(problems.map(problem => showProblem(problem)))
+      // @ts-ignore
+      markReplSessionSynced()
+
+      return interpreter
+    } catch (e) {
+      console.info(e)
+      // @ts-ignore
+      showError(e)
+      return newInterpreter(new Package({ name: REPL }), println)
+    }
+  }
+
   return <section className="repl">
     {formattedResult && <div className='replResult' ref={resultRef}>
       {formattedResult}
@@ -168,18 +182,18 @@ export const ReplEvaluator = () => {
     <div className="replLine">
       <div className="botoneraReplExpression">
         <button className="replRefresh" onClick={() => reload()} title={t.refreshTitle}>
-          <img src="/repl/refresh.svg"/>
+          <img src="/repl/refresh.svg" />
         </button>
         <button className="replReload" onClick={() => reloadAndRefresh()} title={t.reloadTitle}>
-          <img src="/repl/reload.svg"/>
+          <img src="/repl/reload.svg" />
         </button>
-        <button id="validateEditor" onClick={() => buildInterpreter()}/>
+        <button id="validateEditor" onClick={() => buildInterpreter()} />
       </div>
       <input type="text" className="replExpression" placeholder={t.placeholder} onKeyDown={keyDown} onChange={expressionChanged} value={expression}></input>
       <div className="botoneraReplExpression">
         <button className="replEvaluate" onClick={() => evaluate()} title={t.evaluateTitle}>
           {/* https://github.com/feathericons/feather/blob/main/icons */}
-          <img src="/repl/evaluate.svg"/>
+          <img src="/repl/evaluate.svg" />
         </button>
       </div>
     </div>
