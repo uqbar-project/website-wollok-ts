@@ -37,6 +37,9 @@ const getLocale = (): 'es' | 'en' => {
   return 'es'
 }
 
+let interpreter: Interpreter
+let log: string | null = null // from console
+
 export const ReplEvaluator = () => {
   const locale = getLocale()
   const t = translations[locale]
@@ -46,9 +49,9 @@ export const ReplEvaluator = () => {
   const [formattedResult, setFormattedResult] = useState<JSX.Element | undefined>(undefined)
   const resultRef = useRef<HTMLInputElement>(null)
 
-  let log: string // from console
-
   useEffect(() => {
+    if (!interpreter) buildInterpreter()
+
     resultRef.current?.scroll({ top: resultRef.current?.scrollHeight, behavior: 'smooth' })
     refreshDynamicDiagram()
   }, [formattedResult])
@@ -75,6 +78,7 @@ export const ReplEvaluator = () => {
       {formattedResult}
       {generateResult(sanitizedExpression, result)}
     </>)
+    log = null
     setExpression('')
     refreshDynamicDiagram()
   }
@@ -137,7 +141,7 @@ export const ReplEvaluator = () => {
   const reloadInterpreter = () => {
     setExpression('')
     setFormattedResult(undefined)
-    interpreter = buildInterpreter()
+    buildInterpreter()
   }
 
   const interpreteLine = (expression: string) => {
@@ -151,27 +155,23 @@ export const ReplEvaluator = () => {
     log = innerString
   }
 
-  let interpreter = buildInterpreter()
-
   function buildInterpreter() {
     try {
       // @ts-ignore
       const content = getEditorContent()
       const replPackage = parse.File(REPL + '.' + WOLLOK_FILE_EXTENSION).tryParse(content)
-      const interpreter = newInterpreter(replPackage, println)
+      interpreter = newInterpreter(replPackage, println)
       const problems = validate(interpreter.evaluation.environment)
 
       // @ts-ignore
       showProblems(problems.map(problem => showProblem(problem)))
       // @ts-ignore
       markReplSessionSynced()
-
-      return interpreter
     } catch (e) {
       console.info(e)
       // @ts-ignore
       showError(e)
-      return newInterpreter(new Package({ name: REPL }), println)
+      interpreter = newInterpreter(new Package({ name: REPL }), println)
     }
   }
 
