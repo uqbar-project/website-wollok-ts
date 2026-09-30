@@ -21,8 +21,8 @@
     "react": "19.1.1",
     "sharp": "0.34.3",
     "typescript": "5.3.3",
-    "wollok-ts": "4.2.3",
-    "wollok-web-tools": "1.1.10"
+    "wollok-ts": "4.3.0",
+    "wollok-web-tools": "2.1.1"
   },
   "devDependencies": {
     "@types/cytoscape": "3.21.8",
