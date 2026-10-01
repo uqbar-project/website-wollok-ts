@@ -2,7 +2,7 @@
 title: Consola
 description: Consola Wollok en VSCode.
 sidebar:
-  order: 2
+  order: 1
 ---
 
 

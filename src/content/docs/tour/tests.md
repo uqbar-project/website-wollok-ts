@@ -5,7 +5,7 @@ tableOfContents:
   minHeadingLevel: 2
   maxHeadingLevel: 4
 sidebar:
-  order: 3
+  order: 5
 ---
 
 ### Corriendo tests
