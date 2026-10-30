@@ -301,7 +301,6 @@ Wollok game will send messages to all objects in the game to know their position
 ## Moving objects
 
 One way for the object to move on the board is by properly defining the `position()` method and manipulating the references used on it. 
-Positions can be worked with **mutable or immutable objects**, in the first case their coordinates can be changed and in the second to place objects in different positions new objects must be obtained. 
 In a simple case, with a property or method that simply returns the variable `position`, if we modify the reference to a different position, the object is moved to that location.
 
 ```wollok
@@ -330,7 +329,7 @@ object character {
 
 ``` 
 
-Positions understand `right(c) left(c) up(c) down(c)` messages that return new positions with an offset of `c` boxes in the corresponding direction. 
+Positions are _immutable_ by default and understand the messages `right(c) left(c) up(c) down(c)`, which return _new positions_ offset by `c` cells in the corresponding direction.
 
 ```wollok
 object character {
@@ -349,6 +348,31 @@ object character {
 
 }
 ```
+
+### Using `MutablePosition`
+
+If we want to change a position's coordinates without replacing the object, we can use `MutablePosition`. It is created with its initial coordinates, which can be read or changed using the getters and setters: `x()` / `x(newX)` and `y()` / `y(newY)`.
+
+```wollok
+object character {
+  const position = new MutablePosition(x = 0, y = 0)
+
+  method position() = position
+  method image() = "character.png"
+
+  method moveRight(amount) {
+    position.x(position.x() + amount)
+  }
+
+  method moveUp(amount) {
+    position.y(position.y() + amount)
+  }
+}
+```
+
+Since the visual object always returns the same position, changing its coordinates moves the character without assigning a new position.
+
+We can also initialize it with other values, for example `new MutablePosition(x = 3, y = 2)`.
 
 ## The character
 
