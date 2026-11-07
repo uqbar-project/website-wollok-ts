@@ -301,7 +301,6 @@ Wollok game les enviará mensajes a todos los objetos en el juego para conocer s
 ## Moviendo objetos
 
 Una forma para que el objeto se mueva en el tablero es definiendo adecuacadamente el método `position()` y manipulando las referencias que se utilizan en él. 
-Las posiciones se pueden trabajar con **objetos mutables o inmutables**, en el primer caso se les puede cambiar sus coordenadas y en el segundo para ubicar objetos en posiciones diferentes se deben obtener nuevos objetos posición. 
 En un caso simple, con una propiedad o un método que simplemente retorna la variable `position`, si modificamos la referencia a una posición diferente, el objeto se mueve a dicha ubicación.
 
 ```wollok
@@ -330,7 +329,7 @@ object personaje {
 
 ``` 
 
-Las posiciones entienden los mensajes `right(c) left(c) up(c) down(c)` que devuelven nuevas posiciones con un desplazamiento de `c` casilleros en la dirección correspondiente. 
+Las posiciones son, por default, _inmutables_ y entienden los mensajes `right(c) left(c) up(c) down(c)` que devuelven _nuevas posiciones_ con un desplazamiento de `c` casilleros en la dirección correspondiente. 
 
 ```wollok
 object personaje {
@@ -349,6 +348,31 @@ object personaje {
 
 }
 ```
+
+### Usar `MutablePosition`
+
+Si queremos cambiar las coordenadas de una posición sin reemplazar el objeto, podemos usar `MutablePosition`. Se crea indicando sus coordenadas iniciales y se pueden consultar o modificar usando los _getter y setters_: `x()` / `x(nuevoX)` e `y()` / `y(nuevoY)`.
+
+```wollok
+object personaje {
+  const position = new MutablePosition(x = 0, y = 0)
+
+  method position() = position
+  method image() = "personaje.png"
+
+  method moverDerecha(cantidad) {
+    position.x(position.x() + cantidad)
+  }
+
+  method subir(cantidad) {
+    position.y(position.y() + cantidad)
+  }
+}
+```
+
+Como el objeto visual siempre devuelve la misma posición, al modificar sus coordenadas el personaje se mueve sin asignar una posición nueva. 
+
+También podemos inicializarla con otros valores, por ejemplo `new MutablePosition(x = 3, y = 2)`.
 
 ## El personaje
 
