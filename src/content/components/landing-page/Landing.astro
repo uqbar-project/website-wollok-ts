@@ -1,9 +1,21 @@
 ---
+import LandingBanner from "./LandingBanner.astro";
 import LandingIntro from "./LandingIntro.astro";
 import LandingContent from "./LandingContent.astro";
 import Separator from "../common/Separator.astro";
 import LandingCommunity from "./LandingCommunity.astro";
+
+const currentLocale = Astro.currentLocale || 'es';
+const translations = currentLocale === 'en'
+  ? await import('../../i18n/en.json')
+  : await import('../../i18n/es.json');
+
+const t = translations.default;
+const concurso2026Url = "https://docs.google.com/document/d/e/2PACX-1vQvpZzvKHKiwQ2vdsF5l80kFCod0W9OYKemUfIhCU5GBzIDjcQiMC4kQZwsoxDpGQ/pub";
 ---
+<LandingBanner href={concurso2026Url}>
+  <p>{t["landing.announcement.concurso2026"]}</p>
+</LandingBanner>
 <LandingIntro />
 <LandingContent />
 <LandingCommunity />

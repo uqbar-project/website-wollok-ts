@@ -1,19 +1,37 @@
 ---
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+const Tag = href ? "a" : "div";
 ---
-<div class="sl-banner">
+<Tag
+  class="sl-banner"
+  href={href}
+  target={href ? "_blank" : undefined}
+  rel={href ? "noopener noreferrer" : undefined}
+>
   <slot />
-</div>
+</Tag>
 
 <style>
 .sl-banner {
   background-color: var(--sl-color-banner-bg);
-  color: var(--sl-color-text-accent-inverted);
+  color: var(--sl-color-text-accent-inverted) !important;
   display: flex;
   flex-direction: row;
   height: 3rem;
   align-items: center;
   justify-content: center;
   margin: 1rem;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+a.sl-banner:hover {
+  color: var(--sl-color-text-accent-inverted) !important;
+  opacity: 0.85;
 }
 
 @media (max-width: 50em) {
