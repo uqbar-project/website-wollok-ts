@@ -1,6 +1,8 @@
 ---
 title: Validador
 description: Validador de Wollok en VSCode.
+sidebar:
+  order: 6
 ---
 
 ## Detección de errores

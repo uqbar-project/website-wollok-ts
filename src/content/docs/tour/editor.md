@@ -1,6 +1,8 @@
 ---
 title: Editor
 description: Editor de Wollok en VSCode.
+sidebar:
+  order: 3
 ---
 
 ## Highlighter
